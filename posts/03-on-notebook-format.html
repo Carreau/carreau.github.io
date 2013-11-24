@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content=""><meta name="author" content="Matthias Bussonnier"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>03-on-notebook-format | Random Thoughts</title><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><link href="../assets/css/bitter.css" rel="stylesheet" type="text/css"><link href="../assets/css/main.css" rel="stylesheet" type="text/css"><link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml"></head><body>
+    <section class="social"><ul><li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+        
+    
+        
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+        
+    
+        
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+        
+    
+        
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        
+    
+        
+            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        
+    
+        
+            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        
+    
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name" itemprop="headline name">03-on-notebook-format</h1>
+    
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2013-03-01T20:00:00">2013-03-01 20:00</time></div>
+            
+    
+
+            
+    
+          |  
+        <a href="03-on-notebook-format.ipynb" id="sourcelink">Source</a>
+    
+
+            
+    
+
+        </div>
+        <div class="body">
+            <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="IPython-Notebook-Duck-Punching-(II)">IPython Notebook Duck-Punching (II)<a class="anchor-link" href="03-on-notebook-format.html#IPython-Notebook-Duck-Punching-(II)">¶</a></h1>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote>
+<p>If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.</p>
+</blockquote>
+<style>
+    div.cell, .text_cell_render{
+        max-width:750px;
+        margin-left:auto;
+        margin-right:auto;
+
+    }
+
+
+    h1 {
+        text-align:center;
+        font-familly:"Charis SIL", serif;
+    }
+
+</style></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some thoughts on the IPython notebook.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For once, this will discuss more what are the possible things than can be done with IPython, with only few really usable code.</p>
+<p>I hope it will help the reader to better understand in what direction the Core Team whant to drive IPython. This is of course my personnal interpretation of the different points. We discussed since I came on board. But I hope it will help the comunity to feel.concern and participate.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Terminology">Terminology<a class="anchor-link" href="03-on-notebook-format.html#Terminology">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I think one of the first things that should be adressed is the terminology of things. As a non native english speaker I am pretty bad at choosing names for things. And I probably have an horible.english. And I think there is a big problem the Naming in the IPython notebook.</p>
+<p>The problem is the same as what happend with the terme "gene", at some point in history it was used to explain a specific effect that some phenotype where expressed depending on the genes you had, the problem is that with our current technologie an knowledge on genetics, the boundaries of what a gene is becommes fuzzy.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Same apply to the IPython notebook. Let's see.</p>
+<p>You probably can start the IPyrhon notebook from your command line. You can also ask a friend to send his or her IPython notebook by email. You probably know that shift enter execute a cell in an IPython notebook.</p>
+<p>But you probably don't send a webserver by email.</p>
+<p>I haven't seen anyone converting GMail to a power point.</p>
+<p>I think you see the point. "IPython notebook" represent at the same time: The webserver application that yoi start from the command line, the web frontend that you are used to use, the file format that defines the structures of ipynb files, the actual files you exchanges, and the representations of thoses files into the web applocation. Add on top the fact that kernel can speek to multiple frontend and can talk to non-python kernel, and people get lost.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now you wonder why you should care as you are only using the all bundle? Because you will probably what to share and or reuse what you write, and once you understand the differents things.you will be able to do even more amazing things.</p>
+<p>The part you don't (really) care about.</p>
+<p>The webserver. It can mostly be seen as a middleware. The configuration options should be left to the sysadmin. It mostly make the ZMQ/websocket bridge, and is also an endpoint for the web application to access remote filesystem (yes remote, even if localhost).</p>
+<p>The part you can do without.</p>
+<p>The kernel. You probably had one or twice a kernel that died</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In []:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        
+    <ul class="pager"><li class="previous">
+            <a href="02-css-selector.html" rel="prev">← Previous post</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="04-initialisation-cell.html" rel="next">Next post →</a>
+        </li>
+    
+    </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="nikolademo",
+        
+            disqus_url="http://carreau.github.io/posts/03-on-notebook-format.html",
+        
+        disqus_title="03-on-notebook-format",
+        disqus_identifier="cache/posts/03-on-notebook-format.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+        
+        
+    
+
+    </div>
+
+            Contents © 2013         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+
+            
+	
+
+        </div>
+    </section><script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/jquery.timeago.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script></body></html>
