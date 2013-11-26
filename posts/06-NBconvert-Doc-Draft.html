@@ -88,7 +88,7 @@ MathJax.Hub.Config({
 <p>The main principle of nbconvert is to instanciate a <code>Exporter</code> that controle a pipeline through which each notebook you want to export with go through.</p>
 <p>Let's start by importing what we need from the API, and download @jakevdp's notebook.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [1]:
@@ -103,7 +103,7 @@ In [1]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -125,7 +125,7 @@ In [1]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We read the response into a slightly more convenient format which represent IPython notebook. There are not real advantages for now, except some convenient methods, but with time this structure should be able to guarantee that the notebook structure is valid.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [2]:
@@ -140,7 +140,7 @@ In [2]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -168,7 +168,7 @@ In [2]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The nbconvert API exposes some basic exporter for common format and default options. We will start by using one of them. First we import it, instanciate an instance with all the defautl parameters and fed it the downloaded notebook.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [3]:
@@ -181,7 +181,7 @@ In [3]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [4]:
@@ -199,7 +199,7 @@ In [4]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [5]:
@@ -216,7 +216,7 @@ In [5]:
 <p>The exporter returns a tuple containing the body of the converted notebook, here raw HTML, as well as a resources dict. The resource dict contains (among many things) the extracted PNG, JPG [...etc] from the notebook when applicable. The basic HTML exporter does keep them as embeded base64 into the notebook, but one can do ask the figures to be extracted. Cf advance use. So for now the resource dict <strong>should</strong> be mostly empty, except for 1 key containing some css, and 2 others whose content will be obvious.</p>
 <p>Exporter are stateless, you won't be able to extract any usefull information (except their configuration) from them. You can directly re-use the instance to convert another notebook. Each exporter expose for convenience a <code>from_file</code> and <code>from_filename</code> methods if you need.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [6]:
@@ -232,7 +232,7 @@ In [6]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -250,7 +250,7 @@ html
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [7]:
@@ -265,7 +265,7 @@ In [7]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -297,7 +297,7 @@ In [7]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When exporting one might want to extract the base64 encoded figures to separate files, this is by default what does the RstExporter does, let see how to use it.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [8]:
@@ -314,7 +314,7 @@ In [8]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [9]:
@@ -329,7 +329,7 @@ In [9]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -406,7 +406,7 @@ It just doesn'...
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>let's try to see how to get one of these images</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [10]:
@@ -419,7 +419,7 @@ In [10]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -455,7 +455,7 @@ In [10]:
 <p>Hence if you provide <code>_repr_javascript_</code>,<code>_repr_latex_</code> and <code>_repr_png_</code>to an object, you will be able to determine at conversion time which representaition is the more appropriate. You could even decide to show all the representaition of an object, it's up to you. But this will require beeing a little more involve and write a few line of Jinja template. This will probably be the subject of another tutorial.</p>
 <p>Back to our images,</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [11]:
@@ -469,7 +469,7 @@ In [11]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -519,7 +519,7 @@ In [11]:
 <p>We provide some transformer that do some modification on the notebook structure by default. One of them, the <code>ExtractOutputTransformer</code> is responsible for crawling notebook, finding all the figures, and put them into the resources directory, as well as choosing the key (<code>filename_xx_y.extension</code>) that can replace the figure in the template.</p>
 <p>The <code>ExtractOutputTransformer</code> is special in the fact that it <strong>should</strong> be availlable on all <code>Exporter</code>s, but is just inactive by default on some exporter.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [12]:
@@ -533,7 +533,7 @@ In [12]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -563,7 +563,7 @@ In [12]:
 <p>ClassName.attribute_name = value</p>
 <p>A few ways exist to create such config, like reading a config file in your profile, but you can also do it programatically usign a dictionary. Let's create such a config object, and see the difference if we pass it to our <code>HtmlExporter</code></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [13]:
@@ -594,7 +594,7 @@ In [13]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -651,7 +651,7 @@ Here we have one more field
 <p>But what is an transformer ? Transformer can be either <em>decorated function</em> for dead-simple <code>Transformer</code>s that apply independently to each cell, for more advance transformation that support configurability You have to inherit from <code>Transformer</code> and define a <code>call</code> method as we'll see below.</p>
 <p>All transforers have a magic attribute that allows it to be activated/disactivate from the config dict.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [14]:
@@ -673,7 +673,7 @@ In [14]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -747,7 +747,7 @@ Four relevant docstring
 <p>I'll now demonstrate a specific example <a href="https://github.com/ipython/nbconvert/pull/137#issuecomment-18658235">requested</a> while nbconvert 2 was beeing developped. The ability to exclude cell from the conversion process based on their index.</p>
 <p>I'll let you imagin how to inject cell, if what you just want is to happend static content at the beginning/end of a notebook, plese refer to templating section, it will be much easier and cleaner.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [15]:
@@ -760,7 +760,7 @@ In [15]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [16]:
@@ -790,7 +790,7 @@ In [16]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [17]:
@@ -813,7 +813,7 @@ In [17]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I'm creating a pelican exporter that take <code>PelicanSubCell</code> extra transformers and a <code>config</code> object as parameter. This might seem redundant, but with configuration system you'll see that one can register an inactive transformer on all exporters and activate it at will form its config files and command line.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [18]:
@@ -826,7 +826,7 @@ In [18]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [19]:
@@ -839,7 +839,7 @@ In [19]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -904,7 +904,7 @@ In[2]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One more example from one Pull-Request.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [20]:
@@ -934,7 +934,7 @@ In [20]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [21]:
@@ -962,7 +962,7 @@ In [21]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -992,25 +992,8 @@ FOOOOOOOOTEEEEER
             <a href="07-the-sound-of-hydrogen.html" rel="next">Next post →</a>
         </li>
     
-    </ul><div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="nikolademo",
-        
-            disqus_url="http://carreau.github.io/posts/06-NBconvert-Doc-Draft.html",
-        
-        disqus_title="06-NBconvert-Doc-Draft",
-        disqus_identifier="cache/posts/06-NBconvert-Doc-Draft.html",
-        disqus_config = function () {
-            this.language = "";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/06-NBconvert-Doc-Draft.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
 
     
 

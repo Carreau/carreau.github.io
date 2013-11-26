@@ -71,21 +71,7 @@ MathJax.Hub.Config({
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This will try to be a series of blog post (or nbviewer post) on the IPython notebook. Mainly in responses to comment on <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks">Better typography for IPython notebooks</a> and some of the comment at the end of the page, especially <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks/#comment-148">this one</a>, that will have a full answer <a href="../urls/raw.github.com/Carreau/posts/master/02-css-selector.ipynb">next post</a>.</p>
-<style>
-    div.cell, .text_cell_render{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-
-    }
-
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-
-</style></div>
+</div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First some presentation, I am Matthias, you can usually find me on github aka <a href="https://github.com/carreau">@carreau</a>, or on twitter @mbussonn. I'm a Phd student in Biophysic, more physic than bio. And I contributed mostly to the IPython notebook.</p>
 </div>
@@ -180,7 +166,7 @@ MathJax.Hub.Config({
 <p>This file is not created by default, and can exist on a per-profile basis, if you don't know what ipython profiles are, then you are probably using the default profile. In short, profile are a way to have different configuration for ipython which you can choose through a command line flag (<code>ipython notebook --profile=&lt;profilename&gt;</code>).</p>
 <p>Let's locate our profile folder:</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [2]:
@@ -194,7 +180,7 @@ ipython locate
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -215,7 +201,7 @@ ipython locate
 <p><code>/Users/matthiasbussonnier/.ipython/profile_foo/</code></p>
 <p>let's create a profile for the sake of this blog post.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [3]:
@@ -229,7 +215,7 @@ ipython profile create customcss
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -253,7 +239,7 @@ ipython profile create customcss
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I will now create the file I am interested in : <code>static/custom/custom.css</code></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [5]:
@@ -272,7 +258,7 @@ touch ~/.ipython/profile_customcss/static/custom/custom.css
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Use the file magic to write something in it.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [34]:
@@ -300,7 +286,7 @@ In [34]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -316,7 +302,7 @@ Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/c
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [35]:
@@ -329,7 +315,7 @@ In [35]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -367,7 +353,7 @@ In [35]:
 [NotebookApp] Use Control-C to stop this server and shut down all kernels.</code></pre>
 <p>You will get the right css, let's try :</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [36]:
@@ -381,7 +367,7 @@ curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -487,25 +473,8 @@ curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
             <a href="02-css-selector.html" rel="next">Next post →</a>
         </li>
     
-    </ul><div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="nikolademo",
-        
-            disqus_url="http://carreau.github.io/posts/Blog1.html",
-        
-        disqus_title="Blog1",
-        disqus_identifier="cache/posts/Blog1.html",
-        disqus_config = function () {
-            this.language = "";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/Blog1.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
 
     
 

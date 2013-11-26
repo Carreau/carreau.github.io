@@ -79,7 +79,7 @@ MathJax.Hub.Config({
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here is an example where the color of <strong>any</strong> <code>Text</code> object of matplotlib has a configurable color as long as the object that creates it is (also) an <code>Artist</code>, with minimal modification of matplotlib.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [1]:
@@ -94,7 +94,7 @@ In [1]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -110,7 +110,7 @@ Populating the interactive namespace from numpy and matplotlib
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [2]:
@@ -136,7 +136,7 @@ In [2]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [3]:
@@ -153,7 +153,7 @@ In [3]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -200,11 +200,12 @@ In [3]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So I'll assume that IPython configuration system is magic. Still there is some rule you shoudl know.</p>
 <p>In IPython, any object that inherit from <code>Configurable</code> can have attributes that are configurable. The name of the configuration attribute that will allow to change the value of this attribute are easy, it's <code>Class.attribute = Value</code>, and if the creator of an object took care of passing a reference to itself, you can nest config as <code>ParentClass.Class.attribute = value</code>, by dooing so only <code>Class</code> created by <code>ParentClass</code> will have <code>value</code> set. With a dummy example.</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Foo(Configurable):
+<pre class="sourceCode python"><code class="sourceCode python">
+<span class="kw">class</span> Foo(Configurable):
 
     length = Integer(<span class="dv">1</span>,config=<span class="ot">True</span>)
     ...
-
+    
 <span class="kw">class</span> Bar(Configurable):
 
     <span class="kw">def</span> <span class="ot">__init__</span>(<span class="ot">self</span>):
@@ -215,7 +216,7 @@ In [3]:
 <p>every <code>Foo</code> object length can be configured with <code>Foo.length=2</code> or you can target a subset of foo by setting <code>Rem.Foo.length</code> or <code>Bar.Foo.lenght</code>.</p>
 <p>But this might be a little abstarct, let's do a demo with matplotlib</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [4]:
@@ -228,7 +229,7 @@ In [4]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -246,42 +247,40 @@ In [4]:
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>let's make matplotlib <code>Artist</code> an IPython <code>Configurable</code>, grab default config from <code>matplotlib.config</code> if it exist, and pass it to parrent.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<pre class="sourceCode diff"><code class="sourceCode diff"><span class="st">-class Artist(object):</span>
-<span class="ot">+class Artist(Configurable):</span>
+<pre><code>-class Artist(object):
++class Artist(Configurable):
 
-<span class="st">-    def __init__(self):</span>
-<span class="ot">+    def __init__(self, config=None, parent=None):</span>
-<span class="ot">+        </span>
-<span class="ot">+        c = getattr(matplotlib,'config',Config({}))</span>
-<span class="ot">+        if config :</span>
-<span class="ot">+            c.merge(config)</span>
-<span class="ot">+        super(Artist, self).__init__(config=c, parent=parent)</span></code></pre>
+-    def __init__(self):
++    def __init__(self, config=None, parent=None):
++        
++        c = getattr(matplotlib,'config',Config({}))
++        if config :
++            c.merge(config)
++        super(Artist, self).__init__(config=c, parent=parent)</code></pre>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we will define 2 attributes of <code>Patches</code> (a subclass of Artist) ; <code>t_color</code>, <code>t_lw</code> that are respectively a <code>Color</code> or a <code>Float</code> and set the default color of current <code>Patch</code> to this attribute.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre class="sourceCode diff"><code class="sourceCode diff"> class Patch(artist.Artist):
+<pre><code> class Patch(artist.Artist):
 
-<span class="ot">+    t_color = MaybeColor(None,config=True)</span>
-<span class="ot">+    t_lw = MaybeFloat(None,config=True)</span>
-<span class="ot">+</span>
++    t_color = MaybeColor(None,config=True)
++    t_lw = MaybeFloat(None,config=True)
++
      ...
          if linewidth is None:
-<span class="st">-            linewidth = mpl.rcParams['patch.linewidth']</span>
-<span class="ot">+            if self.t_lw is not None:</span>
-<span class="ot">+                linewidth = self.t_lw</span>
-<span class="ot">+            else:</span>
-<span class="ot">+                linewidth = mpl.rcParams['patch.linewidth']</span>
+-            linewidth = mpl.rcParams['patch.linewidth']
++            if self.t_lw is not None:
++                linewidth = self.t_lw
++            else:
++                linewidth = mpl.rcParams['patch.linewidth']
          ...
          if color is None:
-<span class="st">-            color = mpl.rcParams['patch.facecolor']</span>
-<span class="ot">+            if self.t_color is not None:</span>
-<span class="ot">+                color = self.t_color</span>
-<span class="ot">+            else :</span>
-<span class="ot">+                color = mpl.rcParams['patch.facecolor']</span></code></pre>
+-            color = mpl.rcParams['patch.facecolor']
++            if self.t_color is not None:
++                color = self.t_color
++            else :
++                color = mpl.rcParams['patch.facecolor']</code></pre>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One could also set <code>_t_color_default</code> to <code>mpl.rcParams['patch.facecolor']</code> but it becommes complicaed for the explanation</p>
@@ -296,7 +295,7 @@ In [4]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We know that <code>Wedge</code>, <code>Ellipse</code>,<code>...</code> and other are part of this category, so let's play with their <code>t_color</code></p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [5]:
@@ -316,7 +315,7 @@ In [5]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [6]:
@@ -339,7 +338,7 @@ In [6]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's see what this gives :</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [7]:
@@ -375,7 +374,7 @@ In [7]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -409,25 +408,25 @@ In [7]:
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>let's patch <code>Text</code> to also accept a <code>t_color</code> configurable, bacause <code>Text</code> is a good candidate for nesting configurability:</p>
-<pre class="sourceCode diff"><code class="sourceCode diff"> class Text(Artist):
-<span class="ot">+    t_color = MaybeColor(None,config=True)</span>
+<pre><code> class Text(Artist):
++    t_color = MaybeColor(None,config=True)
 
          if color is None:
-<span class="st">-            color = rcParams['text.color']</span>
-<span class="ot">+            if self.t_color is not None:</span>
-<span class="ot">+                color = self.t_color</span>
-<span class="ot">+            else :</span>
-<span class="ot">+                color = rcParams['text.color']</span>
-<span class="ot">+        if self.t_color is not None:</span>
-<span class="ot">+            color = self.t_color</span>
-<span class="ot">+</span>
+-            color = rcParams['text.color']
++            if self.t_color is not None:
++                color = self.t_color
++            else :
++                color = rcParams['text.color']
++        if self.t_color is not None:
++            color = self.t_color
++
          if fontproperties is None:
              fontproperties = FontProperties()</code></pre>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we shoudl be able to make default <code>Text</code> always purple, nice things about <code>Config</code> object is that once created they accept acces of any attribute with dot notation.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [8]:
@@ -440,7 +439,7 @@ In [8]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [9]:
@@ -456,7 +455,7 @@ In [9]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -486,7 +485,7 @@ In [9]:
 <p>Ok, not much further than current matplotlib configuratin right ?</p>
 <p>We also know that <code>XAxis</code> and <code>Yaxis</code> inherit from <code>Axis</code> which itself inherit from <code>Artist</code>. Both are responsible from creating the x- and y-label</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [10]:
@@ -503,7 +502,7 @@ In [10]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>same goes for <code>Tick</code>, <code>XTick</code> and <code>YTicks</code>. I can of course set a parameter to the root class:</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [11]:
@@ -519,7 +518,7 @@ In [11]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>and overwrite it for a specific subclass:</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [12]:
@@ -532,7 +531,7 @@ In [12]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [13]:
@@ -548,7 +547,7 @@ In [13]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -590,7 +589,7 @@ In [13]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's do an example with a custom artist that create 2 kinds of circles. We'll need a custom no-op class that inherit Circle.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [14]:
@@ -604,7 +603,7 @@ In [14]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [15]:
@@ -619,7 +618,7 @@ In [15]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [16]:
@@ -662,7 +661,7 @@ In [16]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -703,7 +702,7 @@ In [16]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This patches version of matplotlib keep track of all the <code>Configurable</code> it discovers while you use it. Here is a non exaustive list.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [17]:
@@ -727,7 +726,7 @@ In [17]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -788,25 +787,8 @@ YTick.Text
         </li>
     
     
-    </ul><div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="nikolademo",
-        
-            disqus_url="http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html",
-        
-        disqus_title="Matplotlib and IPython love child",
-        disqus_identifier="cache/posts/09-Matplotlib-And-IPython-Config.html",
-        disqus_config = function () {
-            this.language = "";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
 
     
 

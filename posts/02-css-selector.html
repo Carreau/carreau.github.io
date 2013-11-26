@@ -68,17 +68,7 @@ MathJax.Hub.Config({
 <blockquote>
 <p>If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.</p>
 </blockquote>
-<style>
-blockquote {
-    border-left: 4px solid #DDD;
-    padding: 0 15px;
-    color: #777;
-}
-
-p {
-     text-align:justify;
-}
-</style></div>
+</div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Response-to-comments">Response to comments<a class="anchor-link" href="02-css-selector.html#Response-to-comments">¶</a></h3>
 </div>
@@ -103,17 +93,9 @@ p {
 </div>
 
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This the second nbviewer post on the IPython notebook. Mainly in responses to comment on <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks">Better typography for IPython notebooks</a>, we saw <a href="http://nbviewer.ipython.org/urls/raw.github.com/Carreau/posts/master/Blog1.ipynb%20&lt;style&gt;%20div.cell,%20.text_cell_render%7B%20max-width:750px;%20margin-left:auto;%20margin-right:auto;">last time</a> how to locally add custom css to a notebook wihtout too much pain. Now we are going to dg deeper into IPython code and see what we can do.</p>
+<p>This the second nbviewer post on the IPython notebook. Mainly in responses to comment on <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks">Better typography for IPython notebooks</a>, we saw <a href="http://nbviewer.ipython.org/urls/raw.github.com/Carreau/posts/master/Blog1.ipynb">last time</a> how to locally add custom css to a notebook wihtout too much pain. Now we are going to dg deeper into IPython code and see what we can do.</p>
 <p>As for the first post, you will stil be able to do everything without changing the source, but still need to get the dev version.</p>
 <p>For those of you on linux; you can get a daily build with <a href="https://launchpad.net/~jtaylor/+archive/ipython-dev">Julian Taylor PPA</a> that should work great. Be carefull though, it has a few custom patches that moved the static resources into <code>/usr/share/</code></p>
-<pre><code>}
-
-
-h1 {
-    text-align:center;
-    font-familly:"Charis SIL", serif;
-}</code></pre>
-
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This notebook will contain javascript snippet, but unlike last post, I will not put them in <code>%%javascript</code> magic for a few reasons, the first beeing that it will not work on nbviewer, the second is that you should stop relying on publishing javascipt using the <code>_repr_javascript_</code> of IPyton as it will be deprecated. This will be the subject of another post, but don't complain we have bigger plan to replace that.</p>
@@ -186,7 +168,7 @@ h1 {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So we can use jQuery <a href="http://api.jquery.com/jQuery.getScript/"><code>getScript</code></a> to just load another file where we will work.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [5]:
@@ -200,7 +182,7 @@ touch ~/.ipython/profile_default/static/js/css_selector.js
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [25]:
@@ -214,7 +196,7 @@ In [25]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -240,7 +222,7 @@ Overwriting /Users/bussonniermatthias/.ipython/profile_default/static/js/css_sel
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I cheat a little and don't do it from the notebook as my config file have more stuff in it, but here is the corresponding line.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [20]:
@@ -253,7 +235,7 @@ In [20]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -323,7 +305,7 @@ $.getScript('/static/js/css_selector.js')
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As writing the selector is not the interesting exercise, I'll just give you the code to put in your <code>css_selector.js</code>:</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In []:
@@ -364,7 +346,7 @@ In []:
 @fontBaseColor : black/white;</code></pre>
 <p>and compiled.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [5]:
@@ -378,7 +360,7 @@ In [5]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -434,25 +416,8 @@ In [5]:
             <a href="03-on-notebook-format.html" rel="next">Next post →</a>
         </li>
     
-    </ul><div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="nikolademo",
-        
-            disqus_url="http://carreau.github.io/posts/02-css-selector.html",
-        
-        disqus_title="02-css-selector",
-        disqus_identifier="cache/posts/02-css-selector.html",
-        disqus_config = function () {
-            this.language = "";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/02-css-selector.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
 
     
 

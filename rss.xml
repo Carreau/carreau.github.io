@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 24 Nov 2013 22:35:41 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Nov 2013 18:47:34 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This is an experiement of how one could try to improve matplotlib configuration system using IPython's traitlets system.&lt;/p&gt;
 &lt;p&gt;It has probably a &lt;strong&gt;huge&lt;/strong&gt; number of disatvantages going from slowing down all the matplotlib stack, as making every class name matter in backward compatibility.&lt;/p&gt;
 &lt;p&gt;Far from beeing a perfect lovechild of two awesome project, this is for now an horible mutant that at some point inspect up it's statck to find information about it's caller in some places.&lt;/p&gt;
@@ -18,7 +18,7 @@
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Here is an example where the color of &lt;strong&gt;any&lt;/strong&gt; &lt;code&gt;Text&lt;/code&gt; object of matplotlib has a configurable color as long as the object that creates it is (also) an &lt;code&gt;Artist&lt;/code&gt;, with minimal modification of matplotlib.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [1]:
@@ -33,7 +33,7 @@ In [1]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -49,7 +49,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -75,7 +75,7 @@ In [2]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -92,7 +92,7 @@ In [3]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -139,11 +139,12 @@ In [3]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;So I'll assume that IPython configuration system is magic. Still there is some rule you shoudl know.&lt;/p&gt;
 &lt;p&gt;In IPython, any object that inherit from &lt;code&gt;Configurable&lt;/code&gt; can have attributes that are configurable. The name of the configuration attribute that will allow to change the value of this attribute are easy, it's &lt;code&gt;Class.attribute = Value&lt;/code&gt;, and if the creator of an object took care of passing a reference to itself, you can nest config as &lt;code&gt;ParentClass.Class.attribute = value&lt;/code&gt;, by dooing so only &lt;code&gt;Class&lt;/code&gt; created by &lt;code&gt;ParentClass&lt;/code&gt; will have &lt;code&gt;value&lt;/code&gt; set. With a dummy example.&lt;/p&gt;
-&lt;pre class="sourceCode python"&gt;&lt;code class="sourceCode python"&gt;&lt;span class="kw"&gt;class&lt;/span&gt; Foo(Configurable):
+&lt;pre class="sourceCode python"&gt;&lt;code class="sourceCode python"&gt;
+&lt;span class="kw"&gt;class&lt;/span&gt; Foo(Configurable):
 
     length = Integer(&lt;span class="dv"&gt;1&lt;/span&gt;,config=&lt;span class="ot"&gt;True&lt;/span&gt;)
     ...
-
+    
 &lt;span class="kw"&gt;class&lt;/span&gt; Bar(Configurable):
 
     &lt;span class="kw"&gt;def&lt;/span&gt; &lt;span class="ot"&gt;__init__&lt;/span&gt;(&lt;span class="ot"&gt;self&lt;/span&gt;):
@@ -154,7 +155,7 @@ In [3]:
 &lt;p&gt;every &lt;code&gt;Foo&lt;/code&gt; object length can be configured with &lt;code&gt;Foo.length=2&lt;/code&gt; or you can target a subset of foo by setting &lt;code&gt;Rem.Foo.length&lt;/code&gt; or &lt;code&gt;Bar.Foo.lenght&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;But this might be a little abstarct, let's do a demo with matplotlib&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [4]:
@@ -167,7 +168,7 @@ In [4]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -185,42 +186,40 @@ In [4]:
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;let's make matplotlib &lt;code&gt;Artist&lt;/code&gt; an IPython &lt;code&gt;Configurable&lt;/code&gt;, grab default config from &lt;code&gt;matplotlib.config&lt;/code&gt; if it exist, and pass it to parrent.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;pre class="sourceCode diff"&gt;&lt;code class="sourceCode diff"&gt;&lt;span class="st"&gt;-class Artist(object):&lt;/span&gt;
-&lt;span class="ot"&gt;+class Artist(Configurable):&lt;/span&gt;
+&lt;pre&gt;&lt;code&gt;-class Artist(object):
++class Artist(Configurable):
 
-&lt;span class="st"&gt;-    def __init__(self):&lt;/span&gt;
-&lt;span class="ot"&gt;+    def __init__(self, config=None, parent=None):&lt;/span&gt;
-&lt;span class="ot"&gt;+        &lt;/span&gt;
-&lt;span class="ot"&gt;+        c = getattr(matplotlib,'config',Config({}))&lt;/span&gt;
-&lt;span class="ot"&gt;+        if config :&lt;/span&gt;
-&lt;span class="ot"&gt;+            c.merge(config)&lt;/span&gt;
-&lt;span class="ot"&gt;+        super(Artist, self).__init__(config=c, parent=parent)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+-    def __init__(self):
++    def __init__(self, config=None, parent=None):
++        
++        c = getattr(matplotlib,'config',Config({}))
++        if config :
++            c.merge(config)
++        super(Artist, self).__init__(config=c, parent=parent)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Now we will define 2 attributes of &lt;code&gt;Patches&lt;/code&gt; (a subclass of Artist) ; &lt;code&gt;t_color&lt;/code&gt;, &lt;code&gt;t_lw&lt;/code&gt; that are respectively a &lt;code&gt;Color&lt;/code&gt; or a &lt;code&gt;Float&lt;/code&gt; and set the default color of current &lt;code&gt;Patch&lt;/code&gt; to this attribute.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;pre class="sourceCode diff"&gt;&lt;code class="sourceCode diff"&gt; class Patch(artist.Artist):
+&lt;pre&gt;&lt;code&gt; class Patch(artist.Artist):
 
-&lt;span class="ot"&gt;+    t_color = MaybeColor(None,config=True)&lt;/span&gt;
-&lt;span class="ot"&gt;+    t_lw = MaybeFloat(None,config=True)&lt;/span&gt;
-&lt;span class="ot"&gt;+&lt;/span&gt;
++    t_color = MaybeColor(None,config=True)
++    t_lw = MaybeFloat(None,config=True)
++
      ...
          if linewidth is None:
-&lt;span class="st"&gt;-            linewidth = mpl.rcParams['patch.linewidth']&lt;/span&gt;
-&lt;span class="ot"&gt;+            if self.t_lw is not None:&lt;/span&gt;
-&lt;span class="ot"&gt;+                linewidth = self.t_lw&lt;/span&gt;
-&lt;span class="ot"&gt;+            else:&lt;/span&gt;
-&lt;span class="ot"&gt;+                linewidth = mpl.rcParams['patch.linewidth']&lt;/span&gt;
+-            linewidth = mpl.rcParams['patch.linewidth']
++            if self.t_lw is not None:
++                linewidth = self.t_lw
++            else:
++                linewidth = mpl.rcParams['patch.linewidth']
          ...
          if color is None:
-&lt;span class="st"&gt;-            color = mpl.rcParams['patch.facecolor']&lt;/span&gt;
-&lt;span class="ot"&gt;+            if self.t_color is not None:&lt;/span&gt;
-&lt;span class="ot"&gt;+                color = self.t_color&lt;/span&gt;
-&lt;span class="ot"&gt;+            else :&lt;/span&gt;
-&lt;span class="ot"&gt;+                color = mpl.rcParams['patch.facecolor']&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+-            color = mpl.rcParams['patch.facecolor']
++            if self.t_color is not None:
++                color = self.t_color
++            else :
++                color = mpl.rcParams['patch.facecolor']&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;One could also set &lt;code&gt;_t_color_default&lt;/code&gt; to &lt;code&gt;mpl.rcParams['patch.facecolor']&lt;/code&gt; but it becommes complicaed for the explanation&lt;/p&gt;
@@ -235,7 +234,7 @@ In [4]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We know that &lt;code&gt;Wedge&lt;/code&gt;, &lt;code&gt;Ellipse&lt;/code&gt;,&lt;code&gt;...&lt;/code&gt; and other are part of this category, so let's play with their &lt;code&gt;t_color&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -255,7 +254,7 @@ In [5]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [6]:
@@ -278,7 +277,7 @@ In [6]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Let's see what this gives :&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [7]:
@@ -314,7 +313,7 @@ In [7]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -348,25 +347,25 @@ In [7]:
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;let's patch &lt;code&gt;Text&lt;/code&gt; to also accept a &lt;code&gt;t_color&lt;/code&gt; configurable, bacause &lt;code&gt;Text&lt;/code&gt; is a good candidate for nesting configurability:&lt;/p&gt;
-&lt;pre class="sourceCode diff"&gt;&lt;code class="sourceCode diff"&gt; class Text(Artist):
-&lt;span class="ot"&gt;+    t_color = MaybeColor(None,config=True)&lt;/span&gt;
+&lt;pre&gt;&lt;code&gt; class Text(Artist):
++    t_color = MaybeColor(None,config=True)
 
          if color is None:
-&lt;span class="st"&gt;-            color = rcParams['text.color']&lt;/span&gt;
-&lt;span class="ot"&gt;+            if self.t_color is not None:&lt;/span&gt;
-&lt;span class="ot"&gt;+                color = self.t_color&lt;/span&gt;
-&lt;span class="ot"&gt;+            else :&lt;/span&gt;
-&lt;span class="ot"&gt;+                color = rcParams['text.color']&lt;/span&gt;
-&lt;span class="ot"&gt;+        if self.t_color is not None:&lt;/span&gt;
-&lt;span class="ot"&gt;+            color = self.t_color&lt;/span&gt;
-&lt;span class="ot"&gt;+&lt;/span&gt;
+-            color = rcParams['text.color']
++            if self.t_color is not None:
++                color = self.t_color
++            else :
++                color = rcParams['text.color']
++        if self.t_color is not None:
++            color = self.t_color
++
          if fontproperties is None:
              fontproperties = FontProperties()&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Now we shoudl be able to make default &lt;code&gt;Text&lt;/code&gt; always purple, nice things about &lt;code&gt;Config&lt;/code&gt; object is that once created they accept acces of any attribute with dot notation.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [8]:
@@ -379,7 +378,7 @@ In [8]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [9]:
@@ -395,7 +394,7 @@ In [9]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -425,7 +424,7 @@ In [9]:
 &lt;p&gt;Ok, not much further than current matplotlib configuratin right ?&lt;/p&gt;
 &lt;p&gt;We also know that &lt;code&gt;XAxis&lt;/code&gt; and &lt;code&gt;Yaxis&lt;/code&gt; inherit from &lt;code&gt;Axis&lt;/code&gt; which itself inherit from &lt;code&gt;Artist&lt;/code&gt;. Both are responsible from creating the x- and y-label&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -442,7 +441,7 @@ In [10]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;same goes for &lt;code&gt;Tick&lt;/code&gt;, &lt;code&gt;XTick&lt;/code&gt; and &lt;code&gt;YTicks&lt;/code&gt;. I can of course set a parameter to the root class:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [11]:
@@ -458,7 +457,7 @@ In [11]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;and overwrite it for a specific subclass:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [12]:
@@ -471,7 +470,7 @@ In [12]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [13]:
@@ -487,7 +486,7 @@ In [13]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -529,7 +528,7 @@ In [13]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Let's do an example with a custom artist that create 2 kinds of circles. We'll need a custom no-op class that inherit Circle.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [14]:
@@ -543,7 +542,7 @@ In [14]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [15]:
@@ -558,7 +557,7 @@ In [15]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [16]:
@@ -601,7 +600,7 @@ In [16]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -642,7 +641,7 @@ In [16]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This patches version of matplotlib keep track of all the &lt;code&gt;Configurable&lt;/code&gt; it discovers while you use it. Here is a non exaustive list.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [17]:
@@ -666,7 +665,7 @@ In [17]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -730,7 +729,7 @@ YTick.Text
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Acording to difflib, the following strings: 'baaaaa', 'aaabaa' and 'aaaaba' share 5 caracters with 'aaaaaa', but 'aabaaa' share only 3 .... but only if the change is in the first half of the string.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [1]:
@@ -749,7 +748,7 @@ In [1]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -797,7 +796,7 @@ In [1]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;To do that, we need to define "junk" which are things you don't want the algorithme to match on. Let see a common example in python where when you add a function with a derorator, the decorator is often added to the "next" function.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -835,7 +834,7 @@ In [2]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Classical diff&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -849,7 +848,7 @@ In [3]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -880,7 +879,7 @@ In [3]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Now we will tell it that blank line are junk:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [4]:
@@ -894,7 +893,7 @@ In [4]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -932,7 +931,7 @@ In [4]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Things is, &lt;code&gt;SequenceMatcher&lt;/code&gt; is also the method that help you get the proximity between two strings. If the sequence you pass to &lt;code&gt;SequenceMatcher&lt;/code&gt; is a string, it will try to match each caracters.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -945,7 +944,7 @@ In [5]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [6]:
@@ -959,7 +958,7 @@ In [6]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -979,7 +978,7 @@ In [6]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Oh, sorry, you need to explicitelty, pass the &lt;code&gt;isjunk&lt;/code&gt; function. Hopefully, it accepts &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [7]:
@@ -993,7 +992,7 @@ In [7]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1017,7 +1016,7 @@ In [7]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;let's try longer...&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [8]:
@@ -1030,7 +1029,7 @@ In [8]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1049,7 +1048,7 @@ In [8]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Still, don't pass it strings longer than 200 char, it automatically detect junk... Yes this is documented, but not obvisous.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [9]:
@@ -1062,7 +1061,7 @@ In [9]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1081,7 +1080,7 @@ In [9]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;So let's define a custom SequenceMatcher that make sens for the rest of the post, so that &lt;code&gt;isjunk&lt;/code&gt;is &lt;code&gt;None&lt;/code&gt; by default, and no &lt;code&gt;autojunk&lt;/code&gt; for &lt;code&gt;n &amp;gt; 200&lt;/code&gt;, and a simple &lt;code&gt;ratio(a, b)&lt;/code&gt; method as a shortcut.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -1098,7 +1097,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -1112,7 +1111,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1139,7 +1138,7 @@ In [10]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;So let's look at what happend if we compare a string against itself, with only one modification, as a function as the position of the modification, that is to say the ratio of &lt;code&gt;aaaa...&lt;/code&gt; vs &lt;code&gt;baaa...&lt;/code&gt; vs &lt;code&gt;abaa...&lt;/code&gt; vs &lt;code&gt;aaba...&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [11]:
@@ -1154,7 +1153,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [12]:
@@ -1187,7 +1186,7 @@ In [12]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1239,7 +1238,7 @@ aaaaaaaa-a ...
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Hum..let's look with some other string, basically same as before, but with repeating sequence &lt;code&gt;ababab..&lt;/code&gt;, &lt;code&gt;abcabcabcabc...&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [13]:
@@ -1252,7 +1251,7 @@ In [13]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [14]:
@@ -1289,7 +1288,7 @@ In [14]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -1332,7 +1331,7 @@ In [14]:
 &lt;p&gt;Anyway, I knew what &lt;a href="http://en.wikipedia.org/wiki/Levenshtein_distance"&gt;levenstein distance&lt;/a&gt; was, but not really what the efficient algorithme where. I played around a little bit with them, and recoded them in pure python. I'll post the link soon, just time to clean things up im make them as pure python module. Below is how it looks like.&lt;/p&gt;
 &lt;p&gt;Thing is, as far as I can tell, libdiff stays an order of magnitude faster in some cases, as well as computes the matches at the same time.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [15]:
@@ -1385,7 +1384,7 @@ In [15]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [16]:
@@ -1399,7 +1398,7 @@ In [16]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [17]:
@@ -1425,7 +1424,7 @@ In [17]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1463,7 +1462,7 @@ sorted √ 27 27
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Except on the sorted case, SequenceMatcher from stdlib give the wrong matches length almost all the time (sometime it is right)&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [18]:
@@ -1482,7 +1481,7 @@ In [18]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1505,7 +1504,7 @@ In [18]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;On both sorted and unsorted arrays, SequenceMatcher is way faster (10 to 20 times) than I am, but wrong.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [19]:
@@ -1522,7 +1521,7 @@ In [19]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1539,7 +1538,7 @@ In [19]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [20]:
@@ -1552,7 +1551,7 @@ In [20]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -1596,7 +1595,7 @@ In [20]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;[Edit] apparently the process of converting something not audible into sound have diffent naming: sonify, sonification or auralizing according to the comment on twitter.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [1]:
@@ -1609,7 +1608,7 @@ In [1]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1627,7 +1626,7 @@ For more information, type 'help(pylab)'.
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -1644,7 +1643,7 @@ In [2]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -1717,7 +1716,7 @@ In [3]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [4]:
@@ -1742,7 +1741,7 @@ In [4]:
 &lt;h1 id="test-the-wav-player"&gt;Test the wav Player&lt;/h1&gt;
 &lt;p&gt;let's try to first just play an A (440 Hz).&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -1759,7 +1758,7 @@ In [5]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [6]:
@@ -1781,7 +1780,7 @@ In [6]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1815,7 +1814,7 @@ In [6]:
 &lt;p&gt;\[ f_{n,m}={c \over \lambda}  = {R_h\over h} \left({1\over n}-{1\over m}\right) \]&lt;/p&gt;
 &lt;p&gt;for \(n=1\) we've got the Lyman series, and for \(n=2\) we have the Balmer series&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [7]:
@@ -1832,7 +1831,7 @@ In [7]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1849,7 +1848,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [8]:
@@ -1864,7 +1863,7 @@ In [8]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [9]:
@@ -1881,7 +1880,7 @@ In [9]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -1894,7 +1893,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [11]:
@@ -1908,7 +1907,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1922,7 +1921,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [12]:
@@ -1936,7 +1935,7 @@ In [12]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1986,7 +1985,7 @@ In [12]:
 &lt;p&gt;The main principle of nbconvert is to instanciate a &lt;code&gt;Exporter&lt;/code&gt; that controle a pipeline through which each notebook you want to export with go through.&lt;/p&gt;
 &lt;p&gt;Let's start by importing what we need from the API, and download @jakevdp's notebook.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [1]:
@@ -2001,7 +2000,7 @@ In [1]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -2023,7 +2022,7 @@ In [1]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;We read the response into a slightly more convenient format which represent IPython notebook. There are not real advantages for now, except some convenient methods, but with time this structure should be able to guarantee that the notebook structure is valid.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -2038,7 +2037,7 @@ In [2]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -2066,7 +2065,7 @@ In [2]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The nbconvert API exposes some basic exporter for common format and default options. We will start by using one of them. First we import it, instanciate an instance with all the defautl parameters and fed it the downloaded notebook.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -2079,7 +2078,7 @@ In [3]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [4]:
@@ -2097,7 +2096,7 @@ In [4]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -2114,7 +2113,7 @@ In [5]:
 &lt;p&gt;The exporter returns a tuple containing the body of the converted notebook, here raw HTML, as well as a resources dict. The resource dict contains (among many things) the extracted PNG, JPG [...etc] from the notebook when applicable. The basic HTML exporter does keep them as embeded base64 into the notebook, but one can do ask the figures to be extracted. Cf advance use. So for now the resource dict &lt;strong&gt;should&lt;/strong&gt; be mostly empty, except for 1 key containing some css, and 2 others whose content will be obvious.&lt;/p&gt;
 &lt;p&gt;Exporter are stateless, you won't be able to extract any usefull information (except their configuration) from them. You can directly re-use the instance to convert another notebook. Each exporter expose for convenience a &lt;code&gt;from_file&lt;/code&gt; and &lt;code&gt;from_filename&lt;/code&gt; methods if you need.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [6]:
@@ -2130,7 +2129,7 @@ In [6]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2148,7 +2147,7 @@ html
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [7]:
@@ -2163,7 +2162,7 @@ In [7]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2195,7 +2194,7 @@ In [7]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;When exporting one might want to extract the base64 encoded figures to separate files, this is by default what does the RstExporter does, let see how to use it.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [8]:
@@ -2212,7 +2211,7 @@ In [8]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [9]:
@@ -2227,7 +2226,7 @@ In [9]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2304,7 +2303,7 @@ It just doesn'...
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;let's try to see how to get one of these images&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -2317,7 +2316,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -2353,7 +2352,7 @@ In [10]:
 &lt;p&gt;Hence if you provide &lt;code&gt;_repr_javascript_&lt;/code&gt;,&lt;code&gt;_repr_latex_&lt;/code&gt; and &lt;code&gt;_repr_png_&lt;/code&gt;to an object, you will be able to determine at conversion time which representaition is the more appropriate. You could even decide to show all the representaition of an object, it's up to you. But this will require beeing a little more involve and write a few line of Jinja template. This will probably be the subject of another tutorial.&lt;/p&gt;
 &lt;p&gt;Back to our images,&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [11]:
@@ -2367,7 +2366,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -2417,7 +2416,7 @@ In [11]:
 &lt;p&gt;We provide some transformer that do some modification on the notebook structure by default. One of them, the &lt;code&gt;ExtractOutputTransformer&lt;/code&gt; is responsible for crawling notebook, finding all the figures, and put them into the resources directory, as well as choosing the key (&lt;code&gt;filename_xx_y.extension&lt;/code&gt;) that can replace the figure in the template.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;ExtractOutputTransformer&lt;/code&gt; is special in the fact that it &lt;strong&gt;should&lt;/strong&gt; be availlable on all &lt;code&gt;Exporter&lt;/code&gt;s, but is just inactive by default on some exporter.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [12]:
@@ -2431,7 +2430,7 @@ In [12]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -2461,7 +2460,7 @@ In [12]:
 &lt;p&gt;ClassName.attribute_name = value&lt;/p&gt;
 &lt;p&gt;A few ways exist to create such config, like reading a config file in your profile, but you can also do it programatically usign a dictionary. Let's create such a config object, and see the difference if we pass it to our &lt;code&gt;HtmlExporter&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [13]:
@@ -2492,7 +2491,7 @@ In [13]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2549,7 +2548,7 @@ Here we have one more field
 &lt;p&gt;But what is an transformer ? Transformer can be either &lt;em&gt;decorated function&lt;/em&gt; for dead-simple &lt;code&gt;Transformer&lt;/code&gt;s that apply independently to each cell, for more advance transformation that support configurability You have to inherit from &lt;code&gt;Transformer&lt;/code&gt; and define a &lt;code&gt;call&lt;/code&gt; method as we'll see below.&lt;/p&gt;
 &lt;p&gt;All transforers have a magic attribute that allows it to be activated/disactivate from the config dict.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [14]:
@@ -2571,7 +2570,7 @@ In [14]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2645,7 +2644,7 @@ Four relevant docstring
 &lt;p&gt;I'll now demonstrate a specific example &lt;a href="https://github.com/ipython/nbconvert/pull/137#issuecomment-18658235"&gt;requested&lt;/a&gt; while nbconvert 2 was beeing developped. The ability to exclude cell from the conversion process based on their index.&lt;/p&gt;
 &lt;p&gt;I'll let you imagin how to inject cell, if what you just want is to happend static content at the beginning/end of a notebook, plese refer to templating section, it will be much easier and cleaner.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [15]:
@@ -2658,7 +2657,7 @@ In [15]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [16]:
@@ -2688,7 +2687,7 @@ In [16]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [17]:
@@ -2711,7 +2710,7 @@ In [17]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I'm creating a pelican exporter that take &lt;code&gt;PelicanSubCell&lt;/code&gt; extra transformers and a &lt;code&gt;config&lt;/code&gt; object as parameter. This might seem redundant, but with configuration system you'll see that one can register an inactive transformer on all exporters and activate it at will form its config files and command line.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [18]:
@@ -2724,7 +2723,7 @@ In [18]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [19]:
@@ -2737,7 +2736,7 @@ In [19]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2802,7 +2801,7 @@ In[2]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;One more example from one Pull-Request.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [20]:
@@ -2832,7 +2831,7 @@ In [20]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [21]:
@@ -2860,7 +2859,7 @@ In [21]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2908,7 +2907,7 @@ FOOOOOOOOTEEEEER
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Install PyYaml, and see what we can do.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [42]:
@@ -2922,7 +2921,7 @@ In [42]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [43]:
@@ -2935,7 +2934,7 @@ In [43]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [44]:
@@ -2948,7 +2947,7 @@ In [44]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2964,7 +2963,7 @@ YAML Notebook.ipynb
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [45]:
@@ -2978,7 +2977,7 @@ In [45]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [46]:
@@ -2991,7 +2990,7 @@ In [46]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -3019,7 +3018,7 @@ In [46]:
 &lt;p&gt;I'll skipp the fiddling around with the yaml converter. In short, you have to specify explicitely the part you want to dump in the literal form, otherwise they are exported as list of strings, which is a little painfull to edit afterward. I'm using the &lt;code&gt;safe_dump&lt;/code&gt; and &lt;code&gt;safe_load&lt;/code&gt; methods (or pass safeLoader and Dumper). Those should be default or otherwise you could unserialise arbitrary object, and have code exucuted.&lt;/p&gt;
 &lt;p&gt;We probably don't want to reproduct the recent file Rail's critical vulnerability that append not so long ago.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [47]:
@@ -3040,7 +3039,7 @@ In [47]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I know classes should be wit upper case, but we just want to hide the fact that thoses a class to end user. At the same time I define a folded method to use it with markdown cell. when markdown contain really long lines, those will be wrapped in the yaml document.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [48]:
@@ -3066,7 +3065,7 @@ In [48]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;now we patch the part of the ipynb file we know we want to be literal or folded&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [49]:
@@ -3083,7 +3082,7 @@ In [49]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [50]:
@@ -3106,7 +3105,7 @@ In [50]:
 &lt;p&gt;Also support across languages are not consistent, and it would probably be too much of a security burden for all code that will support loading ipynb to take care of sanitazing Yaml.&lt;/p&gt;
 &lt;p&gt;One area where I woudl use it would be to describe the ipynb format at a talk for example, and/or to have metadata editing more human readable/writable.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [51]:
@@ -3119,7 +3118,7 @@ In [51]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -3336,21 +3335,7 @@ worksheets:
 &lt;blockquote&gt;
 &lt;p&gt;If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;style&gt;
-    div.cell, .text_cell_render{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-
-    }
-
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-
-&lt;/style&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Small blogpost to answer to one question that has been asked on &lt;a href="http://stackoverflow.com/questions/14934084/does-the-ipython-notebook-have-initialization-cells"&gt;stackoverflow&lt;/a&gt; and on the &lt;a href="https://github.com/ipython/ipython/issues/2950"&gt;Issue tracker&lt;/a&gt; :&lt;/p&gt;
 &lt;blockquote&gt;
@@ -3446,7 +3431,7 @@ var init_cell = CellToolbar.utils.checkbox_ui_generator('Initialisation Cell',
 &lt;pre&gt;&lt;code&gt;CellToolbar.register_preset('My toolbar', ['init_cell.chkb','default.rawedit','slideshow.select']);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And you can see below how it looks like&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [19]:
@@ -3460,7 +3445,7 @@ In [19]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -3522,7 +3507,7 @@ In [19]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I hope this show you that writing extension for the IPython notebook is not that hard, and are easy to share.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In []:
@@ -3542,21 +3527,7 @@ In []:
 &lt;blockquote&gt;
 &lt;p&gt;If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;style&gt;
-    div.cell, .text_cell_render{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-
-    }
-
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-
-&lt;/style&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Some thoughts on the IPython notebook.&lt;/p&gt;
 &lt;/div&gt;
@@ -3586,7 +3557,7 @@ In []:
 &lt;p&gt;The part you can do without.&lt;/p&gt;
 &lt;p&gt;The kernel. You probably had one or twice a kernel that died&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In []:
@@ -3606,17 +3577,7 @@ In []:
 &lt;blockquote&gt;
 &lt;p&gt;If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;style&gt;
-blockquote {
-    border-left: 4px solid #DDD;
-    padding: 0 15px;
-    color: #777;
-}
-
-p {
-     text-align:justify;
-}
-&lt;/style&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Response-to-comments"&gt;Response to comments&lt;a class="anchor-link" href="http://carreau.github.io/posts/02-css-selector.html#Response-to-comments"&gt;¶&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
@@ -3641,17 +3602,9 @@ p {
 &lt;/div&gt;
 
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This the second nbviewer post on the IPython notebook. Mainly in responses to comment on &lt;a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks"&gt;Better typography for IPython notebooks&lt;/a&gt;, we saw &lt;a href="http://nbviewer.ipython.org/urls/raw.github.com/Carreau/posts/master/Blog1.ipynb%20&amp;lt;style&amp;gt;%20div.cell,%20.text_cell_render%7B%20max-width:750px;%20margin-left:auto;%20margin-right:auto;"&gt;last time&lt;/a&gt; how to locally add custom css to a notebook wihtout too much pain. Now we are going to dg deeper into IPython code and see what we can do.&lt;/p&gt;
+&lt;p&gt;This the second nbviewer post on the IPython notebook. Mainly in responses to comment on &lt;a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks"&gt;Better typography for IPython notebooks&lt;/a&gt;, we saw &lt;a href="http://nbviewer.ipython.org/urls/raw.github.com/Carreau/posts/master/Blog1.ipynb"&gt;last time&lt;/a&gt; how to locally add custom css to a notebook wihtout too much pain. Now we are going to dg deeper into IPython code and see what we can do.&lt;/p&gt;
 &lt;p&gt;As for the first post, you will stil be able to do everything without changing the source, but still need to get the dev version.&lt;/p&gt;
 &lt;p&gt;For those of you on linux; you can get a daily build with &lt;a href="https://launchpad.net/~jtaylor/+archive/ipython-dev"&gt;Julian Taylor PPA&lt;/a&gt; that should work great. Be carefull though, it has a few custom patches that moved the static resources into &lt;code&gt;/usr/share/&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;}
-
-
-h1 {
-    text-align:center;
-    font-familly:"Charis SIL", serif;
-}&lt;/code&gt;&lt;/pre&gt;
-
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This notebook will contain javascript snippet, but unlike last post, I will not put them in &lt;code&gt;%%javascript&lt;/code&gt; magic for a few reasons, the first beeing that it will not work on nbviewer, the second is that you should stop relying on publishing javascipt using the &lt;code&gt;_repr_javascript_&lt;/code&gt; of IPyton as it will be deprecated. This will be the subject of another post, but don't complain we have bigger plan to replace that.&lt;/p&gt;
@@ -3724,7 +3677,7 @@ h1 {
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;So we can use jQuery &lt;a href="http://api.jquery.com/jQuery.getScript/"&gt;&lt;code&gt;getScript&lt;/code&gt;&lt;/a&gt; to just load another file where we will work.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -3738,7 +3691,7 @@ touch ~/.ipython/profile_default/static/js/css_selector.js
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [25]:
@@ -3752,7 +3705,7 @@ In [25]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -3778,7 +3731,7 @@ Overwriting /Users/bussonniermatthias/.ipython/profile_default/static/js/css_sel
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I cheat a little and don't do it from the notebook as my config file have more stuff in it, but here is the corresponding line.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [20]:
@@ -3791,7 +3744,7 @@ In [20]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -3861,7 +3814,7 @@ $.getScript('/static/js/css_selector.js')
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;As writing the selector is not the interesting exercise, I'll just give you the code to put in your &lt;code&gt;css_selector.js&lt;/code&gt;:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In []:
@@ -3902,7 +3855,7 @@ In []:
 @fontBaseColor : black/white;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and compiled.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -3916,7 +3869,7 @@ In [5]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -3971,21 +3924,7 @@ In [5]:
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This will try to be a series of blog post (or nbviewer post) on the IPython notebook. Mainly in responses to comment on &lt;a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks"&gt;Better typography for IPython notebooks&lt;/a&gt; and some of the comment at the end of the page, especially &lt;a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks/#comment-148"&gt;this one&lt;/a&gt;, that will have a full answer &lt;a href="http://carreau.github.io/urls/raw.github.com/Carreau/posts/master/02-css-selector.ipynb"&gt;next post&lt;/a&gt;.&lt;/p&gt;
-&lt;style&gt;
-    div.cell, .text_cell_render{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-
-    }
-
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-
-&lt;/style&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;First some presentation, I am Matthias, you can usually find me on github aka &lt;a href="https://github.com/carreau"&gt;@carreau&lt;/a&gt;, or on twitter @mbussonn. I'm a Phd student in Biophysic, more physic than bio. And I contributed mostly to the IPython notebook.&lt;/p&gt;
 &lt;/div&gt;
@@ -4080,7 +4019,7 @@ In [5]:
 &lt;p&gt;This file is not created by default, and can exist on a per-profile basis, if you don't know what ipython profiles are, then you are probably using the default profile. In short, profile are a way to have different configuration for ipython which you can choose through a command line flag (&lt;code&gt;ipython notebook --profile=&amp;lt;profilename&amp;gt;&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Let's locate our profile folder:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -4094,7 +4033,7 @@ ipython locate
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -4115,7 +4054,7 @@ ipython locate
 &lt;p&gt;&lt;code&gt;/Users/matthiasbussonnier/.ipython/profile_foo/&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;let's create a profile for the sake of this blog post.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -4129,7 +4068,7 @@ ipython profile create customcss
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -4153,7 +4092,7 @@ ipython profile create customcss
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I will now create the file I am interested in : &lt;code&gt;static/custom/custom.css&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -4172,7 +4111,7 @@ touch ~/.ipython/profile_customcss/static/custom/custom.css
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Use the file magic to write something in it.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [34]:
@@ -4200,7 +4139,7 @@ In [34]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -4216,7 +4155,7 @@ Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/c
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [35]:
@@ -4229,7 +4168,7 @@ In [35]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -4267,7 +4206,7 @@ In [35]:
 [NotebookApp] Use Control-C to stop this server and shut down all kernels.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You will get the right css, let's try :&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell vbox"&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [36]:
@@ -4281,7 +4220,7 @@ curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output vbox"&gt;
+&lt;div class="output"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;

@@ -230,7 +230,7 @@ html {
 }
 body {
   height: 100%;
-  background: url('../images/cream-dust.png') #ffffff;
+  background: url('../images/bright_squares.png') #ffffff;
 }
 section {
   margin: 0;
@@ -239,7 +239,7 @@ section {
 .social {
   float: left;
   min-height: 100%;
-  background: url('../images/blue-mocha-grunge.jpg') #192029;
+  background: url('../images/bright_squares.png') #ffffff;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -314,6 +314,9 @@ section {
   min-height: 100%;
   padding: 48px 0 60px 42px;
   margin-left: 180px;
+  background: url('../images/cream-dust.png') #ffffff;
+  max-width: 900px;
+  padding-right: 24px;
 }
 @media (min-width: 774px) and (max-width: 1047px) {
   .page-content {
@@ -2092,7 +2095,7 @@ a:focus {
   text-decoration: underline;
 }
 .social a {
-  color: #ffffff;
+  color: #888888;
   line-height: 44.400000000000006px;
   -webkit-transition: text-shadow 0.5s;
   -moz-transition: text-shadow 0.5s;
@@ -2110,7 +2113,7 @@ a:focus {
 .social a:hover,
 .social a:focus {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  color: #ffffff;
+  color: #888888;
   text-decoration: none;
   opacity: 0.9;
   filter: alpha(opacity=90);

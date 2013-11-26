@@ -90,7 +90,7 @@ MathJax.Hub.Config({
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Install PyYaml, and see what we can do.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [42]:
@@ -104,7 +104,7 @@ In [42]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [43]:
@@ -117,7 +117,7 @@ In [43]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [44]:
@@ -130,7 +130,7 @@ In [44]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -146,7 +146,7 @@ YAML Notebook.ipynb
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [45]:
@@ -160,7 +160,7 @@ In [45]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [46]:
@@ -173,7 +173,7 @@ In [46]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt output_prompt">
@@ -201,7 +201,7 @@ In [46]:
 <p>I'll skipp the fiddling around with the yaml converter. In short, you have to specify explicitely the part you want to dump in the literal form, otherwise they are exported as list of strings, which is a little painfull to edit afterward. I'm using the <code>safe_dump</code> and <code>safe_load</code> methods (or pass safeLoader and Dumper). Those should be default or otherwise you could unserialise arbitrary object, and have code exucuted.</p>
 <p>We probably don't want to reproduct the recent file Rail's critical vulnerability that append not so long ago.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [47]:
@@ -222,7 +222,7 @@ In [47]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I know classes should be wit upper case, but we just want to hide the fact that thoses a class to end user. At the same time I define a folded method to use it with markdown cell. when markdown contain really long lines, those will be wrapped in the yaml document.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [48]:
@@ -248,7 +248,7 @@ In [48]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>now we patch the part of the ipynb file we know we want to be literal or folded</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [49]:
@@ -265,7 +265,7 @@ In [49]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [50]:
@@ -288,7 +288,7 @@ In [50]:
 <p>Also support across languages are not consistent, and it would probably be too much of a security burden for all code that will support loading ipynb to take care of sanitazing Yaml.</p>
 <p>One area where I woudl use it would be to describe the ipynb format at a talk for example, and/or to have metadata editing more human readable/writable.</p>
 </div>
-<div class="cell border-box-sizing code_cell vbox">
+<div class="cell border-box-sizing code_cell">
 <div class="input">
 <div class="prompt input_prompt">
 In [51]:
@@ -301,7 +301,7 @@ In [51]:
 </div>
 
 <div class="output_wrapper">
-<div class="output vbox">
+<div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
@@ -522,25 +522,8 @@ worksheets:
             <a href="06-NBconvert-Doc-Draft.html" rel="next">Next post →</a>
         </li>
     
-    </ul><div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="nikolademo",
-        
-            disqus_url="http://carreau.github.io/posts/05-YAML Notebook.html",
-        
-        disqus_title="05-YAML Notebook",
-        disqus_identifier="cache/posts/05-YAML Notebook.html",
-        disqus_config = function () {
-            this.language = "";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/05-YAML Notebook.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
 
     
 
