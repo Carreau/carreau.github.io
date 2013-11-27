@@ -68,8 +68,8 @@ input.engine_num_input{height:20px;margin-bottom:2px;padding-top:0;padding-botto
 .ansibgcyan{background-color:cyan;}
 .ansibggray{background-color:gray;}
 .cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}.cell.selected{border-radius:4px;border:thin #ababab solid;}
-div.cell{width:100%;padding:5px 5px 5px 0px;margin:2px 0px 2px 7px;outline:none;}
-div.prompt{width:11ex;padding:0.4em;margin:0px;font-family:monospace;text-align:right;line-height:1.231em;}
+div.cell{outline:none;}
+div.prompt{width:11ex;margin:0px;font-family:monospace;text-align:right;line-height:1.231em;}
 .celltoolbar{border:thin solid #CFCFCF;border-bottom:none;background:#EEE;border-top-right-radius:3px;border-top-left-radius:3px;width:100%;-webkit-box-pack:end;height:22px;}
 .no_input_radius{border-top-right-radius:0px;border-top-left-radius:0px;}
 .text_cell .ctb_prompt{display:none;}
@@ -87,8 +87,7 @@ div.prompt{width:11ex;padding:0.4em;margin:0px;font-family:monospace;text-align:
 .celltoolbar label span{font-size:85%;}
 .celltoolbar input[type=checkbox]{margin:0px;margin-left:4px;margin-right:4px;}
 .celltoolbar .ui-button{border:none;vertical-align:top;height:20px;}
-div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
-div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-align:stretch;display:-moz-box;-moz-box-align:stretch;display:box;box-align:stretch;}
 div.input_prompt{color:navy;border-top:1px solid transparent;}
 div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
 div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
@@ -143,7 +142,7 @@ p{margin-bottom:0;}
 .end_space{height:200px;}
 #notification_area{z-index:10;}
 .notification_widget{color:#777777;padding:1px 12px;margin:2px 4px;z-index:10;border:1px solid #ccc;border-radius:4px;background:rgba(240, 240, 240, 0.5);}
-div.output_area{padding:0px;page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.output_area{padding:0px;page-break-inside:avoid;display:-webkit-box;-webkit-box-align:stretch;display:-moz-box;-moz-box-align:stretch;display:box;box-align:stretch;}
 div.output_area pre{font-family:monospace;margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;color:black;background-color:transparent;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;line-height:inherit;}
 div.output_subarea{padding:0.44em 0.4em 0.4em 1px;margin-left:6px;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;}
 div.output_text{text-align:left;color:#000000;font-family:monospace;line-height:1.231em;}
@@ -180,7 +179,7 @@ div#pager{overflow:auto;display:none;}div#pager pre{font-size:13px;line-height:1
 .rendered_html ol ol ol ol ol{list-style:decimal;margin:0em 2em;}
 .rendered_html hr{color:black;background-color:black;}
 .rendered_html pre{margin:1em 2em;}
-.rendered_html pre,.rendered_html code{border:0;background-color:#ffffff;color:#000000;font-size:100%;padding:0px;}
+.rendered_html pre,.rendered_html code{border:0;background-color:#ffffff;color:#000000;padding:0px;}
 .rendered_html blockquote{margin:1em 2em;}
 .rendered_html table,.rendered_html tr,.rendered_html th,.rendered_html td{border:1px solid black;border-collapse:collapse;margin:1em 2em;}
 .rendered_html td,.rendered_html th{text-align:left;vertical-align:middle;padding:4px;}
@@ -208,3 +207,4 @@ h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anch
 .ipython_tooltip .tooltiptext pre{border:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;font-size:100%;background-color:#f7f7f7;}
 .pretooltiparrow{left:0px;margin:0px;top:-16px;width:40px;height:16px;overflow:hidden;position:absolute;}
 .pretooltiparrow:before{background-color:#f7f7f7;border:1px #ababab solid;z-index:11;content:"";position:absolute;left:15px;top:10px;width:25px;height:25px;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);}
+
