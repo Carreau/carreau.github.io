@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 27 Nov 2013 18:34:04 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 01 Dec 2013 14:10:35 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This is an experiement of how one could try to improve matplotlib configuration system using IPython's traitlets system; It has probably a &lt;strong&gt;huge&lt;/strong&gt; number of disatvantages going from slowing down all the matplotlib stack, as making every class name matter in backward compatibility.&lt;/p&gt;
 &lt;p&gt;Far from beeing a perfect lovechild of two awesome project, this is for now an horible mutant that at some point inspect up it's statck to find information about it's caller in some places. It woudl need a fair amount of work to be nicely integrated into matplotlib.&lt;/p&gt;
 &lt;/div&gt;
@@ -9,6 +9,7 @@
 
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This post has been written with a &lt;a href="https://github.com/Carreau/matplotlib/compare/master...traitlets"&gt;patched version of Matplotlib&lt;/a&gt;, so you will not be able to reproduce this post by re-executing this notebook.&lt;/p&gt;
+&lt;p&gt;I've also ripped out part of IPython configurable sytem into a small &lt;a href="https://github.com/Carreau/IPConfigurable"&gt;self contained package&lt;/a&gt; that you would need.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="TL,DR;"&gt;TL,DR;&lt;a class="anchor-link" href="http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html#TL,DR;"&gt;¶&lt;/a&gt;&lt;/h2&gt;
@@ -24,7 +25,7 @@ In [1]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;pylab&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.config&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPConfigurable.configurable&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;
 &lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'font'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -54,7 +55,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [19]:
+In [2]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -85,7 +86,7 @@ In [19]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [20]:
+In [3]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sinc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;&lt;span class="s"&gt;'green'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'a sinc'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -104,12 +105,12 @@ In [20]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
-    Out[20]:&lt;/div&gt;
+    Out[3]:&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
 
 &lt;pre&gt;
-&amp;lt;matplotlib.legend.Legend at 0x1103d3350&amp;gt;
+&amp;lt;matplotlib.legend.Legend at 0x1050cc910&amp;gt;
 &lt;/pre&gt;
 
 &lt;/div&gt;
@@ -152,7 +153,7 @@ In [20]:
 
     length = Integer(&lt;span class="dv"&gt;1&lt;/span&gt;,config=&lt;span class="ot"&gt;True&lt;/span&gt;)
     ...
-    
+
 &lt;span class="kw"&gt;class&lt;/span&gt; Bar(Configurable):
 
     &lt;span class="kw"&gt;def&lt;/span&gt; &lt;span class="ot"&gt;__init__&lt;/span&gt;(&lt;span class="ot"&gt;self&lt;/span&gt;):
@@ -166,7 +167,7 @@ In [20]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [21]:
+In [4]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
@@ -245,7 +246,7 @@ In [21]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [22]:
+In [5]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# some minimal imports&lt;/span&gt;
@@ -265,7 +266,7 @@ In [22]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [23]:
+In [6]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
@@ -288,7 +289,7 @@ In [23]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [24]:
+In [7]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="sd"&gt;"""&lt;/span&gt;
@@ -376,7 +377,7 @@ In [24]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [25]:
+In [8]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;t_color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'purple'&lt;/span&gt;
@@ -389,7 +390,7 @@ In [25]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [26]:
+In [9]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -406,12 +407,12 @@ In [26]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
-    Out[26]:&lt;/div&gt;
+    Out[9]:&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
 
 &lt;pre&gt;
-&amp;lt;matplotlib.text.Text at 0x1105ea0d0&amp;gt;
+&amp;lt;matplotlib.text.Text at 0x10512e0d0&amp;gt;
 &lt;/pre&gt;
 
 &lt;/div&gt;
@@ -435,7 +436,7 @@ In [26]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [27]:
+In [10]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;YAxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;t_color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'r'&lt;/span&gt;
@@ -452,7 +453,7 @@ In [27]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [28]:
+In [11]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;t_color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'orange'&lt;/span&gt;
@@ -468,7 +469,7 @@ In [28]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [29]:
+In [12]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;XTick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;t_color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'gray'&lt;/span&gt;
@@ -481,7 +482,7 @@ In [29]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [30]:
+In [13]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -498,12 +499,12 @@ In [30]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
-    Out[30]:&lt;/div&gt;
+    Out[13]:&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
 
 &lt;pre&gt;
-&amp;lt;matplotlib.text.Text at 0x110807f90&amp;gt;
+&amp;lt;matplotlib.text.Text at 0x10527d610&amp;gt;
 &lt;/pre&gt;
 
 &lt;/div&gt;
@@ -539,7 +540,7 @@ In [30]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [31]:
+In [14]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CenterCircle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mpatches&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Circle&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -553,7 +554,7 @@ In [31]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [32]:
+In [15]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;matplotlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -568,10 +569,10 @@ In [32]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [33]:
+In [16]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.config&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Configurable&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPConfigurable.configurable&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Configurable&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyGenArtist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Configurable&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -612,7 +613,7 @@ In [33]:
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
-    Out[33]:&lt;/div&gt;
+    Out[16]:&lt;/div&gt;
 &lt;div class="box-flex1 output_subarea output_pyout"&gt;
 
 
@@ -639,7 +640,7 @@ In [33]:
 &lt;/div&gt;
 
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This configuration system is, of course not limited to Matplotib. But to use it it should probably be decoupled into a separated package first, independently of IPython.&lt;/p&gt;
+&lt;p&gt;This configuration system is, of course not limited to Matplotib. But to use it it should probably be better decoupled into a separated package first, independently of IPython.&lt;/p&gt;
 &lt;p&gt;Also if it is ever accepted into matplotlib, there will still be a need to adapt current mechnisme to work on top of this.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -652,7 +653,7 @@ In [33]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [34]:
+In [17]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;matplotlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;artist&lt;/span&gt;
@@ -738,7 +739,7 @@ YTick.Text
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Acording to difflib, the following strings: 'baaaaa', 'aaabaa' and 'aaaaba' share 5 caracters with 'aaaaaa', but 'aabaaa' share only 3 .... but only if the change is in the first half of the string.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [1]:
@@ -757,7 +758,7 @@ In [1]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -805,7 +806,7 @@ In [1]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;To do that, we need to define "junk" which are things you don't want the algorithme to match on. Let see a common example in python where when you add a function with a derorator, the decorator is often added to the "next" function.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -843,7 +844,7 @@ In [2]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Classical diff&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -857,7 +858,7 @@ In [3]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -888,7 +889,7 @@ In [3]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Now we will tell it that blank line are junk:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [4]:
@@ -902,7 +903,7 @@ In [4]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -940,7 +941,7 @@ In [4]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Things is, &lt;code&gt;SequenceMatcher&lt;/code&gt; is also the method that help you get the proximity between two strings. If the sequence you pass to &lt;code&gt;SequenceMatcher&lt;/code&gt; is a string, it will try to match each caracters.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -953,7 +954,7 @@ In [5]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [6]:
@@ -967,7 +968,7 @@ In [6]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -987,7 +988,7 @@ In [6]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Oh, sorry, you need to explicitelty, pass the &lt;code&gt;isjunk&lt;/code&gt; function. Hopefully, it accepts &lt;code&gt;None&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [7]:
@@ -1001,7 +1002,7 @@ In [7]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1025,7 +1026,7 @@ In [7]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;let's try longer...&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [8]:
@@ -1038,7 +1039,7 @@ In [8]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1057,7 +1058,7 @@ In [8]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Still, don't pass it strings longer than 200 char, it automatically detect junk... Yes this is documented, but not obvisous.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [9]:
@@ -1070,7 +1071,7 @@ In [9]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1089,7 +1090,7 @@ In [9]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;So let's define a custom SequenceMatcher that make sens for the rest of the post, so that &lt;code&gt;isjunk&lt;/code&gt;is &lt;code&gt;None&lt;/code&gt; by default, and no &lt;code&gt;autojunk&lt;/code&gt; for &lt;code&gt;n &amp;gt; 200&lt;/code&gt;, and a simple &lt;code&gt;ratio(a, b)&lt;/code&gt; method as a shortcut.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -1106,7 +1107,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -1120,7 +1121,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1147,7 +1148,7 @@ In [10]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;So let's look at what happend if we compare a string against itself, with only one modification, as a function as the position of the modification, that is to say the ratio of &lt;code&gt;aaaa...&lt;/code&gt; vs &lt;code&gt;baaa...&lt;/code&gt; vs &lt;code&gt;abaa...&lt;/code&gt; vs &lt;code&gt;aaba...&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [11]:
@@ -1162,7 +1163,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [12]:
@@ -1195,7 +1196,7 @@ In [12]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1247,7 +1248,7 @@ aaaaaaaa-a ...
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Hum..let's look with some other string, basically same as before, but with repeating sequence &lt;code&gt;ababab..&lt;/code&gt;, &lt;code&gt;abcabcabcabc...&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [13]:
@@ -1260,7 +1261,7 @@ In [13]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [14]:
@@ -1297,7 +1298,7 @@ In [14]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -1340,7 +1341,7 @@ In [14]:
 &lt;p&gt;Anyway, I knew what &lt;a href="http://en.wikipedia.org/wiki/Levenshtein_distance"&gt;levenstein distance&lt;/a&gt; was, but not really what the efficient algorithme where. I played around a little bit with them, and recoded them in pure python. I'll post the link soon, just time to clean things up im make them as pure python module. Below is how it looks like.&lt;/p&gt;
 &lt;p&gt;Thing is, as far as I can tell, libdiff stays an order of magnitude faster in some cases, as well as computes the matches at the same time.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [15]:
@@ -1393,7 +1394,7 @@ In [15]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [16]:
@@ -1407,7 +1408,7 @@ In [16]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [17]:
@@ -1433,7 +1434,7 @@ In [17]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1471,7 +1472,7 @@ sorted √ 27 27
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Except on the sorted case, SequenceMatcher from stdlib give the wrong matches length almost all the time (sometime it is right)&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [18]:
@@ -1490,7 +1491,7 @@ In [18]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1513,7 +1514,7 @@ In [18]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;On both sorted and unsorted arrays, SequenceMatcher is way faster (10 to 20 times) than I am, but wrong.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [19]:
@@ -1530,7 +1531,7 @@ In [19]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1547,7 +1548,7 @@ In [19]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [20]:
@@ -1560,7 +1561,7 @@ In [20]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -1604,7 +1605,7 @@ In [20]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;[Edit] apparently the process of converting something not audible into sound have diffent naming: sonify, sonification or auralizing according to the comment on twitter.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [1]:
@@ -1617,7 +1618,7 @@ In [1]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1635,7 +1636,7 @@ For more information, type 'help(pylab)'.
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [2]:
@@ -1652,7 +1653,7 @@ In [2]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [3]:
@@ -1725,7 +1726,7 @@ In [3]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [4]:
@@ -1750,7 +1751,7 @@ In [4]:
 &lt;h1 id="test-the-wav-player"&gt;Test the wav Player&lt;/h1&gt;
 &lt;p&gt;let's try to first just play an A (440 Hz).&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [5]:
@@ -1767,7 +1768,7 @@ In [5]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [6]:
@@ -1789,7 +1790,7 @@ In [6]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1823,7 +1824,7 @@ In [6]:
 &lt;p&gt;\[ f_{n,m}={c \over \lambda}  = {R_h\over h} \left({1\over n}-{1\over m}\right) \]&lt;/p&gt;
 &lt;p&gt;for \(n=1\) we've got the Lyman series, and for \(n=2\) we have the Balmer series&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [7]:
@@ -1840,7 +1841,7 @@ In [7]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1857,7 +1858,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [8]:
@@ -1872,7 +1873,7 @@ In [8]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [9]:
@@ -1889,7 +1890,7 @@ In [9]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [10]:
@@ -1902,7 +1903,7 @@ In [10]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [11]:
@@ -1916,7 +1917,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -1930,7 +1931,7 @@ In [11]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [12]:
@@ -1944,7 +1945,7 @@ In [12]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2090,7 +2091,7 @@ In [3]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [4]:
+In [6]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.config&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;
@@ -2108,7 +2109,7 @@ In [4]:
 &lt;div class="cell border-box-sizing code_cell"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
-In [5]:
+In [7]:
 &lt;/div&gt;
 &lt;div class="input_area box-flex1"&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;resources&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;exportHtml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_notebook_node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jake_notebook&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -2916,7 +2917,7 @@ FOOOOOOOOTEEEEER
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Install PyYaml, and see what we can do.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [42]:
@@ -2930,7 +2931,7 @@ In [42]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [43]:
@@ -2943,7 +2944,7 @@ In [43]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [44]:
@@ -2956,7 +2957,7 @@ In [44]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
@@ -2972,7 +2973,7 @@ YAML Notebook.ipynb
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [45]:
@@ -2986,7 +2987,7 @@ In [45]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [46]:
@@ -2999,7 +3000,7 @@ In [46]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
@@ -3027,7 +3028,7 @@ In [46]:
 &lt;p&gt;I'll skipp the fiddling around with the yaml converter. In short, you have to specify explicitely the part you want to dump in the literal form, otherwise they are exported as list of strings, which is a little painfull to edit afterward. I'm using the &lt;code&gt;safe_dump&lt;/code&gt; and &lt;code&gt;safe_load&lt;/code&gt; methods (or pass safeLoader and Dumper). Those should be default or otherwise you could unserialise arbitrary object, and have code exucuted.&lt;/p&gt;
 &lt;p&gt;We probably don't want to reproduct the recent file Rail's critical vulnerability that append not so long ago.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [47]:
@@ -3048,7 +3049,7 @@ In [47]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I know classes should be wit upper case, but we just want to hide the fact that thoses a class to end user. At the same time I define a folded method to use it with markdown cell. when markdown contain really long lines, those will be wrapped in the yaml document.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [48]:
@@ -3074,7 +3075,7 @@ In [48]:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;now we patch the part of the ipynb file we know we want to be literal or folded&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [49]:
@@ -3091,7 +3092,7 @@ In [49]:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [50]:
@@ -3114,7 +3115,7 @@ In [50]:
 &lt;p&gt;Also support across languages are not consistent, and it would probably be too much of a security burden for all code that will support loading ipynb to take care of sanitazing Yaml.&lt;/p&gt;
 &lt;p&gt;One area where I woudl use it would be to describe the ipynb format at a talk for example, and/or to have metadata editing more human readable/writable.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;
 In [51]:
@@ -3127,7 +3128,7 @@ In [51]:
 &lt;/div&gt;
 
 &lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
+&lt;div class="output vbox"&gt;
 
 
 &lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
