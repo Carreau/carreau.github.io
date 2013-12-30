@@ -1,5 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 01 Dec 2013 14:22:15 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 30 Dec 2013 20:00:59 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No Pylab Thanks</title><link>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="Please-Stop-using-Pylab"&gt;Please Stop using Pylab&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Please-Stop-using-Pylab"&gt;¶&lt;/a&gt;&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;TL;DR, Please stop advising people to use the &lt;code&gt;pylab&lt;/code&gt; flag when using IPython. It is harmful. If you want to help IPython, try to avoid retweeting, and promoting thing that use &lt;code&gt;pylab&lt;/code&gt; flag and make the authors aware of the issues.&lt;/p&gt;
+&lt;p&gt;This is mainly prompt by a day where I came across consecutive issues due to the pylab flag, and people happy to discover it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Pylab,-My-worst-friend"&gt;Pylab, My worst friend&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Pylab,-My-worst-friend"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Almost 6 month ago was released IPython 1.0, we had quite a lot of decisions to take in less than a week and loads of discusions at the last moment. One of them come and goes often: we want to get rid of this stupid &lt;code&gt;pylab&lt;/code&gt; flag. If you look at our stable (1.0),dev doc and examples there shouldn't be anywhere mention of the &lt;code&gt;pylab&lt;/code&gt; flag. If there is, we will quickly remove it. Why? Because it is harmful, first to us, then to new user, also to python community, and finally to research in general.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Do you know about pylab ? If you don't please be extra careful and try to avoid it as much as possible. It is like smoking, it looks cool at first then after a few years you realise you can live without it, but it make you sick.&lt;/p&gt;
+&lt;p&gt;You think you know what &lt;code&gt;pylab&lt;/code&gt; does ? really ? Take few second to think what &lt;code&gt;pylab&lt;/code&gt;flag is doing , then read the rest.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="What-is-it-supposed-to-do-?"&gt;What is it supposed to do ?&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#What-is-it-supposed-to-do-?"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The &lt;code&gt;pylab&lt;/code&gt; &lt;strong&gt;package&lt;/strong&gt; goal was mainly to build a &lt;a href="http://wiki.scipy.org/PyLab"&gt;transition tool&lt;/a&gt; from other languages to python. As it was more and more common and painull to do the same import in IPython every time when only the IPython shell was around, the &lt;code&gt;--pylab&lt;/code&gt; flag was added. Basically it did the following :&lt;/p&gt;
+&lt;pre class="sourceCode python"&gt;&lt;code class="sourceCode python"&gt;&lt;span class="ch"&gt;import&lt;/span&gt; numpy
+&lt;span class="ch"&gt;import&lt;/span&gt; matplotlib
+&lt;span class="ch"&gt;from&lt;/span&gt; matplotlib &lt;span class="ch"&gt;import&lt;/span&gt; pylab, mlab, pyplot
+np = numpy
+plt = pyplot
+
+&lt;span class="ch"&gt;from&lt;/span&gt; IPython.core.pylabtools &lt;span class="ch"&gt;import&lt;/span&gt; figsize, getfigs
+
+&lt;span class="ch"&gt;from&lt;/span&gt; pylab &lt;span class="ch"&gt;import&lt;/span&gt; *
+&lt;span class="ch"&gt;from&lt;/span&gt; numpy &lt;span class="ch"&gt;import&lt;/span&gt; *&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Did you get it right the first time without cheating ? Are you able to say what has been imported in &lt;code&gt;from pylab import *&lt;/code&gt; ? in &lt;code&gt;from numpy import *&lt;/code&gt; ?&lt;/p&gt;
+&lt;p&gt;Of course that not the only thing it does. But was it your intention to do that last time you used pylab ?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="It-is-Irreversible"&gt;It is Irreversible&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#It-is-Irreversible"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Once you did activate pylab mode, there is no going back. You cannot unimport things. Of course with the &lt;code&gt;%pylab&lt;/code&gt; magic you can always restart your kernel, but with the flag, all your kernels will start in pylab mode. Are you &lt;strong&gt;sure&lt;/strong&gt; you will not need a non-pylab kernel ?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Unclear"&gt;Unclear&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Unclear"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;When using the flag your audience has usually no way of knowing that you did use the flag. If I use &lt;code&gt;plot(range(10))&lt;/code&gt; now what will happened ? Will it pop a figure ? Inline it? or throw an error ?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In []:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Because I'm mean, I won't execute the cell, so that you don't know whether or not I'm running in pylab mode or not. You might think it's not a big deal, but when teaching and research it is important to communicate what you are doing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="It-polute-namespace"&gt;It polute namespace&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#It-polute-namespace"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In [1]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_ipython&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user_ns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[1]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+
+&lt;pre&gt;
+20
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In [2]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;pylab&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
+&lt;pre&gt;
+Using matplotlib backend: Agg
+Populating the interactive namespace from numpy and matplotlib
+
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;IPython 2.0-dev give some warning, and tell you wether it clobers already non-built-ins varaibles in user namespace.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In [3]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_ipython&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user_ns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[3]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+
+&lt;pre&gt;
+968
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Can you really give me the 948 things you know have in your namespace ? Not a big deal ? really ?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="It-replaces-built-ins"&gt;It replaces built-ins&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#It-replaces-built-ins"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In [6]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;all&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[6]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+
+&lt;pre&gt;
+(&amp;lt;function numpy.core.fromnumeric.sum&amp;gt;, &amp;lt;function numpy.core.fromnumeric.all&amp;gt;)
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;both used to be &lt;code&gt;&amp;lt;function sum&amp;gt;,&amp;lt;function all&amp;gt;&lt;/code&gt; before using pylab, and this &lt;strong&gt;change the behavior of programs !&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;like for example leads to non-pickable object in some cases :&lt;/p&gt;
+&lt;p&gt;@treycausey on Twitter&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;@ogrisel @myusuf3 Ah, very curious. It loads fine in IPython but not in an IPython notebook. I must have a namespace collision or something.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;me : &amp;gt; let me guess : &lt;code&gt;$ipython notebook --pylab&lt;/code&gt; ? but &lt;code&gt;$ipython&lt;/code&gt; alone ?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Other-unrelated-actions"&gt;Other unrelated actions&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Other-unrelated-actions"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;IPython developped and got the rich display protocol. So we added &lt;code&gt;from IPython.display import display&lt;/code&gt; to the import pylab does.&lt;/p&gt;
+&lt;p&gt;As matplotlib can work with different evenloop, pylab grew option to activate qt/gtk/osx... event loop, and with the QtConsole and Notebook creation the ability to select the inline backend, which register display hooks.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The main tings users remember, and often the main message that you can read here and there is that:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You need to use Pylab to get inline figures.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Which is &lt;strong&gt;false&lt;/strong&gt;. Inline pylab mode is a convenient method to have inline back, and display hook setup with matplotlib. You do not need pylab to have inline images, nor do you need matplotlib. With 1.0 and above the recomended way to set-up inline figure woudl be to use &lt;code&gt;%matplotlib&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Side-Effects"&gt;Side Effects&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Side-Effects"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The worse is it have the side effect of forming people who use &lt;code&gt;pylab&lt;/code&gt; without even knowing it. Later they start asking question on how to reuse a graph in matplotlib because no-one ever encounter the following anymore.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;fig,ax = subplots(1,1)
+ax.plot(...)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or why sudentyl their script does not in plain python but does on ipython.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="It-kills-kitten,-with-a-spoon..."&gt;It kills kitten, with a spoon...&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#It-kills-kitten,-with-a-spoon..."&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Maybe not kittens, but it will force dev to explain the same things, again, and again, and again...&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;
+In [8]:
+&lt;/div&gt;
+&lt;div class="input_area box-flex1"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;YouTubeVideo&lt;/span&gt;
+&lt;span class="n"&gt;YouTubeVideo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'9VDvgL58h_Y'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;27&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;
+    Out[8]:&lt;/div&gt;
+&lt;div class="box-flex1 output_subarea output_pyout"&gt;
+
+&lt;div class="output_html rendered_html"&gt;
+
+        &lt;iframe width="400" height='300"' src="http://www.youtube.com/embed/9VDvgL58h_Y?start=267" frameborder="0" allowfullscreen&gt;&lt;p&gt;There was a problem loading this remote IFrame, have a look as Javascript console&lt;/p&gt;&lt;/iframe&gt;
+        
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Make---pylab-disapear."&gt;Make &lt;code&gt;--pylab&lt;/code&gt; disapear.&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Make---pylab-disapear."&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Of course we will not make the &lt;code&gt;--pylab&lt;/code&gt; flag disapear for compatbility reason, but please, for 2014, take the following resolutions:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Use &lt;code&gt;%matplotlib [inline|qt|osx|gtx]&lt;/code&gt; to select the right backend/eventlook.&lt;/li&gt;
+&lt;li&gt;Use explicit import&lt;/li&gt;
+&lt;li&gt;Make people aware of the issues&lt;/li&gt;
+&lt;li&gt;Help having no new article/tutorials that mention &lt;code&gt;--pylab&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;If really you only &lt;a href="https://xkcd.com/1168/"&gt;have 10 seconds left&lt;/a&gt; the &lt;code&gt;%pylab&lt;/code&gt; magic is ok.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As usual this has been written in an IPython notebook, you can send me pull-request if I made mistakes.&lt;/p&gt;
+&lt;/div&gt;</description><guid>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</guid><pubDate>Mon, 30 Dec 2013 19:00:00 GMT</pubDate></item><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This is an experiement of how one could try to improve matplotlib configuration system using IPython's traitlets system; It has probably a &lt;strong&gt;huge&lt;/strong&gt; number of disatvantages going from slowing down all the matplotlib stack, as making every class name matter in backward compatibility.&lt;/p&gt;
 &lt;p&gt;Far from beeing a perfect lovechild of two awesome project, this is for now an horible mutant that at some point inspect up it's statck to find information about it's caller in some places. It woudl need a fair amount of work to be nicely integrated into matplotlib.&lt;/p&gt;
 &lt;/div&gt;

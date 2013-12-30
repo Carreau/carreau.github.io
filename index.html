@@ -40,6 +40,326 @@ MathJax.Hub.Config({
             
     
         <div class="post">
+            <h1 class="title"><a href="posts/10-No-PyLab-Thanks.ipynb.html">No Pylab Thanks</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-12-30T19:00:00">2013-12-30 19:00</time></div>
+                <div class="stats">
+                
+                    
+    
+        
+<div class="g-commentcount" data-href="/posts/10-No-PyLab-Thanks.ipynb.html"></div>
+<script src="https://apis.google.com/js/plusone.js"></script></div>
+                
+    
+
+            </div>
+            <div class="body">
+                <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Please-Stop-using-Pylab">Please Stop using Pylab<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#Please-Stop-using-Pylab">¶</a></h1>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TL;DR, Please stop advising people to use the <code>pylab</code> flag when using IPython. It is harmful. If you want to help IPython, try to avoid retweeting, and promoting thing that use <code>pylab</code> flag and make the authors aware of the issues.</p>
+<p>This is mainly prompt by a day where I came across consecutive issues due to the pylab flag, and people happy to discover it.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pylab,-My-worst-friend">Pylab, My worst friend<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#Pylab,-My-worst-friend">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Almost 6 month ago was released IPython 1.0, we had quite a lot of decisions to take in less than a week and loads of discusions at the last moment. One of them come and goes often: we want to get rid of this stupid <code>pylab</code> flag. If you look at our stable (1.0),dev doc and examples there shouldn't be anywhere mention of the <code>pylab</code> flag. If there is, we will quickly remove it. Why? Because it is harmful, first to us, then to new user, also to python community, and finally to research in general.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Do you know about pylab ? If you don't please be extra careful and try to avoid it as much as possible. It is like smoking, it looks cool at first then after a few years you realise you can live without it, but it make you sick.</p>
+<p>You think you know what <code>pylab</code> does ? really ? Take few second to think what <code>pylab</code>flag is doing , then read the rest.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-is-it-supposed-to-do-?">What is it supposed to do ?<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#What-is-it-supposed-to-do-?">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>pylab</code> <strong>package</strong> goal was mainly to build a <a href="http://wiki.scipy.org/PyLab">transition tool</a> from other languages to python. As it was more and more common and painull to do the same import in IPython every time when only the IPython shell was around, the <code>--pylab</code> flag was added. Basically it did the following :</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">import</span> numpy
+<span class="ch">import</span> matplotlib
+<span class="ch">from</span> matplotlib <span class="ch">import</span> pylab, mlab, pyplot
+np = numpy
+plt = pyplot
+
+<span class="ch">from</span> IPython.core.pylabtools <span class="ch">import</span> figsize, getfigs
+
+<span class="ch">from</span> pylab <span class="ch">import</span> *
+<span class="ch">from</span> numpy <span class="ch">import</span> *</code></pre>
+<p>Did you get it right the first time without cheating ? Are you able to say what has been imported in <code>from pylab import *</code> ? in <code>from numpy import *</code> ?</p>
+<p>Of course that not the only thing it does. But was it your intention to do that last time you used pylab ?</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="It-is-Irreversible">It is Irreversible<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#It-is-Irreversible">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once you did activate pylab mode, there is no going back. You cannot unimport things. Of course with the <code>%pylab</code> magic you can always restart your kernel, but with the flag, all your kernels will start in pylab mode. Are you <strong>sure</strong> you will not need a non-pylab kernel ?</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Unclear">Unclear<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#Unclear">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When using the flag your audience has usually no way of knowing that you did use the flag. If I use <code>plot(range(10))</code> now what will happened ? Will it pop a figure ? Inline it? or throw an error ?</p>
+</div>
+<div class="cell border-box-sizing code_cell">
+<div class="input">
+<div class="prompt input_prompt">
+In []:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Because I'm mean, I won't execute the cell, so that you don't know whether or not I'm running in pylab mode or not. You might think it's not a big deal, but when teaching and research it is important to communicate what you are doing.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="It-polute-namespace">It polute namespace<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#It-polute-namespace">¶</a></h3>
+</div>
+
+<div class="cell border-box-sizing code_cell">
+<div class="input">
+<div class="prompt input_prompt">
+In [1]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[1]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+20
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell">
+<div class="input">
+<div class="prompt input_prompt">
+In [2]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">%</span><span class="k">pylab</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Using matplotlib backend: Agg
+Populating the interactive namespace from numpy and matplotlib
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>IPython 2.0-dev give some warning, and tell you wether it clobers already non-built-ins varaibles in user namespace.</p>
+</div>
+<div class="cell border-box-sizing code_cell">
+<div class="input">
+<div class="prompt input_prompt">
+In [3]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[3]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+968
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Can you really give me the 948 things you know have in your namespace ? Not a big deal ? really ?</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="It-replaces-built-ins">It replaces built-ins<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#It-replaces-built-ins">¶</a></h3>
+</div>
+
+<div class="cell border-box-sizing code_cell">
+<div class="input">
+<div class="prompt input_prompt">
+In [6]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="nb">sum</span><span class="p">,</span><span class="nb">all</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[6]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+(&lt;function numpy.core.fromnumeric.sum&gt;, &lt;function numpy.core.fromnumeric.all&gt;)
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>both used to be <code>&lt;function sum&gt;,&lt;function all&gt;</code> before using pylab, and this <strong>change the behavior of programs !</strong></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>like for example leads to non-pickable object in some cases :</p>
+<p>@treycausey on Twitter</p>
+<blockquote>
+<p>@ogrisel @myusuf3 Ah, very curious. It loads fine in IPython but not in an IPython notebook. I must have a namespace collision or something.</p>
+</blockquote>
+<p>me : &gt; let me guess : <code>$ipython notebook --pylab</code> ? but <code>$ipython</code> alone ?</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Other-unrelated-actions">Other unrelated actions<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#Other-unrelated-actions">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>IPython developped and got the rich display protocol. So we added <code>from IPython.display import display</code> to the import pylab does.</p>
+<p>As matplotlib can work with different evenloop, pylab grew option to activate qt/gtk/osx... event loop, and with the QtConsole and Notebook creation the ability to select the inline backend, which register display hooks.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The main tings users remember, and often the main message that you can read here and there is that:</p>
+<blockquote>
+<p>You need to use Pylab to get inline figures.</p>
+</blockquote>
+<p>Which is <strong>false</strong>. Inline pylab mode is a convenient method to have inline back, and display hook setup with matplotlib. You do not need pylab to have inline images, nor do you need matplotlib. With 1.0 and above the recomended way to set-up inline figure woudl be to use <code>%matplotlib</code>.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Side-Effects">Side Effects<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#Side-Effects">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The worse is it have the side effect of forming people who use <code>pylab</code> without even knowing it. Later they start asking question on how to reuse a graph in matplotlib because no-one ever encounter the following anymore.</p>
+<pre><code>fig,ax = subplots(1,1)
+ax.plot(...)</code></pre>
+<p>or why sudentyl their script does not in plain python but does on ipython.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="It-kills-kitten,-with-a-spoon...">It kills kitten, with a spoon...<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#It-kills-kitten,-with-a-spoon...">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Maybe not kittens, but it will force dev to explain the same things, again, and again, and again...</p>
+</div>
+<div class="cell border-box-sizing code_cell">
+<div class="input">
+<div class="prompt input_prompt">
+In [8]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s">'9VDvgL58h_Y'</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="mi">60</span><span class="o">+</span><span class="mi">27</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[8]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+<div class="output_html rendered_html">
+
+        <iframe width="400" height='300"' src="http://www.youtube.com/embed/9VDvgL58h_Y?start=267" frameborder="0" allowfullscreen><p>There was a problem loading this remote IFrame, have a look as Javascript console</p></iframe>
+        
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Make---pylab-disapear.">Make <code>--pylab</code> disapear.<a class="anchor-link" href="posts/10-No-PyLab-Thanks.ipynb.html#Make---pylab-disapear.">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course we will not make the <code>--pylab</code> flag disapear for compatbility reason, but please, for 2014, take the following resolutions:</p>
+<ul><li>Use <code>%matplotlib [inline|qt|osx|gtx]</code> to select the right backend/eventlook.</li>
+<li>Use explicit import</li>
+<li>Make people aware of the issues</li>
+<li>Help having no new article/tutorials that mention <code>--pylab</code></li>
+</ul><p>If really you only <a href="https://xkcd.com/1168/">have 10 seconds left</a> the <code>%pylab</code> magic is ok.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As usual this has been written in an IPython notebook, you can send me pull-request if I made mistakes.</p>
+</div>
+            </div>
+        </div>
+    
+        <div class="post">
             <h1 class="title"><a href="posts/09-Matplotlib-And-IPython-Config.html">Matplotlib and IPython love child</a></h1>
             <div class="meta">
                 <div class="authordate">

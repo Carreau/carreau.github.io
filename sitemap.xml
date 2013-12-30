@@ -6,39 +6,43 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://carreau.github.io/2013/01/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/02/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/03/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/04/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/05/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/06/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/07/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/08/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/11/index.html</loc>
   <lastmod>2013-12-01</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/2013/12/index.html</loc>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2013/index.html</loc>
@@ -62,7 +66,7 @@
  </url>
  <url>
   <loc>http://carreau.github.io/index.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/listings/index.html</loc>
@@ -70,42 +74,46 @@
  </url>
  <url>
   <loc>http://carreau.github.io/posts/02-css-selector.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/03-on-notebook-format.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/04-initialisation-cell.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/05-YAML Notebook.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/06-NBconvert-Doc-Draft.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/07-the-sound-of-hydrogen.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/08-Dear-DiffLib.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</loc>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/Blog1.html</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/rss.xml</loc>
-  <lastmod>2013-12-01</lastmod>
+  <lastmod>2013-12-30</lastmod>
  </url>
 </urlset>

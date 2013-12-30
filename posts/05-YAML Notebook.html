@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content=""><meta name="author" content="Matthias Bussonnier"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>05-YAML Notebook | Random Thoughts</title><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><link href="../assets/css/bitter.css" rel="stylesheet" type="text/css"><link href="../assets/css/main.css" rel="stylesheet" type="text/css"><link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml"></head><body>
+    <section class="social"><ul><li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+        
+    
+        
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+        
+    
+        
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+        
+    
+        
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        
+    
+        
+            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        
+    
+        
+            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        
+    
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name" itemprop="headline name">05-YAML Notebook</h1>
+    
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2013-05-01T20:00:00">2013-05-01 20:00</time></div>
+            
+    
+
+            
+    
+          |  
+        <a href="05-YAML%20Notebook.ipynb" id="sourcelink">Source</a>
+    
+
+            
+    
+
+        </div>
+        <div class="body">
+            <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="YAML-IPython-notebook">YAML IPython notebook<a class="anchor-link" href="05-YAML%20Notebook.html#YAML-IPython-notebook">¶</a></h1>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Little experiment base on the fact that apparently YAML is made to be better readable by Humans than JSON. We've also had some complaint that metadata are not keep in nbconvert when roundtripping through markdown, those two made me think that I could try to see what ipynb files stored as YAML would look like.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'll also use this post to do some experiment for nbviewer future nbviewer features, if you see anything wrong with the css on some device, please tell me.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="First-atempt">First atempt<a class="anchor-link" href="05-YAML%20Notebook.html#First-atempt">¶</a></h4>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Apparently Json is a subset of YAML:</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>cp foo.ipynb foo.ipyamlnb</code></pre>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Yeah, Mission acomplished !</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Second-try">Second try<a class="anchor-link" href="05-YAML%20Notebook.html#Second-try">¶</a></h4>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Install PyYaml, and see what we can do.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [42]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [43]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">IPython.nbformat</span> <span class="kn">import</span> <span class="n">current</span> <span class="k">as</span> <span class="n">nbf</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [44]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">ls</span> <span class="n">Y</span><span class="o">*.</span><span class="n">ipynb</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output vbox">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+YAML Notebook.ipynb
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [45]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'YAML Notebook.ipynb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">nbook</span> <span class="o">=</span> <span class="n">nbf</span><span class="o">.</span><span class="n">read</span><span class="p">(</span> <span class="n">f</span><span class="p">,</span> <span class="s">'json'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [46]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">nbook</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output vbox">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[46]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+{u'cell_type': u'code',
+ u'collapsed': False,
+ u'input': u'from IPython.nbformat import current as nbf',
+ u'language': u'python',
+ u'metadata': {},
+ u'outputs': []}
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'll skipp the fiddling around with the yaml converter. In short, you have to specify explicitely the part you want to dump in the literal form, otherwise they are exported as list of strings, which is a little painfull to edit afterward. I'm using the <code>safe_dump</code> and <code>safe_load</code> methods (or pass safeLoader and Dumper). Those should be default or otherwise you could unserialise arbitrary object, and have code exucuted.</p>
+<p>We probably don't want to reproduct the recent file Rail's critical vulnerability that append not so long ago.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [47]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># we'll patch a safe Yaml Dumper</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">SafeDumper</span>
+
+<span class="c"># Dummy class, just to mark the part we want with custom dumping</span>
+<span class="k">class</span> <span class="nc">folded_unicode</span><span class="p">(</span><span class="nb">unicode</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">literal_unicode</span><span class="p">(</span><span class="nb">unicode</span><span class="p">):</span> <span class="k">pass</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I know classes should be wit upper case, but we just want to hide the fact that thoses a class to end user. At the same time I define a folded method to use it with markdown cell. when markdown contain really long lines, those will be wrapped in the yaml document.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [48]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">folded_unicode_representer</span><span class="p">(</span><span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s">u'tag:yaml.org,2002:str'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">'&gt;'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">literal_unicode_representer</span><span class="p">(</span><span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_scalar</span><span class="p">(</span><span class="s">u'tag:yaml.org,2002:str'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">'|'</span><span class="p">)</span>
+
+<span class="n">sd</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">folded_unicode</span><span class="p">,</span> <span class="n">folded_unicode_representer</span><span class="p">)</span>
+<span class="n">sd</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">literal_unicode</span><span class="p">,</span> <span class="n">literal_unicode_representer</span><span class="p">)</span>
+
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'YAML Notebook.ipynb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">nbjson</span> <span class="o">=</span>  <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>now we patch the part of the ipynb file we know we want to be literal or folded</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [49]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">for</span> <span class="n">tcell</span> <span class="ow">in</span> <span class="n">nbjson</span><span class="p">[</span><span class="s">'worksheets'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'cells'</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="s">'source'</span> <span class="ow">in</span> <span class="n">tcell</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">tcell</span><span class="p">[</span><span class="s">'source'</span><span class="p">]</span> <span class="o">=</span> <span class="n">folded_unicode</span><span class="p">(</span><span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tcell</span><span class="p">[</span><span class="s">'source'</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s">'input'</span> <span class="ow">in</span> <span class="n">tcell</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">tcell</span><span class="p">[</span><span class="s">'input'</span><span class="p">]</span> <span class="o">=</span> <span class="n">literal_unicode</span><span class="p">(</span><span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tcell</span><span class="p">[</span><span class="s">'input'</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [50]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'Yaml.ipymlnb'</span><span class="p">,</span><span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">nbjson</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">Dumper</span><span class="o">=</span><span class="n">sd</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can round trip it to json, and it's still a valid ipynb file that can be loaded. Haven't fiddled with it much more. There are just a few gotchas with empty lines as well as trailing whitespace at EOL that can respectively diseapear or make the dumper fall back to a string quoted methods to store values.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can skip down to the end of this notebook to look at how it looks like. It's probably much compact than the current json we emit, in <strong>some</strong> cases it might be more easy to read, but I don't think it is worth considering using in the format specification.</p>
+<p>ipynb files are ment to be humanely fixable, and I strongly prefere having a consistent format with simple rules than having to explain what are the meaning of the differents shenigan like <code>: |2+</code> for literal string.</p>
+<p>Also support across languages are not consistent, and it would probably be too much of a security burden for all code that will support loading ipynb to take care of sanitazing Yaml.</p>
+<p>One area where I woudl use it would be to describe the ipynb format at a talk for example, and/or to have metadata editing more human readable/writable.</p>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input">
+<div class="prompt input_prompt">
+In [51]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">!</span>cat Yaml.ipymlnb
+</pre></div>
+
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output vbox">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+metadata:
+  name: YAML Notebook
+nbformat: 3
+nbformat_minor: 0
+worksheets:
+- cells:
+  - cell_type: heading
+    level: 1
+    metadata: {}
+    source: &gt;-
+      YAML IPython notebook
+  - cell_type: markdown
+    metadata: {}
+    source: "Little experiment base on the fact that apparently YAML is made to be\
+      \ better readable by Humans than JSON.\nWe've also had some complaint that metadata\
+      \ are not keep in nbconvert when roundtripping through markdown, those two\n\
+      made me think that I could try to see what ipynb files stored as YAML would\
+      \ look like. "
+  - cell_type: heading
+    level: 4
+    metadata: {}
+    source: &gt;-
+      First atempt
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      Apparently Json is a subset of YAML:
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;2+
+          cp foo.ipynb foo.ipyamlnb
+
+
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      Yeah, Mission acomplished !
+  - cell_type: heading
+    level: 4
+    metadata: {}
+    source: &gt;-
+      Second try
+  - cell_type: markdown
+    metadata: {}
+    source: "Install PyYaml, and see what we can do. "
+  - cell_type: code
+    collapsed: false
+    input: |-
+      import json
+      import yaml
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: code
+    collapsed: false
+    input: |-
+      from IPython.nbformat import current as nbf
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: code
+    collapsed: false
+    input: |-
+      ls Y*.ipynb
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: code
+    collapsed: false
+    input: |-
+      with open('YAML Notebook.ipynb') as f:
+          nbook = nbf.read( f, 'json')
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: code
+    collapsed: false
+    input: |-
+      nbook.worksheets[0].cells[9]
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      I'll skipp the fiddling around with the yaml converter. In short, you have to
+      specify explicitely the part you want to dump in the literal form, otherwise
+      they are exported as list of strings, which is a little painfull to edit afterward.
+      I'm using the `safe_dump` and `safe_load` methods (or pass safeLoader and Dumper).
+      Those should be default or otherwise you could unserialise arbitrary object,
+      and have code exucuted.
+
+
+      We probably don't want to reproduct the recent file Rail's critical vulnerability
+      that append not so long ago.
+  - cell_type: code
+    collapsed: false
+    input: |-
+      # we'll patch a safe Yaml Dumper
+      sd = yaml.SafeDumper
+
+      # Dummy class, just to mark the part we want with custom dumping
+      class folded_unicode(unicode): pass
+      class literal_unicode(unicode): pass
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      I know classes should be wit upper case, but we just want to hide the fact that
+      thoses a class to end user. At the same time I define a folded method if I want
+      to use it later.
+  - cell_type: code
+    collapsed: false
+    input: |-
+      def folded_unicode_representer(dumper, data):
+          return dumper.represent_scalar(u'tag:yaml.org,2002:str', data, style='&gt;')
+      def literal_unicode_representer(dumper, data):
+          return dumper.represent_scalar(u'tag:yaml.org,2002:str', data, style='|')
+
+      sd.add_representer(folded_unicode, folded_unicode_representer)
+      sd.add_representer(literal_unicode, literal_unicode_representer)
+
+
+      with open('YAML Notebook.ipynb') as f:
+          nbjson =  json.load(f)
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      now we patch the part of the ipynb file we know we want to be literal or folded
+  - cell_type: code
+    collapsed: false
+    input: |-
+      for tcell in nbjson['worksheets'][0]['cells']:
+          if 'source' in tcell.keys():
+              tcell['source'] = folded_unicode("".join(tcell['source']))
+          if 'input' in tcell.keys():
+              tcell['input'] = literal_unicode("".join(tcell['input']))
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: code
+    collapsed: false
+    input: |-
+      with open('Yaml.ipymlnb','w') as f:
+          f.write(yaml.dump(nbjson, default_flow_style=False, Dumper=sd))
+    language: python
+    metadata: {}
+    outputs: []
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      You can round trip it to json, and it's still a valid ipynb file that can be
+      loaded. Haven't fiddled with it much more.
+
+      There are just a few gotchas with empty lines as well as trailing whitespace
+      at EOL that can respectively diseapear or make the dumper fall back to a string
+      quoted methods to store values.
+
+
+      One could also try to tiker with `folded_unicode` in markdown cell that tipically
+      have long lines to play a little more nicely with VCS.
+  - cell_type: markdown
+    metadata: {}
+    source: &gt;-
+      You can skip down to the end of this notebook to loko at how it looks like.
+      It's probably much compact than the current json we emit, in **some** cases
+      it might be more easy to read, but I don't think it is worth considering using
+      in the format specification.
+
+
+      ipynb files are ment to be humanely fixable, and I strongly prefere having a
+      consistent format with simple rules than having to explain what are the meaning
+      of the differents shenigan like `: |2+` for literal string.
+
+
+      Also support across languages are not consistent, and it would probably be too
+      much of a security burden for all code that will support loading ipynb to take
+      care of sanitazing Yaml.
+
+
+      One area where I woudl use it would be to describe the ipynb format at a talk
+      for example, and/or to have metadata editing more human readable/writable.
+  - cell_type: code
+    collapsed: false
+    input: |-
+      !cat Yaml.ipymlnb
+    language: python
+    metadata: {}
+    outputs: []
+  metadata: {}
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        
+    <ul class="pager"><li class="previous">
+            <a href="04-initialisation-cell.html" rel="prev">← Previous post</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="06-NBconvert-Doc-Draft.html" rel="next">Next post →</a>
+        </li>
+    
+    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/05-YAML Notebook.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
+
+    
+
+        
+        
+    
+
+    </div>
+
+            Contents © 2013         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+
+            
+	
+
+        </div>
+    </section><script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/jquery.timeago.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script></body></html>
