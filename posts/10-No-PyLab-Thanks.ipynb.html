@@ -66,6 +66,7 @@ MathJax.Hub.Config({
 
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>TL;DR, Please stop advising people to use the <code>pylab</code> flag when using IPython. It is harmful. If you want to help IPython, try to avoid retweeting, and promoting thing that use <code>pylab</code> flag and make the authors aware of the issues.</p>
+<p>Use explicit import, and <code>%matplotlib inline</code> magic. It is better (and support swithching inline/not inline.)</p>
 <p>This is mainly prompt by a day where I came across consecutive issues due to the pylab flag, and people happy to discover it.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -230,7 +231,7 @@ In [3]:
 
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Can you really give me the 948 things you know have in your namespace ? Not a big deal ? really ?</p>
+<p>Can you really give me the 948 aditionnal things you now have in your namespace ? Not a big deal ? really ?</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="It-replaces-built-ins">It replaces built-ins<a class="anchor-link" href="10-No-PyLab-Thanks.ipynb.html#It-replaces-built-ins">¶</a></h3>
@@ -358,7 +359,7 @@ In [8]:
 </ul><p>If really you only <a href="https://xkcd.com/1168/">have 10 seconds left</a> the <code>%pylab</code> magic is ok.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As usual this has been written in an IPython notebook, you can send me pull-request if I made mistakes.</p>
+<p>As usual this has been written in an IPython notebook, you can send me pull-request if I made mistakes, or if you have any adittional remarks of why not using <code>--pylab</code>.</p>
 </div>
         </div>
         

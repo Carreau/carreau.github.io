@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 30 Dec 2013 20:00:59 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No Pylab Thanks</title><link>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 30 Dec 2013 20:08:15 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No Pylab Thanks</title><link>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Please-Stop-using-Pylab"&gt;Please Stop using Pylab&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Please-Stop-using-Pylab"&gt;¶&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
 
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;TL;DR, Please stop advising people to use the &lt;code&gt;pylab&lt;/code&gt; flag when using IPython. It is harmful. If you want to help IPython, try to avoid retweeting, and promoting thing that use &lt;code&gt;pylab&lt;/code&gt; flag and make the authors aware of the issues.&lt;/p&gt;
+&lt;p&gt;Use explicit import, and &lt;code&gt;%matplotlib inline&lt;/code&gt; magic. It is better (and support swithching inline/not inline.)&lt;/p&gt;
 &lt;p&gt;This is mainly prompt by a day where I came across consecutive issues due to the pylab flag, and people happy to discover it.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -169,7 +170,7 @@ In [3]:
 
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Can you really give me the 948 things you know have in your namespace ? Not a big deal ? really ?&lt;/p&gt;
+&lt;p&gt;Can you really give me the 948 aditionnal things you now have in your namespace ? Not a big deal ? really ?&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="It-replaces-built-ins"&gt;It replaces built-ins&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#It-replaces-built-ins"&gt;¶&lt;/a&gt;&lt;/h3&gt;
@@ -297,7 +298,7 @@ In [8]:
 &lt;/ul&gt;&lt;p&gt;If really you only &lt;a href="https://xkcd.com/1168/"&gt;have 10 seconds left&lt;/a&gt; the &lt;code&gt;%pylab&lt;/code&gt; magic is ok.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As usual this has been written in an IPython notebook, you can send me pull-request if I made mistakes.&lt;/p&gt;
+&lt;p&gt;As usual this has been written in an IPython notebook, you can send me pull-request if I made mistakes, or if you have any adittional remarks of why not using &lt;code&gt;--pylab&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;</description><guid>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</guid><pubDate>Mon, 30 Dec 2013 19:00:00 GMT</pubDate></item><item><title>Matplotlib and IPython love child</title><link>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;This is an experiement of how one could try to improve matplotlib configuration system using IPython's traitlets system; It has probably a &lt;strong&gt;huge&lt;/strong&gt; number of disatvantages going from slowing down all the matplotlib stack, as making every class name matter in backward compatibility.&lt;/p&gt;
 &lt;p&gt;Far from beeing a perfect lovechild of two awesome project, this is for now an horible mutant that at some point inspect up it's statck to find information about it's caller in some places. It woudl need a fair amount of work to be nicely integrated into matplotlib.&lt;/p&gt;
