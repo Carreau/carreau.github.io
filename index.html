@@ -40,6 +40,195 @@ MathJax.Hub.Config({
             
     
         <div class="post">
+            <h1 class="title"><a href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html">IPython Dev Meeting - Winter 2014</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-01-18T05:30:00">2014-01-18 05:30</time></div>
+                <div class="stats">
+                
+                    
+    
+        
+<div class="g-commentcount" data-href="/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html"></div>
+<script src="https://apis.google.com/js/plusone.js"></script></div>
+                
+    
+
+            </div>
+            <div class="body">
+                <div class="text_cell_render border-box-sizing rendered_html">
+<p>Some recap from my perspective of IPython dev meeting in Berkeley. Less code than last time, more tired. More complex problem to solve.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bi-Annual-Meeting">Bi-Annual Meeting<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Bi-Annual-Meeting">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As you might know (or not), with the <a href="http://ipython.org/sloan-grant.html">Sloan Grant</a> came some funding to allow a reunion of the all IPython core-dev and active participants twice a year; last July we had our first 5 days meeting in Berkley, so it was time to meet again and discuss the future of IPython.</p>
+<p>In this post I'll try to sum up what append during the week to bring you up to speed as, unlike everyweek, we did not do our discussion in public on google hangout. I hope this might explain our low presence on the net for the last five days.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For the technical detail, I was the only one that was flewn from Paris on last saturday (11th), I was welcommed by <a href="https://github.com/takluyver">Thomas Kluyver</a> (that I finally met after 2 years), <a href="https://github.com/jhamrick">Jess Hamrick</a> and <a href="https://github.com/aculich">Aaron Culich</a> who helpped me to stay awake on the first day in front of Beers and burgers; I fought jetlag in San-Francisco on Sunday. Then the hard part started, you put between 8 and 10 people in a close room with coffe from 9:30am to 6pm for 5 days and mix.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Usually we did code only from 8am to 9am while having breakfast, hence the low apparent productivity (except from Jon and Min that might probably have their clone at home).</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We had extra people from last time, in the name of <a href="https://github.com/rgbkrk">Kyle Kelley</a> from Rackspace, who is responsible for nbconvert deploy, and Thomas Kluyver who finished his PhD last summer and joined the IPython team full time.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The two exception were wednesday where the room was open from 4pm to 6pm for anybody to comme and say hello, as well as thurstday evening, were we had dinner with other people related to IPython around berkeley.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Human-After-All">Human After All<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Human-After-All">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of course not every minute was productive, in particular <a href="http://www.sanger.dk">Brian had the inside of his screen cleanned</a> and I'll see if I can get permission from Thomas to post a video of him learning to drive (Musée des Méchaniques, near Fisherman Wharf in SF). We also learned that <a href="http://bridesthrowingcats.com/">Brides could thow cats</a>.</p>
+<p>We spoke of Markov Chain which lead us to examine the example of training on the King James Bible and Structure and Interpretation of Computer Programs aka <a href="http://kingjamesprogramming.tumblr.com/">King James Programming</a> :</p>
+<blockquote>
+<p>I am the LORD when I have preached to others, I myself should be a function f between <code>a</code> and <code>x</code>.</p>
+</blockquote>
+<p>Memorable Quote were Said:</p>
+<blockquote class="twitter-tweet" lang="fr"><p>
+Discussing <a href="https://twitter.com/IPythonDev">@IPythonDev</a> config system:
+
+<br><a href="https://twitter.com/ellisonbg">@ellisonbg</a>: "Being a theoretical physicist, I'm trying to abstract this..."
+<br><a href="https://twitter.com/minrk">@minrk</a>: "It's a sphere."
+</p>
+<a href="https://twitter.com/ivanov/statuses/423892348498493440">16 Janvier 2014</a>
+</blockquote>
+
+<p>As well as</p>
+<blockquote>
+<p>Just add a <code>var that = this;</code> (On <a href="http://stackoverflow.com/questions/4886632/what-does-var-that-this-mean-in-javascript">Python</a> code)</p>
+</blockquote>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="IPython-2.0">IPython 2.0<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-2.0">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We are slightly late on the scedule, but some things had to be discussed. It was a good thing to be all in one room. Expect a release of 2.0 beta in 4 to 6 week at best.</p>
+<p>[Modal UI] was merge 2 weeks ago, and will be refined, we know some people are not happy with it, and we are aware it is not perfect. We were starting to hit the limit of what we could do with browser and had to go modal to develop the notebook. We will still be limited by the browser capability and fight with the dom focusing of elements; so some compromise had and will have to be made. We thought <strong>a lot</strong> of what we wanted, we are happy with it and need 4 to 6 six weeks of the modal UI in the wild to get user feedback and polish rough corners. So if you have comment, complaint we would be happy to hear from you.</p>
+<p>We also a huge discussion of Interactive Widget, from a tecnical point of view, User eXperience, and code review. We are pushing some functionality from 2.0 to later, it will not prevent you from dooing anything but might need little more code in the kernel. Expect Jon Pull request to be merged in a week or so, then 4 more weeks to have testing from users. If you are adventurous, <a href="https://github.com/ipython/ipython/pull/4374">grab Jon PR today</a> and test it! Jason Grout made a lot of good feedback, advice and technical review.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Unexpected-Changes">Unexpected Changes<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Unexpected-Changes">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We had an unexpected discussion about library like <a href="http://nbviewer.ipython.org/github/jakevdp/mpld3/blob/master/examples/mpld3_demo.ipynb">mpld3</a> and static widget (<a href="https://github.com/jakevdp">@Jakevdp</a> we love your work and congrats BTW) which lead to a <strong>small</strong> digression onf 1 day and a half about dynamic content (on nbviewer | live notebook) and consequence on security as well as good practice. I'll try to quickly sum-up the problem.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notebook allow arbitrary content execution, but you don't want arbitrary code to be executed. So we need to walk the fine line between what is code that user <em>want</em> to run, from code that user would prefer <em>not to run</em>.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As of IPython 1.0, <strong>viewing</strong> a notebook is equivalent of running code. With the possibility we keep adding to IPython, at some point notebook could wreak havock on your machines, and we want to avoid making things like <em>document macro</em> that could be malicious.</p>
+<p>(If I get some time later I would be happy to make a talk that show some of the things that would be doable)</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the meantime we like to avoid aving a user experience like UAC where in the end you just click <code>Allow</code> without pondering the consequences. Keep in mind that you have to view notebook as program, that run as yourself and that <strong>we cannot guaranty</strong> full security when you open notebook on your local machine, but we will do our best.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That beeing said, as some content like HTML/Javascript/svg might present security they might not be show in some circonstance when you <strong>open</strong> a notebook, so from 2.0 (probably) and oward we will (try to) :</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul><li>Prevent rendering markdown if it contains any Javascript</li>
+<li>HTML/JS/svg in output
+<ul><li>will not be show on load</li>
+<li>unless <strong>you</strong> were the one to have fully executed the notebook for the last time.</li>
+</ul></li>
+</ul></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This will not apply (for the time beeing) on nbviewer, and we have no reason to disable it until we add authentication to nbviewer.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To do so, starting with 2.0 notebooks files will be signed (as in cryptographycally signed) on save with IPython web frontend (Aka webnotebook). This is of course not mandatory for a notebook to be runned or loaded. It does not change the notebook format, and do not affect existing kernels. Though if you have a custom frontend (or program that generate notebook) I would advise for you to follow the same practice.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From a user perspective, this means that if I <strong>download</strong> the example notebook mpld3 on my machine, it will not show as on nbviewer up until you have run all cells at least once in once session. Once done it will not affect you.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you work a lot across multiple machine and like your notebook to be recognized everywhere, we will provide more technical details later on where the key(s) are stored by default.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Public/Private-Keys">Public/Private Keys<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Public/Private-Keys">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I am personnaly really happy about the signature mechanisme we are putting in place. It might add noise to versionnig system (but you can always have a hook that clean it). I believe it could be tightly coupled to authorship of total or part of a notebook.</p>
+<p>We did quite some discussion on the current mechanisme, almost come to blows, and add several iterations before comming to that. We suppose security is not perfect and we love people to review that. Personally I will try to hook that into Public/Private key pairs to be able to have a ring of trust of notebook.</p>
+<p>I hope also that at some point it might help in versionnig to know when a notebook has merges (once the merge tool is written) and might not reflect what a full re-execusion would do.</p>
+<p>This does not prevent you from considering that every notebook you load could be dangerous, and probably do more damages than you think.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="IPython-1.2">IPython 1.2<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-1.2">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will have a 1.2 release.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="IPython-2.x">IPython 2.x<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-2.x">¶</a></h3>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will (probably) try to release 2.x release regularly (every month). Bug and doc fixes only.</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="IPython-3.0">IPython 3.0<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-3.0">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Not everything planned for 2.0 was done, some many things have been just pushed to next release, we new about it but it is always hard to see the number of things that have to be done.</p>
+<p>As for myself, I wasn't assigned to any issues, indead I'll have to start writing my dissertation but I'm thrilled to see what is comming. We have not made a detailed plan yet but here is what we are thinking about:</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul><li>Static Widgets
+<ul><li>runs through all combinations of widgets and sends results to the notebook.</li>
+<li>Where do we store all te data without making 2Gb notebooks ?</li>
+<li>Make it compatible with nbviewer ?</li>
+</ul></li>
+<li>Full, integrated support for non-Python kernels
+<ul><li>Launch IPython Once, and ability to select "Open this notebook with (IJulia|IRuby|IHaskell|...) etc.</li>
+<li>Simpler way for kernels to provide "Configurability" for IPython.</li>
+</ul></li>
+<li>Diff/merge of notebooks
+<ul><li>Greg Wilson have student workign on that</li>
+<li>We will try also</li>
+</ul></li>
+<li>UI to browse filesytem/edit non-ipynb text-files</li>
+<li>Push nbviewer forward</li>
+<li>Starting Multiuser-support
+<ul><li>learn node.js</li>
+</ul></li>
+</ul></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Rackspace">Rackspace<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Rackspace">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nbviewer have moved to rackspace a few weeks ago, and we continuing to move things over there. Thanks to <a href="https://twitter.com/rgbkrk">Kyle Kelley</a> and <a href="https://twitter.com/jessenoller">Jessy Noller</a>, we know have ability to deploy nbviewer on <a href="posts/www.rackspace.com">Rackspace</a> servers usig salt-stack (with a <a href="http://developer.rackspace.com/devtrial/">small discount</a> for open source project). Movign DNS controle over to Rackspace will allow us to semi-automatically deploy PRs to test and have clean load balancing when doing a deploy not for the service to drop user when a new version go into production.</p>
+<p>We (and this mean Kyle) are working hard to document this completly from A to Z and make as much as possible public so that you could replicate it locally. Right now we still have some things private because of Auth keys.</p>
+<p><a href="https://twitter.com/intent/tweet?text=Thanks%20%40jessnoller%20and%20%40rgbkrk%20for%20nbviewer%20on%20%40rackspace" class="twitter-mention-button" data-related="rgbkrk,jessenoller">Tweet them your love</a></p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="After-That...">After That...<a class="anchor-link" href="posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#After-That...">¶</a></h2>
+</div>
+
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>4.0... And we do not know, Sloan Grant funding end on 31 Dec 2014. So if you or your entreprise have used of IPython consider helping and feel free to write to us.</p>
+<p>Bye from thousand of feet above Atlanic Ocean, it's 5:30 am were I'm heading to, and 8:30pm where I come from. Next IPython Meeting will be in roughly 6 month, mark the date and come say hello. Otherwise search us at PyCon, SciPy, EuroSciPy (..etc) we have Stickers and Flyers!</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As usual my english is not perfect, so PR are welcommed, More details topic later.</p>
+</div>
+
+            </div>
+        </div>
+    
+        <div class="post">
             <h1 class="title"><a href="posts/10-No-PyLab-Thanks.ipynb.html">No Pylab Thanks</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -4455,436 +4644,13 @@ In [5]:
             </div>
         </div>
     
-        <div class="post">
-            <h1 class="title"><a href="posts/Blog1.html">Blog1</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-01-01T20:00:00">2013-01-01 20:00</time></div>
-                <div class="stats">
-                
-                    
-    
-        
-<div class="g-commentcount" data-href="/posts/Blog1.html"></div>
-<script src="https://apis.google.com/js/plusone.js"></script></div>
-                
-    
-
-            </div>
-            <div class="body">
-                <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="IPython-Notebook-Duck-Punching-(I)">IPython Notebook Duck-Punching (I)<a class="anchor-link" href="posts/Blog1.html#IPython-Notebook-Duck-Punching-(I)">¶</a></h1>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.</p>
-</blockquote>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This will try to be a series of blog post (or nbviewer post) on the IPython notebook. Mainly in responses to comment on <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks">Better typography for IPython notebooks</a> and some of the comment at the end of the page, especially <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks/#comment-148">this one</a>, that will have a full answer <a href="urls/raw.github.com/Carreau/posts/master/02-css-selector.ipynb">next post</a>.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>First some presentation, I am Matthias, you can usually find me on github aka <a href="https://github.com/carreau">@carreau</a>, or on twitter @mbussonn. I'm a Phd student in Biophysic, more physic than bio. And I contributed mostly to the IPython notebook.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This would also probably be the starting point for the IPython Advance tutorial I'll be giving next August in <a href="https://www.euroscipy.org/">Euro SciPy</a>.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Addendum">Addendum<a class="anchor-link" href="posts/Blog1.html#Addendum">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I was a little optimistic in presupposing that <code>custom.css</code> was availlable in 0.13.1, so most of what is discussed here need a more recent developpement version to work.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-more-general-issue">A more general issue<a class="anchor-link" href="posts/Blog1.html#A-more-general-issue">¶</a></h2>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The question about changing the style of the notebook come often and it is part in my opinion of the question of type :</p>
-<blockquote>
-<p>Why dont you want to integrate X? Why is it not implemented?</p>
-</blockquote>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I would like to take some time to respond to it, in both a general way and try to introduce to to some concept of the notebook few people know about. Brian Granger already did some good post about it <a href="http://brianegranger.com/?p=249">here</a> and <a href="http://brianegranger.com/?p=261">here</a>.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As I am also responsible for the refactoring of <a href="https://github.com/ipython/nbconvert">nbconvert</a> and are the principal maintainer of <a href="http://nbviewer.ipython.org/">nbviewer</a> I'll try to share my thought on what the future will be, and what is currently in progress.</p>
-<p>So, back to our question, why do we not implement some feature.</p>
-<p>Well, a non negligeable part of the time, because they already exist, you are just not aware of that. Plese read the doc (or say you did) and ask how to do it because you didn't well understood. Once you acchieve to do it, a good way to help us and other is to improve the doc, Pull Request are welcomed :-)</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Second possibility: You don't need code in the core to do it. We provide more or less easy way to hook onto IPython. And as there a are many reason for which some things are better outside of IPython than in the core, we will encourage you to do ship it separately.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Third: we won't special case only for you. This does not mean we don't like what you did, more often it mean that the internal of IPython shoudl allow what you did to be an extension, they just don't allow it yet. Bare with us for some time or help us to acchieve our goal and it will be better for everyone soon !</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-about-css-theming-?">What about css theming ?<a class="anchor-link" href="posts/Blog1.html#What-about-css-theming-?">¶</a></h2>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Short answer : I haven't seen any requests about theming that cannot be done without patching IPython code in itself. Some part could be made much easier, and it is in progress.</p>
-<p>What you ask (Custom theme, share them...) is already here, you just don't know how to do it.</p>
-<p><a href="http://slendrmeans.wordpress.com/">Carl</a> said :</p>
-<blockquote>
-<p>Warning: I don’t know what I’m doing. Don’t make any of these changes, or any others, without backing up the files first.</p>
-</blockquote>
-<p>But me, I do know what I'm dooing when speeking of IPython, but not when speaking of design, so let's start to tinker with IPython to have custom css, and easy to share.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>First thing to remember if you ever think of modifying a file in <code>IPython/notebook/html/static/*</code> you are dooing it wrong.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's dive a little into how to customise the IPython notebook.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adding-custom-css:">Adding custom css:<a class="anchor-link" href="posts/Blog1.html#Adding-custom-css:">¶</a></h3>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>How to add custom css to notebook, starting by the wrong way. Things you must never do.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Modifyin-IPython-source-files.">Modifyin IPython source files.<a class="anchor-link" href="posts/Blog1.html#Modifyin-IPython-source-files.">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Never do that, except if you want to open a pull request to fix a bug. Actually you should <strong>never</strong> modify a file which is under <code>IPython/frontend/html/notebook/static/*</code> because you don't <strong>need</strong> to do it. We'll se later why and what to do.</p>
-<p>This mean, that if you are not admin on your machine, or you just don't want to modify the system file, you can still read the rest and try by yourself.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="CSS-In-a-markdown-cell">CSS In a markdown cell<a class="anchor-link" href="posts/Blog1.html#CSS-In-a-markdown-cell">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Probably the worse way to do it. You can create a markdown cell with style tag in it, and write some css that will apply to the notebook.</p>
-<p>It will most likely break on future version, you have to add it every time. You will bother other when sharing your notebook, and it will probably break the conversion process into pdf/rst/markdown when you use <a href="https://github.com/ipython/nbconvert">nbconvert</a></p>
-<p>Html markup will not be the same in nbviewer, so your post might be ugly, and if there are any update of something at some point, you will have to update all your .ipynb files.</p>
-<p>Even if this is great to test some css as a quick an dirty way (like I did for this notebook) I strongly advise not to do it.</p>
-<p>It is not yet clear with how things are right now, but a notebook is a document that contain data, and the frontend is responsible for the formatting. Right now the notebook server has few frontends: - the browser one - and the <a href="https://github.com/tkf/emacs-ipython-notebook">emacs client</a>.</p>
-<p>But this is likely to change, so please no style in Markdown cell.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-answer-:-custom.css">The answer : custom.css<a class="anchor-link" href="posts/Blog1.html#The-answer-:-custom.css">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So here we are, the right way to add custoom css to a notebook when you look at it throught the browser interface, use the <code>custom.css</code> file.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This file is not created by default, and can exist on a per-profile basis, if you don't know what ipython profiles are, then you are probably using the default profile. In short, profile are a way to have different configuration for ipython which you can choose through a command line flag (<code>ipython notebook --profile=&lt;profilename&gt;</code>).</p>
-<p>Let's locate our profile folder:</p>
-</div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
-<div class="prompt input_prompt">
-In [2]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash 
-ipython locate
-</pre></div>
-
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-/Users/matthiasbussonnier/.ipython
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This tells me that IPyton is expecting profiles in the above directory, and more specially on profile named <code>foo</code> will have the corresponding files in</p>
-<p><code>/Users/matthiasbussonnier/.ipython/profile_foo/</code></p>
-<p>let's create a profile for the sake of this blog post.</p>
-</div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
-<div class="prompt input_prompt">
-In [3]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash
-ipython profile create customcss
-</pre></div>
-
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
-<pre>
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_config.py'
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_qtconsole_config.py'
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_notebook_config.py'
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This created the needed folder structure for IPython to work, but we won't be interested in those file for now. If you do not want to create a custom profile, you could also modify the files in <code>profile_default</code> which is the profile IPython uses when nothing is specified.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I will now create the file I am interested in : <code>static/custom/custom.css</code></p>
-</div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
-<div class="prompt input_prompt">
-In [5]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash
-mkdir ~/.ipython/profile_customcss/static/
-mkdir ~/.ipython/profile_customcss/static/custom/
-touch ~/.ipython/profile_customcss/static/custom/custom.css
-</pre></div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Use the file magic to write something in it.</p>
-</div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
-<div class="prompt input_prompt">
-In [34]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="o">%%</span><span class="k">file</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">matthiasbussonnier</span><span class="o">/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
-<span class="o">/**</span><span class="n">write</span> <span class="n">your</span> <span class="n">css</span> <span class="ow">in</span> <span class="n">here</span><span class="o">**/</span>
-<span class="o">/*</span> <span class="n">like</span> <span class="o">*/</span>
-
-<span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span>
-    <span class="n">div</span><span class="o">.</span><span class="n">cell</span><span class="p">{</span>
-        <span class="nb">max</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="mi">750</span><span class="n">px</span><span class="p">;</span>
-        <span class="n">margin</span><span class="o">-</span><span class="n">left</span><span class="p">:</span><span class="n">auto</span><span class="p">;</span>
-        <span class="n">margin</span><span class="o">-</span><span class="n">right</span><span class="p">:</span><span class="n">auto</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">h1</span> <span class="p">{</span>
-        <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span><span class="n">center</span><span class="p">;</span>
-        <span class="n">font</span><span class="o">-</span><span class="n">familly</span><span class="p">:</span><span class="s">"Charis SIL"</span><span class="p">,</span> <span class="n">serif</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/custom.css
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
-<div class="prompt input_prompt">
-In [35]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">cat</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-/**write your css in here**/
-/* like */
-
-&lt;style&gt;
-    div.cell{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-&lt;/style&gt;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now every time you start ipython with :</p>
-<pre><code>$ ipython notebook --profile customcss
-[NotebookApp] Using existing profile dir: u'~/.ipython/profile_customcss'
-[NotebookApp] Serving notebooks from local directory: /Users/matthiasbussonnier/
-[NotebookApp] The IPython Notebook is running at: http://&lt;ip&gt;:8889/
-[NotebookApp] Use Control-C to stop this server and shut down all kernels.</code></pre>
-<p>You will get the right css, let's try :</p>
-</div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
-<div class="prompt input_prompt">
-In [36]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash 
-curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
-</pre></div>
-
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-/**write your css in here**/
-/* like */
-
-&lt;style&gt;
-    div.cell{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-&lt;/style&gt;
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
-<pre>
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   240  100   240    0     0   102k      0 --:--:-- --:--:-- --:--:--  234k
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Yeah ! We now get you custom css that will be loaded in notebook, without dangerous file modifications, and without using root rights !</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Things-to-come.">Things to come.<a class="anchor-link" href="posts/Blog1.html#Things-to-come.">¶</a></h3>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="On-IPython-notebook-server-side">On IPython notebook-server side<a class="anchor-link" href="posts/Blog1.html#On-IPython-notebook-server-side">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I must warn you, do not rely too much on current css and classes to make your custom theme. We are both refactoring and introducing new tools to make our (and your) life easier.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We are progressively moving our css to <a href="http://twitter.github.com/bootstrap/">bootrap</a>, and we currently have part of it that is generated through a compilation of <code>less</code> file.</p>
-<p>This allow us to introduce css variables, so that you can, for example, set a global HUE for the theme an a radius for the corner, recompile, and you get your new theme ready. Just use it as a custom css in your profile dir and you are good to go.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here are one example of what you can do. And as a bonus, (I'll let you search) we added a notebook flag to compile css on the fly in the browser, so you can develop your theme with a less folder wirhout triggering compilation yourself.</p>
-<center>
-<img src="https://f.cloud.github.com/assets/335567/22913/bb412fdc-4a19-11e2-9a9b-2700e5b24843.png" alt="img"></center>
-
-<p>I told you I was not good in design.</p>
-<p>So now our notebook look more like an ugly duckling, but we now how to pet it so that it behave more like we want, and you can share it!</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="On-nbconvert/viewer-side">On nbconvert/viewer side<a class="anchor-link" href="posts/Blog1.html#On-nbconvert/viewer-side">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The notebook format suppor metadata, so I don't see any reason not to set a prefered theme for a notebook whe viewing with a specific application/frontend. This might include nbviewer, it we consider that css are safe enough and got the time to add the concept of <code>user</code> to nbviewer I don't see any reason not to support external css. @damiamavilla already have build a slideshow version of nbviewer (that we will probably release in the next 6 month) that support multiple theme for the same notebook. And if you made some theme, feel free to share, I even think that a <a href="https://github.com/ipython-contrib/IPython-contrib">user-governed</a> repository with multiple css woudl be great.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conclusion">Conclusion<a class="anchor-link" href="posts/Blog1.html#Conclusion">¶</a></h3>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Custom css is doable, and will improve, and the more you help us, the faster it will arrives ! Also this show you that this does not <strong>need</strong> to be part of IPython core to exist, and having it separately will allow faster release cycle or even rolling release of themes.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If you have any comment corrections, I think you'll probably find the gist/github repo that correspond to this notebook.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Next-post-trailer.">Next post trailer.<a class="anchor-link" href="posts/Blog1.html#Next-post-trailer.">¶</a></h4>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Custom.css is not the only file that you can use to inject css in the notebook. Actually any file that you ask to the webserver that start with the /static/ prefix will be first searched in your profile dir. You can also add path with <code>NotebookApp.extra_static_paths=&lt;List&gt;</code> configuration option.</p>
-<p>So as you'll have guessed, <code>custom.css</code> exist in the directory where the static resources are installed, it only contains comments.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Next time, we will use <code>custom.js</code> (I think you can find it by yourself) as an entry point into the notebook to load more javascript dynamically and look at where we can hook to create a css selector. I'll dive into the recent api we added to javascript, and what are the great things you can do with it.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I'll let you prepare a few themes to play with, feel free to share them on <a href="https://github.com/ipython-contrib/IPython-contrib">ipython-contrib</a>.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Not many javascript knowledge will required, you just need to find the curly bracket on your keyboard.</p>
-</div>
-            </div>
-        </div>
-    
     
 <div>
-<ul class="pager"></ul></div>
+<ul class="pager"><li class="next">
+        <a href="index-1.html" rel="next">Older posts →</a>
+    </li>
+  
+</ul></div>
 
     
     

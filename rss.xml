@@ -1,5 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 04 Jan 2014 10:26:57 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No Pylab Thanks</title><link>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 20 Jan 2014 21:23:32 GMT</lastBuildDate><generator>nikola</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>IPython Dev Meeting - Winter 2014</title><link>http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Some recap from my perspective of IPython dev meeting in Berkeley. Less code than last time, more tired. More complex problem to solve.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Bi-Annual-Meeting"&gt;Bi-Annual Meeting&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Bi-Annual-Meeting"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As you might know (or not), with the &lt;a href="http://ipython.org/sloan-grant.html"&gt;Sloan Grant&lt;/a&gt; came some funding to allow a reunion of the all IPython core-dev and active participants twice a year; last July we had our first 5 days meeting in Berkley, so it was time to meet again and discuss the future of IPython.&lt;/p&gt;
+&lt;p&gt;In this post I'll try to sum up what append during the week to bring you up to speed as, unlike everyweek, we did not do our discussion in public on google hangout. I hope this might explain our low presence on the net for the last five days.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;For the technical detail, I was the only one that was flewn from Paris on last saturday (11th), I was welcommed by &lt;a href="https://github.com/takluyver"&gt;Thomas Kluyver&lt;/a&gt; (that I finally met after 2 years), &lt;a href="https://github.com/jhamrick"&gt;Jess Hamrick&lt;/a&gt; and &lt;a href="https://github.com/aculich"&gt;Aaron Culich&lt;/a&gt; who helpped me to stay awake on the first day in front of Beers and burgers; I fought jetlag in San-Francisco on Sunday. Then the hard part started, you put between 8 and 10 people in a close room with coffe from 9:30am to 6pm for 5 days and mix.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Usually we did code only from 8am to 9am while having breakfast, hence the low apparent productivity (except from Jon and Min that might probably have their clone at home).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We had extra people from last time, in the name of &lt;a href="https://github.com/rgbkrk"&gt;Kyle Kelley&lt;/a&gt; from Rackspace, who is responsible for nbconvert deploy, and Thomas Kluyver who finished his PhD last summer and joined the IPython team full time.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The two exception were wednesday where the room was open from 4pm to 6pm for anybody to comme and say hello, as well as thurstday evening, were we had dinner with other people related to IPython around berkeley.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Human-After-All"&gt;Human After All&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Human-After-All"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Of course not every minute was productive, in particular &lt;a href="http://www.sanger.dk"&gt;Brian had the inside of his screen cleanned&lt;/a&gt; and I'll see if I can get permission from Thomas to post a video of him learning to drive (Musée des Méchaniques, near Fisherman Wharf in SF). We also learned that &lt;a href="http://bridesthrowingcats.com/"&gt;Brides could thow cats&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We spoke of Markov Chain which lead us to examine the example of training on the King James Bible and Structure and Interpretation of Computer Programs aka &lt;a href="http://kingjamesprogramming.tumblr.com/"&gt;King James Programming&lt;/a&gt; :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I am the LORD when I have preached to others, I myself should be a function f between &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;x&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Memorable Quote were Said:&lt;/p&gt;
+&lt;blockquote class="twitter-tweet" lang="fr"&gt;&lt;p&gt;
+Discussing &lt;a href="https://twitter.com/IPythonDev"&gt;@IPythonDev&lt;/a&gt; config system:
+
+&lt;br&gt;&lt;a href="https://twitter.com/ellisonbg"&gt;@ellisonbg&lt;/a&gt;: "Being a theoretical physicist, I'm trying to abstract this..."
+&lt;br&gt;&lt;a href="https://twitter.com/minrk"&gt;@minrk&lt;/a&gt;: "It's a sphere."
+&lt;/p&gt;
+&lt;a href="https://twitter.com/ivanov/statuses/423892348498493440"&gt;16 Janvier 2014&lt;/a&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As well as&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Just add a &lt;code&gt;var that = this;&lt;/code&gt; (On &lt;a href="http://stackoverflow.com/questions/4886632/what-does-var-that-this-mean-in-javascript"&gt;Python&lt;/a&gt; code)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="IPython-2.0"&gt;IPython 2.0&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-2.0"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We are slightly late on the scedule, but some things had to be discussed. It was a good thing to be all in one room. Expect a release of 2.0 beta in 4 to 6 week at best.&lt;/p&gt;
+&lt;p&gt;[Modal UI] was merge 2 weeks ago, and will be refined, we know some people are not happy with it, and we are aware it is not perfect. We were starting to hit the limit of what we could do with browser and had to go modal to develop the notebook. We will still be limited by the browser capability and fight with the dom focusing of elements; so some compromise had and will have to be made. We thought &lt;strong&gt;a lot&lt;/strong&gt; of what we wanted, we are happy with it and need 4 to 6 six weeks of the modal UI in the wild to get user feedback and polish rough corners. So if you have comment, complaint we would be happy to hear from you.&lt;/p&gt;
+&lt;p&gt;We also a huge discussion of Interactive Widget, from a tecnical point of view, User eXperience, and code review. We are pushing some functionality from 2.0 to later, it will not prevent you from dooing anything but might need little more code in the kernel. Expect Jon Pull request to be merged in a week or so, then 4 more weeks to have testing from users. If you are adventurous, &lt;a href="https://github.com/ipython/ipython/pull/4374"&gt;grab Jon PR today&lt;/a&gt; and test it! Jason Grout made a lot of good feedback, advice and technical review.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Unexpected-Changes"&gt;Unexpected Changes&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Unexpected-Changes"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We had an unexpected discussion about library like &lt;a href="http://nbviewer.ipython.org/github/jakevdp/mpld3/blob/master/examples/mpld3_demo.ipynb"&gt;mpld3&lt;/a&gt; and static widget (&lt;a href="https://github.com/jakevdp"&gt;@Jakevdp&lt;/a&gt; we love your work and congrats BTW) which lead to a &lt;strong&gt;small&lt;/strong&gt; digression onf 1 day and a half about dynamic content (on nbviewer | live notebook) and consequence on security as well as good practice. I'll try to quickly sum-up the problem.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Notebook allow arbitrary content execution, but you don't want arbitrary code to be executed. So we need to walk the fine line between what is code that user &lt;em&gt;want&lt;/em&gt; to run, from code that user would prefer &lt;em&gt;not to run&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As of IPython 1.0, &lt;strong&gt;viewing&lt;/strong&gt; a notebook is equivalent of running code. With the possibility we keep adding to IPython, at some point notebook could wreak havock on your machines, and we want to avoid making things like &lt;em&gt;document macro&lt;/em&gt; that could be malicious.&lt;/p&gt;
+&lt;p&gt;(If I get some time later I would be happy to make a talk that show some of the things that would be doable)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In the meantime we like to avoid aving a user experience like UAC where in the end you just click &lt;code&gt;Allow&lt;/code&gt; without pondering the consequences. Keep in mind that you have to view notebook as program, that run as yourself and that &lt;strong&gt;we cannot guaranty&lt;/strong&gt; full security when you open notebook on your local machine, but we will do our best.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;That beeing said, as some content like HTML/Javascript/svg might present security they might not be show in some circonstance when you &lt;strong&gt;open&lt;/strong&gt; a notebook, so from 2.0 (probably) and oward we will (try to) :&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;&lt;li&gt;Prevent rendering markdown if it contains any Javascript&lt;/li&gt;
+&lt;li&gt;HTML/JS/svg in output
+&lt;ul&gt;&lt;li&gt;will not be show on load&lt;/li&gt;
+&lt;li&gt;unless &lt;strong&gt;you&lt;/strong&gt; were the one to have fully executed the notebook for the last time.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This will not apply (for the time beeing) on nbviewer, and we have no reason to disable it until we add authentication to nbviewer.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;To do so, starting with 2.0 notebooks files will be signed (as in cryptographycally signed) on save with IPython web frontend (Aka webnotebook). This is of course not mandatory for a notebook to be runned or loaded. It does not change the notebook format, and do not affect existing kernels. Though if you have a custom frontend (or program that generate notebook) I would advise for you to follow the same practice.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;From a user perspective, this means that if I &lt;strong&gt;download&lt;/strong&gt; the example notebook mpld3 on my machine, it will not show as on nbviewer up until you have run all cells at least once in once session. Once done it will not affect you.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;If you work a lot across multiple machine and like your notebook to be recognized everywhere, we will provide more technical details later on where the key(s) are stored by default.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Public/Private-Keys"&gt;Public/Private Keys&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Public/Private-Keys"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;I am personnaly really happy about the signature mechanisme we are putting in place. It might add noise to versionnig system (but you can always have a hook that clean it). I believe it could be tightly coupled to authorship of total or part of a notebook.&lt;/p&gt;
+&lt;p&gt;We did quite some discussion on the current mechanisme, almost come to blows, and add several iterations before comming to that. We suppose security is not perfect and we love people to review that. Personally I will try to hook that into Public/Private key pairs to be able to have a ring of trust of notebook.&lt;/p&gt;
+&lt;p&gt;I hope also that at some point it might help in versionnig to know when a notebook has merges (once the merge tool is written) and might not reflect what a full re-execusion would do.&lt;/p&gt;
+&lt;p&gt;This does not prevent you from considering that every notebook you load could be dangerous, and probably do more damages than you think.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="IPython-1.2"&gt;IPython 1.2&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-1.2"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We will have a 1.2 release.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="IPython-2.x"&gt;IPython 2.x&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-2.x"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We will (probably) try to release 2.x release regularly (every month). Bug and doc fixes only.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="IPython-3.0"&gt;IPython 3.0&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#IPython-3.0"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Not everything planned for 2.0 was done, some many things have been just pushed to next release, we new about it but it is always hard to see the number of things that have to be done.&lt;/p&gt;
+&lt;p&gt;As for myself, I wasn't assigned to any issues, indead I'll have to start writing my dissertation but I'm thrilled to see what is comming. We have not made a detailed plan yet but here is what we are thinking about:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ul&gt;&lt;li&gt;Static Widgets
+&lt;ul&gt;&lt;li&gt;runs through all combinations of widgets and sends results to the notebook.&lt;/li&gt;
+&lt;li&gt;Where do we store all te data without making 2Gb notebooks ?&lt;/li&gt;
+&lt;li&gt;Make it compatible with nbviewer ?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Full, integrated support for non-Python kernels
+&lt;ul&gt;&lt;li&gt;Launch IPython Once, and ability to select "Open this notebook with (IJulia|IRuby|IHaskell|...) etc.&lt;/li&gt;
+&lt;li&gt;Simpler way for kernels to provide "Configurability" for IPython.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Diff/merge of notebooks
+&lt;ul&gt;&lt;li&gt;Greg Wilson have student workign on that&lt;/li&gt;
+&lt;li&gt;We will try also&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;UI to browse filesytem/edit non-ipynb text-files&lt;/li&gt;
+&lt;li&gt;Push nbviewer forward&lt;/li&gt;
+&lt;li&gt;Starting Multiuser-support
+&lt;ul&gt;&lt;li&gt;learn node.js&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Rackspace"&gt;Rackspace&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#Rackspace"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Nbviewer have moved to rackspace a few weeks ago, and we continuing to move things over there. Thanks to &lt;a href="https://twitter.com/rgbkrk"&gt;Kyle Kelley&lt;/a&gt; and &lt;a href="https://twitter.com/jessenoller"&gt;Jessy Noller&lt;/a&gt;, we know have ability to deploy nbviewer on &lt;a href="http://carreau.github.io/posts/www.rackspace.com"&gt;Rackspace&lt;/a&gt; servers usig salt-stack (with a &lt;a href="http://developer.rackspace.com/devtrial/"&gt;small discount&lt;/a&gt; for open source project). Movign DNS controle over to Rackspace will allow us to semi-automatically deploy PRs to test and have clean load balancing when doing a deploy not for the service to drop user when a new version go into production.&lt;/p&gt;
+&lt;p&gt;We (and this mean Kyle) are working hard to document this completly from A to Z and make as much as possible public so that you could replicate it locally. Right now we still have some things private because of Auth keys.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://twitter.com/intent/tweet?text=Thanks%20%40jessnoller%20and%20%40rgbkrk%20for%20nbviewer%20on%20%40rackspace" class="twitter-mention-button" data-related="rgbkrk,jessenoller"&gt;Tweet them your love&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="After-That..."&gt;After That...&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html#After-That..."&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;4.0... And we do not know, Sloan Grant funding end on 31 Dec 2014. So if you or your entreprise have used of IPython consider helping and feel free to write to us.&lt;/p&gt;
+&lt;p&gt;Bye from thousand of feet above Atlanic Ocean, it's 5:30 am were I'm heading to, and 8:30pm where I come from. Next IPython Meeting will be in roughly 6 month, mark the date and come say hello. Otherwise search us at PyCon, SciPy, EuroSciPy (..etc) we have Stickers and Flyers!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As usual my english is not perfect, so PR are welcommed, More details topic later.&lt;/p&gt;
+&lt;/div&gt;
+</description><guid>http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html</guid><pubDate>Sat, 18 Jan 2014 05:30:00 GMT</pubDate></item><item><title>No Pylab Thanks</title><link>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Please-Stop-using-Pylab"&gt;Please Stop using Pylab&lt;a class="anchor-link" href="http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html#Please-Stop-using-Pylab"&gt;¶&lt;/a&gt;&lt;/h1&gt;
 &lt;/div&gt;
 
@@ -4226,410 +4394,4 @@ In [5]:
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;If you have any comment, feel free to comment on the gihub repo of this blog post, and/or to send me PR to fix mistakes.&lt;/p&gt;
-&lt;/div&gt;</description><guid>http://carreau.github.io/posts/02-css-selector.html</guid><pubDate>Fri, 01 Feb 2013 20:00:00 GMT</pubDate></item><item><title>Blog1</title><link>http://carreau.github.io/posts/Blog1.html</link><description>&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="IPython-Notebook-Duck-Punching-(I)"&gt;IPython Notebook Duck-Punching (I)&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#IPython-Notebook-Duck-Punching-(I)"&gt;¶&lt;/a&gt;&lt;/h1&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This will try to be a series of blog post (or nbviewer post) on the IPython notebook. Mainly in responses to comment on &lt;a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks"&gt;Better typography for IPython notebooks&lt;/a&gt; and some of the comment at the end of the page, especially &lt;a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks/#comment-148"&gt;this one&lt;/a&gt;, that will have a full answer &lt;a href="http://carreau.github.io/urls/raw.github.com/Carreau/posts/master/02-css-selector.ipynb"&gt;next post&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;First some presentation, I am Matthias, you can usually find me on github aka &lt;a href="https://github.com/carreau"&gt;@carreau&lt;/a&gt;, or on twitter @mbussonn. I'm a Phd student in Biophysic, more physic than bio. And I contributed mostly to the IPython notebook.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This would also probably be the starting point for the IPython Advance tutorial I'll be giving next August in &lt;a href="https://www.euroscipy.org/"&gt;Euro SciPy&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Addendum"&gt;Addendum&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#Addendum"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I was a little optimistic in presupposing that &lt;code&gt;custom.css&lt;/code&gt; was availlable in 0.13.1, so most of what is discussed here need a more recent developpement version to work.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="A-more-general-issue"&gt;A more general issue&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#A-more-general-issue"&gt;¶&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The question about changing the style of the notebook come often and it is part in my opinion of the question of type :&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Why dont you want to integrate X? Why is it not implemented?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I would like to take some time to respond to it, in both a general way and try to introduce to to some concept of the notebook few people know about. Brian Granger already did some good post about it &lt;a href="http://brianegranger.com/?p=249"&gt;here&lt;/a&gt; and &lt;a href="http://brianegranger.com/?p=261"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As I am also responsible for the refactoring of &lt;a href="https://github.com/ipython/nbconvert"&gt;nbconvert&lt;/a&gt; and are the principal maintainer of &lt;a href="http://nbviewer.ipython.org/"&gt;nbviewer&lt;/a&gt; I'll try to share my thought on what the future will be, and what is currently in progress.&lt;/p&gt;
-&lt;p&gt;So, back to our question, why do we not implement some feature.&lt;/p&gt;
-&lt;p&gt;Well, a non negligeable part of the time, because they already exist, you are just not aware of that. Plese read the doc (or say you did) and ask how to do it because you didn't well understood. Once you acchieve to do it, a good way to help us and other is to improve the doc, Pull Request are welcomed :-)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Second possibility: You don't need code in the core to do it. We provide more or less easy way to hook onto IPython. And as there a are many reason for which some things are better outside of IPython than in the core, we will encourage you to do ship it separately.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Third: we won't special case only for you. This does not mean we don't like what you did, more often it mean that the internal of IPython shoudl allow what you did to be an extension, they just don't allow it yet. Bare with us for some time or help us to acchieve our goal and it will be better for everyone soon !&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="What-about-css-theming-?"&gt;What about css theming ?&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#What-about-css-theming-?"&gt;¶&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Short answer : I haven't seen any requests about theming that cannot be done without patching IPython code in itself. Some part could be made much easier, and it is in progress.&lt;/p&gt;
-&lt;p&gt;What you ask (Custom theme, share them...) is already here, you just don't know how to do it.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://slendrmeans.wordpress.com/"&gt;Carl&lt;/a&gt; said :&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Warning: I don’t know what I’m doing. Don’t make any of these changes, or any others, without backing up the files first.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;But me, I do know what I'm dooing when speeking of IPython, but not when speaking of design, so let's start to tinker with IPython to have custom css, and easy to share.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;First thing to remember if you ever think of modifying a file in &lt;code&gt;IPython/notebook/html/static/*&lt;/code&gt; you are dooing it wrong.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's dive a little into how to customise the IPython notebook.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Adding-custom-css:"&gt;Adding custom css:&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#Adding-custom-css:"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;How to add custom css to notebook, starting by the wrong way. Things you must never do.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Modifyin-IPython-source-files."&gt;Modifyin IPython source files.&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#Modifyin-IPython-source-files."&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Never do that, except if you want to open a pull request to fix a bug. Actually you should &lt;strong&gt;never&lt;/strong&gt; modify a file which is under &lt;code&gt;IPython/frontend/html/notebook/static/*&lt;/code&gt; because you don't &lt;strong&gt;need&lt;/strong&gt; to do it. We'll se later why and what to do.&lt;/p&gt;
-&lt;p&gt;This mean, that if you are not admin on your machine, or you just don't want to modify the system file, you can still read the rest and try by yourself.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="CSS-In-a-markdown-cell"&gt;CSS In a markdown cell&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#CSS-In-a-markdown-cell"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Probably the worse way to do it. You can create a markdown cell with style tag in it, and write some css that will apply to the notebook.&lt;/p&gt;
-&lt;p&gt;It will most likely break on future version, you have to add it every time. You will bother other when sharing your notebook, and it will probably break the conversion process into pdf/rst/markdown when you use &lt;a href="https://github.com/ipython/nbconvert"&gt;nbconvert&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Html markup will not be the same in nbviewer, so your post might be ugly, and if there are any update of something at some point, you will have to update all your .ipynb files.&lt;/p&gt;
-&lt;p&gt;Even if this is great to test some css as a quick an dirty way (like I did for this notebook) I strongly advise not to do it.&lt;/p&gt;
-&lt;p&gt;It is not yet clear with how things are right now, but a notebook is a document that contain data, and the frontend is responsible for the formatting. Right now the notebook server has few frontends: - the browser one - and the &lt;a href="https://github.com/tkf/emacs-ipython-notebook"&gt;emacs client&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;But this is likely to change, so please no style in Markdown cell.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="The-answer-:-custom.css"&gt;The answer : custom.css&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#The-answer-:-custom.css"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;So here we are, the right way to add custoom css to a notebook when you look at it throught the browser interface, use the &lt;code&gt;custom.css&lt;/code&gt; file.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This file is not created by default, and can exist on a per-profile basis, if you don't know what ipython profiles are, then you are probably using the default profile. In short, profile are a way to have different configuration for ipython which you can choose through a command line flag (&lt;code&gt;ipython notebook --profile=&amp;lt;profilename&amp;gt;&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Let's locate our profile folder:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;
-In [2]:
-&lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%%bash 
-ipython locate
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre&gt;
-/Users/matthiasbussonnier/.ipython
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This tells me that IPyton is expecting profiles in the above directory, and more specially on profile named &lt;code&gt;foo&lt;/code&gt; will have the corresponding files in&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;/Users/matthiasbussonnier/.ipython/profile_foo/&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;let's create a profile for the sake of this blog post.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;
-In [3]:
-&lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%%bash
-ipython profile create customcss
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stderr"&gt;
-&lt;pre&gt;
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_config.py'
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_qtconsole_config.py'
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_notebook_config.py'
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This created the needed folder structure for IPython to work, but we won't be interested in those file for now. If you do not want to create a custom profile, you could also modify the files in &lt;code&gt;profile_default&lt;/code&gt; which is the profile IPython uses when nothing is specified.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I will now create the file I am interested in : &lt;code&gt;static/custom/custom.css&lt;/code&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;
-In [5]:
-&lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%%bash
-mkdir ~/.ipython/profile_customcss/static/
-mkdir ~/.ipython/profile_customcss/static/custom/
-touch ~/.ipython/profile_customcss/static/custom/custom.css
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Use the file magic to write something in it.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;
-In [34]:
-&lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;%%&lt;/span&gt;&lt;span class="k"&gt;file&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;matthiasbussonnier&lt;/span&gt;&lt;span class="o"&gt;/.&lt;/span&gt;&lt;span class="n"&gt;ipython&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;profile_customcss&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;static&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;custom&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;custom&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;css&lt;/span&gt;
-&lt;span class="o"&gt;/**&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;css&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;&lt;span class="o"&gt;**/&lt;/span&gt;
-&lt;span class="o"&gt;/*&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="o"&gt;*/&lt;/span&gt;
-
-&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="n"&gt;div&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;750&lt;/span&gt;&lt;span class="n"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;margin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;margin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;h1&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;center&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-        &lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;familly&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s"&gt;"Charis SIL"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;serif&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre&gt;
-Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/custom.css
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;
-In [35]:
-&lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;~/.&lt;/span&gt;&lt;span class="n"&gt;ipython&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;profile_customcss&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;static&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;custom&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;custom&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;css&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre&gt;
-/**write your css in here**/
-/* like */
-
-&amp;lt;style&amp;gt;
-    div.cell{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-&amp;lt;/style&amp;gt;
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now every time you start ipython with :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ ipython notebook --profile customcss
-[NotebookApp] Using existing profile dir: u'~/.ipython/profile_customcss'
-[NotebookApp] Serving notebooks from local directory: /Users/matthiasbussonnier/
-[NotebookApp] The IPython Notebook is running at: http://&amp;lt;ip&amp;gt;:8889/
-[NotebookApp] Use Control-C to stop this server and shut down all kernels.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You will get the right css, let's try :&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;
-In [36]:
-&lt;/div&gt;
-&lt;div class="input_area box-flex1"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;%%bash 
-curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stdout"&gt;
-&lt;pre&gt;
-/**write your css in here**/
-/* like */
-
-&amp;lt;style&amp;gt;
-    div.cell{
-        max-width:750px;
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    h1 {
-        text-align:center;
-        font-familly:"Charis SIL", serif;
-    }
-&amp;lt;/style&amp;gt;
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="box-flex1 output_subarea output_stream output_stderr"&gt;
-&lt;pre&gt;
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   240  100   240    0     0   102k      0 --:--:-- --:--:-- --:--:--  234k
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Yeah ! We now get you custom css that will be loaded in notebook, without dangerous file modifications, and without using root rights !&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Things-to-come."&gt;Things to come.&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#Things-to-come."&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="On-IPython-notebook-server-side"&gt;On IPython notebook-server side&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#On-IPython-notebook-server-side"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I must warn you, do not rely too much on current css and classes to make your custom theme. We are both refactoring and introducing new tools to make our (and your) life easier.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We are progressively moving our css to &lt;a href="http://twitter.github.com/bootstrap/"&gt;bootrap&lt;/a&gt;, and we currently have part of it that is generated through a compilation of &lt;code&gt;less&lt;/code&gt; file.&lt;/p&gt;
-&lt;p&gt;This allow us to introduce css variables, so that you can, for example, set a global HUE for the theme an a radius for the corner, recompile, and you get your new theme ready. Just use it as a custom css in your profile dir and you are good to go.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Here are one example of what you can do. And as a bonus, (I'll let you search) we added a notebook flag to compile css on the fly in the browser, so you can develop your theme with a less folder wirhout triggering compilation yourself.&lt;/p&gt;
-&lt;center&gt;
-&lt;img src="https://f.cloud.github.com/assets/335567/22913/bb412fdc-4a19-11e2-9a9b-2700e5b24843.png" alt="img"&gt;&lt;/center&gt;
-
-&lt;p&gt;I told you I was not good in design.&lt;/p&gt;
-&lt;p&gt;So now our notebook look more like an ugly duckling, but we now how to pet it so that it behave more like we want, and you can share it!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="On-nbconvert/viewer-side"&gt;On nbconvert/viewer side&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#On-nbconvert/viewer-side"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The notebook format suppor metadata, so I don't see any reason not to set a prefered theme for a notebook whe viewing with a specific application/frontend. This might include nbviewer, it we consider that css are safe enough and got the time to add the concept of &lt;code&gt;user&lt;/code&gt; to nbviewer I don't see any reason not to support external css. @damiamavilla already have build a slideshow version of nbviewer (that we will probably release in the next 6 month) that support multiple theme for the same notebook. And if you made some theme, feel free to share, I even think that a &lt;a href="https://github.com/ipython-contrib/IPython-contrib"&gt;user-governed&lt;/a&gt; repository with multiple css woudl be great.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Conclusion"&gt;Conclusion&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#Conclusion"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Custom css is doable, and will improve, and the more you help us, the faster it will arrives ! Also this show you that this does not &lt;strong&gt;need&lt;/strong&gt; to be part of IPython core to exist, and having it separately will allow faster release cycle or even rolling release of themes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;If you have any comment corrections, I think you'll probably find the gist/github repo that correspond to this notebook.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Next-post-trailer."&gt;Next post trailer.&lt;a class="anchor-link" href="http://carreau.github.io/posts/Blog1.html#Next-post-trailer."&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Custom.css is not the only file that you can use to inject css in the notebook. Actually any file that you ask to the webserver that start with the /static/ prefix will be first searched in your profile dir. You can also add path with &lt;code&gt;NotebookApp.extra_static_paths=&amp;lt;List&amp;gt;&lt;/code&gt; configuration option.&lt;/p&gt;
-&lt;p&gt;So as you'll have guessed, &lt;code&gt;custom.css&lt;/code&gt; exist in the directory where the static resources are installed, it only contains comments.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Next time, we will use &lt;code&gt;custom.js&lt;/code&gt; (I think you can find it by yourself) as an entry point into the notebook to load more javascript dynamically and look at where we can hook to create a css selector. I'll dive into the recent api we added to javascript, and what are the great things you can do with it.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I'll let you prepare a few themes to play with, feel free to share them on &lt;a href="https://github.com/ipython-contrib/IPython-contrib"&gt;ipython-contrib&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Not many javascript knowledge will required, you just need to find the curly bracket on your keyboard.&lt;/p&gt;
-&lt;/div&gt;</description><guid>http://carreau.github.io/posts/Blog1.html</guid><pubDate>Tue, 01 Jan 2013 20:00:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><guid>http://carreau.github.io/posts/02-css-selector.html</guid><pubDate>Fri, 01 Feb 2013 20:00:00 GMT</pubDate></item></channel></rss>
