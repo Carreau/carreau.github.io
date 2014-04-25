@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content=""><meta name="author" content="Matthias Bussonnier"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Draft-12 | Random Thoughts</title><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><link href="../assets/css/bitter.css" rel="stylesheet" type="text/css"><link href="../assets/css/main.css" rel="stylesheet" type="text/css"><link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml"></head><body>
+    <section class="social"><ul><li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+        
+    
+        
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+        
+    
+        
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+        
+    
+        
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        
+    
+        
+            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        
+    
+        
+            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        
+    
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name" itemprop="headline name">Draft-12</h1>
+    
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2914-04-30T19:00:00">2914-04-30 19:00</time></div>
+            
+    
+
+            
+    
+          |  
+        <a href="12-Write-An-IPython-Kernel.ipynb.ipynb" id="sourcelink">Source</a>
+    
+
+            
+    
+
+        </div>
+        <div class="body">
+            <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is more a bookmark post that a real post.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Prompt by recent discussion on the IPyton mailing list and on twitter, I think we miss a place to rassemble informations on how to build a kernel regardless of the language and a place to reference thoses implementation.</p>
+<p>You shoudl probably at some point read <a href="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/">this blog post from IHaskell creator</a> to know more about architecture. But really at some point what you will need is example and advices. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Do-not-assume-others-get-it-right">Do not assume others get it right<a class="anchor-link" href="12-Write-An-IPython-Kernel.ipynb.html#Do-not-assume-others-get-it-right">¶</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Even if other kernel are working, this does not meen they got things right. Even IPyhton kernel had things wrong in some places.
+Things can be wrong iin implementation but also in the way we though of things. In bothe case tell us and/or the author.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Start-simple">Start simple<a class="anchor-link" href="12-Write-An-IPython-Kernel.ipynb.html#Start-simple">¶</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol><li>start IPython with <code>--debug</code> flag it will print all exchanges messages.</li>
+<li>set <code>c.Session.key=''</code> at start not to sign messages.</li>
+</ol><p>You do not need either to have all the protocol implemented at first, things like completion request can be added later.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Contribute-Back">Contribute Back<a class="anchor-link" href="12-Write-An-IPython-Kernel.ipynb.html#Contribute-Back">¶</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As soon as you find something which not clear or mising in the doc, please send a Pull Request, or open an Issue.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="We-have-a-test-suite">We have a test suite<a class="anchor-link" href="12-Write-An-IPython-Kernel.ipynb.html#We-have-a-test-suite">¶</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can probably run it against your kernel, it will give you an idea of your progress, and tell you what need to be done.</p>
+<p>TODO: write on how to run the test again another kernel.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Things-become-obsolete">Things become obsolete<a class="anchor-link" href="12-Write-An-IPython-Kernel.ipynb.html#Things-become-obsolete">¶</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This article is probably already obsolete, and things like <a href="http://nbviewer.ipython.org/gist/Carreau/4279371/node-kernel.ipynb">my node kernel</a> don't even work because IPython has changed after I wrote it. Technically the kernel shoudl still work, but the instruction to make it run are wrong now. Try to focus on active project when searching for examples.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In []:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+
+        </div>
+        
+    <ul class="pager"></ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/12-Write-An-IPython-Kernel.ipynb.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+</div>
+
+    
+
+        
+        
+    
+
+    </div>
+
+            Contents © 2014         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+
+            
+	
+
+        </div>
+    </section><script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/jquery.timeago.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script></body></html>
