@@ -1,4 +1,28 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="description" content=""><meta name="author" content="Matthias Bussonnier"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Blog1 | Random Thoughts</title><script type="text/x-mathjax-config">
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Blog1 | Random Thoughts</title>
+
+                <link href="../assets/css/bitter.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/main.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+
+                <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://carreau.github.io/posts/Blog1.html">
+
+
+
+    
+<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -9,110 +33,218 @@ MathJax.Hub.Config({
         styles: {'.MathJax_Display': {"margin": 0}}
     }
 });
-</script><link href="../assets/css/bitter.css" rel="stylesheet" type="text/css"><link href="../assets/css/main.css" rel="stylesheet" type="text/css"><link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css"><!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml"></head><body>
-    <section class="social"><ul><li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
-        
-    
-        
-            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-        
-    
-        
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-        
-    
-        
-            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
-        
-    
-        
-            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
-        
-    
-        
-            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
-        
+</script>
+
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
     
 
-        </ul></section><section class="page-content"><div class="content" rel="main">
-            
+    
+    <meta name="author" content="Matthias Bussonnier">
+        <meta property="og:site_name" content="Random Thoughts">
+    <meta property="og:title" content="Blog1">
+    <meta property="og:url" content="http://carreau.github.io/posts/Blog1.html">
+    <meta property="og:description" content="IPython Notebook Duck-Punching (I)¶
+
+
+
+
+
+
+
+
+If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck un">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2013-01-01T20:00:00+00:00">
+
+    
+    
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+                    <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
     <div class="post">
-    
-    <h1 class="p-name" itemprop="headline name">Blog1</h1>
-    
+        <h1 class="p-name entry-title" itemprop="headline name">Blog1</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2013-01-01T20:00:00">2013-01-01 20:00</time></div>
+                <time class="timeago" datetime="2013-01-01T20:00:00+00:00">2013-01-01 20:00</time>
             
-    
-
-            
-    
-          |  
+                      |  
         <a href="Blog1.ipynb" id="sourcelink">Source</a>
-    
 
+            </div>
             
-    
-
         </div>
         <div class="body">
-            <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="IPython-Notebook-Duck-Punching-(I)">IPython Notebook Duck-Punching (I)<a class="anchor-link" href="Blog1.html#IPython-Notebook-Duck-Punching-(I)">¶</a></h1>
-</div>
+            <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="IPython-Notebook-Duck-Punching-(I)">IPython Notebook Duck-Punching (I)<a class="anchor-link" href="Blog1.html#IPython-Notebook-Duck-Punching-(I)">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote>
 <p>If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.</p>
 </blockquote>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This will try to be a series of blog post (or nbviewer post) on the IPython notebook. Mainly in responses to comment on <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks">Better typography for IPython notebooks</a> and some of the comment at the end of the page, especially <a href="http://slendrmeans.wordpress.com/2012/12/05/better-typography-for-ipython-notebooks/#comment-148">this one</a>, that will have a full answer <a href="../urls/raw.github.com/Carreau/posts/master/02-css-selector.ipynb">next post</a>.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First some presentation, I am Matthias, you can usually find me on github aka <a href="https://github.com/carreau">@carreau</a>, or on twitter @mbussonn. I'm a Phd student in Biophysic, more physic than bio. And I contributed mostly to the IPython notebook.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This would also probably be the starting point for the IPython Advance tutorial I'll be giving next August in <a href="https://www.euroscipy.org/">Euro SciPy</a>.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Addendum">Addendum<a class="anchor-link" href="Blog1.html#Addendum">¶</a></h4>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Addendum">Addendum<a class="anchor-link" href="Blog1.html#Addendum">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I was a little optimistic in presupposing that <code>custom.css</code> was availlable in 0.13.1, so most of what is discussed here need a more recent developpement version to work.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-more-general-issue">A more general issue<a class="anchor-link" href="Blog1.html#A-more-general-issue">¶</a></h2>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-more-general-issue">A more general issue<a class="anchor-link" href="Blog1.html#A-more-general-issue">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The question about changing the style of the notebook come often and it is part in my opinion of the question of type :</p>
 <blockquote>
 <p>Why dont you want to integrate X? Why is it not implemented?</p>
 </blockquote>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I would like to take some time to respond to it, in both a general way and try to introduce to to some concept of the notebook few people know about. Brian Granger already did some good post about it <a href="http://brianegranger.com/?p=249">here</a> and <a href="http://brianegranger.com/?p=261">here</a>.</p>
+<p>I would like to take some time to respond to it, in both a general way and try to introduce to to some concept of the notebook few people know about.
+Brian Granger already did some good post about it <a href="http://brianegranger.com/?p=249">here</a> and <a href="http://brianegranger.com/?p=261">here</a>.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As I am also responsible for the refactoring of <a href="https://github.com/ipython/nbconvert">nbconvert</a> and are the principal maintainer of <a href="http://nbviewer.ipython.org/">nbviewer</a> I'll try to share my thought on what the future will be, and what is currently in progress.</p>
 <p>So, back to our question, why do we not implement some feature.</p>
-<p>Well, a non negligeable part of the time, because they already exist, you are just not aware of that. Plese read the doc (or say you did) and ask how to do it because you didn't well understood. Once you acchieve to do it, a good way to help us and other is to improve the doc, Pull Request are welcomed :-)</p>
+<p>Well, a non negligeable part of the time, because they already exist, you are just not aware of that. Plese read the doc (or say you did) and ask how to do it because you didn't well understood.
+Once you acchieve to do it, a good way to help us and other is to improve the doc, Pull Request are welcomed :-)</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Second possibility: You don't need code in the core to do it. We provide more or less easy way to hook onto IPython. And as there a are many reason for which some things are better outside of IPython than in the core, we will encourage you to do ship it separately.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Third: we won't special case only for you. This does not mean we don't like what you did, more often it mean that the internal of IPython shoudl allow what you did to be an extension, they just don't allow it yet. Bare with us for some time or help us to acchieve our goal and it will be better for everyone soon !</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-about-css-theming-?">What about css theming ?<a class="anchor-link" href="Blog1.html#What-about-css-theming-?">¶</a></h2>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-about-css-theming-?">What about css theming ?<a class="anchor-link" href="Blog1.html#What-about-css-theming-?">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Short answer : I haven't seen any requests about theming that cannot be done without patching IPython code in itself. Some part could be made much easier, and it is in progress.</p>
 <p>What you ask (Custom theme, share them...) is already here, you just don't know how to do it.</p>
@@ -121,61 +253,144 @@ MathJax.Hub.Config({
 <p>Warning: I don’t know what I’m doing. Don’t make any of these changes, or any others, without backing up the files first.</p>
 </blockquote>
 <p>But me, I do know what I'm dooing when speeking of IPython, but not when speaking of design, so let's start to tinker with IPython to have custom css, and easy to share.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First thing to remember if you ever think of modifying a file in <code>IPython/notebook/html/static/*</code> you are dooing it wrong.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's dive a little into how to customise the IPython notebook.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adding-custom-css:">Adding custom css:<a class="anchor-link" href="Blog1.html#Adding-custom-css:">¶</a></h3>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Adding-custom-css:">Adding custom css:<a class="anchor-link" href="Blog1.html#Adding-custom-css:">¶</a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>How to add custom css to notebook, starting by the wrong way. Things you must never do.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Modifyin-IPython-source-files.">Modifyin IPython source files.<a class="anchor-link" href="Blog1.html#Modifyin-IPython-source-files.">¶</a></h4>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Never do that, except if you want to open a pull request to fix a bug. Actually you should <strong>never</strong> modify a file which is under <code>IPython/frontend/html/notebook/static/*</code> because you don't <strong>need</strong> to do it. We'll se later why and what to do.</p>
+<h5 id="Modifyin-IPython-source-files.">Modifyin IPython source files.<a class="anchor-link" href="Blog1.html#Modifyin-IPython-source-files.">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Never do that, except if you want to open a pull request to fix a bug. 
+Actually you should <strong>never</strong> modify a file which is under <code>IPython/frontend/html/notebook/static/*</code> because you don't <strong>need</strong> to do it. We'll se later why and what to do.</p>
 <p>This mean, that if you are not admin on your machine, or you just don't want to modify the system file, you can still read the rest and try by yourself.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="CSS-In-a-markdown-cell">CSS In a markdown cell<a class="anchor-link" href="Blog1.html#CSS-In-a-markdown-cell">¶</a></h4>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Probably the worse way to do it. You can create a markdown cell with style tag in it, and write some css that will apply to the notebook.</p>
+<h5 id="CSS-In-a-markdown-cell">CSS In a markdown cell<a class="anchor-link" href="Blog1.html#CSS-In-a-markdown-cell">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Probably the worse way to do it.
+You can create a markdown cell with style tag in it, and write some css that will apply to the notebook.</p>
 <p>It will most likely break on future version, you have to add it every time. You will bother other when sharing your notebook, and it will probably break the conversion process into pdf/rst/markdown when you use <a href="https://github.com/ipython/nbconvert">nbconvert</a></p>
 <p>Html markup will not be the same in nbviewer, so your post might be ugly, and if there are any update of something at some point, you will have to update all your .ipynb files.</p>
 <p>Even if this is great to test some css as a quick an dirty way (like I did for this notebook) I strongly advise not to do it.</p>
-<p>It is not yet clear with how things are right now, but a notebook is a document that contain data, and the frontend is responsible for the formatting. Right now the notebook server has few frontends: - the browser one - and the <a href="https://github.com/tkf/emacs-ipython-notebook">emacs client</a>.</p>
-<p>But this is likely to change, so please no style in Markdown cell.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-answer-:-custom.css">The answer : custom.css<a class="anchor-link" href="Blog1.html#The-answer-:-custom.css">¶</a></h4>
-</div>
+<p>It is not yet clear with how things are right now, but a notebook is a document that contain data, and the frontend is responsible for the formatting. Right now the notebook server has few frontends:</p>
 
+<pre><code>- the browser one
+- and the [emacs client](https://github.com/tkf/emacs-ipython-notebook).
+
+</code></pre>
+<p>But this is likely to change, so please no style in Markdown cell.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="The-answer-:-custom.css">The answer : custom.css<a class="anchor-link" href="Blog1.html#The-answer-:-custom.css">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So here we are, the right way to add custoom css to a notebook when you look at it throught the browser interface, use the <code>custom.css</code> file.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This file is not created by default, and can exist on a per-profile basis, if you don't know what ipython profiles are, then you are probably using the default profile. In short, profile are a way to have different configuration for ipython which you can choose through a command line flag (<code>ipython notebook --profile=&lt;profilename&gt;</code>).</p>
 <p>Let's locate our profile folder:</p>
+
 </div>
-<div class="cell border-box-sizing code_cell">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [2]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash 
-ipython locate
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
+<span class="n">ipython</span> <span class="n">locate</span>
 </pre></div>
 
+</div>
 </div>
 </div>
 
@@ -183,11 +398,10 @@ ipython locate
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-/Users/matthiasbussonnier/.ipython
-
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/Users/matthiasbussonnier/.ipython
 </pre>
 </div>
 </div>
@@ -196,21 +410,28 @@ ipython locate
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This tells me that IPyton is expecting profiles in the above directory, and more specially on profile named <code>foo</code> will have the corresponding files in</p>
 <p><code>/Users/matthiasbussonnier/.ipython/profile_foo/</code></p>
 <p>let's create a profile for the sake of this blog post.</p>
+
 </div>
-<div class="cell border-box-sizing code_cell">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [3]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash
-ipython profile create customcss
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
+<span class="n">ipython</span> <span class="n">profile</span> <span class="n">create</span> <span class="n">customcss</span>
 </pre></div>
 
+</div>
 </div>
 </div>
 
@@ -218,13 +439,12 @@ ipython profile create customcss
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
-<pre>
-[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_config.py'
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_config.py'
 [ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_qtconsole_config.py'
 [ProfileCreate] Generating default config file: u'/Users/matthiasbussonnier/.ipython/profile_customcss/ipython_notebook_config.py'
-
 </pre>
 </div>
 </div>
@@ -233,38 +453,59 @@ ipython profile create customcss
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This created the needed folder structure for IPython to work, but we won't be interested in those file for now. If you do not want to create a custom profile, you could also modify the files in <code>profile_default</code> which is the profile IPython uses when nothing is specified.</p>
+
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I will now create the file I am interested in : <code>static/custom/custom.css</code></p>
 </div>
-<div class="cell border-box-sizing code_cell">
-<div class="input">
+</div>
+<div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
-In [5]:
 </div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash
-mkdir ~/.ipython/profile_customcss/static/
-mkdir ~/.ipython/profile_customcss/static/custom/
-touch ~/.ipython/profile_customcss/static/custom/custom.css
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I will now create the file I am interested in : 
+<code>static/custom/custom.css</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
+<span class="n">mkdir</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span>
+<span class="n">mkdir</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span>
+<span class="n">touch</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
 </pre></div>
 
 </div>
 </div>
+</div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Use the file magic to write something in it.</p>
+
 </div>
-<div class="cell border-box-sizing code_cell">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [34]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="o">%%</span><span class="k">file</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">matthiasbussonnier</span><span class="o">/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
+<div class="prompt input_prompt">In [34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">file</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">matthiasbussonnier</span><span class="o">/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
 <span class="o">/**</span><span class="n">write</span> <span class="n">your</span> <span class="n">css</span> <span class="ow">in</span> <span class="n">here</span><span class="o">**/</span>
 <span class="o">/*</span> <span class="n">like</span> <span class="o">*/</span>
 
@@ -284,16 +525,16 @@ In [34]:
 
 </div>
 </div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/custom.css
-
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/custom.css
 </pre>
 </div>
 </div>
@@ -302,15 +543,15 @@ Overwriting /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/c
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell">
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [35]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">cat</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">cat</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
 </pre></div>
 
+</div>
 </div>
 </div>
 
@@ -318,10 +559,10 @@ In [35]:
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-/**write your css in here**/
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/**write your css in here**/
 /* like */
 
 &lt;style&gt;
@@ -335,8 +576,7 @@ In [35]:
         text-align:center;
         font-familly:"Charis SIL", serif;
     }
-&lt;/style&gt;
-</pre>
+&lt;/style&gt;</pre>
 </div>
 </div>
 
@@ -344,25 +584,33 @@ In [35]:
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now every time you start ipython with :</p>
+
 <pre><code>$ ipython notebook --profile customcss
 [NotebookApp] Using existing profile dir: u'~/.ipython/profile_customcss'
 [NotebookApp] Serving notebooks from local directory: /Users/matthiasbussonnier/
 [NotebookApp] The IPython Notebook is running at: http://&lt;ip&gt;:8889/
 [NotebookApp] Use Control-C to stop this server and shut down all kernels.</code></pre>
 <p>You will get the right css, let's try :</p>
+
 </div>
-<div class="cell border-box-sizing code_cell">
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">
-In [36]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre>%%bash 
-curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
+<div class="prompt input_prompt">In [36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
+<span class="n">curl</span>  <span class="o">--</span><span class="n">noproxy</span> <span class="n">localhost</span>  <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8889</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
 </pre></div>
 
+</div>
 </div>
 </div>
 
@@ -370,10 +618,10 @@ curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-/**write your css in here**/
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>/**write your css in here**/
 /* like */
 
 &lt;style&gt;
@@ -387,18 +635,16 @@ curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
         text-align:center;
         font-familly:"Charis SIL", serif;
     }
-&lt;/style&gt;
-</pre>
+&lt;/style&gt;</pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
-<pre>
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   240  100   240    0     0   102k      0 --:--:-- --:--:-- --:--:--  234k
-
+100   240  100   240    0     0   102k      0 --:--:-- --:--:-- --:--:--  234k
 </pre>
 </div>
 </div>
@@ -407,92 +653,210 @@ curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Yeah ! We now get you custom css that will be loaded in notebook, without dangerous file modifications, and without using root rights !</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Things-to-come.">Things to come.<a class="anchor-link" href="Blog1.html#Things-to-come.">¶</a></h3>
-</div>
 
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="On-IPython-notebook-server-side">On IPython notebook-server side<a class="anchor-link" href="Blog1.html#On-IPython-notebook-server-side">¶</a></h4>
 </div>
-
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Things-to-come.">Things to come.<a class="anchor-link" href="Blog1.html#Things-to-come.">¶</a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="On-IPython-notebook-server-side">On IPython notebook-server side<a class="anchor-link" href="Blog1.html#On-IPython-notebook-server-side">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I must warn you, do not rely too much on current css and classes to make your custom theme. We are both refactoring and introducing new tools to make our (and your) life easier.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We are progressively moving our css to <a href="http://twitter.github.com/bootstrap/">bootrap</a>, and we currently have part of it that is generated through a compilation of <code>less</code> file.</p>
 <p>This allow us to introduce css variables, so that you can, for example, set a global HUE for the theme an a radius for the corner, recompile, and you get your new theme ready. Just use it as a custom css in your profile dir and you are good to go.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here are one example of what you can do. And as a bonus, (I'll let you search) we added a notebook flag to compile css on the fly in the browser, so you can develop your theme with a less folder wirhout triggering compilation yourself.</p>
 <center>
-<img src="https://f.cloud.github.com/assets/335567/22913/bb412fdc-4a19-11e2-9a9b-2700e5b24843.png" alt="img"></center>
+![img](https://f.cloud.github.com/assets/335567/22913/bb412fdc-4a19-11e2-9a9b-2700e5b24843.png)
+</center>
 
 <p>I told you I was not good in design.</p>
 <p>So now our notebook look more like an ugly duckling, but we now how to pet it so that it behave more like we want, and you can share it!</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="On-nbconvert/viewer-side">On nbconvert/viewer side<a class="anchor-link" href="Blog1.html#On-nbconvert/viewer-side">¶</a></h4>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="On-nbconvert/viewer-side">On nbconvert/viewer side<a class="anchor-link" href="Blog1.html#On-nbconvert/viewer-side">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The notebook format suppor metadata, so I don't see any reason not to set a prefered theme for a notebook whe viewing with a specific application/frontend. This might include nbviewer, it we consider that css are safe enough and got the time to add the concept of <code>user</code> to nbviewer I don't see any reason not to support external css. @damiamavilla already have build a slideshow version of nbviewer (that we will probably release in the next 6 month) that support multiple theme for the same notebook. And if you made some theme, feel free to share, I even think that a <a href="https://github.com/ipython-contrib/IPython-contrib">user-governed</a> repository with multiple css woudl be great.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conclusion">Conclusion<a class="anchor-link" href="Blog1.html#Conclusion">¶</a></h3>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Conclusion">Conclusion<a class="anchor-link" href="Blog1.html#Conclusion">¶</a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Custom css is doable, and will improve, and the more you help us, the faster it will arrives ! Also this show you that this does not <strong>need</strong> to be part of IPython core to exist, and having it separately will allow faster release cycle or even rolling release of themes.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you have any comment corrections, I think you'll probably find the gist/github repo that correspond to this notebook.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Next-post-trailer.">Next post trailer.<a class="anchor-link" href="Blog1.html#Next-post-trailer.">¶</a></h4>
-</div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Next-post-trailer.">Next post trailer.<a class="anchor-link" href="Blog1.html#Next-post-trailer.">¶</a>
+</h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Custom.css is not the only file that you can use to inject css in the notebook. Actually any file that you ask to the webserver that start with the /static/ prefix will be first searched in your profile dir. You can also add path with <code>NotebookApp.extra_static_paths=&lt;List&gt;</code> configuration option.</p>
 <p>So as you'll have guessed, <code>custom.css</code> exist in the directory where the static resources are installed, it only contains comments.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next time, we will use <code>custom.js</code> (I think you can find it by yourself) as an entry point into the notebook to load more javascript dynamically and look at where we can hook to create a css selector. I'll dive into the recent api we added to javascript, and what are the great things you can do with it.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I'll let you prepare a few themes to play with, feel free to share them on <a href="https://github.com/ipython-contrib/IPython-contrib">ipython-contrib</a>.</p>
+
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Not many javascript knowledge will required, you just need to find the curly bracket on your keyboard.</p>
+
 </div>
+</div>
+</div>
+    </div>
+  </div>
+
         </div>
-        
-    <ul class="pager"><li class="next">
-            <a href="02-css-selector.html" rel="next">Next post →</a>
-        </li>
-    
-    </ul><script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/Blog1.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+                <ul class="pager">
+            <li class="next">
+                <a href="02-css-selector.html" rel="next" title="02-css-selector">Next post</a>
+            </li>
+        </ul>
+
+                    <script src="https://apis.google.com/js/plusone.js"></script>
+<div class="g-comments" data-href="http://carreau.github.io/posts/Blog1.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
 </div>
 
-    
-
-        
-        
-    
 
     </div>
-
-            Contents © 2014         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
-
+</p>
             
-	
+        </footer>
 
         </div>
-    </section><script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/jquery.timeago.js" type="text/javascript"></script><script type="text/javascript">
+    </section>
+    
+    
+                <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../assets/js/jquery.timeago.js" type="text/javascript"></script>
+        <script src="../assets/js/mathjax.js" type="text/javascript"></script>
+    
+
+        <script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
-        </script></body></html>
+        </script>
+</body>
+</html>
