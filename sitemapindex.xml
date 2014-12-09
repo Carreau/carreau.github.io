@@ -5,15 +5,11 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
-  <loc>http://carreau.github.io/categories/tags-draft.xml</loc>
-  <lastmod>2014-12-07</lastmod>
- </sitemap>
- <sitemap>
   <loc>http://carreau.github.io/rss.xml</loc>
-  <lastmod>2014-12-07</lastmod>
+  <lastmod>2014-12-09</lastmod>
  </sitemap>
  <sitemap>
   <loc>http://carreau.github.io/sitemap.xml</loc>
-  <lastmod>2014-12-07</lastmod>
+  <lastmod>2014-12-09</lastmod>
  </sitemap>
 </sitemapindex>
