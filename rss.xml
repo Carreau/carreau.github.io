@@ -1,5 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link rel="self" href="http://carreau.github.io/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jan 2015 09:55:27 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Jupyter</title><link>http://carreau.github.io/posts/15-Jupyter.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link type="application/rss+xml" href="http://carreau.github.io/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jan 2015 10:40:41 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autodeploy with travis</title><link>http://carreau.github.io/posts/16-Autodeploy-with-travis.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+    &lt;div class="container" id="notebook-container"&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;TL;DR: After a day fighting with travis, my blog get &lt;a href="https://github.com/Carreau/posts/blob/master/.travis.yml"&gt;auto-deployed&lt;/a&gt; with Travis using Nikola !&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="A-bit-of-automation"&gt;A bit of automation&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#A-bit-of-automation"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;One of the annoying things when I want to post a blog post like this one, is that I never remember hom to deploy my blog. So, why not completly automatize with a script ?&lt;/p&gt;
+&lt;p&gt;Well, that one step, but you know what is really good at runnign scripts ? Travis.&lt;/p&gt;
+&lt;p&gt;Travis have the nice ability to run script in the category &lt;code&gt;after_success&lt;/code&gt; , or &lt;a href="http://docs.travis-ci.com/user/encrypting-files/"&gt;encrypting file&lt;/a&gt;, whice allow a nice deployment setup.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="A--description-of-the-process."&gt;A  description of the process.&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#A--description-of-the-process."&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The first step is to create an ssh key with empty pass passphrase;
+I like to add it (encrypted) to &lt;code&gt;.travis&lt;/code&gt; folder in my repository.
+Travis have nice &lt;a href="http://docs.travis-ci.com/user/encrypting-files/"&gt;doc&lt;/a&gt; for that.&lt;/p&gt;
+&lt;p&gt;Copy the public key to the target github repository deploy key in setting.&lt;/p&gt;
+&lt;p&gt;In my particular setup the tricky bit where :&lt;/p&gt;
+&lt;p&gt;To get IPython and nikola master:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;code&gt;- pip install -e git+https://github.com/ipython/ipython.git#egg=IPython&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;- pip install -e git+https://github.com/getnikola/nikola.git#egg=nikola&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Get the correct layout of folders:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;blog (gh/carreau/blog)&lt;ul&gt;&lt;li&gt;posts (gh/carreau/posts)&lt;/li&gt;
+&lt;li&gt;output (gh/carreau/carreau.github.io)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;I had to soft link &lt;code&gt;posts&lt;/code&gt;, as this is the repo which trigger travis build, and is by default cloned into &lt;code&gt;~/posts&lt;/code&gt; by travis. &lt;code&gt;carreau/carreau.github.io&lt;/code&gt; is clone via &lt;code&gt;https&lt;/code&gt; to allow pull request to build (and not push) as the ssh key can only be decrypted on master branch.&lt;/p&gt;
+&lt;p&gt;Then run &lt;code&gt;nikola build&lt;/code&gt;.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In the &lt;code&gt;after_success&lt;/code&gt; step (you might want to run unit-test like non-broken link on your blog) you want to check that you are not in a PR, and  on master branch before trying to decrypt the ssh key and push the built website:&lt;/p&gt;
+&lt;p&gt;The following snippet works well.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;`bash
+if [[ $TRAVIS_PULL_REQUEST == false &amp;amp;&amp;amp; $TRAVIS_BRANCH == 'master' ]];&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Travis CL tool gave you the instruction to decrypt the ssh key, you now "just" have to add it 
+to the keyring.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    eval `ssh-agent -s`
+    chmod 600 .travis/travis_rsa
+    ssh-add .travis/travis_rsa
+    cd ../blog/output&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And add an ssh remote, which user is &lt;strong&gt;git&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Push, and you are done (don't forget to commit though) !&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Extra-tips"&gt;Extra tips&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#Extra-tips"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;When testing, do not push on master, push on another branch and open the PR manually to see the diff. 
+Travis env might defier a bit from yours.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Todo"&gt;Todo&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#Todo"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Nikola read metadata file from &lt;code&gt;.meta&lt;/code&gt; file, which is annoying. I should patch it to read metadata from notebook Metadata. ALso need a JS extension to make that easy.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Closing-thoughts"&gt;Closing thoughts&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#Closing-thoughts"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;PR and comments welcommed as usual.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</description><guid>http://carreau.github.io/posts/16-Autodeploy-with-travis.html</guid><pubDate>Wed, 28 Jan 2015 10:00:00 GMT</pubDate></item><item><title>Jupyter</title><link>http://carreau.github.io/posts/15-Jupyter.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
@@ -5476,549 +5627,4 @@ FOOOOOOOOTEEEEER
 &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-</description><guid>http://carreau.github.io/posts/06-NBconvert-Doc-Draft.html</guid><pubDate>Sat, 01 Jun 2013 20:00:00 GMT</pubDate></item><item><title>05-YAML Notebook</title><link>http://carreau.github.io/posts/05-YAML Notebook.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
-    &lt;div class="container" id="notebook-container"&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="YAML-IPython-notebook"&gt;YAML IPython notebook&lt;a class="anchor-link" href="http://carreau.github.io/posts/05-YAML%20Notebook.html#YAML-IPython-notebook"&gt;¶&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Little experiment base on the fact that apparently YAML is made to be better readable by Humans than JSON.
-We've also had some complaint that metadata are not keep in nbconvert when roundtripping through markdown, those two
-made me think that I could try to see what ipynb files stored as YAML would look like.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I'll also use this post to do some experiment for nbviewer future nbviewer features, if you see anything wrong with the css on some device, please tell me.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h5 id="First-atempt"&gt;First atempt&lt;a class="anchor-link" href="http://carreau.github.io/posts/05-YAML%20Notebook.html#First-atempt"&gt;¶&lt;/a&gt;&lt;/h5&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Apparently Json is a subset of YAML:&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-
-&lt;pre&gt;&lt;code&gt;cp foo.ipynb foo.ipyamlnb&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Yeah, Mission acomplished !&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h5 id="Second-try"&gt;Second try&lt;a class="anchor-link" href="http://carreau.github.io/posts/05-YAML%20Notebook.html#Second-try"&gt;¶&lt;/a&gt;&lt;/h5&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Install PyYaml, and see what we can do.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [42]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;yaml&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [43]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.nbformat&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;nbf&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [44]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;ipynb&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;YAML Notebook.ipynb
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [45]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'YAML Notebook.ipynb'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;nbook&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nbf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'json'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [46]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="n"&gt;nbook&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;worksheets&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cells&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[46]:&lt;/div&gt;
-
-
-&lt;div class="output_text output_subarea output_execute_result"&gt;
-&lt;pre&gt;{u'cell_type': u'code',
- u'collapsed': False,
- u'input': u'from IPython.nbformat import current as nbf',
- u'language': u'python',
- u'metadata': {},
- u'outputs': []}&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I'll skipp the fiddling around with the yaml converter. In short, you have to specify explicitely the part you want to dump in the literal form, otherwise they are exported as list of strings, which is a little painfull to edit afterward. I'm using the &lt;code&gt;safe_dump&lt;/code&gt; and &lt;code&gt;safe_load&lt;/code&gt; methods (or pass safeLoader and Dumper). Those should be default or otherwise you could unserialise arbitrary object, and have code exucuted.&lt;/p&gt;
-&lt;p&gt;We probably don't want to reproduct the recent file Rail's critical vulnerability that append not so long ago.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [47]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="c"&gt;# we'll patch a safe Yaml Dumper&lt;/span&gt;
-&lt;span class="n"&gt;sd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SafeDumper&lt;/span&gt;
-
-&lt;span class="c"&gt;# Dummy class, just to mark the part we want with custom dumping&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;folded_unicode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unicode&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;literal_unicode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unicode&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I know classes should be wit upper case, but we just want to hide the fact that thoses a class to end user. At the same time I define a folded method to use it with markdown cell. when markdown contain really long lines, those will be wrapped in the yaml document.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [48]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;folded_unicode_representer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dumper&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dumper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;represent_scalar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;u'tag:yaml.org,2002:str'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;literal_unicode_representer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dumper&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dumper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;represent_scalar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;u'tag:yaml.org,2002:str'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'|'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;sd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_representer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;folded_unicode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;folded_unicode_representer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;sd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_representer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;literal_unicode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;literal_unicode_representer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'YAML Notebook.ipynb'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;nbjson&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;now we patch the part of the ipynb file we know we want to be literal or folded&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [49]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;tcell&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;nbjson&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'worksheets'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s"&gt;'cells'&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s"&gt;'source'&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tcell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="n"&gt;tcell&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'source'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;folded_unicode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;""&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tcell&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'source'&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s"&gt;'input'&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tcell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="n"&gt;tcell&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'input'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;literal_unicode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;""&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tcell&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'input'&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [50]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Yaml.ipymlnb'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;'w'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nbjson&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;default_flow_style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Dumper&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sd&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;You can round trip it to json, and it's still a valid ipynb file that can be loaded. Haven't fiddled with it much more.
-There are just a few gotchas with empty lines as well as trailing whitespace at EOL that can respectively diseapear or make the dumper fall back to a string quoted methods to store values.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;You can skip down to the end of this notebook to look at how it looks like. It's probably much compact than the current json we emit, in &lt;strong&gt;some&lt;/strong&gt; cases it might be more easy to read, but I don't think it is worth considering using in the format specification.&lt;/p&gt;
-&lt;p&gt;ipynb files are ment to be humanely fixable, and I strongly prefere having a consistent format with simple rules than having to explain what are the meaning of the differents shenigan like &lt;code&gt;: |2+&lt;/code&gt; for literal string.&lt;/p&gt;
-&lt;p&gt;Also support across languages are not consistent, and it would probably be too much of a security burden for all code that will support loading ipynb to take care of sanitazing Yaml.&lt;/p&gt;
-&lt;p&gt;One area where I woudl use it would be to describe the ipynb format at a talk for example, and/or to have metadata editing more human readable/writable.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [51]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span class="o"&gt;!&lt;/span&gt;cat Yaml.ipymlnb
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;metadata:
-  name: YAML Notebook
-nbformat: 3
-nbformat_minor: 0
-worksheets:
-- cells:
-  - cell_type: heading
-    level: 1
-    metadata: {}
-    source: &amp;gt;-
-      YAML IPython notebook
-  - cell_type: markdown
-    metadata: {}
-    source: "Little experiment base on the fact that apparently YAML is made to be\
-      \ better readable by Humans than JSON.\nWe've also had some complaint that metadata\
-      \ are not keep in nbconvert when roundtripping through markdown, those two\n\
-      made me think that I could try to see what ipynb files stored as YAML would\
-      \ look like. "
-  - cell_type: heading
-    level: 4
-    metadata: {}
-    source: &amp;gt;-
-      First atempt
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      Apparently Json is a subset of YAML:
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;2+
-          cp foo.ipynb foo.ipyamlnb
-
-
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      Yeah, Mission acomplished !
-  - cell_type: heading
-    level: 4
-    metadata: {}
-    source: &amp;gt;-
-      Second try
-  - cell_type: markdown
-    metadata: {}
-    source: "Install PyYaml, and see what we can do. "
-  - cell_type: code
-    collapsed: false
-    input: |-
-      import json
-      import yaml
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: code
-    collapsed: false
-    input: |-
-      from IPython.nbformat import current as nbf
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: code
-    collapsed: false
-    input: |-
-      ls Y*.ipynb
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: code
-    collapsed: false
-    input: |-
-      with open('YAML Notebook.ipynb') as f:
-          nbook = nbf.read( f, 'json')
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: code
-    collapsed: false
-    input: |-
-      nbook.worksheets[0].cells[9]
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      I'll skipp the fiddling around with the yaml converter. In short, you have to
-      specify explicitely the part you want to dump in the literal form, otherwise
-      they are exported as list of strings, which is a little painfull to edit afterward.
-      I'm using the `safe_dump` and `safe_load` methods (or pass safeLoader and Dumper).
-      Those should be default or otherwise you could unserialise arbitrary object,
-      and have code exucuted.
-
-
-      We probably don't want to reproduct the recent file Rail's critical vulnerability
-      that append not so long ago.
-  - cell_type: code
-    collapsed: false
-    input: |-
-      # we'll patch a safe Yaml Dumper
-      sd = yaml.SafeDumper
-
-      # Dummy class, just to mark the part we want with custom dumping
-      class folded_unicode(unicode): pass
-      class literal_unicode(unicode): pass
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      I know classes should be wit upper case, but we just want to hide the fact that
-      thoses a class to end user. At the same time I define a folded method if I want
-      to use it later.
-  - cell_type: code
-    collapsed: false
-    input: |-
-      def folded_unicode_representer(dumper, data):
-          return dumper.represent_scalar(u'tag:yaml.org,2002:str', data, style='&amp;gt;')
-      def literal_unicode_representer(dumper, data):
-          return dumper.represent_scalar(u'tag:yaml.org,2002:str', data, style='|')
-
-      sd.add_representer(folded_unicode, folded_unicode_representer)
-      sd.add_representer(literal_unicode, literal_unicode_representer)
-
-
-      with open('YAML Notebook.ipynb') as f:
-          nbjson =  json.load(f)
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      now we patch the part of the ipynb file we know we want to be literal or folded
-  - cell_type: code
-    collapsed: false
-    input: |-
-      for tcell in nbjson['worksheets'][0]['cells']:
-          if 'source' in tcell.keys():
-              tcell['source'] = folded_unicode("".join(tcell['source']))
-          if 'input' in tcell.keys():
-              tcell['input'] = literal_unicode("".join(tcell['input']))
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: code
-    collapsed: false
-    input: |-
-      with open('Yaml.ipymlnb','w') as f:
-          f.write(yaml.dump(nbjson, default_flow_style=False, Dumper=sd))
-    language: python
-    metadata: {}
-    outputs: []
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      You can round trip it to json, and it's still a valid ipynb file that can be
-      loaded. Haven't fiddled with it much more.
-
-      There are just a few gotchas with empty lines as well as trailing whitespace
-      at EOL that can respectively diseapear or make the dumper fall back to a string
-      quoted methods to store values.
-
-
-      One could also try to tiker with `folded_unicode` in markdown cell that tipically
-      have long lines to play a little more nicely with VCS.
-  - cell_type: markdown
-    metadata: {}
-    source: &amp;gt;-
-      You can skip down to the end of this notebook to loko at how it looks like.
-      It's probably much compact than the current json we emit, in **some** cases
-      it might be more easy to read, but I don't think it is worth considering using
-      in the format specification.
-
-
-      ipynb files are ment to be humanely fixable, and I strongly prefere having a
-      consistent format with simple rules than having to explain what are the meaning
-      of the differents shenigan like `: |2+` for literal string.
-
-
-      Also support across languages are not consistent, and it would probably be too
-      much of a security burden for all code that will support loading ipynb to take
-      care of sanitazing Yaml.
-
-
-      One area where I woudl use it would be to describe the ipynb format at a talk
-      for example, and/or to have metadata editing more human readable/writable.
-  - cell_type: code
-    collapsed: false
-    input: |-
-      !cat Yaml.ipymlnb
-    language: python
-    metadata: {}
-    outputs: []
-  metadata: {}
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-</description><guid>http://carreau.github.io/posts/05-YAML Notebook.html</guid><pubDate>Wed, 01 May 2013 20:00:00 GMT</pubDate></item></channel></rss>
+</description><guid>http://carreau.github.io/posts/06-NBconvert-Doc-Draft.html</guid><pubDate>Sat, 01 Jun 2013 20:00:00 GMT</pubDate></item></channel></rss>
