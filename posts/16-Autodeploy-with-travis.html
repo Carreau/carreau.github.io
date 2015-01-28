@@ -158,19 +158,18 @@ Travis have nice <a href="http://docs.travis-ci.com/user/encrypting-files/">doc<
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the <code>after_success</code> step (you might want to run unit-test like non-broken link on your blog) you want to check that you are not in a PR, and  on master branch before trying to decrypt the ssh key and push the built website:</p>
 <p>The following snippet works well.</p>
-
-<pre><code>`bash
-if [[ $TRAVIS_PULL_REQUEST == false &amp;&amp; $TRAVIS_BRANCH == 'master' ]];</code></pre>
+<div class="highlight"><pre><span class="k">if</span> <span class="o">[[</span> <span class="nv">$TRAVIS_PULL_REQUEST</span> <span class="o">==</span> <span class="nb">false</span> <span class="o">&amp;&amp;</span> <span class="nv">$TRAVIS_BRANCH</span> <span class="o">==</span> <span class="s1">'master'</span> <span class="o">]]</span><span class="p">;</span>
+</pre></div>
 <p>Travis CL tool gave you the instruction to decrypt the ssh key, you now "just" have to add it 
 to the keyring.</p>
-
-<pre><code>    eval `ssh-agent -s`
-    chmod 600 .travis/travis_rsa
-    ssh-add .travis/travis_rsa
-    cd ../blog/output</code></pre>
+<div class="highlight"><pre><span class="nb">eval</span> <span class="sb">`</span>ssh-agent -s<span class="sb">`</span>
+chmod <span class="m">600</span> .travis/travis_rsa
+ssh-add .travis/travis_rsa
+<span class="nb">cd</span> ../blog/output
+</pre></div>
 <p>And add an ssh remote, which user is <strong>git</strong>:</p>
-
-<pre><code>    git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io</code></pre>
+<div class="highlight"><pre>git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io
+</pre></div>
 <p>Push, and you are done (don't forget to commit though) !</p>
 
 </div>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link type="application/rss+xml" href="http://carreau.github.io/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jan 2015 10:40:41 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autodeploy with travis</title><link>http://carreau.github.io/posts/16-Autodeploy-with-travis.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link rel="self" href="http://carreau.github.io/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jan 2015 14:31:13 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autodeploy with travis</title><link>http://carreau.github.io/posts/16-Autodeploy-with-travis.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
@@ -72,19 +72,18 @@ Travis have nice &lt;a href="http://docs.travis-ci.com/user/encrypting-files/"&g
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In the &lt;code&gt;after_success&lt;/code&gt; step (you might want to run unit-test like non-broken link on your blog) you want to check that you are not in a PR, and  on master branch before trying to decrypt the ssh key and push the built website:&lt;/p&gt;
 &lt;p&gt;The following snippet works well.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;`bash
-if [[ $TRAVIS_PULL_REQUEST == false &amp;amp;&amp;amp; $TRAVIS_BRANCH == 'master' ]];&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="nv"&gt;$TRAVIS_PULL_REQUEST&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;$TRAVIS_BRANCH&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'master'&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Travis CL tool gave you the instruction to decrypt the ssh key, you now "just" have to add it 
 to the keyring.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    eval `ssh-agent -s`
-    chmod 600 .travis/travis_rsa
-    ssh-add .travis/travis_rsa
-    cd ../blog/output&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="sb"&gt;`&lt;/span&gt;ssh-agent -s&lt;span class="sb"&gt;`&lt;/span&gt;
+chmod &lt;span class="m"&gt;600&lt;/span&gt; .travis/travis_rsa
+ssh-add .travis/travis_rsa
+&lt;span class="nb"&gt;cd&lt;/span&gt; ../blog/output
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And add an ssh remote, which user is &lt;strong&gt;git&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Push, and you are done (don't forget to commit though) !&lt;/p&gt;
 
 &lt;/div&gt;
