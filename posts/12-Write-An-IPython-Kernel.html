@@ -6,7 +6,7 @@ article: http://ogp.me/ns/article#
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>03-on-notebook-format | Random Thoughts</title>
+<title>Write an ipython kernel | Random Thoughts</title>
 <link href="../assets/css/bitter.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/main.css" rel="stylesheet" type="text/css">
@@ -14,7 +14,7 @@ article: http://ogp.me/ns/article#
 <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://carreau.github.io/posts/03-on-notebook-format.html">
+<link rel="canonical" href="http://carreau.github.io/posts/12-Write-An-IPython-Kernel.html">
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     tex2jax: {
@@ -28,9 +28,9 @@ MathJax.Hub.Config({
 });
 </script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
 <meta property="og:site_name" content="Random Thoughts">
-<meta property="og:title" content="03-on-notebook-format">
-<meta property="og:url" content="http://carreau.github.io/posts/03-on-notebook-format.html">
-<meta property="og:description" content="IPython Notebook Duck-Punching (II)¶
+<meta property="og:title" content="Write an ipython kernel">
+<meta property="og:url" content="http://carreau.github.io/posts/12-Write-An-IPython-Kernel.html">
+<meta property="og:description" content="This is more a bookmark post that a real post.
 
 
 
@@ -39,9 +39,11 @@ MathJax.Hub.Config({
 
 
 
-If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck u">
+
+Prompt by recent discussion on the IPyton mailing list and on twitter, I think we miss a place to rassemble informations on how to build a kerne">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2013-03-01T20:00:00+00:00">
+<meta property="article:published_time" content="2099-01-19T05:30:00+00:00">
+<meta property="article:tag" content="tags: draft 2014/01/19 05:30:00">
 </head>
 <body>
     <section class="social"><ul>
@@ -54,17 +56,23 @@ If it walks like a duck and talks like a duck, it’s a duck. So if this duck is
 
         </ul></section><section class="page-content"><div class="content" rel="main">
     <div class="post">
-        <h1 class="p-name entry-title" itemprop="headline name">03-on-notebook-format</h1>
+        <h1 class="p-name entry-title" itemprop="headline name">Write an ipython kernel</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2013-03-01T20:00:00+00:00">2013-03-01 20:00</time>
+                <time class="timeago" datetime="2099-01-19T05:30:00+00:00">2099-01-19 05:30</time>
             
                       |  
-        <a href="03-on-notebook-format.ipynb" id="sourcelink">Source</a>
+        <a href="12-Write-An-IPython-Kernel.ipynb" id="sourcelink">Source</a>
 
             </div>
-            
+                    <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/tags-draft-20140119-053000.html" rel="tag">tags: draft 2014/01/19 05:30:00</a></li>
+        </ul>
+</div>
+
         </div>
         <div class="body">
             <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -75,19 +83,7 @@ If it walks like a duck and talks like a duck, it’s a duck. So if this duck is
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="IPython-Notebook-Duck-Punching-(II)">IPython Notebook Duck-Punching (II)<a class="anchor-link" href="03-on-notebook-format.html#IPython-Notebook-Duck-Punching-(II)">¶</a>
-</h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<blockquote>
-<p>If it walks like a duck and talks like a duck, it’s a duck. So if this duck is not giving you the noise that you want, you’ve got to just punch that duck until it returns what you expect.</p>
-</blockquote>
+<p>This is more a bookmark post that a real post.</p>
 
 </div>
 </div>
@@ -97,7 +93,8 @@ If it walks like a duck and talks like a duck, it’s a duck. So if this duck is
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Some thoughts on the IPython notebook.</p>
+<p>Prompt by recent discussion on the IPyton mailing list and on twitter, I think we miss a place to rassemble informations on how to build a kernel regardless of the language and a place to reference thoses implementation.</p>
+<p>You shoudl probably at some point read <a href="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/">this blog post from IHaskell creator</a> to know more about architecture. But really at some point what you will need is example and advices.</p>
 
 </div>
 </div>
@@ -107,18 +104,7 @@ If it walks like a duck and talks like a duck, it’s a duck. So if this duck is
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For once, this will discuss more what are the possible things than can be done with IPython, with only few really usable code.</p>
-<p>I hope it will help the reader to better understand in what direction the Core Team whant to drive IPython. This is of course my personnal interpretation of the different points. We discussed since I came on board. But I hope it will help the comunity to feel.concern and participate.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Terminology">Terminology<a class="anchor-link" href="03-on-notebook-format.html#Terminology">¶</a>
+<h3 id="Do-not-assume-others-get-it-right">Do not assume others get it right<a class="anchor-link" href="12-Write-An-IPython-Kernel.html#Do-not-assume-others-get-it-right">¶</a>
 </h3>
 </div>
 </div>
@@ -128,8 +114,8 @@ If it walks like a duck and talks like a duck, it’s a duck. So if this duck is
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I think one of the first things that should be adressed is the terminology of things. As a non native english speaker I am pretty bad at choosing names for things. And I probably have an horible.english. And I think there is a big problem the Naming in the IPython notebook.</p>
-<p>The problem is the same as what happend with the terme "gene", at some point in history it was used to explain a specific effect that some phenotype where expressed depending on the genes you had, the problem is that with our current technologie an knowledge on genetics, the boundaries of what a gene is becommes fuzzy.</p>
+<p>Even if other kernel are working, this does not meen they got things right. Even IPyhton kernel had things wrong in some places.
+Things can be wrong iin implementation but also in the way we though of things. In bothe case tell us and/or the author.</p>
 
 </div>
 </div>
@@ -139,14 +125,21 @@ If it walks like a duck and talks like a duck, it’s a duck. So if this duck is
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Same apply to the IPython notebook. Let's see.</p>
-<p>You probably can start the IPyrhon notebook from your command line. 
-You can also ask a friend to send his or her IPython notebook by email. 
-You probably know that shift enter execute a cell in an IPython notebook.</p>
-<p>But you probably don't send a webserver by email.</p>
-<p>I haven't seen anyone converting GMail to a power point.</p>
-<p>I think you see the point. "IPython notebook" represent at the same time: The webserver application that yoi start from the command line, the web frontend that you are used to use, the file format that defines the structures of ipynb files, the actual files you exchanges, and the representations of thoses files into the web applocation. 
-Add on top the fact that kernel can speek to multiple frontend and can talk to non-python kernel, and people get lost.</p>
+<h3 id="Start-simple">Start simple<a class="anchor-link" href="12-Write-An-IPython-Kernel.html#Start-simple">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>start IPython with <code>--debug</code> flag it will print all exchanges messages.</li>
+<li>set <code>c.Session.key=''</code> at start not to sign messages.</li>
+</ol>
+<p>You do not need either to have all the protocol implemented at first, things like completion request can be added later.</p>
 
 </div>
 </div>
@@ -156,12 +149,58 @@ Add on top the fact that kernel can speek to multiple frontend and can talk to n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now you wonder why you should care as you are only using the all bundle? Because you will probably what to share and or reuse what you write, and once you understand the differents things.you will be able to do even more amazing things.</p>
-<p>The part you don't (really) care about.</p>
-<p>The webserver. 
-It can mostly be seen as a middleware. The configuration options should be left to the sysadmin. It mostly make the ZMQ/websocket bridge, and is also an endpoint for the web application to access remote filesystem (yes remote, even if localhost).</p>
-<p>The part you can do without.</p>
-<p>The kernel. You probably had one or twice a kernel that died</p>
+<h3 id="Contribute-Back">Contribute Back<a class="anchor-link" href="12-Write-An-IPython-Kernel.html#Contribute-Back">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As soon as you find something which not clear or mising in the doc, please send a Pull Request, or open an Issue.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="We-have-a-test-suite">We have a test suite<a class="anchor-link" href="12-Write-An-IPython-Kernel.html#We-have-a-test-suite">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can probably run it against your kernel, it will give you an idea of your progress, and tell you what need to be done.</p>
+<p>TODO: write on how to run the test again another kernel.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Things-become-obsolete">Things become obsolete<a class="anchor-link" href="12-Write-An-IPython-Kernel.html#Things-become-obsolete">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This article is probably already obsolete, and things like <a href="http://nbviewer.ipython.org/gist/Carreau/4279371/node-kernel.ipynb">my node kernel</a> don't even work because IPython has changed after I wrote it. Technically the kernel shoudl still work, but the instruction to make it run are wrong now. Try to focus on active project when searching for examples.</p>
 
 </div>
 </div>
@@ -183,15 +222,8 @@ It can mostly be seen as a middleware. The configuration options should be left 
   </div>
 
         </div>
-                <ul class="pager">
-<li class="previous">
-                <a href="02-css-selector.html" rel="prev" title="02-css-selector">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="04-initialisation-cell.html" rel="next" title="04-initialisation-cell">Next post</a>
-            </li>
-        </ul>
-<script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/03-on-notebook-format.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
+        
+                    <script src="https://apis.google.com/js/plusone.js"></script><div class="g-comments" data-href="http://carreau.github.io/posts/12-Write-An-IPython-Kernel.html" data-first_party_property="BLOGGER" data-view_type="FILTERED_POSTMOD">
 </div>
 
 

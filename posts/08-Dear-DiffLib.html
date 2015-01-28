@@ -6,7 +6,7 @@ article: http://ogp.me/ns/article#
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>08-Dear-DiffLib | Random Thoughts</title>
+<title>Dear DiffLib | Random Thoughts</title>
 <link href="../assets/css/bitter.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/main.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@ MathJax.Hub.Config({
 });
 </script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
 <meta property="og:site_name" content="Random Thoughts">
-<meta property="og:title" content="08-Dear-DiffLib">
+<meta property="og:title" content="Dear DiffLib">
 <meta property="og:url" content="http://carreau.github.io/posts/08-Dear-DiffLib.html">
 <meta property="og:description" content="Dear difflib, What The F@&amp;#! ?¶
 
@@ -63,7 +63,7 @@ Acording to difflib, the following strings: 'baaaaa', 'aaabaa' and 'aaaaba' shar
 
         </ul></section><section class="page-content"><div class="content" rel="main">
     <div class="post">
-        <h1 class="p-name entry-title" itemprop="headline name">08-Dear-DiffLib</h1>
+        <h1 class="p-name entry-title" itemprop="headline name">Dear DiffLib</h1>
 
         <div class="meta">
             <div class="authordate">
@@ -641,7 +641,7 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -1022,13 +1022,13 @@ sorted √ 27 27
 <div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">timeit</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">()</span>
-<span class="o">%</span><span class="k">timeit</span> <span class="n">lcs_len3</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">timeit</span> difflib.SequenceMatcher(None, s1, s2, autojunk=False).get_matching_blocks()
+<span class="o">%</span><span class="k">timeit</span> lcs_len3(s1,s2)
 <span class="nb">print</span> <span class="s">'--------- sorted ----------'</span>
 <span class="n">s1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="n">s2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="o">%</span><span class="k">timeit</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">()</span>
-<span class="o">%</span><span class="k">timeit</span> <span class="n">lcs_len3</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> difflib.SequenceMatcher(None, s1, s2, autojunk=False).get_matching_blocks()
+<span class="o">%</span><span class="k">timeit</span> lcs_len3(s1,s2)
 </pre></div>
 
 </div>
@@ -1073,8 +1073,8 @@ sorted √ 27 27
 <div class=" highlight hl-ipython3"><pre><span class="n">s1</span> <span class="o">=</span> <span class="s">'a'</span><span class="o">*</span><span class="mi">251</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">124</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="s">'a'</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">'b'</span><span class="o">+</span><span class="s">'a'</span><span class="o">*</span><span class="p">(</span><span class="mi">250</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> <span class="n">MySequenceMatcher</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">()</span>        
-<span class="o">%</span><span class="k">timeit</span> <span class="n">lcs_len3</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> MySequenceMatcher(s1, s2).get_matching_blocks()        
+<span class="o">%</span><span class="k">timeit</span> lcs_len3(s1,s2)
 </pre></div>
 
 </div>
@@ -1187,7 +1187,7 @@ sorted √ 27 27
 
 
     </div>
-                    <footer id="footer" role="contentinfo"><p>Contents © 2014         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
 </p>
             

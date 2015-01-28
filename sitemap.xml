@@ -6,82 +6,106 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://carreau.github.io/2013/index.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/2014/index.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/2015/index.html</loc>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/archive.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/categories/index.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/index-1.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/index.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/02-css-selector.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/03-on-notebook-format.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/04-initialisation-cell.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/05-YAML Notebook.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/06-NBconvert-Doc-Draft.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/07-the-sound-of-hydrogen.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/08-Dear-DiffLib.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/posts/10-No-PyLab-Thanks.html</loc>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/10-No-PyLab-Thanks.ipynb.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html</loc>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.ipynb.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/12-Write-An-IPython-Kernel.ipynb.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/posts/13-PyCon2014.html</loc>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/13-PyCon2014.ipynb.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/posts/14-Pip-Create.html</loc>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/14-Pip-Create.ipynb.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
+ </url>
+ <url>
+  <loc>http://carreau.github.io/posts/15-Jupyter.html</loc>
+  <lastmod>2015-01-28</lastmod>
  </url>
  <url>
   <loc>http://carreau.github.io/posts/Blog1.html</loc>
-  <lastmod>2014-12-09</lastmod>
+  <lastmod>2015-01-28</lastmod>
  </url>
 </urlset>

@@ -810,8 +810,8 @@ Be carefull though, it has a few custom patches that moved the static resources 
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">touch</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_default</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">js</span><span class="o">/</span><span class="n">css_selector</span><span class="o">.</span><span class="n">js</span>
+<div class=" highlight hl-ipython3"><pre>%%bash
+touch ~/.ipython/profile_default/static/js/css_selector.js
 </pre></div>
 
 </div>
@@ -824,8 +824,8 @@ Be carefull though, it has a few custom patches that moved the static resources 
 <div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">file</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">bussonniermatthias</span><span class="o">/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_default</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">js</span><span class="o">/</span><span class="n">css_selector</span><span class="o">.</span><span class="n">js</span>
-<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">"I'm loaded"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">file</span> /Users/bussonniermatthias/.ipython/profile_default/static/js/css_selector.js
+console.log("I'm loaded")
 </pre></div>
 
 </div>
@@ -1535,8 +1535,8 @@ You can create a markdown cell with style tag in it, and write some css that wil
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ipython</span> <span class="n">locate</span>
+<div class=" highlight hl-ipython3"><pre>%%bash 
+ipython locate
 </pre></div>
 
 </div>
@@ -1576,8 +1576,8 @@ You can create a markdown cell with style tag in it, and write some css that wil
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">ipython</span> <span class="n">profile</span> <span class="n">create</span> <span class="n">customcss</span>
+<div class=" highlight hl-ipython3"><pre>%%bash
+ipython profile create customcss
 </pre></div>
 
 </div>
@@ -1628,10 +1628,10 @@ You can create a markdown cell with style tag in it, and write some css that wil
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">mkdir</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span>
-<span class="n">mkdir</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span>
-<span class="n">touch</span> <span class="o">~/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
+<div class=" highlight hl-ipython3"><pre>%%bash
+mkdir ~/.ipython/profile_customcss/static/
+mkdir ~/.ipython/profile_customcss/static/custom/
+touch ~/.ipython/profile_customcss/static/custom/custom.css
 </pre></div>
 
 </div>
@@ -1654,22 +1654,22 @@ You can create a markdown cell with style tag in it, and write some css that wil
 <div class="prompt input_prompt">In [34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">file</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">matthiasbussonnier</span><span class="o">/.</span><span class="n">ipython</span><span class="o">/</span><span class="n">profile_customcss</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
-<span class="o">/**</span><span class="n">write</span> <span class="n">your</span> <span class="n">css</span> <span class="ow">in</span> <span class="n">here</span><span class="o">**/</span>
-<span class="o">/*</span> <span class="n">like</span> <span class="o">*/</span>
+<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">file</span> /Users/matthiasbussonnier/.ipython/profile_customcss/static/custom/custom.css
+/**write your css in here**/
+/* like */
 
-<span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span>
-    <span class="n">div</span><span class="o">.</span><span class="n">cell</span><span class="p">{</span>
-        <span class="nb">max</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="mi">750</span><span class="n">px</span><span class="p">;</span>
-        <span class="n">margin</span><span class="o">-</span><span class="n">left</span><span class="p">:</span><span class="n">auto</span><span class="p">;</span>
-        <span class="n">margin</span><span class="o">-</span><span class="n">right</span><span class="p">:</span><span class="n">auto</span><span class="p">;</span>
-    <span class="p">}</span>
+&lt;style&gt;
+    div.cell{
+        max-width:750px;
+        margin-left:auto;
+        margin-right:auto;
+    }
 
-    <span class="n">h1</span> <span class="p">{</span>
-        <span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span><span class="n">center</span><span class="p">;</span>
-        <span class="n">font</span><span class="o">-</span><span class="n">familly</span><span class="p">:</span><span class="s">"Charis SIL"</span><span class="p">,</span> <span class="n">serif</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span>
+    h1 {
+        text-align:center;
+        font-familly:"Charis SIL", serif;
+    }
+&lt;/style&gt;
 </pre></div>
 
 </div>
@@ -1755,8 +1755,8 @@ You can create a markdown cell with style tag in it, and write some css that wil
 <div class="prompt input_prompt">In [36]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">bash</span>
-<span class="n">curl</span>  <span class="o">--</span><span class="n">noproxy</span> <span class="n">localhost</span>  <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8889</span><span class="o">/</span><span class="n">static</span><span class="o">/</span><span class="n">custom</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
+<div class=" highlight hl-ipython3"><pre>%%bash 
+curl  --noproxy localhost  http://localhost:8889/static/custom/custom.css
 </pre></div>
 
 </div>
@@ -1979,7 +1979,7 @@ You can create a markdown cell with style tag in it, and write some css that wil
 <li class="previous">
                 <a href="index.html" rel="prev">Newer posts</a>
             </li>
-        </ul></nav><footer id="footer" role="contentinfo"><p>Contents © 2014         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
 </p>
             
