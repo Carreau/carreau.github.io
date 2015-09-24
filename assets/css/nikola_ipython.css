@@ -1,3 +1,9 @@
+.body p {
+    text-indent: 25px;
+    padding-bottom: 10px;
+    font-weight: 200;
+}
+
 body {
   position: static;
 }

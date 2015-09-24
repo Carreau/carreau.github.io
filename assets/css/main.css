@@ -2173,7 +2173,7 @@ a:focus {
   font-size: 26.25px;
 }
 .page-content {
-  font-family: "Bitter", "Georgia", "Times New Roman", serif;
+  font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, "Helvetica", "Bitter", "Georgia", "Times New Roman", serif;
 }
 .page-content > .content {
   text-rendering: optimizeLegibility;
@@ -2192,7 +2192,6 @@ a:focus {
 .page-content > .content .h6 {
   margin: 12px 0;
   font-family: inherit;
-  font-weight: bold;
   line-height: 24px;
   color: #2e2e2e;
   text-rendering: optimizelegibility;
