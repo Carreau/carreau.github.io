@@ -30,8 +30,8 @@ working group to plan a early death for Legacy Python.
 
 ## Move over Legacy Python once and for all.
 
-In collaboration with many developers, including @jiffyclub, @tacasswell,
-@kbarbary, @teoliphant, @pzwang, and @ogrisel, we discussed different options to
+In collaboration with many developers among whom @jiffyclub, @tacasswell,
+@kbarbary, @teoliphant, @pzwang, @ogrisel, we discussed different options to
 push Legacy Python more or less gently through the door. We understand that
 some people are still requiring the use of Legacy Python in their code base, or
 the use some libraries which are still only available on Legacy Python and we
