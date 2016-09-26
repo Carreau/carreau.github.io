@@ -114,13 +114,13 @@ Acording to difflib, the following strings: 'baaaaa', 'aaabaa' and 'aaaaba' shar
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">difflib</span>
-<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'-aaaaa'</span><span class="p">,</span> <span class="s">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
-<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'a-aaaa'</span><span class="p">,</span> <span class="s">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
-<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'aa-aaa'</span><span class="p">,</span> <span class="s">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
-<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'aaa-aa'</span><span class="p">,</span> <span class="s">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
-<span class="nb">print</span> <span class="s">'- Control -'</span>
-<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'aaaaaa'</span><span class="p">,</span> <span class="s">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">difflib</span>
+<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'-aaaaa'</span><span class="p">,</span> <span class="s1">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
+<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'a-aaaa'</span><span class="p">,</span> <span class="s1">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
+<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'aa-aaa'</span><span class="p">,</span> <span class="s1">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
+<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'aaa-aa'</span><span class="p">,</span> <span class="s1">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
+<span class="nb">print</span> <span class="s1">'- Control -'</span>
+<span class="nb">print</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'aaaaaa'</span><span class="p">,</span> <span class="s1">'aaaaaa'</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -216,29 +216,29 @@ Let see a common example in python where when you add a function with a derorato
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">s1</span> <span class="o">=</span> <span class="s">"""</span>
-<span class="s">@decorate</span>
-<span class="s">def fun1():</span>
-<span class="s">    return 1</span>
-<span class="s">    </span>
-<span class="s">@decorate</span>
-<span class="s">def fun3():</span>
-<span class="s">    return 3</span>
-<span class="s">"""</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">@decorate</span>
+<span class="s2">def fun1():</span>
+<span class="s2">    return 1</span>
+<span class="s2">    </span>
+<span class="s2">@decorate</span>
+<span class="s2">def fun3():</span>
+<span class="s2">    return 3</span>
+<span class="s2">"""</span>
 
-<span class="n">s2</span> <span class="o">=</span> <span class="s">"""</span>
-<span class="s">@decorate</span>
-<span class="s">def fun1():</span>
-<span class="s">    return 1</span>
-<span class="s">    </span>
-<span class="s">@decorate</span>
-<span class="s">def fun2():</span>
-<span class="s">    return 2</span>
-<span class="s">    </span>
-<span class="s">@decorate</span>
-<span class="s">def fun3():</span>
-<span class="s">    return 3</span>
-<span class="s">"""</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">@decorate</span>
+<span class="s2">def fun1():</span>
+<span class="s2">    return 1</span>
+<span class="s2">    </span>
+<span class="s2">@decorate</span>
+<span class="s2">def fun2():</span>
+<span class="s2">    return 2</span>
+<span class="s2">    </span>
+<span class="s2">@decorate</span>
+<span class="s2">def fun3():</span>
+<span class="s2">    return 3</span>
+<span class="s2">"""</span>
 </pre></div>
 
 </div>
@@ -261,8 +261,8 @@ Let see a common example in python where when you add a function with a derorato
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">difflib</span>
-<span class="nb">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">difflib</span><span class="o">.</span><span class="n">ndiff</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s2</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">difflib</span>
+<span class="nb">print</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">difflib</span><span class="o">.</span><span class="n">ndiff</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s2</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -312,8 +312,8 @@ Let see a common example in python where when you add a function with a derorato
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">blankline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span><span class="s">''</span>
-<span class="nb">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">difflib</span><span class="o">.</span><span class="n">ndiff</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s2</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">linejunk</span><span class="o">=</span><span class="n">blankline</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">blankline</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span><span class="s1">''</span>
+<span class="nb">print</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">difflib</span><span class="o">.</span><span class="n">ndiff</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s2</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">linejunk</span><span class="o">=</span><span class="n">blankline</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -384,7 +384,7 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">from</span> <span class="nn">difflib</span> <span class="k">import</span> <span class="n">SequenceMatcher</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">difflib</span> <span class="k">import</span> <span class="n">SequenceMatcher</span>
 </pre></div>
 
 </div>
@@ -397,8 +397,8 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">,</span><span class="s">'hello world'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
-<span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="s">'xyz'</span><span class="p">,</span><span class="s">'abc'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">,</span><span class="s1">'hello world'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
+<span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="s1">'xyz'</span><span class="p">,</span><span class="s1">'abc'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -437,8 +437,8 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'hello world'</span><span class="p">,</span><span class="s">'hello world'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
-<span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'xyz'</span><span class="p">,</span><span class="s">'abc'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'hello world'</span><span class="p">,</span><span class="s1">'hello world'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
+<span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'xyz'</span><span class="p">,</span><span class="s1">'abc'</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -488,7 +488,7 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'y'</span><span class="o">+</span><span class="s">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">,</span><span class="s">'x'</span><span class="o">+</span><span class="s">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'y'</span><span class="o">+</span><span class="s1">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">,</span><span class="s1">'x'</span><span class="o">+</span><span class="s1">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -526,7 +526,7 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="s">'y'</span><span class="o">+</span><span class="s">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">,</span><span class="s">'x'</span><span class="o">+</span><span class="s">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'y'</span><span class="o">+</span><span class="s1">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">,</span><span class="s1">'x'</span><span class="o">+</span><span class="s1">'abc'</span><span class="o">*</span><span class="mi">150</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -564,7 +564,7 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">MySequenceMatcher</span><span class="p">(</span> <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">isjunk</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="k">False</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">MySequenceMatcher</span><span class="p">(</span> <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">isjunk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="n">isjunk</span><span class="p">,</span> <span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="n">autojunk</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">ratio</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
@@ -581,8 +581,8 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">print</span> <span class="n">ratio</span><span class="p">(</span><span class="s">'abc'</span><span class="p">,</span><span class="s">'abc'</span><span class="p">)</span>
-<span class="nb">print</span> <span class="n">ratio</span><span class="p">(</span><span class="s">'abcd'</span><span class="p">,</span><span class="s">'abcf'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="n">ratio</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">,</span><span class="s1">'abc'</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">ratio</span><span class="p">(</span><span class="s1">'abcd'</span><span class="p">,</span><span class="s1">'abcf'</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -641,7 +641,7 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">matplotlib</span> inline
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -656,27 +656,27 @@ If the sequence you pass to <code>SequenceMatcher</code> is a string, it will tr
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">s1</span> <span class="o">=</span> <span class="s">u'a'</span><span class="o">*</span><span class="n">n</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="s1">u'a'</span><span class="o">*</span><span class="n">n</span>
 <span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
     <span class="sd">""" return the string s1, where the i-th is replaced by -"""</span>
-    <span class="k">return</span> <span class="n">s1</span><span class="p">[:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s">u'-'</span><span class="o">+</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">s1</span><span class="p">[:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">u'-'</span><span class="o">+</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
 
 <span class="n">xx</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 
 
-<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">[:</span><span class="mi">10</span><span class="p">]),</span><span class="s">'...'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">[:</span><span class="mi">10</span><span class="p">]),</span><span class="s1">'...'</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">modified</span><span class="p">(</span><span class="n">i</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]),</span><span class="s">'...'</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">'..............'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">modified</span><span class="p">(</span><span class="n">i</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]),</span><span class="s1">'...'</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'..............'</span><span class="p">)</span>
 <span class="n">distance</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span> <span class="n">r</span><span class="p">,</span> <span class="p">[</span><span class="n">modified</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xx</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'similarity'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'position of modified caracter'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'similarity'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'position of modified caracter'</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -755,7 +755,7 @@ aaaaaaaa-a ...
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">string</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
 </pre></div>
 
 </div>
@@ -768,14 +768,14 @@ aaaaaaaa-a ...
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">test_rep</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_rep</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
     <span class="n">s1</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">letters</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">s1</span> <span class="o">=</span> <span class="n">s1</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
     <span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span>
     
     <span class="k">def</span> <span class="nf">modified</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
         <span class="sd">""" return the string s1, where the i-th is replaced by -"""</span>
-        <span class="k">return</span> <span class="n">s1</span><span class="p">[:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s">u'-'</span><span class="o">+</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">s1</span><span class="p">[:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">u'-'</span><span class="o">+</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
     
     <span class="n">xx</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
     <span class="n">distance</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span> <span class="n">r</span><span class="p">,</span> <span class="p">[</span><span class="n">modified</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xx</span><span class="p">])</span>
@@ -787,11 +787,11 @@ aaaaaaaa-a ...
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">]:</span>
     <span class="n">xx</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">test_rep</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s">'post'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'k={k}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">'post'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'k=</span><span class="si">{k}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">))</span>
     
 
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'similarity'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'position of modified caracter'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'similarity'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'position of modified caracter'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 
@@ -885,7 +885,7 @@ I'll post the link soon, just time to clean things up im make them as pure pytho
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">lcs_len3</span><span class="p">(</span><span class="n">Seq1</span> <span class="p">,</span> <span class="n">Seq2</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lcs_len3</span><span class="p">(</span><span class="n">Seq1</span> <span class="p">,</span> <span class="n">Seq2</span><span class="p">):</span>
     <span class="sd">""" Compute the LCS len 2 sequences</span>
 <span class="sd">    </span>
 <span class="sd">    Do not calculate the matrix and try to be as efficient as possible </span>
@@ -895,8 +895,8 @@ I'll post the link soon, just time to clean things up im make them as pure pytho
     <span class="n">LL1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Seq1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
     <span class="n">LL2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Seq2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
 
-    <span class="c">## we will do the big loop over the longest sequence (L1)</span>
-    <span class="c">## and store the previous row of the matrix (L2+1)</span>
+    <span class="c1">## we will do the big loop over the longest sequence (L1)</span>
+    <span class="c1">## and store the previous row of the matrix (L2+1)</span>
     <span class="k">if</span> <span class="n">LL2</span> <span class="o">&gt;</span> <span class="n">LL1</span> <span class="p">:</span> 
         <span class="n">Seq2</span><span class="p">,</span> <span class="n">Seq1</span> <span class="o">=</span> <span class="n">Seq1</span><span class="p">,</span> <span class="n">Seq2</span>
         <span class="n">LL2</span><span class="p">,</span> <span class="n">LL1</span> <span class="o">=</span> <span class="n">LL1</span><span class="p">,</span> <span class="n">LL2</span>
@@ -938,7 +938,7 @@ I'll post the link soon, just time to clean things up im make them as pure pytho
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">difflib</span>
 </pre></div>
 
@@ -952,8 +952,8 @@ I'll post the link soon, just time to clean things up im make them as pure pytho
 <div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
-    <span class="n">m0</span> <span class="o">=</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="k">None</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>
+    <span class="n">m0</span> <span class="o">=</span> <span class="n">difflib</span><span class="o">.</span><span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">()</span>
     <span class="n">m1</span> <span class="o">=</span> <span class="n">lcs_len3</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">)</span>
     <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">m0</span><span class="p">]),</span><span class="n">m1</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> 
@@ -962,9 +962,9 @@ I'll post the link soon, just time to clean things up im make them as pure pytho
     <span class="n">s1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">s2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">compare</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">)</span>
-    <span class="nb">print</span> <span class="s">'random'</span><span class="p">,</span><span class="s">u'√'</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="k">else</span> <span class="s">'x'</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+    <span class="nb">print</span> <span class="s1">'random'</span><span class="p">,</span><span class="s1">u'√'</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="k">else</span> <span class="s1">'x'</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
     <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">compare</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s1</span><span class="p">),</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
-    <span class="nb">print</span> <span class="s">'sorted'</span><span class="p">,</span><span class="s">u'√'</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="k">else</span> <span class="s">'x'</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+    <span class="nb">print</span> <span class="s1">'sorted'</span><span class="p">,</span><span class="s1">u'√'</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="k">else</span> <span class="s1">'x'</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
     
 </pre></div>
 
@@ -1022,9 +1022,9 @@ sorted √ 27 27
 <div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">timeit</span> difflib.SequenceMatcher(None, s1, s2, autojunk=False).get_matching_blocks()
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">timeit</span> difflib.SequenceMatcher(None, s1, s2, autojunk=False).get_matching_blocks()
 <span class="o">%</span><span class="k">timeit</span> lcs_len3(s1,s2)
-<span class="nb">print</span> <span class="s">'--------- sorted ----------'</span>
+<span class="nb">print</span> <span class="s1">'--------- sorted ----------'</span>
 <span class="n">s1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="n">s2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="o">%</span><span class="k">timeit</span> difflib.SequenceMatcher(None, s1, s2, autojunk=False).get_matching_blocks()
@@ -1070,9 +1070,9 @@ sorted √ 27 27
 <div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">s1</span> <span class="o">=</span> <span class="s">'a'</span><span class="o">*</span><span class="mi">251</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="s1">'a'</span><span class="o">*</span><span class="mi">251</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">124</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="s">'a'</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">'b'</span><span class="o">+</span><span class="s">'a'</span><span class="o">*</span><span class="p">(</span><span class="mi">250</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s1">'a'</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">'b'</span><span class="o">+</span><span class="s1">'a'</span><span class="o">*</span><span class="p">(</span><span class="mi">250</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
 <span class="o">%</span><span class="k">timeit</span> MySequenceMatcher(s1, s2).get_matching_blocks()        
 <span class="o">%</span><span class="k">timeit</span> lcs_len3(s1,s2)
 </pre></div>
@@ -1103,7 +1103,7 @@ sorted √ 27 27
 <div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">MySequenceMatcher</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">MySequenceMatcher</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">get_matching_blocks</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -1183,7 +1183,7 @@ sorted √ 27 27
             </li>
         </ul>
 </div>
-                    <footer id="footer"><p>Contents © 2015         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer"><p>Contents © 2016         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
 </p>
             

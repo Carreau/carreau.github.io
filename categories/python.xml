@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts (python)</title><link>http://carreau.github.io/</link><description></description><atom:link rel="self" href="http://carreau.github.io/categories/python.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 29 Nov 2015 20:20:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Planning an Early Death for Python 2</title><link>http://carreau.github.io/posts/planning-an-early-death-for-python-2.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;On September 18 and 19, 2015, the Data Structure for Data Science workshop
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts (python)</title><link>http://carreau.github.io/</link><description></description><atom:link href="http://carreau.github.io/categories/python.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 26 Sep 2016 16:22:10 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Planning an Early Death for Python 2</title><link>http://carreau.github.io/posts/planning-an-early-death-for-python-2.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;On September 18 and 19, 2015, the Data Structure for Data Science workshop
 gathered at UC Berkeley's BIDS [Berkeley Institute for Data Science]. It was a
 productive two days of presentation, discussion and working groups — a
 collaborative effort aimed at expanding what data science can do.&lt;/p&gt;
@@ -124,7 +124,7 @@ IF you are knowledgeable on this domain, your help is welcomed.&lt;/p&gt;
 &lt;p&gt;Make a twitter account that shame people that use Legacy Python, though we
 might do a Parody account which say funny things, and push people toward Python 3.&lt;/p&gt;
 &lt;p&gt;Slow code on purpose and obviously on Legacy Python:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version_info&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
     &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -133,7 +133,7 @@ might do a Parody account which say funny things, and push people toward Python 
 
 &lt;p&gt;Though it would be fun.&lt;/p&gt;
 &lt;p&gt;Ask user at IDE/CLI startup time if they want to upgrade to Python3:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python2
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;$ python2
 Python 2.7.10 &lt;span class="o"&gt;(&lt;/span&gt;default, Jul &lt;span class="m"&gt;13&lt;/span&gt; 2015, 12:05:58&lt;span class="o"&gt;)&lt;/span&gt;
 Type &lt;span class="s2"&gt;"help"&lt;/span&gt;, &lt;span class="s2"&gt;"copyright"&lt;/span&gt;, &lt;span class="s2"&gt;"credits"&lt;/span&gt; or &lt;span class="s2"&gt;"license"&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
 
