@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 26 Sep 2016 23:50:45 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>One less Pull Request</title><link>http://carreau.github.io/posts/21-one-less-pull-request.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 27 Sep 2016 22:13:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>One less Pull Request Followup</title><link>http://carreau.github.io/posts/22-one-less-pull-request-followup.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;My earlier blog post could not have been more timely, here is what I received
+this morning:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hacktoberfest is back! Ready to hack away?&lt;/p&gt;
+&lt;p&gt;It’s that time of year again! &lt;a href="https://hacktoberfest.digitalocean.com/"&gt;Hacktoberfest
+2016&lt;/a&gt; is right around the corner and
+we’re back with new, featured projects and the chance to win the
+limited-edition Hacktoberfest T-shirt you all love. &lt;/p&gt;
+&lt;p&gt;Read the &lt;a href="https://www.digitalocean.com/company/blog/ready-set-hacktoberfest/"&gt;blog
+post&lt;/a&gt; to
+see what’s changed this year and share on your favorite social media networks
+with #Hacktoberfest.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Community Feedback.&lt;/h2&gt;
+&lt;p&gt;I quickly got some feedback in particular from &lt;a href="https://twitter.com/Mbussonn/status/780617317759672320"&gt;Aaron
+Meurer&lt;/a&gt;. First there is
+no comment box on this blog. I tried it's painful to maintain, need moderation
+(...etc) so you can ping me on twitter, or &lt;a href="https://github.com/carreau/posts/issues/new"&gt;open a
+GitHub&lt;/a&gt;. I think it's a high
+enough filter, if you have something to say to what I write here, you (likely)
+already have a GitHub account.&lt;/p&gt;
+&lt;p&gt;Also, I ran &lt;a href="https://twitter.com/Mbussonn/status/780474037977751552"&gt;a poll&lt;/a&gt; on
+twitter, with 41 responses, 51% (I assume 21 users) prefer few PRs. 49% (20
+users) don't really count. So there is definitively a non-negligible population
+that will still be ok to contribute. This also explains Aaron tweet:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;if the number of pull requests discouraged pull requests we wouldn't have so
+many pull requests&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I would argue that if 50% of your users are not discouraged, you still
+discourage the other half. Which might be fine according to your own metrics. &lt;/p&gt;
+&lt;h3&gt;How to close ?&lt;/h3&gt;
+&lt;p&gt;Aaron expressed his concern that closing a PR without a comment might send the
+unintended message that:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;The maintainer does not want your code (assuming the maintainer closes)&lt;/li&gt;
+&lt;li&gt;The Author does not want the project to get his code anymore (assuming the
+    author closes)&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;It might not have been clear enough in earlier post but when closing please,
+explain why you are closing, and what you expect. Here is one example of the
+&lt;a href="https://github.com/ipython/ipython/pull/5373"&gt;IPython repository&lt;/a&gt; where the
+maintainers have close the PR:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;@takluyver and @ellisonbg have decided that we are going to close this PR and
+open an issue. We are still interested in this work going in, but the tests
+need to be written first. Feel free to re-open when the tests are ready.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If you are closing your own work, please make it clear whether:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;You plan to work later on that&lt;/li&gt;
+&lt;li&gt;If what you did can be reuse by future developers.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;When not to close&lt;/h3&gt;
+&lt;p&gt;Aaron pointed again that as a maintainer he prefers to keep PRs open. Now that
+GitHub allows you to give maintainers ability to push on your branch, You can
+give maintainers the ability to push on the PR. In case you disagree whether
+the PR should be close or not, exchange with the maintainer. The commits of a
+close PR can still be accessed and maybe a best course of action is for the
+maintainer to for your branch and re-issue the PR. They will have more control
+over it. Regardless discuss with the maintainer, convey your intent. &lt;/p&gt;
+&lt;h3&gt;Look deeper into maintainers habits.&lt;/h3&gt;
+&lt;p&gt;I purposely avoided the subject, but &lt;a href="https://twitter.com/amuellerml/status/780735097129558016"&gt;Andreas
+Mueller&lt;/a&gt; pointed out
+that you can actually look at recently merged PRs, and commit history. Only if
+all PR are old is Andreas discouraged. &lt;/p&gt;
+&lt;p&gt;This is a valid strategy, but it requires time from the person that want to
+submit the PR. And it's not always easy to do. I tend to go this extra step
+when I really think the PR is worth it. &lt;/p&gt;
+&lt;h2&gt;Things are subjective&lt;/h2&gt;
+&lt;p&gt;Again, all these are personal thoughts and preferences. I prefer to have few
+PR, like I would prefer to have zero-inbox. I would be curious to see analysis
+of general &lt;em&gt;type&lt;/em&gt; of contribution vs number of opened PRs. Are novice users
+less likely to contribute depending on the number of opened PRs? Are the
+structures of networks across project different ?&lt;/p&gt;
+&lt;p&gt;Happy HacktoberFest.&lt;/p&gt;&lt;/div&gt;</description><guid>http://carreau.github.io/posts/22-one-less-pull-request-followup.md.html</guid><pubDate>Tue, 27 Sep 2016 20:00:00 GMT</pubDate></item><item><title>One less Pull Request</title><link>http://carreau.github.io/posts/21-one-less-pull-request.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
 websites and organisation will push you to make contribution to Open-Source,
 for example via &lt;a href="https://hacktoberfest.digitalocean.com/"&gt;hacktoberfest&lt;/a&gt; I got
 a nice T-shirt last year, and &lt;a href="http://24pullrequests.com/"&gt;24pullrequests&lt;/a&gt; seem
@@ -1943,399 +2014,4 @@ I won't repeat was &lt;a href="http://www.jesshamrick.com/2014/04/18/how-i-learn
 &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-</description><guid>http://carreau.github.io/posts/13-PyCon2014.html</guid><pubDate>Wed, 30 Apr 2014 19:00:00 GMT</pubDate></item><item><title>IPython Dev Meeting - Winter 2014</title><link>http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
-    &lt;div class="container" id="notebook-container"&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Some recap from my perspective of IPython dev meeting in Berkeley. Less code than last time, more tired. More complex problem to solve.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Bi-Annual-Meeting"&gt;Bi-Annual Meeting&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#Bi-Annual-Meeting"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As you might know (or not), with the &lt;a href="http://ipython.org/sloan-grant.html"&gt;Sloan Grant&lt;/a&gt; came some funding to allow a reunion of the all IPython core-dev and active participants twice a year; last July we had our first 5 days meeting in Berkley, so it was time to meet again and discuss the future of IPython.&lt;/p&gt;
-&lt;p&gt;In this post I'll try to sum up what append during the week to bring you up to speed as, unlike everyweek, we did not do our discussion in public on google hangout. I hope this might explain our low presence on the net for the last five days.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;For the technical detail, I was the only one that was flewn from Paris on last saturday (11th), I was welcommed by &lt;a href="https://github.com/takluyver"&gt;Thomas Kluyver&lt;/a&gt; (that I finally met after 2 years), &lt;a href="https://github.com/jhamrick"&gt;Jess Hamrick&lt;/a&gt; and &lt;a href="https://github.com/aculich"&gt;Aaron Culich&lt;/a&gt; who helpped me to stay awake on the first day in front of Beers and burgers; I fought jetlag in San-Francisco on Sunday. Then the hard part started, you put between 8 and 10 people in a close room with coffe from 9:30am to 6pm for 5 days and mix.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Usually we did code only from 8am to 9am while having breakfast, hence the low apparent productivity (except from Jon and Min that might probably have their clone at home).&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We had extra people from last time, in the name of &lt;a href="https://github.com/rgbkrk"&gt;Kyle Kelley&lt;/a&gt; from Rackspace, who is responsible for nbconvert deploy, and Thomas Kluyver who finished his PhD last summer and joined the IPython team full time.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The two exception were wednesday where the room was open from 4pm to 6pm for anybody to comme and say hello, as well as thurstday evening, were we had dinner with other people related to IPython around berkeley.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Human-After-All"&gt;Human After All&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#Human-After-All"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Of course not every minute was productive, in particular &lt;a href="http://www.sanger.dk"&gt;Brian had the inside of his screen cleanned&lt;/a&gt; and I'll see if I can get permission from Thomas to post a video of him  learning to drive (Musée des Méchaniques, near Fisherman Wharf in SF). We also learned that &lt;a href="http://bridesthrowingcats.com/"&gt;Brides could thow cats&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We spoke of Markov Chain which lead us to examine the example of training on the King James Bible and Structure and Interpretation of Computer Programs aka &lt;a href="http://kingjamesprogramming.tumblr.com/"&gt;King James Programming&lt;/a&gt; :&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;I am the LORD when I have preached to others, I myself should be a function f between &lt;code&gt;a&lt;/code&gt; and &lt;code&gt;x&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Memorable Quote were Said:&lt;/p&gt;
-&lt;blockquote class="twitter-tweet" lang="fr"&gt;&lt;p&gt;Discussing &lt;a href="https://twitter.com/IPythonDev"&gt;@IPythonDev&lt;/a&gt; config system:
-
-&lt;br&gt;&lt;a href="https://twitter.com/ellisonbg"&gt;@ellisonbg&lt;/a&gt;: "Being a theoretical physicist, I'm trying to abstract this..."
-&lt;br&gt;&lt;a href="https://twitter.com/minrk"&gt;@minrk&lt;/a&gt;: "It's a sphere."&lt;/p&gt;&lt;a href="https://twitter.com/ivanov/statuses/423892348498493440"&gt;16 Janvier 2014&lt;/a&gt;&lt;/blockquote&gt;&lt;p&gt;As well as&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;Just add a &lt;code&gt;var that = this;&lt;/code&gt; (On &lt;a href="http://stackoverflow.com/questions/4886632/what-does-var-that-this-mean-in-javascript"&gt;Python&lt;/a&gt; code)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="IPython-2.0"&gt;IPython 2.0&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#IPython-2.0"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We are slightly late on the scedule, but some things had to be discussed. It was a good thing to be all in one room. Expect a release of 2.0 beta in 4 to 6 week at best.&lt;/p&gt;
-&lt;p&gt;[Modal UI] was merge 2 weeks ago, and will be refined, we know some people are not happy with it, and we are aware it is not perfect.
-We were starting to hit the limit of what we could do with browser and had to go modal to develop the notebook. We will still be limited by the browser capability and fight with the dom focusing of elements; so some compromise had and will have to be made. We thought &lt;strong&gt;a lot&lt;/strong&gt; of what we wanted, we are happy with it and need 4 to 6 six weeks of the modal UI in the wild to get user feedback and polish rough corners. So if you have comment, complaint we would be happy to hear from you.&lt;/p&gt;
-&lt;p&gt;We also a huge discussion of Interactive Widget, from a tecnical point of view, User eXperience, and code review. We are pushing some functionality from 2.0 to later, it will not prevent you from dooing anything but might need little more code in the kernel. Expect Jon Pull request to be merged in a week or so, then 4 more weeks to have testing from users. If you are adventurous, &lt;a href="https://github.com/ipython/ipython/pull/4374"&gt;grab Jon PR today&lt;/a&gt; and test it! Jason Grout made a lot of good feedback, advice and technical review.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Unexpected-Changes"&gt;Unexpected Changes&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#Unexpected-Changes"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We had an unexpected discussion about library like &lt;a href="http://nbviewer.ipython.org/github/jakevdp/mpld3/blob/master/examples/mpld3_demo.ipynb"&gt;mpld3&lt;/a&gt; and static widget (&lt;a href="https://github.com/jakevdp"&gt;@Jakevdp&lt;/a&gt; we love your work and congrats BTW) which lead to a &lt;strong&gt;small&lt;/strong&gt; digression onf 1 day and a half about dynamic content (on nbviewer | live notebook) and consequence on security as well as good practice. I'll try to quickly sum-up the problem.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Notebook allow arbitrary content execution, but you don't want arbitrary code to be executed. So we need to walk the fine line between what is code that user &lt;em&gt;want&lt;/em&gt; to run, from code that user would prefer &lt;em&gt;not to run&lt;/em&gt;.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As of IPython 1.0, &lt;strong&gt;viewing&lt;/strong&gt; a notebook is equivalent of running code. With the possibility we keep adding to IPython, at some point notebook could wreak havock on your machines, and we want to avoid making things like &lt;em&gt;document macro&lt;/em&gt; that could be malicious.&lt;/p&gt;
-&lt;p&gt;(If I get some time later I would be happy to make a talk that show some of the things that would be doable)&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In the meantime we like to avoid aving a user experience like UAC where in the end you just click &lt;code&gt;Allow&lt;/code&gt; without pondering the consequences. Keep in mind that you have to view notebook as program, that run as yourself and that &lt;strong&gt;we cannot guaranty&lt;/strong&gt; full security when you open notebook on your local machine, but we will do our best.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;That beeing said, as some content like HTML/Javascript/svg might present security they might not be show in some circonstance when you &lt;strong&gt;open&lt;/strong&gt; a notebook, so from 2.0 (probably) and oward we will (try to) :&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;ul&gt;&lt;li&gt;Prevent rendering markdown if it contains any Javascript&lt;/li&gt;
-&lt;li&gt;HTML/JS/svg in output&lt;ul&gt;&lt;li&gt;will not be show on load&lt;/li&gt;
-&lt;li&gt;unless &lt;strong&gt;you&lt;/strong&gt;  were the one to have fully executed the notebook for the last time.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This will not apply (for the time beeing) on nbviewer, and we have no reason to disable it until we add authentication to nbviewer.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;To do so, starting with 2.0 notebooks files will be signed (as in cryptographycally signed) on save with IPython web frontend (Aka webnotebook). This is of course not mandatory for a notebook to be runned or loaded. It does not change the notebook format, and do not affect existing kernels. Though if you have a custom frontend (or program that generate notebook) I would advise for you to follow the same practice.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;From a user perspective, this means that if I &lt;strong&gt;download&lt;/strong&gt; the example notebook mpld3 on my machine, it will not show as on nbviewer up until you have run all cells at least once in once session. Once done it will not affect you.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;If you work a lot across multiple machine and like your notebook to be recognized everywhere, we will provide more technical details later on where the key(s) are stored by default.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Public/Private-Keys"&gt;Public/Private Keys&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#Public/Private-Keys"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I am personnaly really happy about the signature mechanisme we are putting in place. It might add noise to versionnig system (but you can always have a hook that clean it). I believe it could be tightly coupled to authorship of total or part of a notebook.&lt;/p&gt;
-&lt;p&gt;We did quite some discussion on the current mechanisme, almost come to blows, and add several iterations before comming to that. We suppose security is not perfect and we love people to review that. Personally I will try to hook that into Public/Private key pairs to be able to have a ring of trust of notebook.&lt;/p&gt;
-&lt;p&gt;I hope also that at some point it might help in versionnig to know when a notebook has merges (once the merge tool is written) and might not reflect what a full re-execusion would do.&lt;/p&gt;
-&lt;p&gt;This does not prevent you from considering that every notebook you load could be dangerous, and probably do more damages than you think.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="IPython-1.2"&gt;IPython 1.2&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#IPython-1.2"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We will have a 1.2 release.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="IPython-2.x"&gt;IPython 2.x&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#IPython-2.x"&gt;¶&lt;/a&gt;&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We will (probably) try to release 2.x release regularly (every month). Bug and doc fixes only.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="IPython-3.0"&gt;IPython 3.0&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#IPython-3.0"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Not everything planned for 2.0 was done, some many things have been just pushed to next release, we new about it but it is always hard to see the number of things that have to be done.&lt;/p&gt;
-&lt;p&gt;As for myself, I wasn't assigned to any issues, indead I'll have to start writing my dissertation but I'm thrilled to see what is comming. We have not made a detailed plan yet but here is what we are thinking about:&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;ul&gt;&lt;li&gt;&lt;p&gt;Static Widgets&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;runs through all combinations of widgets and sends results to the notebook.&lt;/li&gt;
-&lt;li&gt;Where do we store all te data without making 2Gb notebooks ? &lt;/li&gt;
-&lt;li&gt;Make it compatible with nbviewer ? &lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Full, integrated support for non-Python kernels&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;Launch IPython Once, and ability to select "Open this notebook with (IJulia|IRuby|IHaskell|...) etc.&lt;/li&gt;
-&lt;li&gt;Simpler way for kernels to provide "Configurability" for IPython.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Diff/merge of notebooks&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;Greg Wilson have student workign on that&lt;/li&gt;
-&lt;li&gt;We will try also&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;UI to browse filesytem/edit non-ipynb text-files&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;Push nbviewer forward&lt;/li&gt;
-&lt;li&gt;Starting Multiuser-support&lt;ul&gt;&lt;li&gt;learn node.js&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Rackspace"&gt;Rackspace&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#Rackspace"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Nbviewer have moved to rackspace a few weeks ago, and we continuing to move things over there. Thanks to &lt;a href="https://twitter.com/rgbkrk"&gt;Kyle Kelley&lt;/a&gt; and &lt;a href="https://twitter.com/jessenoller"&gt;Jessy Noller&lt;/a&gt;, we know have ability to deploy nbviewer on &lt;a href="http://carreau.github.io/posts/www.rackspace.com"&gt;Rackspace&lt;/a&gt; servers usig salt-stack (with a &lt;a href="http://developer.rackspace.com/devtrial/"&gt;small discount&lt;/a&gt; for open source project). Movign DNS controle over to Rackspace will allow us to semi-automatically deploy PRs to test and have clean load balancing when doing a deploy not for the service to drop user when a new version go into production.&lt;/p&gt;
-&lt;p&gt;We (and this mean Kyle) are working hard to document this completly from A to Z and make as much as possible public so that you could replicate it locally. Right now we still have some things private because of Auth keys.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://twitter.com/intent/tweet?text=Thanks%20%40jessnoller%20and%20%40rgbkrk%20for%20nbviewer%20on%20%40rackspace" class="twitter-mention-button" data-related="rgbkrk,jessenoller"&gt;Tweet them your love&lt;/a&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="After-That..."&gt;After That...&lt;a class="anchor-link" href="http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html#After-That..."&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;4.0... And we do not know, Sloan Grant funding end on 31 Dec 2014. So if you or your entreprise have used of IPython consider helping and feel free to write to us.&lt;/p&gt;
-&lt;p&gt;Bye from thousand of feet above Atlanic Ocean, it's 5:30 am were I'm heading to, and 8:30pm where I come from. Next IPython Meeting will be in roughly 6 month, mark the date and come say hello. Otherwise search us at PyCon, SciPy, EuroSciPy (..etc) we have Stickers and Flyers!&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As usual my english is not perfect, so PR are welcommed, More details topic later.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-</description><guid>http://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html</guid><pubDate>Sat, 18 Jan 2014 05:30:00 GMT</pubDate></item></channel></rss>
+</description><guid>http://carreau.github.io/posts/13-PyCon2014.html</guid><pubDate>Wed, 30 Apr 2014 19:00:00 GMT</pubDate></item></channel></rss>
