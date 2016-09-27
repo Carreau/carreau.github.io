@@ -40,6 +40,128 @@ MathJax.Hub.Config({
 
         </ul></section><section class="page-content"><div class="content" rel="main">
         <div class="post">
+            <h1 class="title"><a href="posts/21-one-less-pull-request.md.html">One less Pull Request</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-09-26T20:00:00+00:00">2016-09-26 20:00</time>
+</div>
+                <div class="stats">
+                    
+                </div>
+                        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/open-source.html" rel="tag">open-source</a></li>
+           <li><a class="tag p-category" href="categories/python.html" rel="tag">python</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>This time of the year again, it's soon going to be the period where many
+websites and organisation will push you to make contribution to Open-Source,
+for example via <a href="https://hacktoberfest.digitalocean.com/">hacktoberfest</a> I got
+a nice T-shirt last year, and <a href="http://24pullrequests.com/">24pullrequests</a> seem
+to get tractions as well each years. Theses are really nice incentive that push
+users of open-source to start contributing and already seasons developers to
+try touch new project. </p>
+<p>Here is a request I got for you whether you participate or not to these events:
+Please close a Pull Request. </p>
+<h2>Less is More</h2>
+<p>While I really appreciate having new contributions, there is a point were too
+many opened pull-requests can – I think – be harmful. I'm going to expose the
+various case, why I think these are harmful and what can be done.</p>
+<p>Here are two specific examples : the <a href="https://github.com/sympy/sympy">Sympy
+Project</a> (as <a href="https://twitter.com/asmeurer/status/780512119024410625">Aaron feel
+targeted</a>), the authors
+are absolutely extraordinary and reactive. The current count of opened PR is
+378. <a href="https://github.com/matplotlib/matplotlib">Matplotlib</a> is also apparently
+at <a href="https://twitter.com/tacaswell/status/780508160490692609">207</a>. You can see
+in the discussion linked here that maintainers feel differently about high
+number of PRs.</p>
+<h3>I open to many pull requests</h3>
+<p>I currently have 12 opened pull requests, see how many <a href="https://github.com/pulls">you
+have</a>. This mean that I (at least) have to follow-up
+with around 12 projects every days. This is an extremely hight cognitive cost
+of switching. I try to not keep a PR older than 6 month. If it's older then
+it's most likely not going to be merged or taken care of by the maintainers.
+Every time I get to this screen I at least spend 30 sec wondering what to do
+about old PRs.</p>
+<p>My advice is to stay focus: If you are not going to work on a Pull Request, let
+the maintainers know about this fact: close it. It can still be reopened. You
+might want to leave a message explaining why you are not working on it, and
+that you would be happy (or not), for someone else to take over.</p>
+<p>I'm now back to 8. It fits on one screen, I can be more focused.</p>
+<p>Also if you are a maintainer and know a pull-request will likely not get
+merged, I would prefer you don't give me false hope, and close it. Explain why.
+Even if it's just that's you are busy on something else and would appreciate if
+this was resubmitted later. I'm more likely to get over it and try a few other
+time than if my first contribution got no responses.</p>
+<h3>I receive too many pull-requests</h3>
+<p>I strongly encourage you to try
+<a href="https://minrk.github.io/all-my-pulls/">minrk.github.io/all-my-pulls</a> it allows
+you to view all the pull-requests you have the ability to merge. And filter by
+repositories you do not wish to see. After filtering, I have 61 pull requests
+in 19 repos. It is too much to stay focused as well.</p>
+<p>Many of these pull-requests have stalled, and I would gladly appreciate for the
+authors to close them if they have no intention on working on things. To be
+honest many of the oldest pull-requests have entered this "Awkward state" of
+wanting to close it but not actually doing so because it can be rough for the
+author to see his work dismiss. </p>
+<p>As a maintainer I should do a better job as saying when a Pull request have
+stalled and is just polluting the PR list. Close it with a nice explanation.
+It's always possible to reopen if needed. GitHub allows canned responses, I use
+it as a template to list the policy of PR closing. I've found that <a href="http://jupyter.readthedocs.io/en/latest/development_guide/closing_prs.html">having a
+clear
+policy</a>
+often make decision easier. And sometime closing even allow work to be
+resubmitted, to appear on the top of the pile, and start anew.</p>
+<p>There is also the possibility of taking over the author work and finishing up
+in a separate PR, or push directly on authors forks if he is allowing it. I
+personally rarely do that, as I feel like it is a slippery slope for the
+maintainer to do everything.</p>
+<p>I find myself much more efficient when there is only 5 to 6 opened
+pull-requests. I can keep track of each of them, judge whether or not the work
+will conflict and give proper care to each of these. I fail to do so when there
+are many pages. </p>
+<h3>I don't contribute to repository that have too many PRs.</h3>
+<p>When I come across a repository with more than 20-ish pull-requests, I tend to
+think that the authors are not responding so why bother to contribute. I know
+that often these are only <em>impressions</em> and I can get over it because <em>I have
+the chance</em> to often know the maintainers. This feeling is though hard to get
+over on repositories I'm new to.</p>
+<p>With a high number of opened PRs, I tend to also be discouraged at searching
+whether someone is fixing the bug I saw, or implementing the feature I wish.
+Moreover the higher the number of opened PRs the more chance there is for the
+maintainers to review my PR in a long time, and the higher chance there will be
+that I will need to <a href="https://git-scm.com/docs/git-rebase">rebase</a> my work,
+which regardless of whether you are a git master <a href="https://xkcd.com/1597/">or
+not</a> can be painful process to go through (and to ask
+someone to go through).</p>
+<p>I'm pretty certain I'm not the only one to be discouraged from seeing a large
+number of open non active Pull requests. I've
+<a href="https://twitter.com/Mbussonn/status/780474037977751552">asked</a> on twitter and
+it looks like roughly every other respondent are discouraged to contribute if
+too many PR are opened.</p>
+<h2>What do you think ?</h2>
+<p>The above paragraphs are my though on too many opened pull-requests ? How are
+you feeling about that ? As you might have read in the twitter conversation
+linked to above, different people have different opinions.</p>
+<p>If you want to comment, please open an <a href="https://github.com/Carreau/posts/issues">issue on
+GitHub</a>, and if you have the courage
+to help improve my English feel free to send me a PR (sic) to make this more
+readable.</p>
+<h2>Close a PR !</h2>
+<p>Thanks you for reading up until here ! If you want to restore part of the
+sanity of some maintainers, or want to appeal a bit more to some users, please
+go close a PRs ! Or help finish a Pr that have stalled ! I can't give you a
+free T-shirt like for HactoberFest but feel free to tweet with hashtag
+<code>#IClosedAPR</code> !</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/20-about-legacy-python-retirement.html">About Legacy Python retirement</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -2560,543 +2682,6 @@ We were starting to hit the limit of what we could do with browser and had to go
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As usual my english is not perfect, so PR are welcommed, More details topic later.</p>
-
-</div>
-</div>
-</div>
-    </div>
-  </div>
-
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/10-No-PyLab-Thanks.html">No Pylab Thanks</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-12-30T19:00:00+00:00">2013-12-30 19:00</time>
-</div>
-                <div class="stats">
-                    
-                </div>
-                
-            </div>
-            <div class="body">
-                <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Please-Stop-using-Pylab">Please Stop using Pylab<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#Please-Stop-using-Pylab">¶</a>
-</h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>[Edit] thanks to <a href="https://github.com/Carreau/posts/pull/3">Randy Olson</a> for sending me a PR with grammar and spelling corrections.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>TL;DR, Please stop advising people to use the <code>pylab</code> flag when using IPython.
-It is harmful. If you want to help IPython, try to avoid retweeting, and
-promoting things that use the <code>pylab</code> flag and make the authors aware of the issues.</p>
-<p>Use explicit import, and <code>%matplotlib inline</code> magic. It is better (and supports switching between inline/not inline.)</p>
-<p>This was mainly prompted by a day where I came across consecutive issues due to
-the pylab flag, and people happy to discover it.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pylab,-my-worst-friend">Pylab, my worst friend<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#Pylab,-my-worst-friend">¶</a>
-</h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>When IPython 1.0 was released almost 6 months ago, we had quite a few decisions to
-make in less than a week and loads of discussions at the last moment. One of
-those decisions comes and goes often: we want to get rid of this stupid <code>pylab</code> flag. If
-you look at our stable (1.0) dev doc and examples there shouldn't be
-a mention of the <code>pylab</code> flag anywhere. If there is, we will quickly remove it.
-Why? Because it is harmful, first to us, then to new users, to the Python
-community, and finally to research in general.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Do you know about pylab? If you don't, please be extra careful and try to avoid it as much as possible.
-It is like smoking: it looks cool at first, then after a few years you realise you can live without it, 
-but it makes you sick.</p>
-<p>You think you know what <code>pylab</code> does? Really? Take few seconds to think what the <code>pylab</code> flag is doing, then read the rest.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-it-supposed-to-do?">What is it supposed to do?<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#What-is-it-supposed-to-do?">¶</a>
-</h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The <code>pylab</code> <strong>package</strong> main purpose was to build a <a href="http://wiki.scipy.org/PyLab">transition tool</a> 
-from other languages to Python. As it was more and more common and painful to do the same import 
-in IPython every time when only the IPython shell was around, the <code>--pylab</code> flag was added. Basically, it did the following:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pylab</span><span class="p">,</span> <span class="n">mlab</span><span class="p">,</span> <span class="n">pyplot</span>
-<span class="n">np</span> <span class="o">=</span> <span class="n">numpy</span>
-<span class="n">plt</span> <span class="o">=</span> <span class="n">pyplot</span>
-
-<span class="kn">from</span> <span class="nn">IPython.core.pylabtools</span> <span class="kn">import</span> <span class="n">figsize</span><span class="p">,</span> <span class="n">getfigs</span>
-
-<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-</pre></div>
-<p>Did you get it right the first time without cheating ? Are you able to say what has been imported
-in <code>from pylab import *</code> ? in <code>from numpy import *</code> ?</p>
-<p>Of course, that is not the only thing it does. But was it your intention to do that the last time you used pylab?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="It-is-irreversible">It is irreversible<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#It-is-irreversible">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Once you activate pylab mode, there is no going back. You cannot unimport
-things. Of course, with the <code>%pylab</code> magic you can always restart your kernel,
-but with the flag, all your kernels will start in pylab mode. Are you <strong>sure</strong>
-you will not need a non-pylab kernel?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Unclear">Unclear<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#Unclear">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>When using the <code>pylab</code> flag, your audience usually has no way of knowing that you
-used the flag. If I use <code>plot(range(10))</code>, what will happen? Will it pop up a
-figure ? Inline it? Or throw an error?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Because I'm mean, I won't execute the cell, so that you don't know whether or
-not I'm running in pylab mode or not. You might think it's not a big deal, but
-in teaching and research it is important to communicate exactly what you are doing.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="It-pollutes-the-namespace">It pollutes the namespace<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#It-pollutes-the-namespace">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>20</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Using matplotlib backend: Agg
-Populating the interactive namespace from numpy and matplotlib
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>IPython 2.0-dev gives some warning, and will tell you wether it clobbers already non-built-in variables in the user namespace.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">user_ns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>968</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Can you really tell me the 948 additional things you now have in your namespace? Not a big deal? Really?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="It-replaces-built-ins">It replaces built-ins<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#It-replaces-built-ins">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">,</span><span class="nb">all</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(&lt;function numpy.core.fromnumeric.sum&gt;, &lt;function numpy.core.fromnumeric.all&gt;)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Both used to be <code>&lt;function sum&gt;,&lt;function all&gt;</code> before using pylab, and this <strong>changes the behavior of your programs!</strong></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For example, it leads to non-pickable object in some cases:</p>
-<p>@treycausey on Twitter</p>
-<blockquote>
-<p>@ogrisel @myusuf3 Ah, very curious. It loads fine in IPython but not in an IPython notebook. I must have a namespace collision or something.</p>
-</blockquote>
-<p>Me:</p>
-<blockquote>
-<p>Let me guess: <code>$ipython notebook --pylab</code>? But <code>$ipython</code> alone?</p>
-</blockquote>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Other-unrelated-actions">Other unrelated actions<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#Other-unrelated-actions">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>IPython developed and added the rich display protocol, so we added <code>from IPython.display import display</code> to what <code>import pylab</code> does.</p>
-<p>Because matplotlib can work with different event loops, pylab added options to activate qt/gtk/osx/etc. event loops, and with the QtConsole and Notebook creation, the ability to select the inline backend, which registers display hooks.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The main things users remember, and often the main message that you can read here and there is that:</p>
-<blockquote>
-<p>You need to use Pylab to get inline figures.</p>
-</blockquote>
-<p>Which is <strong>false</strong>. Inline pylab mode is a convenient method to activate inline, and set up a display hook with matplotlib. You do not need pylab to have inline images, nor do you need matplotlib. 
-With 1.0 and above the recommended way to set up inline figures would be to use <code>%matplotlib</code>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Side-Effects">Side Effects<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#Side-Effects">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The worst part is it has the side effect of making people use <code>pylab</code> without even knowing it. Later on, they start asking question about how to reuse a graph in matplotlib because no one ever encounters the following code any more:</p>
-
-<pre><code>fig,ax = subplots(1,1)
-ax.plot(...)</code></pre>
-<p>or why their script suddenly does not work in plain Python but works in IPython.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="It-kills-kittens,-with-a-spoon...">It kills kittens, with a spoon...<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#It-kills-kittens,-with-a-spoon...">¶</a>
-</h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Maybe not kittens, but it will force developers to explain the same things, again, and again, and again...</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">YouTubeVideo</span>
-<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s1">'9VDvgL58h_Y'</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="mi">60</span><span class="o">+</span><span class="mi">27</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-        <iframe width="400" height='300"' src="http://www.youtube.com/embed/9VDvgL58h_Y?start=267" frameborder="0" allowfullscreen><p>There was a problem loading this remote IFrame, have a look as Javascript console</p></iframe>
-        
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Make---pylab-disappear.">Make <code>--pylab</code> disappear.<a class="anchor-link" href="posts/10-No-PyLab-Thanks.html#Make---pylab-disappear.">¶</a>
-</h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Of course, we will not remove the <code>--pylab</code> flag for compatibility reasons, but please, for 2014, make the following resolutions:</p>
-<ul>
-<li>Use <code>%matplotlib [inline|qt|osx|gtx]</code> to select the right backend/event hook.</li>
-<li>Use explicit imports</li>
-<li>Make people aware of the issues</li>
-<li>Help by making no new articles/tutorials that mention <code>--pylab</code>
-</li>
-</ul>
-<p>If really you only <a href="https://xkcd.com/1168/">have 10 seconds left</a>, the <code>%pylab</code> magic is fine.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As usual, this has been written in an IPython Notebook. You can send me pull request if I made mistakes, or if you have any additional remarks on why you shouldn't use <code>--pylab</code>.</p>
 
 </div>
 </div>

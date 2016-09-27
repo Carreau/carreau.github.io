@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts (open-source)</title><link>http://carreau.github.io/</link><description></description><atom:link href="http://carreau.github.io/categories/open-source.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 26 Sep 2016 23:50:45 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>One less Pull Request</title><link>http://carreau.github.io/posts/21-one-less-pull-request.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
+websites and organisation will push you to make contribution to Open-Source,
+for example via &lt;a href="https://hacktoberfest.digitalocean.com/"&gt;hacktoberfest&lt;/a&gt; I got
+a nice T-shirt last year, and &lt;a href="http://24pullrequests.com/"&gt;24pullrequests&lt;/a&gt; seem
+to get tractions as well each years. Theses are really nice incentive that push
+users of open-source to start contributing and already seasons developers to
+try touch new project. &lt;/p&gt;
+&lt;p&gt;Here is a request I got for you whether you participate or not to these events:
+Please close a Pull Request. &lt;/p&gt;
+&lt;h2&gt;Less is More&lt;/h2&gt;
+&lt;p&gt;While I really appreciate having new contributions, there is a point were too
+many opened pull-requests can – I think – be harmful. I'm going to expose the
+various case, why I think these are harmful and what can be done.&lt;/p&gt;
+&lt;p&gt;Here are two specific examples : the &lt;a href="https://github.com/sympy/sympy"&gt;Sympy
+Project&lt;/a&gt; (as &lt;a href="https://twitter.com/asmeurer/status/780512119024410625"&gt;Aaron feel
+targeted&lt;/a&gt;), the authors
+are absolutely extraordinary and reactive. The current count of opened PR is
+378. &lt;a href="https://github.com/matplotlib/matplotlib"&gt;Matplotlib&lt;/a&gt; is also apparently
+at &lt;a href="https://twitter.com/tacaswell/status/780508160490692609"&gt;207&lt;/a&gt;. You can see
+in the discussion linked here that maintainers feel differently about high
+number of PRs.&lt;/p&gt;
+&lt;h3&gt;I open to many pull requests&lt;/h3&gt;
+&lt;p&gt;I currently have 12 opened pull requests, see how many &lt;a href="https://github.com/pulls"&gt;you
+have&lt;/a&gt;. This mean that I (at least) have to follow-up
+with around 12 projects every days. This is an extremely hight cognitive cost
+of switching. I try to not keep a PR older than 6 month. If it's older then
+it's most likely not going to be merged or taken care of by the maintainers.
+Every time I get to this screen I at least spend 30 sec wondering what to do
+about old PRs.&lt;/p&gt;
+&lt;p&gt;My advice is to stay focus: If you are not going to work on a Pull Request, let
+the maintainers know about this fact: close it. It can still be reopened. You
+might want to leave a message explaining why you are not working on it, and
+that you would be happy (or not), for someone else to take over.&lt;/p&gt;
+&lt;p&gt;I'm now back to 8. It fits on one screen, I can be more focused.&lt;/p&gt;
+&lt;p&gt;Also if you are a maintainer and know a pull-request will likely not get
+merged, I would prefer you don't give me false hope, and close it. Explain why.
+Even if it's just that's you are busy on something else and would appreciate if
+this was resubmitted later. I'm more likely to get over it and try a few other
+time than if my first contribution got no responses.&lt;/p&gt;
+&lt;h3&gt;I receive too many pull-requests&lt;/h3&gt;
+&lt;p&gt;I strongly encourage you to try
+&lt;a href="https://minrk.github.io/all-my-pulls/"&gt;minrk.github.io/all-my-pulls&lt;/a&gt; it allows
+you to view all the pull-requests you have the ability to merge. And filter by
+repositories you do not wish to see. After filtering, I have 61 pull requests
+in 19 repos. It is too much to stay focused as well.&lt;/p&gt;
+&lt;p&gt;Many of these pull-requests have stalled, and I would gladly appreciate for the
+authors to close them if they have no intention on working on things. To be
+honest many of the oldest pull-requests have entered this "Awkward state" of
+wanting to close it but not actually doing so because it can be rough for the
+author to see his work dismiss. &lt;/p&gt;
+&lt;p&gt;As a maintainer I should do a better job as saying when a Pull request have
+stalled and is just polluting the PR list. Close it with a nice explanation.
+It's always possible to reopen if needed. GitHub allows canned responses, I use
+it as a template to list the policy of PR closing. I've found that &lt;a href="http://jupyter.readthedocs.io/en/latest/development_guide/closing_prs.html"&gt;having a
+clear
+policy&lt;/a&gt;
+often make decision easier. And sometime closing even allow work to be
+resubmitted, to appear on the top of the pile, and start anew.&lt;/p&gt;
+&lt;p&gt;There is also the possibility of taking over the author work and finishing up
+in a separate PR, or push directly on authors forks if he is allowing it. I
+personally rarely do that, as I feel like it is a slippery slope for the
+maintainer to do everything.&lt;/p&gt;
+&lt;p&gt;I find myself much more efficient when there is only 5 to 6 opened
+pull-requests. I can keep track of each of them, judge whether or not the work
+will conflict and give proper care to each of these. I fail to do so when there
+are many pages. &lt;/p&gt;
+&lt;h3&gt;I don't contribute to repository that have too many PRs.&lt;/h3&gt;
+&lt;p&gt;When I come across a repository with more than 20-ish pull-requests, I tend to
+think that the authors are not responding so why bother to contribute. I know
+that often these are only &lt;em&gt;impressions&lt;/em&gt; and I can get over it because &lt;em&gt;I have
+the chance&lt;/em&gt; to often know the maintainers. This feeling is though hard to get
+over on repositories I'm new to.&lt;/p&gt;
+&lt;p&gt;With a high number of opened PRs, I tend to also be discouraged at searching
+whether someone is fixing the bug I saw, or implementing the feature I wish.
+Moreover the higher the number of opened PRs the more chance there is for the
+maintainers to review my PR in a long time, and the higher chance there will be
+that I will need to &lt;a href="https://git-scm.com/docs/git-rebase"&gt;rebase&lt;/a&gt; my work,
+which regardless of whether you are a git master &lt;a href="https://xkcd.com/1597/"&gt;or
+not&lt;/a&gt; can be painful process to go through (and to ask
+someone to go through).&lt;/p&gt;
+&lt;p&gt;I'm pretty certain I'm not the only one to be discouraged from seeing a large
+number of open non active Pull requests. I've
+&lt;a href="https://twitter.com/Mbussonn/status/780474037977751552"&gt;asked&lt;/a&gt; on twitter and
+it looks like roughly every other respondent are discouraged to contribute if
+too many PR are opened.&lt;/p&gt;
+&lt;h2&gt;What do you think ?&lt;/h2&gt;
+&lt;p&gt;The above paragraphs are my though on too many opened pull-requests ? How are
+you feeling about that ? As you might have read in the twitter conversation
+linked to above, different people have different opinions.&lt;/p&gt;
+&lt;p&gt;If you want to comment, please open an &lt;a href="https://github.com/Carreau/posts/issues"&gt;issue on
+GitHub&lt;/a&gt;, and if you have the courage
+to help improve my English feel free to send me a PR (sic) to make this more
+readable.&lt;/p&gt;
+&lt;h2&gt;Close a PR !&lt;/h2&gt;
+&lt;p&gt;Thanks you for reading up until here ! If you want to restore part of the
+sanity of some maintainers, or want to appeal a bit more to some users, please
+go close a PRs ! Or help finish a Pr that have stalled ! I can't give you a
+free T-shirt like for HactoberFest but feel free to tweet with hashtag
+&lt;code&gt;#IClosedAPR&lt;/code&gt; !&lt;/p&gt;&lt;/div&gt;</description><category>open-source</category><category>python</category><guid>http://carreau.github.io/posts/21-one-less-pull-request.md.html</guid><pubDate>Mon, 26 Sep 2016 20:00:00 GMT</pubDate></item></channel></rss>
