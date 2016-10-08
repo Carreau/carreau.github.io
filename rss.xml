@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link rel="self" href="http://carreau.github.io/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 08 Oct 2016 05:16:23 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Viridisify</title><link>http://carreau.github.io/posts/24-Viridisify.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link rel="self" type="application/rss+xml" href="http://carreau.github.io/rss.xml"></atom:link><language>en</language><lastBuildDate>Sat, 08 Oct 2016 05:34:34 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Viridisify</title><link>http://carreau.github.io/posts/24-Viridisify.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
@@ -669,12 +669,12 @@ ffmpeg -i out.mp4  output.gif -y -loglevel panic
 &lt;p&gt;Enjoy the result, and see how the north part of the huricane does not look like getting that much increase in intensity !&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://twitter.com/Mbussonn/status/784447098963972098"&gt;https://twitter.com/Mbussonn/status/784447098963972098&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It's not a reason not to stay safe from huricanes.&lt;/p&gt;
-&lt;hr&gt;&lt;p&gt;Thanks to Stefan Van der Valt, and Nathaniel Smith for inspiration and helpful discussion.&lt;/p&gt;
+&lt;hr&gt;&lt;p&gt;Thanks to Stefan Van der Walt, and Nathaniel Smith for inspiration and helpful discussion.&lt;/p&gt;
 &lt;hr&gt;&lt;p&gt;Notes:&lt;/p&gt;
 &lt;p&gt;Michael Ayes &lt;a href="https://twitter.com/michaelaye/status/784478461926645760"&gt;asks&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;that’s cool, but technically, that’s viridis_r, isn’t it?&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;That's discutable as I do a map from Jet to Viridis, the authors of the initial  graph seem to have user &lt;code&gt;jet_r&lt;/code&gt; (reversed jet) so the final version looks like &lt;code&gt;veridis_r&lt;/code&gt; (reversed viridis). More generally if the the original graph had used f(jet), then the final version woudl be close to f(viridis).&lt;/p&gt;
+&lt;p&gt;That's discutable as I do a map from Jet to Viridis, the authors of the initial  graph seem to have user &lt;code&gt;jet_r&lt;/code&gt; (reversed jet) so the final version looks like &lt;code&gt;viridis_r&lt;/code&gt; (reversed viridis). More generally if the the original graph had used f(jet), then the final version woudl be close to f(viridis).&lt;/p&gt;
 &lt;p&gt;As usual please feel free to ask questions or send me updates, as my english is likely far from perfect.&lt;/p&gt;
 
 &lt;/div&gt;
@@ -2234,10 +2234,10 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 
 
 
-&lt;div id="aa4f7057-2c8e-4c70-909c-c9d31b74c74c"&gt;&lt;/div&gt;
+&lt;div id="293b4d54-8e05-4eb6-ad09-9e132aedeb96"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#aa4f7057-2c8e-4c70-909c-c9d31b74c74c');
+var element = $('#293b4d54-8e05-4eb6-ad09-9e132aedeb96');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
