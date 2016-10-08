@@ -88,12 +88,16 @@ Note: This has been written as a notebook so you can download it to run it yours
 <p>Note: This has been written as <a href="https://github.com/carreau/posts">a notebook</a> so you can download it to run it yourself using <a href="https://jupyter.org">jupyter</a> or <a href="https://nteract.io/">nteract</a>, view it <a href="https://github.com/Carreau/posts/blob/master/23-Cross-Language-Integration.ipynb">on GitHub</a>, or <a href="https://nbviewer.jupyter.org/github/Carreau/posts/blob/master/23-Cross-Language-Integration.ipynb">on nbviewer</a> if you prefer the classical notebook rendering. It originally should have appeared on <a href="http://carreau.github.io/posts/23-Cross-Language-Integration.ipynb.html">my blog</a>.</p>
 <p>I would be happy to know if you can get it to work on <a href="http://mybinder.org/">binder</a>.</p>
 <hr>
+<p>[UPDATE]</p>
+<p>Thanks to <a href="https://github.com/michaelpacer">Michael Pacer</a> for copy-editting this. 
+Also note that this notebook is basedaround multiple example that have been written by various people across many years.</p>
+<hr>
 <p>An often requested feature for the <a href="https://jupyter.org">Jupyter Notebook</a> is the ability to have multiple kernels, often in many languages, for a single notebook.</p>
-<p>While the request in spirit is a perfectly valid one, it is often a missunderstanding of what having a single kernel means. In particlular having multiple language is often easier if you have a single process which handle the dispatching of various instructions to potentially multiple underlying languages. It is possible to do that in a <em>Single Kernel</em> which does orchestrate dispatching instruction and moving data around.</p>
-<p>Wether the multiple languages that get orchestrated together are remote processes, or simply library calls or more complex mechanisme becomes an implementation detail.</p>
-<p><a href="https://python.org">Python</a> is known to be a good "glue" language, and over the year the <a href="https://ipython.org">IPython kernel</a> have seen a growing number of extensions showing that dynamic cross language integration can be seemleass form the point of view of the user.</p>
-<p>In the followign we only scratch the surface of what is possible across a variety of languages. The approach shown here is one among many. The <a href="https://github.com/Calysto">Calysto</a> organisation for example has several projects taking different approaches on the problem.</p>
-<p>In the following I will show a quick overview on how you can in single notebook interact with many languages, via subprocess call (Bash, Ruby), Common Foreign function interface (C, Rust, Fortran, ...), or even crazyier approaches (Julia).</p>
+<p>While the request in spirit is a perfectly valid one, it is often a misunderstanding of what having a single kernel means. In particular having multiple language is often easier if you have a single process which handle the dispatching of various instructions to potentially multiple underlying languages. It is possible to do that in a <em>Single Kernel</em> which does orchestrate dispatching instruction and moving data around.</p>
+<p>Whether the multiple languages that get orchestrated together are remote processes, or simply library calls or more complex mechanisms becomes an implementation detail.</p>
+<p><a href="https://python.org">Python</a> is known to be a good "glue" language, and over the year the <a href="https://ipython.org">IPython kernel</a> have seen a growing number of extensions showing that dynamic cross language integration can be seamless form the point of view of the user.</p>
+<p>In the following we only scratch the surface of what is possible across a variety of languages. The approach shown here is one among many. The <a href="https://github.com/Calysto">Calysto</a> organisation for example has several projects taking different approaches on the problem.</p>
+<p>In the following I will show a quick overview on how you can in single notebook interact with many languages, via subprocess call (Bash, Ruby), Common Foreign function interface (C, Rust, Fortran, ...), or even crazier approaches (Julia).</p>
 
 </div>
 </div>
@@ -113,9 +117,9 @@ Note: This has been written as a notebook so you can download it to run it yours
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The rest of this is mostly a demo on how cross-language integration works in a Jupyter notebook by using the features of the <em>Reference IPython Kernel implementation</em>. These features are completely handled in the kernel so need to be reimplemented on a per-kernel basis. Though they <strong>also</strong> work on pure terminal IPython, nbconvert or any other programatic use of IPython.</p>
-<p>Most of what you will see here are <em>just</em> thin wrappers around already existing libraries. These libraries (and their respective authors) do all the heavy lifinting. I just show how seamless a cross language environement can be from the user point of view. The installation of these library might not be easy either and getting all these language to play together can be complex task. It is though becomming easier and easier.</p>
-<p>The term <em>just</em> does not imply that the wrapers are simple, or easy to write. It indicate that the wraper are far from being complete. What is shown here is completely doable using standard Python syntax and bit of manual work. SO what you'll see here is mostly <em>convenience</em>.</p>
+<p>The rest of this is mostly a demo on how cross-language integration works in a Jupyter notebook by using the features of the <em>Reference IPython Kernel implementation</em>. These features are completely handled in the kernel so need to be reimplemented on a per-kernel basis. Though they <strong>also</strong> work on pure terminal IPython, nbconvert or any other programmatic use of IPython.</p>
+<p>Most of what you will see here are <em>just</em> thin wrappers around already existing libraries. These libraries (and their respective authors) do all the heavy lifting. I just show how seamless a cross language environment can be from the user point of view. The installation of these library might not be easy either and getting all these language to play together can be complex task. It is though becoming easier and easier.</p>
+<p>The term <em>just</em> does not imply that the wrappers are simple, or easy to write. It indicate that the wrappers are far from being complete. What is shown here is completely doable using standard Python syntax and bit of manual work. SO what you'll see here is mostly <em>convenience</em>.</p>
 
 </div>
 </div>
@@ -135,7 +139,7 @@ Note: This has been written as a notebook so you can download it to run it yours
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Understanding the multiple languages themselves is not necessary; most of the code here should self explanatory and straitforward. We'll define many function that compute the nth <code>fibonnaci</code> number more or less efficiently. We'll define them either using the classic recursive implementation, or sometime using an unrolled optimized version. As a reminder the fibbonaci sequence is defines a the following:</p>
+<p>Understanding the multiple languages themselves is not necessary; most of the code here should self explanatory and straightforward. We'll define many function that compute the nth <code>Fibonacci</code> number more or less efficiently. We'll define them either using the classic recursive implementation, or sometime using an unrolled optimized version. As a reminder the Fibonacci sequence is defines a the following:</p>
 $$ F_n = \begin{cases} 1 &amp;\mbox{if } n \leq 2 \\ 
 F_{n-1}+F_{n-2} &amp; \mbox{otherwise }\end{cases}$$
 </div>
@@ -146,7 +150,7 @@ F_{n-1}+F_{n-2} &amp; \mbox{otherwise }\end{cases}$$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The fact that we calculate the fibonacci sequence as little importance, except that the value of $F_n$ can grow <em>really</em> fast in $O(e^n)$ if I remember correctly. And the recursive implementation will have a hard time getting beyond (n=100) as the number of call will be greater than $O(e^n)$ as well. Be careful especaily if you calculate $F_{F_n}$ or more composition. Rememberring that n=5 is stable via $F$ might be useful.</p>
+<p>The fact that we calculate the Fibonacci sequence as little importance, except that the value of $F_n$ can grow <em>really</em> fast in $O(e^n)$ if I remember correctly. And the recursive implementation will have a hard time getting beyond (n=100) as the number of call will be greater than $O(e^n)$ as well. Be careful especially if you calculate $F_{F_n}$ or more composition. Remembering that n=5 is stable via $F$ might be useful.</p>
 <p>Here are the first terms of the Fibonacci sequence:</p>
 <ol>
 <li>1</li>
@@ -207,7 +211,7 @@ F_{n-1}+F_{n-2} &amp; \mbox{otherwise }\end{cases}$$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Python offer many facilities to call into other languages, wether we "shell-out" or use the C-API. The easiest for the end user is often to use <a href="https://docs.python.org/3/library/subprocess.html"><code>subprocess</code></a> , with the recently added <a href="https://docs.python.org/3/library/subprocess.html#subprocess.run"><code>run</code></a> command. Though it might be annoying to define all foreign code in strings and calling the subprocess run function manually.</p>
+<p>Python offer many facilities to call into other languages, whether we "shell-out" or use the C-API. The easiest for the end user is often to use <a href="https://docs.python.org/3/library/subprocess.html"><code>subprocess</code></a> , with the recently added <a href="https://docs.python.org/3/library/subprocess.html#subprocess.run"><code>run</code></a> command. Though it might be annoying to define all foreign code in strings and calling the subprocess run function manually.</p>
 
 </div>
 </div>
@@ -217,7 +221,7 @@ F_{n-1}+F_{n-2} &amp; \mbox{otherwise }\end{cases}$$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is why in the followign you will see 2 constructs:</p>
+<p>This is why in the following you will see 2 constructs:</p>
 
 <pre><code>optional_python_lhs = %language (language RHS expression)</code></pre>
 <p>As well as</p>
@@ -284,7 +288,7 @@ from another:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Steamlining-calling-subprocess">Steamlining calling subprocess<a class="anchor-link" href="23-Cross-Language-Integration.html#Steamlining-calling-subprocess">¶</a>
+<h3 id="Streamlining-calling-subprocess">Streamlining calling subprocess<a class="anchor-link" href="23-Cross-Language-Integration.html#Streamlining-calling-subprocess">¶</a>
 </h3>
 </div>
 </div>
@@ -294,7 +298,7 @@ from another:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The IPython team special cased a couple of these for forign languages, here <em>ruby</em>. We define the fibonacci function, compute the 15th value, print it to standard out from Ruby, and capture the value variable in the python <code>fib15</code>.</p>
+<p>The IPython team special cased a couple of these for foreign languages, here <em>ruby</em>. We define the <code>fibonacci</code> function, compute the 15th value, print it to standard out from Ruby, and capture the value variable in the python <code>fib15</code>.</p>
 
 </div>
 </div>
@@ -392,7 +396,7 @@ from another:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ok, that's somewhat usefull, but not really that much. It's convenient for self contain code. You cannot pass variable in... or can't you ?</p>
+<p>Ok, that's somewhat useful, but not really that much. It's convenient for self contain code. You cannot pass variable in... or can't you ?</p>
 
 </div>
 </div>
@@ -412,7 +416,7 @@ from another:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Calling subprocess can be quite cumbersome when working interactively, we saw above that <code>%%</code> cells-magics can be of help, but you might want to <em>shell out</em> in the middle of a python function. Let's create a bunch of randome filenames and fake some subprocess operations with it.</p>
+<p>Calling subprocess can be quite cumbersome when working interactively, we saw above that <code>%%</code> cells-magics can be of help, but you might want to <em>shell out</em> in the middle of a python function. Let's create a bunch of random file-names and fake some subprocess operations with it.</p>
 
 </div>
 </div>
@@ -647,7 +651,7 @@ _wJJUbrPzpq.o
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ok, that was kind of cute, fire-up a subprocess, serialize, pipe data in as a string, pipe-data out as a string, kill subprocess... What about somemething less state-less, or more statefull ?</p>
+<p>Ok, that was kind of cute, fire-up a subprocess, serialize, pipe data in as a string, pipe-data out as a string, kill subprocess... What about something less state-less, or more stateful?</p>
 
 </div>
 </div>
@@ -657,7 +661,7 @@ _wJJUbrPzpq.o
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's define the fibonacci function in python:</p>
+<p>Let's define the <code>fibonacci</code> function in python:</p>
 
 </div>
 </div>
@@ -738,7 +742,7 @@ _wJJUbrPzpq.o
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'n'</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'fib(n)'</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'The fibonacci sequence grows fast !'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'The Fibonacci sequence grows fast !'</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -778,7 +782,7 @@ _wJJUbrPzpq.o
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It shoudl not be a surprise to you, but this looks like an exponential, so if we were to look at $log(fib(n))$ vs $n$ it woudl likely look like a line. We can try to do a linear regression on this model, and I have understood that R is a language many people use to do statistics so let's use R.</p>
+<p>It may not surprise you, but this looks like an exponential, so if we were to look at $log(fib(n))$ × $n$ it would look approximately like a line. We can try to do a linear regression using this model. R is a language many people use to do statistics. So, let's use R.</p>
 
 </div>
 </div>
@@ -788,7 +792,7 @@ _wJJUbrPzpq.o
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's enable integration between Python and R using the <a href="https://rpy2.readthedocs.io/en/version_2.8.x/"><strong><code>RPy2</code></strong></a> python package developped by Laurent Gautier and the rest of the rpy2 team.</p>
+<p>Let's enable integration between Python and R using the <a href="https://rpy2.readthedocs.io/en/version_2.8.x/"><strong><code>RPy2</code></strong></a> python package developed by Laurent Gautier and the rest of the rpy2 team.</p>
 
 </div>
 </div>
@@ -798,8 +802,8 @@ _wJJUbrPzpq.o
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>(Side note, you might need to change the environment variable passed to your kernel for this to work, 
-Here is what I had to do only once)</p>
+<p>(Side note, you might need to change the environment variable passed to your kernel for this to work.
+Here is what I had to do only once.)</p>
 
 </div>
 </div>
@@ -860,7 +864,7 @@ Here is what I had to do only once)</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And now let's try to fit a linear model ($ln(Y) = A.X + B$) using R. I'm not a R user myself, so don't take this a idiomatic R.</p>
+<p>And now let's try to fit a linear model ($ln(Y) = A.X + B$) using R. I'm not a R user myself, so don't take this as idiomatic R.</p>
 
 </div>
 </div>
@@ -975,7 +979,7 @@ F-statistic: 9.912e+04 on 1 and 27 DF,  p-value: &lt; 2.2e-16
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also look at the variable more carefully</p>
+<p>We can also look at the variables more carefully</p>
 
 </div>
 </div>
@@ -1062,7 +1066,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can even get the variabe back from R as Python objects:</p>
+<p>We can even get the variable back from R as Python objects:</p>
 
 </div>
 </div>
@@ -1104,7 +1108,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>That's all fro the R part. Hope this show you some of the power of IPython, both in notebook ans command line.</p>
+<p>That's all from the R part. I hope this shows you some of the power of IPython, both in notebook and command line.</p>
 
 </div>
 </div>
@@ -1124,7 +1128,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Great ! We were able to send data back and forth ! If does nto works for all objects, but at least for the basic ones. It requires quite some work from the authors of the underlying library to allow you to do that. Though we are still limited to data. We can't (yet) send functions over which limits the utility.</p>
+<p>Great! We were able to send data back and forth! If does not works for all objects, but at least for the basic ones. It requires quite some work from the authors of the underlying library to allow you to do that. Though we are still limited to data. We can't (yet) send functions over which limits the utility.</p>
 
 </div>
 </div>
@@ -1154,7 +1158,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You might stil need here and there the raw power of an ubiquitous language which is known for its speed when you know how to wield it well: C.</p>
+<p>You might still need here and there the raw power of an ubiquitous language which is known for its speed when you know how to wield it well: C.</p>
 <p>Though one of the disadvantage of C is the (relatively) slow  iteration process due to the necessity of compilation/run part of the cycle. Let see if we can improve that by leveraging the excellent <a href="https://cffi.readthedocs.io/">CFFI project</a>, using my own small <a href="https://pypi.python.org/pypi/cffi_magic">cffi_magic</a> wrapper.</p>
 
 </div>
@@ -1255,7 +1259,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The first line take the "header" of the function we declare, and the rest of the cell takes the body of this fucntion. The <code>cfib</code> function will automatically be made available to you in the main python namespace.</p>
+<p>The first line take the "header" of the function we declare, and the rest of the cell takes the body of this function. The <code>cfib</code> function will automatically be made available to you in the main python namespace.</p>
 
 </div>
 </div>
@@ -1295,7 +1299,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Oops there is a mistake as we shoudl have <code>fib(5) == 5</code>. Luckily we can redefine the function on the fly. I could edit the above cell, but here as this will be rendered statically for the sake of demo purpose, I'm going to make a second cell:</p>
+<p>Oops there is a mistake as we should have <code>fib(5) == 5</code>. Luckily we can redefine the function on the fly. I could edit the above cell, but here as this will be rendered statically for the sake of demo purpose, I'm going to make a second cell:</p>
 
 </div>
 </div>
@@ -1427,7 +1431,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Not so bad considering the C implementation is recusrsive, and the Python version is manually hand-rolled.</p>
+<p>Not so bad considering the C implementation is recursive, and the Python version is manually hand-rolled.</p>
 
 </div>
 </div>
@@ -1447,7 +1451,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So how do we do that magically under the hood ? The knowlegeable reader is aware that CPython extensions cannot be reloaded. Though here we redefine the function... how come ?</p>
+<p>So how do we do that magically under the hood? The knowledgeable reader is aware that CPython extensions cannot be reloaded. Though here we redefine the function... how come?</p>
 <p>Using the user provided code we compile a shared object with a random name, import this as a module and alias using a user friendly name in the <code>__main__</code> namespace. If the user re-execute we just get a new name, and change the alias mapping.</p>
 <p>If one wan to optimize you can use a hash of the codecell string to not recompile if the user hasn't changed the code.</p>
 
@@ -1507,7 +1511,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <code>cffi</code>  module also allows you to do the same with <a href="https://www.rust-lang.org">Rust</a>, a new language desing by Mozilla, which provide the same C-like level of control, while incorporating more recent understanding of programming and provide better memory safety. Let's see how we would do the same with Rust:</p>
+<p>The <code>cffi</code> module also allows you to do the same with <a href="https://www.rust-lang.org">Rust</a>, a new language designed by Mozilla, which provide the same C-like level of control, while incorporating more recent understanding of programming and provide better memory safety. Let's see how we would do the same with Rust:</p>
 
 </div>
 </div>
@@ -1585,7 +1589,7 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I'm not a Rustacean, but the above seem pretty straitforward to me. Again this might not be idiomatic Rust but you should be able to decifer what's above. The same than for C applies.</p>
+<p>I'm not a Rustacean, but the above seem pretty straightforward to me. Again this might not be idiomatic Rust but you should be able to decipher what's above. The same than for C applies.</p>
 
 </div>
 </div>
@@ -1595,7 +1599,7 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Still-in-developement">Still in developement<a class="anchor-link" href="23-Cross-Language-Integration.html#Still-in-developement">¶</a>
+<h4 id="Still-in-development">Still in development<a class="anchor-link" href="23-Cross-Language-Integration.html#Still-in-development">¶</a>
 </h4>
 </div>
 </div>
@@ -1625,7 +1629,7 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="https://pypi.python.org/pypi/fortran-magic">fortran magic</a> does the same as above, but has been developped by <a href="https://github.com/mgaitan/fortran_magic">mgaitan</a> and is slightly older. Again no surprise except you are supposed to mark fortran variable that are used to return the values.</p>
+<p>The <a href="https://pypi.python.org/pypi/fortran-magic">fortran magic</a> does the same as above, but has been developed by <a href="https://github.com/mgaitan/fortran_magic">mgaitan</a> and is slightly older. Again no surprise except you are supposed to mark fortran variable that are used to return the values.</p>
 
 </div>
 </div>
@@ -1660,10 +1664,10 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 
 
 
-<div id="a388b626-8ad0-451f-8cd9-20f6843d43e1"></div>
+<div id="aa4f7057-2c8e-4c70-909c-c9d31b74c74c"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a388b626-8ad0-451f-8cd9-20f6843d43e1');
+var element = $('#aa4f7057-2c8e-4c70-909c-c9d31b74c74c');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
@@ -1757,9 +1761,9 @@ END SUBROUTINE ffib
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>IPython use to ship with the Cython magic that is now part of <a href="http://cython.org/">Cython</a> itself. 
+<p>IPython used to ship with the Cython magic that is now part of <a href="http://cython.org/">Cython</a> itself.
 Cython is a superset of Python that compiles to C and importable from Python. You should be a ble to take your python code as is, type annotate it, and get c-like speed.
-Same principle applies:</p>
+The same principle applies:</p>
 
 </div>
 </div>
@@ -1983,7 +1987,7 @@ Same principle applies:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>[let's skip the Rust fib version, it tends to segfault, and it woudl be sad to segfault now :-) ]</p>
+<p>[let's skip the Rust fib version, it tends to segfault, and it would be sad to segfault now :-) ]</p>
 
 </div>
 </div>
@@ -2006,7 +2010,7 @@ Same principle applies:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-Cake-is-not-a-lie-!">The Cake is not a lie !<a class="anchor-link" href="23-Cross-Language-Integration.html#The-Cake-is-not-a-lie-!">¶</a>
+<h4 id="The-Cake-is-not-a-lie!">The Cake is not a lie!<a class="anchor-link" href="23-Cross-Language-Integration.html#The-Cake-is-not-a-lie!">¶</a>
 </h4>
 </div>
 </div>
@@ -2016,7 +2020,7 @@ Same principle applies:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So can we do a layer cake ? Can we call rust from Python from fortran from Cython ? Of Cython from C from Fortran ? Of Fortron from Cytran from Cust ?</p>
+<p>So can we do a layer cake? Can we call rust from Python from Fortran from Cython? Or Cython from C from Fortran? Or Fortron from Cytran from Cust?</p>
 
 </div>
 </div>
@@ -2170,7 +2174,7 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you have a small idea about how the above layer-cake is working you'll understand that there is (still) a non-negligible overhead as between each language switch we need to go back to Python-land. And the scope in which we can access function is still quite limited. The following is some really <em>Dark Magic</em> concocted by Fernando Perez and Steven Johnson using the <a href="http://julialang.org/">Julia</a> programming language. I can't even pretend to understand how this possible, but's it's really impressive to see.</p>
+<p>If you have a small idea about how the above layer-cake is working you'll understand that there is (still) a non-negligible overhead as between each language switch we need to go back to Python-land. And the scope in which we can access function is still quite limited. The following is some really <em>Dark Magic</em> concocted by Fernando Perez and Steven Johnson using the <a href="http://julialang.org/">Julia</a> programming language. I can't even pretend to understand how this possible, but it's really impressive to see.</p>
 
 </div>
 </div>
@@ -2180,7 +2184,7 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try to handwave what's hapenning. I would be happy to get corrections.</p>
+<p>Let's try to handwave what's happening. I would be happy to get corrections.</p>
 
 </div>
 </div>
@@ -2191,7 +2195,7 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The crux is that the Python and Julia interpreters can be started in a way where they each have access to the other process memory. Thus the Julia and Python interpreter can share live objects. You then "just" need to teach the Julia language about the structure of Python objects and it can manipulate these as desired, either directly (if the memory layout allow it) or using proxy objects that "delegate" the functionality to the python process.</p>
-<p>The result being that julia can import and use Python modules (using the Julia <code>PyCall</code> package), and Julia functions are availlable fron witin Python using the <code>pyjulia</code> module.</p>
+<p>The result being that Julia can import and use Python modules (using the Julia <code>PyCall</code> package), and Julia functions are available from within Python using the <code>pyjulia</code> module.</p>
 <p>Let's see how this look like.</p>
 
 </div>
@@ -2356,8 +2360,8 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>All the above block of code is Julia, where, <code>linspace</code>,<code>pi</code>,<code>sin</code>  are builtins of Julia. <code>np.*</code> and <code>plt.*</code> are referencing Python function and methods.</p>
-<p>We see that <code>t</code> is a julia "Array" (technically a <code>1000-element LinSpace{Float64}</code>), which can get sent to <code>numpy.cos</code>, multiply by a Julia int, (..etc) and end up being plotted via matplotlib (Python), and displayed inline.</p>
-<p>Let's finish upour graph in Python</p>
+<p>We see that <code>t</code> is a Julia "Array" (technically a <code>1000-element LinSpace{Float64}</code>), which can get sent to <code>numpy.cos</code>, multiply by a Julia int, (..etc) and end up being plotted via matplotlib (Python), and displayed inline.</p>
+<p>Let's finish our graph in Python</p>
 
 </div>
 </div>
@@ -2414,10 +2418,10 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Above we had <em>explicit</em> transition between the julia code and the Python code. Can we be more sneeky ?</p>
-<p>One thig we can do is define the Fibonacci function using the recursive form and pass <em>explicitely</em> the function to recurse with (as a toy example).</p>
-<p>We'll define such a function both on the Julia and Python side, ask the Julia fuction to recurse by calling the Python one, and the Python one to recurse using the Julia one.</p>
-<p>Let's print <code>(P</code> when we enter Python Kingdom, <code>(J</code> when we enter Julia Relam, and close the parenthesis acordingly:</p>
+<p>Above we had <em>explicit</em> transition between the Julia code and the Python code. Can we be more sneaky?</p>
+<p>One toy example is to define the Fibonacci function using the recursive form and <em>explicitly</em> pass the function with which we recurse.</p>
+<p>We'll define such a function both on the Julia and Python side, ask the Julia function to recurse by calling the Python one, and the Python one to recurse using the Julia one.</p>
+<p>Let's print <code>(P</code> when we enter Python Kingdom, <code>(J</code> when we enter Julia Realm, and close the parenthesis accordingly:</p>
 
 </div>
 </div>
@@ -2509,10 +2513,9 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I hope you enjoyed that, I find it quite interesting and useful when you need to levrage the tools available  in multiple domain. I'm sure there are plenty of other tools that allow this ind of things and a host of other languages that can interact with each other in this way.</p>
+<p>I hope you enjoyed that, I find it quite interesting and useful when you need to leverage the tools available across multiple domains. I'm sure there are plenty of other tools that allow this kind of things and a host of other languages that can interact with each other in this way.</p>
 <p>From the top of my head I know of a few magics (SQL, Redis...) that provide such integration. Every language has its strong and weak points, and knowing what to use is often hard. I hope I convinced you that mixing languages is not such a daunting task.</p>
-<p>The other case when this is useful is when you are learning a new language, you can leverage your current expertise temporarily and get something that work before learning the idiomatic way and aviallable libraries.</p>
-<p>I'll stop there for now.</p>
+<p>The other case when this is useful is when you are learning a new language, you can leverage your current expertise temporarily and get something that work before learning the idiomatic way and available libraries.</p>
 
 </div>
 </div>
@@ -2544,7 +2547,7 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here is a fibonacci cat to thank you from reading until the end, sorry, no banana for scale.</p>
+<p>Here is a Fibonacci cat to thank you from reading until the end, sorry, no banana for scale.</p>
 
 </div>
 </div>
@@ -2596,6 +2599,9 @@ The key value here is that we get the <em>same</em> object from within Python an
                 <ul class="pager hidden-print">
 <li class="previous">
                 <a href="22-one-less-pull-request-followup.md.html" rel="prev" title="One less Pull Request Followup">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="24-Viridisify.html" rel="next" title="Viridisify">Next post</a>
             </li>
         </ul>
 </div>
