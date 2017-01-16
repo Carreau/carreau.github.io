@@ -1,5 +1,446 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link rel="self" href="http://carreau.github.io/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 30 Nov 2016 19:57:40 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Remapping notebook shortcuts</title><link>http://carreau.github.io/posts/25-remaping-notebook-shortcuts.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;As Jupyter notebook run in a browser for technical and practical
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 16 Jan 2017 18:01:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Changing ByteStr REPR</title><link>http://carreau.github.io/posts/25-Changing-ByteString-REPR.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+    &lt;div class="container" id="notebook-container"&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;A recent &lt;a href="https://learnpythonthehardway.org/book/nopython3.html"&gt;rebutal&lt;/a&gt; against Python 3 was recently written by the (in)famous Zed Shaw, with &lt;a href="https://eev.ee/blog/2016/11/23/a-rebuttal-for-python-3/"&gt;many&lt;/a&gt; responses to various arguments and counter arguments.&lt;/p&gt;
+&lt;p&gt;One particular topic which caught my eye was the &lt;code&gt;bytearray&lt;/code&gt; vs &lt;code&gt;unicodearray&lt;/code&gt; debate. I'll try explicitely avoid the term &lt;code&gt;str&lt;/code&gt;/&lt;code&gt;string&lt;/code&gt;/&lt;code&gt;bytes&lt;/code&gt;/&lt;code&gt;unicode&lt;/code&gt; naming as it is (IMHO) confusing, but that's a debate for another time. If one pay attention to above debates, you might see that there are about two camps:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;code&gt;bytearray&lt;/code&gt; and &lt;code&gt;unicodearray&lt;/code&gt; are two different things, and we should &lt;em&gt;never&lt;/em&gt; convert from one to the other. (that's rought the Pro-Python-3 camp)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bytearray&lt;/code&gt; and &lt;code&gt;unicodearray&lt;/code&gt; are similar enough in most cases that we should do the magic for users. &lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;I'm greatly exagerating here and the following is neither for one side or another, I have my personal preference of what I think is good, but that's irrelevant for now. Note that both sides argue that &lt;em&gt;their&lt;/em&gt; preference is better for beginners.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;You can often find posts trying to explain the misconception string/str/bytes, like &lt;a href="https://sircmpwn.github.io/2017/01/13/The-problem-with-Python-3.html"&gt;this one&lt;/a&gt; which keep insisting on the fact that &lt;code&gt;str&lt;/code&gt; in python 3 is far different from bytes.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="The-mistake-in-the-REPR"&gt;The mistake in the REPR&lt;a class="anchor-link" href="http://carreau.github.io/posts/25-Changing-ByteString-REPR.html#The-mistake-in-the-REPR"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;I have one theory that the &lt;code&gt;bytes&lt;/code&gt;/&lt;code&gt;str&lt;/code&gt; issue is not in their behavior, but in their REPR. The REPR is in the end the main informatin communication channel between the object and the brain of the programmer, user. Also, Python "ducktyped", and you have to admit that &lt;code&gt;bytes&lt;/code&gt; and &lt;code&gt;str&lt;/code&gt; kinda &lt;em&gt;look&lt;/em&gt; similar when printed, so assuming they should behave in similar way is not far fetched. I'm not saying that user will &lt;em&gt;conciously&lt;/em&gt; assume bytes/str are the same. I'm saying that human brain inherently may do such association.&lt;/p&gt;
+&lt;p&gt;From the top of your head, what does &lt;code&gt;requests.get(url).content&lt;/code&gt; returns ?&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests_cache&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
+&lt;span class="n"&gt;requests_cache&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;install_cache&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cachedb.tmp'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'http://swapi.co/api/people/1'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[2]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;b'{"name":"Luke Skywalker","height":"172","mass":"77","hair_color":"blond","skin_color":"fair","eye_color":"blue","birth_year":"19BBY","gender":"male","homeworld":"http://swapi.co/api/planets/1/","films":["http://swapi.co/api/films/6/","http://swapi.co/api/films/3/","http://swapi.co/api/films/2/","http://swapi.co/api/films/1/","http://swapi.co/api/films/7/"],"species":["http://swapi.co/api/species/1/"],"vehicles":["http://swapi.co/api/vehicles/14/","http://swapi.co/api/vehicles/30/"],"starships":["http://swapi.co/api/starships/12/","http://swapi.co/api/starships/22/"],"created":"2014-12-09T13:50:51.644000Z","edited":"2014-12-20T21:17:56.891000Z","url":"http://swapi.co/api/people/1/"}'&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;... bytes...&lt;/p&gt;
+&lt;p&gt;I'm pretty sure you glanced ahead in this post and probaly thought it was "Text", even probably in this case Json. It might be invalid Json, I'm pretty sure you cannot tell.&lt;/p&gt;
+&lt;p&gt;Why does it returns bytes ? Because it could fetch an image:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://avatars0.githubusercontent.com/u/335567'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[3]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x01\xcc\x00\x00\x01\xcc\x08\x06\x00\x00\x00X\xdb\x98\x86\x00\x00 \x00IDATx\xda\xac\xbdy\x93\x1b\xb9\xb2\xf6\xf7K\x00\xb5\x90\xbdH\xa3\x99\xb9s7\xbf\xf1:\x1c\x0e/\xdf\xff\xdb8\xec\xb0}\xd79g4Rw\xb3IV\x15\x80\xf4\x1f@\xedUl\xea\\w\x84\xa65-6Y\x85\x02ry\xf2\xc9'\xa5\xfe\x9f\xfeGE\x04#\x821\x061\x16c\x0c\xc6XD\x0c\x02\xa0\x8a\x8a\x801\xa4\x1f\x08\x880\xfdRUD\x04\xd5\xfe\xff#6z\x8c*\xaa\x82\x88\xe0C \x84@\xf7~\xa6yy\xc5=&amp;gt;Q&amp;gt;~\xe6\xe1\xf3g~\xfd\xa7\x7f\xc28\x07\xb6\x00\x84h-\x88A1(\xe0U\xd2\xfb\xb8t\r1("&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;And if you decode the first request ?&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'http://swapi.co/api/people/2'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;'{"name":"C-3PO","height":"167","mass":"75","hair_color":"n/a","skin_color":"gold","eye_color":"yellow","birth_year":"112BBY","gender":"n/a","homeworld":"http://swapi.co/api/planets/1/","films":["http://swapi.co/api/films/5/","http://swapi.co/api/films/4/","http://swapi.co/api/films/6/","http://swapi.co/api/films/3/","http://swapi.co/api/films/2/","http://swapi.co/api/films/1/"],"species":["http://swapi.co/api/species/2/"],"vehicles":[],"starships":[],"created":"2014-12-10T15:10:51.357000Z","edited":"2014-12-20T21:17:50.309000Z","url":"http://swapi.co/api/people/2/"}'&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Well that looks the same (except leading &lt;code&gt;b&lt;/code&gt;...). Go explain a beginner that the 2 above are totally different things, while they already struggle with 0 base indexing, iterators, and the syntax of the language.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Changing-the-repr"&gt;Changing the repr&lt;a class="anchor-link" href="http://carreau.github.io/posts/25-Changing-ByteString-REPR.html#Changing-the-repr"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Lets revert the &lt;code&gt;repr&lt;/code&gt; of &lt;code&gt;bytesarray&lt;/code&gt; to better represent what they are.  IPython allows to change object repr easily:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;text_formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_ipython&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_formatter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;formatters&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'text/plain'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_print_bytestr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cycle&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;BytesBytesBytesBytesBytes&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;        
+&lt;span class="n"&gt;text_formatter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;for_type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_print_bytestr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;function IPython.lib.pretty._repr_pprint&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'http://swapi.co/api/people/4'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;BytesBytesBytesBytesBytes&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Make-a-usefull-repr"&gt;Make a usefull repr&lt;a class="anchor-link" href="http://carreau.github.io/posts/25-Changing-ByteString-REPR.html#Make-a-usefull-repr"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;bytesbytesbytes&amp;gt;&lt;/code&gt; may not an  usefull repr, so let's try to make a repr, that:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Convey bytes are, in genral &lt;strong&gt;not&lt;/strong&gt; text.&lt;/li&gt;
+&lt;li&gt;Let us &lt;em&gt;peak&lt;/em&gt; into the content to guess what it is&lt;/li&gt;
+&lt;li&gt;Push the user to &lt;code&gt;.decode()&lt;/code&gt; if necessary.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Generally in Python objects have a repr which start with &lt;code&gt;&amp;lt;&lt;/code&gt;, then have the &lt;em&gt;class name&lt;/em&gt;, a &lt;em&gt;quoted representation&lt;/em&gt; of the object, and memory location of the object, a closing &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As the _quoted representation of the object may be really long, we can ellide it.&lt;/p&gt;
+&lt;p&gt;A common representation of bytes could be binary, but it's not really compact. Hex, compact but more difficult to read, and make &lt;em&gt;peaking&lt;/em&gt; at the content hart when it could be ASCII. So let's go with ASCII reprentation where we escape non ASCII caracterd.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ellide&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;75&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt;  &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'...'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_print_bytestr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cycle&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;bytes '&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;ellide&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;' at &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;&amp;gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;       
+&lt;span class="n"&gt;text_formatter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;for_type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_print_bytestr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;function __main__._print_bytestr&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'http://swapi.co/api/people/12'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[10]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;bytes b'{"name":"Wilhuff Tarkin","height":"180","mass":"...pi/people/12/"}' at 0x107299228&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'http://swapi.co/api/people/12'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;'{"name":"Wilhuff Tarkin","height":"180","mass":"unknown","hair_color":"auburn, grey","skin_color":"fair","eye_color":"blue","birth_year":"64BBY","gender":"male","homeworld":"http://swapi.co/api/planets/21/","films":["http://swapi.co/api/films/1/","http://swapi.co/api/films/6/"],"species":["http://swapi.co/api/species/1/"],"vehicles":[],"starships":[],"created":"2014-12-10T16:26:56.138000Z","edited":"2014-12-20T21:17:50.330000Z","url":"http://swapi.co/api/people/12/"}'&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Advantage: It is not gobbledygook anymore when getting binary resources !&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://avatars0.githubusercontent.com/u/335567'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&amp;lt;bytes b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x01\...0IEND\xaeB`\x82' at 0x107e0c000&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</description><guid>http://carreau.github.io/posts/25-Changing-ByteString-REPR.html</guid><pubDate>Mon, 16 Jan 2017 10:00:00 GMT</pubDate></item><item><title>Remapping notebook shortcuts</title><link>http://carreau.github.io/posts/25-remaping-notebook-shortcuts.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;As Jupyter notebook run in a browser for technical and practical
 reasons we only have a limited number of shortcuts available and
 choices need to be made. Often this choices may conflict with browser
 shortcut, and you might need to remap it. &lt;/p&gt;
@@ -2302,10 +2743,10 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 
 
 
-&lt;div id="c688a8ba-c558-4e75-a725-3518f957e208"&gt;&lt;/div&gt;
+&lt;div id="7348db30-f20a-4be4-92f1-2bcd321cf1f6"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#c688a8ba-c558-4e75-a725-3518f957e208');
+var element = $('#7348db30-f20a-4be4-92f1-2bcd321cf1f6');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
@@ -4099,154 +4540,4 @@ But as for the &lt;a href="http://en.wikipedia.org/wiki/Kilogram"&gt;Kilogram&lt
 &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-</description><guid>http://carreau.github.io/posts/17-jupyter-logo.html</guid><pubDate>Sat, 21 Feb 2015 10:00:00 GMT</pubDate></item><item><title>Autodeploy with travis</title><link>http://carreau.github.io/posts/16-Autodeploy-with-travis.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
-    &lt;div class="container" id="notebook-container"&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;TL;DR: After a day fighting with travis, my blog get &lt;a href="https://github.com/Carreau/posts/blob/master/.travis.yml"&gt;auto-deployed&lt;/a&gt; with Travis using Nikola !&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="A-bit-of-automation"&gt;A bit of automation&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#A-bit-of-automation"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;One of the annoying things when I want to post a blog post like this one, is that I never remember hom to deploy my blog. So, why not completly automatize with a script ?&lt;/p&gt;
-&lt;p&gt;Well, that one step, but you know what is really good at runnign scripts ? Travis.&lt;/p&gt;
-&lt;p&gt;Travis have the nice ability to run script in the category &lt;code&gt;after_success&lt;/code&gt; , or &lt;a href="http://docs.travis-ci.com/user/encrypting-files/"&gt;encrypting file&lt;/a&gt;, whice allow a nice deployment setup.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="A--description-of-the-process."&gt;A  description of the process.&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#A--description-of-the-process."&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The first step is to create an ssh key with empty pass passphrase;
-I like to add it (encrypted) to &lt;code&gt;.travis&lt;/code&gt; folder in my repository.
-Travis have nice &lt;a href="http://docs.travis-ci.com/user/encrypting-files/"&gt;doc&lt;/a&gt; for that.&lt;/p&gt;
-&lt;p&gt;Copy the public key to the target github repository deploy key in setting.&lt;/p&gt;
-&lt;p&gt;In my particular setup the tricky bit where :&lt;/p&gt;
-&lt;p&gt;To get IPython and nikola master:&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;&lt;code&gt;- pip install -e git+https://github.com/ipython/ipython.git#egg=IPython&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;- pip install -e git+https://github.com/getnikola/nikola.git#egg=nikola&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Get the correct layout of folders:&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;blog (gh/carreau/blog)&lt;ul&gt;&lt;li&gt;posts (gh/carreau/posts)&lt;/li&gt;
-&lt;li&gt;output (gh/carreau/carreau.github.io)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;I had to soft link &lt;code&gt;posts&lt;/code&gt;, as this is the repo which trigger travis build, and is by default cloned into &lt;code&gt;~/posts&lt;/code&gt; by travis. &lt;code&gt;carreau/carreau.github.io&lt;/code&gt; is clone via &lt;code&gt;https&lt;/code&gt; to allow pull request to build (and not push) as the ssh key can only be decrypted on master branch.&lt;/p&gt;
-&lt;p&gt;Then run &lt;code&gt;nikola build&lt;/code&gt;.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In the &lt;code&gt;after_success&lt;/code&gt; step (you might want to run unit-test like non-broken link on your blog) you want to check that you are not in a PR, and  on master branch before trying to decrypt the ssh key and push the built website:&lt;/p&gt;
-&lt;p&gt;The following snippet works well.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="nv"&gt;$TRAVIS_PULL_REQUEST&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;$TRAVIS_BRANCH&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'master'&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Travis CL tool gave you the instruction to decrypt the ssh key, you now "just" have to add it 
-to the keyring.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="sb"&gt;`&lt;/span&gt;ssh-agent -s&lt;span class="sb"&gt;`&lt;/span&gt;
-chmod &lt;span class="m"&gt;600&lt;/span&gt; .travis/travis_rsa
-ssh-add .travis/travis_rsa
-&lt;span class="nb"&gt;cd&lt;/span&gt; ../blog/output
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And add an ssh remote, which user is &lt;strong&gt;git&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Push, and you are done (don't forget to commit though) !&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Extra-tips"&gt;Extra tips&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#Extra-tips"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;When testing, do not push on master, push on another branch and open the PR manually to see the diff. 
-Travis env might defier a bit from yours.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Todo"&gt;Todo&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#Todo"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Nikola read metadata file from &lt;code&gt;.meta&lt;/code&gt; file, which is annoying. I should patch it to read metadata from notebook Metadata. ALso need a JS extension to make that easy.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Closing-thoughts"&gt;Closing thoughts&lt;a class="anchor-link" href="http://carreau.github.io/posts/16-Autodeploy-with-travis.html#Closing-thoughts"&gt;¶&lt;/a&gt;&lt;/h3&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;PR and comments welcommed as usual.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-</description><guid>http://carreau.github.io/posts/16-Autodeploy-with-travis.html</guid><pubDate>Wed, 28 Jan 2015 10:00:00 GMT</pubDate></item></channel></rss>
+</description><guid>http://carreau.github.io/posts/17-jupyter-logo.html</guid><pubDate>Sat, 21 Feb 2015 10:00:00 GMT</pubDate></item></channel></rss>

@@ -40,6 +40,182 @@ MathJax.Hub.Config({
 
         </ul></section><section class="page-content"><div class="content" rel="main">
         <div class="post">
+            <h1 class="title"><a href="posts/16-Autodeploy-with-travis.html">Autodeploy with travis</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2015-01-28T10:00:00+00:00">2015-01-28 10:00</time>
+</div>
+                <div class="stats">
+                    
+                </div>
+                
+            </div>
+            <div class="body">
+                <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TL;DR: After a day fighting with travis, my blog get <a href="https://github.com/Carreau/posts/blob/master/.travis.yml">auto-deployed</a> with Travis using Nikola !</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-bit-of-automation">A bit of automation<a class="anchor-link" href="posts/16-Autodeploy-with-travis.html#A-bit-of-automation">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One of the annoying things when I want to post a blog post like this one, is that I never remember hom to deploy my blog. So, why not completly automatize with a script ?</p>
+<p>Well, that one step, but you know what is really good at runnign scripts ? Travis.</p>
+<p>Travis have the nice ability to run script in the category <code>after_success</code> , or <a href="http://docs.travis-ci.com/user/encrypting-files/">encrypting file</a>, whice allow a nice deployment setup.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A--description-of-the-process.">A  description of the process.<a class="anchor-link" href="posts/16-Autodeploy-with-travis.html#A--description-of-the-process.">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first step is to create an ssh key with empty pass passphrase;
+I like to add it (encrypted) to <code>.travis</code> folder in my repository.
+Travis have nice <a href="http://docs.travis-ci.com/user/encrypting-files/">doc</a> for that.</p>
+<p>Copy the public key to the target github repository deploy key in setting.</p>
+<p>In my particular setup the tricky bit where :</p>
+<p>To get IPython and nikola master:</p>
+<ul>
+<li><code>- pip install -e git+https://github.com/ipython/ipython.git#egg=IPython</code></li>
+<li><code>- pip install -e git+https://github.com/getnikola/nikola.git#egg=nikola</code></li>
+</ul>
+<p>Get the correct layout of folders:</p>
+<ul>
+<li>blog (gh/carreau/blog)<ul>
+<li>posts (gh/carreau/posts)</li>
+<li>output (gh/carreau/carreau.github.io)</li>
+</ul>
+</li>
+</ul>
+<p>I had to soft link <code>posts</code>, as this is the repo which trigger travis build, and is by default cloned into <code>~/posts</code> by travis. <code>carreau/carreau.github.io</code> is clone via <code>https</code> to allow pull request to build (and not push) as the ssh key can only be decrypted on master branch.</p>
+<p>Then run <code>nikola build</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the <code>after_success</code> step (you might want to run unit-test like non-broken link on your blog) you want to check that you are not in a PR, and  on master branch before trying to decrypt the ssh key and push the built website:</p>
+<p>The following snippet works well.</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[[</span> <span class="nv">$TRAVIS_PULL_REQUEST</span> <span class="o">==</span> <span class="nb">false</span> <span class="o">&amp;&amp;</span> <span class="nv">$TRAVIS_BRANCH</span> <span class="o">==</span> <span class="s1">'master'</span> <span class="o">]]</span><span class="p">;</span>
+</pre></div>
+<p>Travis CL tool gave you the instruction to decrypt the ssh key, you now "just" have to add it 
+to the keyring.</p>
+<div class="highlight"><pre><span></span><span class="nb">eval</span> <span class="sb">`</span>ssh-agent -s<span class="sb">`</span>
+chmod <span class="m">600</span> .travis/travis_rsa
+ssh-add .travis/travis_rsa
+<span class="nb">cd</span> ../blog/output
+</pre></div>
+<p>And add an ssh remote, which user is <strong>git</strong>:</p>
+<div class="highlight"><pre><span></span>git remote add ghpages ssh://git@github.com/Carreau/carreau.github.io
+</pre></div>
+<p>Push, and you are done (don't forget to commit though) !</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Extra-tips">Extra tips<a class="anchor-link" href="posts/16-Autodeploy-with-travis.html#Extra-tips">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When testing, do not push on master, push on another branch and open the PR manually to see the diff. 
+Travis env might defier a bit from yours.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Todo">Todo<a class="anchor-link" href="posts/16-Autodeploy-with-travis.html#Todo">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nikola read metadata file from <code>.meta</code> file, which is annoying. I should patch it to read metadata from notebook Metadata. ALso need a JS extension to make that easy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Closing-thoughts">Closing thoughts<a class="anchor-link" href="posts/16-Autodeploy-with-travis.html#Closing-thoughts">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>PR and comments welcommed as usual.</p>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/15-Jupyter.html">Jupyter</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1579,7 +1755,7 @@ We were starting to hit the limit of what we could do with browser and had to go
             <li class="next">
                 <a href="index-1.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><footer id="footer"><p>Contents © 2016         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><footer id="footer"><p>Contents © 2017         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
 </p>
             
