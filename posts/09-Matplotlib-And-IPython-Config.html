@@ -40,10 +40,10 @@ from slowing down all the ">
     <section class="social"><ul>
 <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
             <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+            <li><a href="../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
 
         </ul></section><section class="page-content"><div class="content" rel="main">
     <div class="post">
@@ -140,6 +140,7 @@ It woudl need a fair amount of work to be nicely integrated into matplotlib.</p>
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Populating the interactive namespace from numpy and matplotlib
 </pre>
@@ -216,6 +217,7 @@ It woudl need a fair amount of work to be nicely integrated into matplotlib.</p>
 <div class="prompt output_prompt">Out[3]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>&lt;matplotlib.legend.Legend at 0x1050cc910&gt;</pre>
 </div>
@@ -224,6 +226,7 @@ It woudl need a fair amount of work to be nicely integrated into matplotlib.</p>
 
 <div class="output_area">
 <div class="prompt"></div>
+
 
 
 <div class="output_png output_subarea ">
@@ -297,7 +300,7 @@ The name of the configuration attribute that will allow to change the value of t
 
 <span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="n">Configurable</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Rem</span><span class="p">(</span><span class="n">Bar</span><span class="p">):</span>
@@ -327,6 +330,7 @@ The name of the configuration attribute that will allow to change the value of t
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>/Users/bussonniermatthias/matplotlib
 </pre>
@@ -530,6 +534,7 @@ The name of the configuration attribute that will allow to change the value of t
 <div class="prompt"></div>
 
 
+
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,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">
 </div>
@@ -569,7 +574,7 @@ The name of the configuration attribute that will allow to change the value of t
 but Matplotlib is not made to pass the <code>parent</code> keyword to every Artist it creates, this prevent the use of nested configuration. Still using inspect, we can try to get a handle on the parent, by walking up the stack.</p>
 <p>adding the following in <code>Artist</code> constructor:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span> 
-<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="n">i_parent</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span><span class="o">.</span><span class="n">f_back</span><span class="o">.</span><span class="n">f_locals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'self'</span><span class="p">,</span><span class="bp">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">i_parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">i_parent</span><span class="p">)</span> <span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i_parent</span><span class="p">,</span><span class="n">Configurable</span><span class="p">)):</span>
@@ -651,6 +656,7 @@ but Matplotlib is not made to pass the <code>parent</code> keyword to every Arti
 <div class="prompt output_prompt">Out[9]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>&lt;matplotlib.text.Text at 0x10512e0d0&gt;</pre>
 </div>
@@ -659,6 +665,7 @@ but Matplotlib is not made to pass the <code>parent</code> keyword to every Arti
 
 <div class="output_area">
 <div class="prompt"></div>
+
 
 
 <div class="output_png output_subarea ">
@@ -766,6 +773,7 @@ Both are responsible from creating the x- and y-label</p>
 <div class="prompt output_prompt">Out[13]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>&lt;matplotlib.text.Text at 0x10527d610&gt;</pre>
 </div>
@@ -774,6 +782,7 @@ Both are responsible from creating the x- and y-label</p>
 
 <div class="output_area">
 <div class="prompt"></div>
+
 
 
 <div class="output_png output_subarea ">
@@ -917,6 +926,7 @@ They shoudl probably be refactor into <code>MajorTick</code>/<code>MinorTick</co
 <div class="prompt output_prompt">Out[16]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>(-1.0, 6.0, -1.0, 6.0)</pre>
 </div>
@@ -925,6 +935,7 @@ They shoudl probably be refactor into <code>MajorTick</code>/<code>MinorTick</co
 
 <div class="output_area">
 <div class="prompt"></div>
+
 
 
 <div class="output_png output_subarea ">
@@ -1008,6 +1019,7 @@ Here is a non exaustive list.</p>
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>-------------------------
 Some single configurables

@@ -57,10 +57,10 @@ NBconvert has now been merged into IPython itself. You will need IPython 1.0 or 
     <section class="social"><ul>
 <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
             <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+            <li><a href="../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
 
         </ul></section><section class="page-content"><div class="content" rel="main">
     <div class="post">
@@ -178,6 +178,7 @@ a pipeline through which each notebook you want to export with go through.</p>
 <div class="prompt output_prompt">Out[1]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>'{\n "metadata": {\n  "name": "XKCD_plots"\n },\n "nbformat": 3,\n...'</pre>
 </div>
@@ -220,6 +221,7 @@ guarantee that the notebook structure is valid.</p>
 
 <div class="output_area">
 <div class="prompt output_prompt">Out[2]:</div>
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -337,6 +339,7 @@ You can directly re-use the instance to convert another notebook. Each exporter 
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>['inlining', 'output_extension', 'metadata']
 defaultdict(None, {'name': 'Notebook'})
@@ -369,6 +372,7 @@ html
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -452,6 +456,7 @@ html
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 XKCD plots in Matplotlib
@@ -565,6 +570,7 @@ Of course to help you in this task all those naming are configurable in the righ
 <div class="prompt output_prompt">Out[10]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>[u'output_13_1.text',
  u'output_18_0.text',
@@ -619,6 +625,7 @@ keep in mind that a object having multiple <em>repr</em> will store all it's rep
 
 <div class="output_area">
 <div class="prompt output_prompt">Out[11]:</div>
+
 
 
 <div class="output_png output_subarea output_execute_result">
@@ -736,6 +743,7 @@ finding all the figures, and put them into the resources directory, as well as c
 <div class="prompt output_prompt">Out[12]:</div>
 
 
+
 <div class="output_text output_subarea output_execute_result">
 <pre>[&lt;function IPython.nbconvert.transformers.coalescestreams.wrappedfunc&gt;,
  &lt;IPython.nbconvert.transformers.svg2pdf.SVG2PDFTransformer at 0x10c203e90&gt;,
@@ -801,6 +809,7 @@ this will look pretty familiar to you. Configuration option are always of the fo
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>resources without the "figures" key :
 ['inlining', 'output_extension', 'metadata']
@@ -813,6 +822,7 @@ Here we have one more field
 
 <div class="output_area">
 <div class="prompt output_prompt">Out[13]:</div>
+
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -881,11 +891,11 @@ independently to each cell, for more advance transformation that support configu
 <span class="kn">import</span> <span class="nn">IPython.config</span>
 <span class="nb">print</span> <span class="s2">"Four relevant docstring"</span>
 <span class="nb">print</span> <span class="s1">'============================='</span>
-<span class="nb">print</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="nb">print</span> <span class="n">Transformer</span><span class="o">.</span><span class="vm">__doc__</span>
 <span class="nb">print</span> <span class="s1">'============================='</span>
-<span class="nb">print</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">call</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="nb">print</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">call</span><span class="o">.</span><span class="vm">__doc__</span>
 <span class="nb">print</span> <span class="s1">'============================='</span>
-<span class="nb">print</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">transform_cell</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="nb">print</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">transform_cell</span><span class="o">.</span><span class="vm">__doc__</span>
 <span class="nb">print</span> <span class="s1">'============================='</span>
 </pre></div>
 
@@ -899,6 +909,7 @@ independently to each cell, for more advance transformation that support configu
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Four relevant docstring
 =============================
@@ -1092,6 +1103,7 @@ independently to each cell, for more advance transformation that support configu
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>I'll keep only cells from  4 to  6 
 
@@ -1256,6 +1268,7 @@ they can magically read your config file.</p>
 
 <div class="output_area">
 <div class="prompt"></div>
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;p&gt;This post was written entirely in an IPython Notebook: the notebook file is available for download &lt;a href="http://jakevdp.github.com/downloads/notebooks/XKCD_plots.ipynb"&gt;here&lt;/a&gt;. For more information on blogging with notebooks in octopress, see my &lt;a href="http://jakevdp.github.com/blog/2012/10/04/blogging-with-ipython/"&gt;previous post&lt;/a&gt; on the subject.&lt;/p&gt;
 &lt;/div&gt;
