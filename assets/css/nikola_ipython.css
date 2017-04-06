@@ -1,5 +1,4 @@
 .body p {
-    text-indent: 25px;
     padding-bottom: 10px;
     font-weight: 200;
 }
@@ -21,7 +20,7 @@ pre {
 
 .output_subarea {
     border:none;
-    border-left: 5px solid #d81b1b;
+    border-left: 5px solid #bb1717;
 }
 
 div.input {
@@ -34,7 +33,7 @@ div.input {
 
 div.input_area {
     border:none;
-    border-left: 5px solid #60a4f7;
+    border-left: 5px solid #1566ca;
     background-color:transparent;
     border-radius:0px;
 }
@@ -55,7 +54,7 @@ div.prompt {
 div.output_prompt {
   /* 5px right shift to account for margin in parent container */
   margin: 0 5px 0 0px;
-  color: #d81b1b;
+  color: #bb1717;
 }
 
 div.output_area pre {
@@ -95,16 +94,14 @@ div.text_cell_render {
 }
 
 div.input, div.output_area {
-    display:grid;
     flex-direction: row;
-
 }
 
 div.output_prompt {
-    color: #d81b1b;
+    color: #bb1717;
 }
 div.input_prompt {
-    color:#60a4f7;
+    color:#1566ca;
 }
 
 div.prompt{
