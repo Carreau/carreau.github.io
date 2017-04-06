@@ -325,11 +325,6 @@ div.prompt {
   padding: 0;
   opacity: 0;
 }
-div.prompt:hover {
-  height: 1.5em;
-  padding: 0.6em;
-  opacity: 1;
-}
 .page-content {
   min-height: 100%;
   padding: 48px 0 60px 42px;
