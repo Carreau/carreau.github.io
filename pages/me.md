@@ -124,7 +124,7 @@ Also right now my background is beige for the top half of the wall.
 
 ### Talks
 
-- **Ending Py2/Py3 compatibility in a user friendly manner** – PyCon – 2017 – M. Bussonnier, M. Pacer, T. Kluyver
+- **Ending Py2/Py3 compatibility in a user friendly manner** – PyCon – 2017 – M. Bussonnier, M. Pacer, T. Kluyver – [slides](https://carreau.github.io/pycon2017/) – [video](https://www.youtube.com/watch?v=2DkfPzWWC2Q)
 - **Documentation and Continuous Integration in Python with Sphinx and Travis CI** – The Hacker Within, Berkeley – 2017 – Nelle Varoquaux, Chris Holdgraf, Matthias Bussonnier
 - **Continuous integration, Documentation and Travis CI** – Docathon Conference, Berkeley – 2017 – Matthias Bussonnier - [slides](https://speakerdeck.com/carreau/continuous-integration-documentation-and-travis-ci)
 - **Git and GitHub** – The Hacker Within, Berkeley – 2017 – Ciera Martinez and Matthias Bussonnier

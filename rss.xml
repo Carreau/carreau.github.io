@@ -1,9 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 06 Apr 2017 20:19:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Writing an async REPL - Part 1</title><link>http://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts</title><link>http://carreau.github.io/</link><description>Random, often unfinished thoughts about things, mostly programming and Python</description><atom:link href="http://carreau.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 28 May 2017 20:58:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migration to Python 3 only</title><link>http://carreau.github.io/posts/28-migration-to-python-3-only.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This is a personal experience of having migrated IPython from being single
+source Py2-Py3 to Python 3 only.&lt;/p&gt;
+&lt;h2&gt;The migration plan&lt;/h2&gt;
+&lt;p&gt;The migration of IPython to be Python 3 only, started about a year ago. For the
+last couple of years, the IPython code base was "single source", meaning that yo
+could run it on Python 2 and Python 3 without a single change to the source
+code. &lt;/p&gt;
+&lt;p&gt;We could have made the transition to a Python 3 only code base with the use of a
+transpiler (like 2to3, but 3to2), though there does not seem to be any commonly
+used tools. This would also have required taking care of functionality backport,
+which can be a pain, and things like async-io are quasi impossible to backport
+cleanly to Python 2&lt;/p&gt;
+&lt;p&gt;So we just dropped Python 2 support&lt;/p&gt;
+&lt;h2&gt;The levels of Non-support&lt;/h2&gt;
+&lt;p&gt;While it is easy to use the term "non-supported" there are different level of
+non-support.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Do not release for Python 2, but ou can "compile" or clone/install yourself.&lt;/li&gt;
+&lt;li&gt;Officially saying "this software is not meant to run on Python 2", but it
+   still does and is released.&lt;/li&gt;
+&lt;li&gt;CI Tests are run on Python 2 but "allow failure"&lt;ul&gt;&lt;li&gt;likely to break, but you accept PRs to fix things &lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;CI Tests are not run on Python 2, PR fixing things are accepted&lt;/li&gt;
+&lt;li&gt;PR to fix things on Python 2 are not accepted &lt;/li&gt;
+&lt;li&gt;You are actively adding Python 3 only code&lt;/li&gt;
+&lt;li&gt;You are actively removing Python 2 code&lt;/li&gt;
+&lt;li&gt;You are actively keeping Python 2 compatibility, but make the software delete
+   user home directory.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We settle somewhere in between adding python 3 only feature, and removing Python
+2 code. &lt;/p&gt;
+&lt;p&gt;Making a codebase Python 3 only is "easy" in the sens that adding a single &lt;code&gt;yield
+from&lt;/code&gt; is enough to make your code not valid Python 2, and no &lt;code&gt;__future__&lt;/code&gt;
+statement can fix that.&lt;/p&gt;
+&lt;h2&gt;Removing code&lt;/h2&gt;
+&lt;p&gt;One of the things you will probably see in the background of this section is
+that static languages would be of great help for this task. I would tend to say
+"thank you captain obvious", but there is some truth. Though Python is not a
+static language and we are trying to see how we can write Python in a better way
+to ease the transition.&lt;/p&gt;
+&lt;h3&gt;the obvious&lt;/h3&gt;
+&lt;p&gt;There are obvious functions that are present only for Python 2. In general
+present in &lt;code&gt;if Py2&lt;/code&gt; blocks. These can simply be deleted, and hopefully now your
+linter will complain about a ton of unused variable and import you can remove. &lt;/p&gt;
+&lt;p&gt;This is not always the case with function definition as most linter assume
+function are exported. You can help with coverage, but then you have to make
+sure your function is not tested separately on Python 3. &lt;/p&gt;
+&lt;p&gt;One of the indirect effect in many places was the reduced indentation.
+Especially at module level this lead to much greater readability as module-level
+function are easily confused for object methods when indented in an &lt;code&gt;if py2:&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;EAFP vs LBYL&lt;/h3&gt;
+&lt;p&gt;It is common in Python to use try/except in place of if/else condition. 
+The well-known &lt;code&gt;hasattr&lt;/code&gt; works by catching an exception, and if/else is subject
+to race conditions. So it's not uncommon to hear that "Easier to Ask Forgiveness
+than Permission" is preferred to  "Look Before you Leap". That might be a good
+move in a codebase with requirement that will never change, though in the
+context of code removal it is an hassle. Indeed when encountering a try/except
+which is &lt;strong&gt;likely&lt;/strong&gt; meant to handle a change of behavior between versions of
+Python is hard to know for which version(s) of Python this was written – some
+changes are between minor versions ; in which order is the try/except written
+(Python 2 in the try, or in the except clause), and especially it is quasi
+impossible to &lt;strong&gt;find&lt;/strong&gt; these location. &lt;/p&gt;
+&lt;p&gt;In the other hand explicit if statement (&lt;code&gt;if sys.version_info &amp;lt; (3,)&lt;/code&gt;) are easy
+to find – remember you only need to compare the first item of the tuple – and
+easy to reduce to the only needed branch. It's also way easier to apply (and
+find) these for minor versions.&lt;/p&gt;
+&lt;p&gt;The zen of Python had it right: Explicit is better than implicit. &lt;/p&gt;
+&lt;p&gt;For me at least, &lt;code&gt;try/except ImportError, AttributeError&lt;/code&gt; is a pattern I'll
+avoid in favor of explicit if/else.&lt;/p&gt;
+&lt;h3&gt;byte/str/string/unicode&lt;/h3&gt;
+&lt;p&gt;There is a couple location where you might have to deal with
+bytes/unicode/str/string – oh boy, these names are not well chosen. In
+particular in area where you are casting thing that are bytes to unicode and
+vice-versa. And I can never remember when I read &lt;code&gt;cast_bytes_py2&lt;/code&gt; if it's doing
+nothing on Python 2, or nothing on Python 3. Though once you got the hang of it
+the code is soooo much shorter and simpler and clearer in your head. &lt;/p&gt;
+&lt;p&gt;Remember &lt;code&gt;bytes&amp;lt;-&amp;gt;unicode&lt;/code&gt; at boundary and keep things Unicode everywhere in
+your programs if you want to avoid headache. Good Python Code is boring Python
+code.&lt;/p&gt;
+&lt;h2&gt;Python 2-ism&lt;/h2&gt;
+&lt;p&gt;Dealing with removing Python 2 code made me realise that there is still a lot of
+Python-2-ism in most of the Python 3 code I write.&lt;/p&gt;
+&lt;h3&gt;inheriting classes&lt;/h3&gt;
+&lt;p&gt;Writing classes that do not need to inherit from &lt;code&gt;object&lt;/code&gt; feels weird, and I
+definitively don't have the habit (yet) of not doing it. Having the ability to
+use a bare &lt;code&gt;super()&lt;/code&gt; is great as I fevered remembered the order of parameter. &lt;/p&gt;
+&lt;h3&gt;Pathlib&lt;/h3&gt;
+&lt;p&gt;IPython uses a lot of path manipulation, so we keep using &lt;code&gt;os.path.join&lt;/code&gt; in many
+paces, or even just use the &lt;code&gt;with open(...)&lt;/code&gt; context manager. If you can afford
+it and target only recent python version &lt;code&gt;pathlib&lt;/code&gt; and Path object are great
+alternative that we tend to forget exist. &lt;/p&gt;
+&lt;h3&gt;decode&lt;/h3&gt;
+&lt;p&gt;Most of decode/encode operation do the right things, there is almost no need to
+precise the encoding anywhere. This make handling &lt;code&gt;bytes-&amp;gt; str&lt;/code&gt; conversion even
+easier.&lt;/p&gt;
+&lt;h2&gt;Python 3 ism&lt;/h2&gt;
+&lt;p&gt;This are the feature of Python 3 which do not have equivalent in Python 2 and
+would make great addition in many code base. I tend to forget they exist and do
+not design code around them enough.&lt;/p&gt;
+&lt;h2&gt;async/await&lt;/h2&gt;
+&lt;p&gt;I'm just scratching the surface of async/await, and I definitively see great
+opportunities here. You need to design code to work in an async-fashion, but it
+should be &lt;em&gt;relatively&lt;/em&gt; straightforward to use async code from synchronous one. I
+should learn more about sans-io (google is your friend) to make code reusable. &lt;/p&gt;
+&lt;h2&gt;type anotations&lt;/h2&gt;
+&lt;p&gt;Type annotation are an incredible feature that even just as visual annotation
+replace numpydoc. I have a small grudge against the pep8 that describe the
+position of space, but even without mypy the ability to annotate type is a huge
+boon for documentation. Now docstring can focus on why/how of functions.&lt;/p&gt;
+&lt;h2&gt;kwarg only&lt;/h2&gt;
+&lt;p&gt;Keyword arguments only is a great feature of Python 3, often under-appreciated
+the &lt;code&gt;*&lt;/code&gt;-syntax is IMHO a bit clunky – but I don't have a better option. It give
+you a great flexibility in api without sacrifying backward compatibility. 
+I wish I had position only as well. &lt;/p&gt;&lt;/div&gt;</description><guid>http://carreau.github.io/posts/28-migration-to-python-3-only.md.html</guid><pubDate>Tue, 18 Apr 2017 10:00:00 GMT</pubDate></item><item><title>Writing an async REPL - Part 1</title><link>http://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -28,8 +138,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -37,8 +146,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -63,8 +171,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -105,7 +212,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;1.3.5
@@ -114,7 +223,9 @@
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+
 
 
 
@@ -159,7 +270,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+
 
 
 
@@ -191,7 +304,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
+
 
 
 
@@ -223,7 +338,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
+
 
 
 
@@ -267,8 +384,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -302,7 +418,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
 
 
 
@@ -319,8 +437,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -346,7 +463,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_text output_error"&gt;
 &lt;pre&gt;
@@ -362,8 +481,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -372,8 +490,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -381,8 +498,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -421,7 +537,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;hey
@@ -430,7 +548,9 @@
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+
 
 
 
@@ -444,8 +564,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -477,7 +596,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_text output_error"&gt;
 &lt;pre&gt;
@@ -493,8 +614,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -526,7 +646,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+
 
 
 
@@ -557,7 +679,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[14]:&lt;/div&gt;
+
 
 
 
@@ -571,8 +695,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -599,7 +722,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[15]:&lt;/div&gt;
+
 
 
 
@@ -613,8 +738,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -641,7 +765,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[16]:&lt;/div&gt;
+
 
 
 
@@ -655,8 +781,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -682,7 +807,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_text output_error"&gt;
 &lt;pre&gt;
@@ -696,8 +823,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -711,8 +837,7 @@
 </description><guid>http://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb.html</guid><pubDate>Thu, 06 Apr 2017 13:00:00 GMT</pubDate></item><item><title>Changing ByteStr REPR</title><link>http://carreau.github.io/posts/25-Changing-ByteString-REPR.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -725,8 +850,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -735,8 +859,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -744,8 +867,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -787,7 +909,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[2]:&lt;/div&gt;
+
 
 
 
@@ -801,8 +925,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -830,7 +953,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[3]:&lt;/div&gt;
+
 
 
 
@@ -844,8 +969,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -871,7 +995,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+
 
 
 
@@ -885,8 +1011,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -895,8 +1020,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -904,8 +1028,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -946,7 +1069,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+
 
 
 
@@ -977,7 +1102,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
+
 
 
 
@@ -991,8 +1118,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1000,8 +1126,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1048,7 +1173,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
 
 
 
@@ -1079,7 +1206,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[10]:&lt;/div&gt;
+
 
 
 
@@ -1110,7 +1239,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+
 
 
 
@@ -1124,8 +1255,7 @@
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1151,7 +1281,9 @@
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
 
 
 
@@ -1238,8 +1370,7 @@ the UI and not to have to write a single line of code !&lt;/p&gt;
 &lt;p&gt;Questions, feedback and fixes &lt;a href="https://github.com/carreau/posts"&gt;welcomed&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>http://carreau.github.io/posts/25-remaping-notebook-shortcuts.md.html</guid><pubDate>Wed, 30 Nov 2016 11:00:00 GMT</pubDate></item><item><title>Viridisify</title><link>http://carreau.github.io/posts/24-Viridisify.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1247,8 +1378,7 @@ the UI and not to have to write a single line of code !&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1256,8 +1386,7 @@ the UI and not to have to write a single line of code !&lt;/p&gt;
 &lt;hr&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1321,7 +1450,9 @@ the UI and not to have to write a single line of code !&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;rm: output.gif: No such file or directory
@@ -1333,8 +1464,7 @@ the UI and not to have to write a single line of code !&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1362,8 +1492,7 @@ ffmpeg -i input.mp4 -r &lt;span class="m"&gt;8&lt;/span&gt; -f image2 img%02d.pn
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1406,7 +1535,9 @@ ffmpeg -i input.mp4 -r &lt;span class="m"&gt;8&lt;/span&gt; -f image2 img%02d.pn
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1419,8 +1550,7 @@ ffmpeg -i input.mp4 -r &lt;span class="m"&gt;8&lt;/span&gt; -f image2 img%02d.pn
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1483,7 +1613,9 @@ ffmpeg -i input.mp4 -r &lt;span class="m"&gt;8&lt;/span&gt; -f image2 img%02d.pn
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1496,8 +1628,7 @@ ffmpeg -i input.mp4 -r &lt;span class="m"&gt;8&lt;/span&gt; -f image2 img%02d.pn
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1525,7 +1656,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
 
 
 
@@ -1536,7 +1669,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1549,8 +1684,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1559,8 +1693,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1647,7 +1780,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
 
 
 
@@ -1658,7 +1793,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1668,7 +1805,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1681,8 +1820,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1708,7 +1846,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+
 
 
 
@@ -1719,7 +1859,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1729,7 +1871,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1742,8 +1886,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1769,7 +1912,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[14]:&lt;/div&gt;
+
 
 
 
@@ -1780,7 +1925,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1790,7 +1937,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1803,8 +1952,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1830,7 +1978,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[15]:&lt;/div&gt;
+
 
 
 
@@ -1841,7 +1991,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1851,7 +2003,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -1864,8 +2018,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1875,8 +2028,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1931,8 +2083,7 @@ ffmpeg -i out.mp4  output.gif -y -loglevel panic
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1955,8 +2106,7 @@ ffmpeg -i out.mp4  output.gif -y -loglevel panic
 </description><guid>http://carreau.github.io/posts/24-Viridisify.html</guid><pubDate>Fri, 07 Oct 2016 20:00:00 GMT</pubDate></item><item><title>Cross Language Integration</title><link>http://carreau.github.io/posts/23-Cross-Language-Integration.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1964,8 +2114,7 @@ ffmpeg -i out.mp4  output.gif -y -loglevel panic
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1984,8 +2133,7 @@ Also note that this notebook is basedaround multiple example that have been writ
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -1993,8 +2141,7 @@ Also note that this notebook is basedaround multiple example that have been writ
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2005,8 +2152,7 @@ Also note that this notebook is basedaround multiple example that have been writ
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2014,8 +2160,7 @@ Also note that this notebook is basedaround multiple example that have been writ
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2025,8 +2170,7 @@ F_{n-1}+F_{n-2} &amp;amp; \mbox{otherwise }\end{cases}$$
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2043,8 +2187,7 @@ F_{n-1}+F_{n-2} &amp;amp; \mbox{otherwise }\end{cases}$$
 &lt;/ol&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2070,7 +2213,9 @@ F_{n-1}+F_{n-2} &amp;amp; \mbox{otherwise }\end{cases}$$
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[1]:&lt;/div&gt;
+
 
 
 
@@ -2084,8 +2229,7 @@ F_{n-1}+F_{n-2} &amp;amp; \mbox{otherwise }\end{cases}$$
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2094,8 +2238,7 @@ F_{n-1}+F_{n-2} &amp;amp; \mbox{otherwise }\end{cases}$$
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2113,8 +2256,7 @@ from another:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2123,8 +2265,7 @@ from another:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2150,7 +2291,9 @@ from another:
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;10000 loops, best of 3: 34.9 µs per loop
@@ -2162,8 +2305,7 @@ from another:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2171,8 +2313,7 @@ from another:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2216,7 +2357,9 @@ from another:
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+
 
 
 
@@ -2230,8 +2373,7 @@ from another:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2257,7 +2399,9 @@ from another:
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[5]:&lt;/div&gt;
+
 
 
 
@@ -2271,8 +2415,7 @@ from another:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2281,8 +2424,7 @@ from another:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2290,8 +2432,7 @@ from another:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2318,8 +2459,7 @@ from another:
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2347,7 +2487,9 @@ from another:
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;creating file _XiKZxtsLwX.o
@@ -2385,7 +2527,9 @@ creating file _uKbssAzHBP.o
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;_DKCjzvlTuF.o
@@ -2406,8 +2550,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2434,7 +2577,9 @@ _wJJUbrPzpq.o
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
 
 
 
@@ -2470,8 +2615,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2497,7 +2641,9 @@ _wJJUbrPzpq.o
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;ls: *.o: No such file or directory
@@ -2509,8 +2655,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2519,8 +2664,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2528,8 +2672,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2538,8 +2681,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2587,7 +2729,9 @@ _wJJUbrPzpq.o
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+
 
 
 
@@ -2601,8 +2745,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2637,7 +2780,9 @@ _wJJUbrPzpq.o
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[14]:&lt;/div&gt;
+
 
 
 
@@ -2648,7 +2793,9 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -2661,8 +2808,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2671,8 +2817,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2681,8 +2826,7 @@ _wJJUbrPzpq.o
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2720,8 +2864,7 @@ Here is what I had to do only once.)&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2743,8 +2886,7 @@ Here is what I had to do only once.)&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2775,7 +2917,9 @@ abline&lt;span class="p"&gt;(&lt;/span&gt;my_summary&lt;span class="p"&gt;)&lt;/
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -2806,7 +2950,9 @@ my_summary
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -2839,8 +2985,7 @@ F-statistic: 9.912e+04 on 1 and 27 DF,  p-value: &amp;lt; 2.2e-16
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2849,8 +2994,7 @@ F-statistic: 9.912e+04 on 1 and 27 DF,  p-value: &amp;lt; 2.2e-16
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2859,8 +3003,7 @@ F-statistic: 9.912e+04 on 1 and 27 DF,  p-value: &amp;lt; 2.2e-16
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2887,7 +3030,9 @@ val
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -2904,8 +3049,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2931,7 +3075,9 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[21]:&lt;/div&gt;
+
 
 
 
@@ -2948,8 +3094,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -2977,7 +3122,9 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[22]:&lt;/div&gt;
+
 
 
 
@@ -2991,8 +3138,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3001,8 +3147,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3010,8 +3155,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3020,8 +3164,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3029,8 +3172,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3039,8 +3181,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3093,7 +3234,9 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;ls: *.c: No such file or directory
@@ -3107,8 +3250,7 @@ ls: *.o: No such file or directory
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3141,8 +3283,7 @@ int cfib(int n)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3168,7 +3309,9 @@ int cfib(int n)
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[27]:&lt;/div&gt;
+
 
 
 
@@ -3182,8 +3325,7 @@ int cfib(int n)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3233,7 +3375,9 @@ int cfib(int n)
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[29]:&lt;/div&gt;
+
 
 
 
@@ -3247,8 +3391,7 @@ int cfib(int n)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3274,7 +3417,9 @@ int cfib(int n)
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;The slowest run took 73.42 times longer than the fastest. This could mean that an intermediate result is being cached.
@@ -3304,7 +3449,9 @@ int cfib(int n)
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;The slowest run took 4.65 times longer than the fastest. This could mean that an intermediate result is being cached.
@@ -3317,8 +3464,7 @@ int cfib(int n)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3327,8 +3473,7 @@ int cfib(int n)
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3336,8 +3481,7 @@ int cfib(int n)
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3365,7 +3509,9 @@ int cfib(int n)
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;_cffi_cWtAstIlGT.c  _cffi_cWtAstIlGT.o  _cffi_yxGAKIqXRR.c  _cffi_yxGAKIqXRR.o
@@ -3377,8 +3523,7 @@ int cfib(int n)
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3387,8 +3532,7 @@ int cfib(int n)
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3396,8 +3540,7 @@ int cfib(int n)
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3433,7 +3576,9 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;injecting  rfib in user ns
@@ -3462,7 +3607,9 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[34]:&lt;/div&gt;
+
 
 
 
@@ -3476,8 +3623,7 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3486,8 +3632,7 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3495,8 +3640,7 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3505,8 +3649,7 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3514,8 +3657,7 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3541,7 +3683,9 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stderr output_text"&gt;
 &lt;pre&gt;/Users/bussonniermatthias/anaconda/lib/python3.5/site-packages/fortranmagic.py:147: UserWarning: get_ipython_cache_dir has moved to the IPython.paths module since IPython 4.0.
@@ -3551,15 +3695,17 @@ pub extern fn rfib(n: i32) -&amp;gt; i32 {
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
 
 
 
 
-&lt;div id="448f23c9-b688-49d7-98cb-fc298ba212f1"&gt;&lt;/div&gt;
+
+&lt;div id="142aed36-ed59-4ed1-85b3-65951fe9e694"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#448f23c9-b688-49d7-98cb-fc298ba212f1');
+var element = $('#142aed36-ed59-4ed1-85b3-65951fe9e694');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
@@ -3614,7 +3760,9 @@ END SUBROUTINE ffib
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[37]:&lt;/div&gt;
+
 
 
 
@@ -3628,8 +3776,7 @@ END SUBROUTINE ffib
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3638,8 +3785,7 @@ END SUBROUTINE ffib
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3647,8 +3793,7 @@ END SUBROUTINE ffib
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3727,7 +3872,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[41]:&lt;/div&gt;
+
 
 
 
@@ -3741,8 +3888,7 @@ The same principle applies:&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3767,7 +3913,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;100 loops, best of 3: 648 ns per loop
@@ -3796,7 +3944,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;The slowest run took 11.60 times longer than the fastest. This could mean that an intermediate result is being cached.
@@ -3826,7 +3976,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;100 loops, best of 3: 147 ns per loop
@@ -3855,7 +4007,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;100 loops, best of 3: 45.6 ns per loop
@@ -3867,8 +4021,7 @@ The same principle applies:&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3877,8 +4030,7 @@ The same principle applies:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3900,8 +4052,7 @@ The same principle applies:&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3909,8 +4060,7 @@ The same principle applies:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -3944,7 +4094,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Pray the demo-gods it wont segfault even without rust...
@@ -3992,7 +4144,9 @@ The same principle applies:&lt;/p&gt;
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;fortran -&amp;gt; cython -&amp;gt; python -&amp;gt; c : 5
@@ -4044,7 +4198,9 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;It worked ! I can run all the permutations !
@@ -4056,8 +4212,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4065,8 +4220,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4075,8 +4229,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4085,8 +4238,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4127,7 +4279,9 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Initializing Julia interpreter. This may take some time...
@@ -4157,7 +4311,9 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[53]:&lt;/div&gt;
+
 
 
 
@@ -4171,8 +4327,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4229,7 +4384,9 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[56]:&lt;/div&gt;
+
 
 
 
@@ -4240,7 +4397,9 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 
 
@@ -4253,8 +4412,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4288,7 +4446,9 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[57]:&lt;/div&gt;
+
 
 
 
@@ -4301,8 +4461,7 @@ c -&amp;gt; python -&amp;gt; cython -&amp;gt; fortran : 5
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4312,8 +4471,7 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4377,7 +4535,9 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;(P(J(P(J(P(J(P(J(P)(P)))(P(J))(P(J))(P)))(P(J(P(J))(P)(P)(P)))(P(J(P(J))(P)(P)(P)))(P(J(P)(P)))))(P(J(P(J(P(J))(P)(P)(P)))(P(J(P)(P)))(P(J(P)(P)))(P(J))))(P(J(P(J(P(J))(P)(P)(P)))(P(J(P)(P)))(P(J(P)(P)))(P(J))))(P(J(P(J(P)(P)))(P(J))(P(J))(P)))))&lt;/pre&gt;
@@ -4385,7 +4545,9 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[59]:&lt;/div&gt;
+
 
 
 
@@ -4399,8 +4561,7 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4408,8 +4569,7 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4420,8 +4580,7 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4430,8 +4589,7 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4439,8 +4597,7 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -4468,7 +4625,9 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt"&gt;&lt;/div&gt;
+
 
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Pfiew
@@ -4477,7 +4636,9 @@ The key value here is that we get the &lt;em&gt;same&lt;/em&gt; object from with
 &lt;/div&gt;
 
 &lt;div class="output_area"&gt;
+
 &lt;div class="prompt output_prompt"&gt;Out[60]:&lt;/div&gt;
+
 
 
 
@@ -4921,156 +5082,4 @@ Please respect them instead of raising some funds by venture capitals.&lt;/p&gt;
 apparently you don't.&lt;/p&gt;
 &lt;h3&gt;Thanks&lt;/h3&gt;
 &lt;p&gt;As usual, I'm not a good at writing English so I appreciate any Pull Request
-that fix grammar, spelling and english expression.&lt;/p&gt;&lt;/div&gt;</description><category>anger</category><category>figshare</category><category>privacy</category><category>security</category><category>swearwords</category><guid>http://carreau.github.io/posts/19-about-security.html</guid><pubDate>Thu, 24 Sep 2015 21:33:24 GMT</pubDate></item><item><title>Planning an Early Death for Python 2</title><link>http://carreau.github.io/posts/planning-an-early-death-for-python-2.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;On September 18 and 19, 2015, the Data Structure for Data Science workshop
-gathered at UC Berkeley's BIDS [Berkeley Institute for Data Science]. It was a
-productive two days of presentation, discussion and working groups — a
-collaborative effort aimed at expanding what data science can do.&lt;/p&gt;
-&lt;p&gt;Despite having mostly Python developers, the workshop reached out and included
-members from many other programming communities (e.g., C, C++, Julia, R, etc.)
-as the workshop's explicit goal was to improve cross language operability. In
-particular, the goal was to enable python's scientific computing tools
-(numpy, scipy, pandas, etc.) to have a consensus backbone data-structure that
-would enable easier interaction with other programming languages.&lt;/p&gt;
-&lt;p&gt;Out of the discussion arose a topic that has long plagued the python community
-at large: code that requires legacy Python 2.7 is holding back the development
-of data-science toolsets and – by extension – the progress of data science as a
-whole. Python 2.7 was an important part of the history of scientific computing,
-but now it should be left as part of that history. Thus, we convened a small
-working group to plan a early death for Legacy Python.&lt;/p&gt;
-&lt;h3&gt;Move over Legacy Python once and for all.&lt;/h3&gt;
-&lt;p&gt;In collaboration with many developers among whom @jiffyclub, @tacasswell,
-@kbarbary, @teoliphant, @pzwang, @ogrisel, we discussed different options to
-push Legacy Python more or less gently through the door. We understand that
-some people are still requiring the use of Legacy Python in their code base, or
-the use some libraries which are still only available on Legacy Python and we
-don't blame them.  We understand that Legacy Python was a great language and
-that it's hard to move over it.  Though the retirement of Legacy Python is
-2020, you will ave to make the transition then, and it will be even harder to
-transition at that point.&lt;/p&gt;
-&lt;p&gt;So what are the step we can do to push the transition forward.&lt;/p&gt;
-&lt;h3&gt;Choose your words.&lt;/h3&gt;
-&lt;p&gt;The choice of words you make on the internet and in real life will influence
-the vision people have for Legacy Python vs Python. Assume that Python 3 is
-just Python, and refer to Python 2 as legacy python.  IDEs and TwitterSphere is
-&lt;a href="https://twitter.com/astrofrog/status/646976176657932288"&gt;starting&lt;/a&gt; to &lt;a href="https://twitter.com/almarklein/status/645542438937980929"&gt;do
-that&lt;/a&gt;, join the
-movement.&lt;/p&gt;
-&lt;p&gt;Refer to Legacy Python in the past tense. It will reinforce the old and
-deprecated state of Legacy Python. I still don't understand why people would
-like to stay with a language which that many defects:&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;it did not protect you from mixing Unicode and bytes,&lt;/li&gt;
-&lt;li&gt;tripped you with integer division&lt;/li&gt;
-&lt;li&gt;did not allow you to replace the printing function&lt;/li&gt;
-&lt;li&gt;had a range object which is not memory efficient&lt;/li&gt;
-&lt;li&gt;did not permit to re-raise exception&lt;/li&gt;
-&lt;li&gt;had a bad asynchronous support, without yield from&lt;/li&gt;
-&lt;li&gt;forced you to repeat the current class in &lt;code&gt;super()&lt;/code&gt; call.&lt;/li&gt;
-&lt;li&gt;let you mix tab and space.&lt;/li&gt;
-&lt;li&gt;did not support function annotations&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Legacy Python was missing many other feature which are now part of Python.&lt;/p&gt;
-&lt;p&gt;Do not state what's better in Python 3, state that it was missing/broken in
-Legacy Python.  Like the missing matrix multiplication operator was missing
-multiplication operator. Legacy Python was preventing people to use efficient
-numeric library which are relying on the numerical operator.&lt;/p&gt;
-&lt;h3&gt;Don't respond to "and on Python 2"&lt;/h3&gt;
-&lt;p&gt;Personally during talks I plan to not pay attention to question regarding
-legacy Python, and will treat questions such questions as someone asking whether
-I support windows Vista. Next question please. The less you talk about Legacy Python
-the more you imply Legacy Python  is not a thing anymore.&lt;/p&gt;
-&lt;h3&gt;Drop support for Legacy Python (at least on paper)&lt;/h3&gt;
-&lt;p&gt;If you a library author, you have probably had to deal with user trying your
-software on Legacy Python, and spend lot of time making your codebase
-compatible with both Python 3 and legacy Python.  There are a few step you can
-take to push user toward Python 3.&lt;/p&gt;
-&lt;p&gt;If a user is not willing to update to a new version on Python, and decide to stay on
-legacy Python, they can most likely pin the version on your library to versions which
-support Legacy Python.&lt;/p&gt;
-&lt;h4&gt;Make your examples/documentation Python 3 only&lt;/h4&gt;
-&lt;p&gt;Or at least do not make effort to have examples that work using Legacy Python.
-Sprinkle with function annotation, and &lt;code&gt;async&lt;/code&gt;/&lt;code&gt;await&lt;/code&gt; keyword can help with
-communicating your example are Python 3 only.&lt;/p&gt;
-&lt;p&gt;You can even avoid mention of Legacy Python in your documentation and assume
-your users are using Python 3, this will make writing documentation much easier,
-and increase the chances to get examples right.&lt;/p&gt;
-&lt;h4&gt;Ask user to reproduce but on up-to-date Python version.&lt;/h4&gt;
-&lt;p&gt;Have you ever had a bug report where you ask users to upgrade your libraries
-dependencies ? Do the same with Python. If a user make a bug report with Python
-2.7 ask them if they can reproduce with an up-to date version of Python, even
-if the bug is obviously from your side.  If they really can't upgrade they will
-know, if they do and can reproduce, then you'll have at least converted one
-user from Legacy Python (and in the meantime you might have already corrected
-the bug).&lt;/p&gt;
-&lt;h4&gt;Defer 2.7 support to companies like Continuum&lt;/h4&gt;
-&lt;p&gt;This is already what &lt;a href="http://www.curiousefficiency.org/posts/2015/04/stop-supporting-python26.html"&gt;Nick Coghlan
-recommands&lt;/a&gt;
-for Python 2.6, and that's what you can do for Legacy Python fix. If you
-have a sufficient number of user which are asking for 2.7 support, accept the
-bug report, but as an open source maintainer do not work on it. You can partner
-with companies like Continuum or Enthought, from which user would "buy" 2.7 support
-for your libraries, in exchange of which the Companies could spend some of their
-developer time fixing your Legacy Python bugs.&lt;/p&gt;
-&lt;p&gt;After a quick discussion with Peter Wang, it would be possible, but details
-need to be worked on.&lt;/p&gt;
-&lt;h3&gt;Make Python 3 attractive&lt;/h3&gt;
-&lt;h4&gt;Create new features&lt;/h4&gt;
-&lt;p&gt;Plan you new features explicitly for Python 3, even if the feature would be
-simple to make Legacy Python compatible, disable it on old platforms, and issue
-a warning indicating that the feature is not available on Legacy Python
-install.&lt;/p&gt;
-&lt;p&gt;You will be able to use all the shiny Python features which are lacking on
-Legacy Python like Unicode characters !&lt;/p&gt;
-&lt;h4&gt;Create new Python packages&lt;/h4&gt;
-&lt;p&gt;Make new packages Python 3 only, and make all the design decision you didn't do
-on your previous package. Pure python libraries are much easier to create and
-&lt;a href="http://flit.readthedocs.org/en/latest/"&gt;build&lt;/a&gt;  once you are not hold back by
-legacy Python.&lt;/p&gt;
-&lt;h3&gt;Helping Other project&lt;/h3&gt;
-&lt;p&gt;Despite all the good will in the world the Migration path from Legacy Python
-can be hard.  There are still a lot of things that can be done to help current
-and new project to push forward the adoption of Python.&lt;/p&gt;
-&lt;h4&gt;Testing&lt;/h4&gt;
-&lt;p&gt;Make sure that all the project you care about have continuous integration on
-Python 3, if possible even the documentation building done with Python 3, help
-to make Python 3 the default.&lt;/p&gt;
-&lt;p&gt;With continuous integration, check that your favorites projects are tested on
-Python Nightly, most CI provider allow the tests to be ran on nightly, but do
-not make the status of the project turn red if the test are failing. See
-&lt;a href="http://docs.travis-ci.com/user/customizing-the-build/#Rows-that-are-Allowed-to-Fail"&gt;&lt;code&gt;allow_faillure&lt;/code&gt;&lt;/a&gt;
-on Travis-CI for example.&lt;/p&gt;
-&lt;h4&gt;Porting C-extensions, move to Cython&lt;/h4&gt;
-&lt;p&gt;The path to migrate C-extension is not well documented, the preferred approach
-is to use &lt;a href="https://cffi.readthedocs.org/en/latest/"&gt;CFFI&lt;/a&gt;, but there is still
-alack of well written centralised, document on how to integrate with Python 3.
-IF you are knowledgeable on this domain, your help is welcomed.&lt;/p&gt;
-&lt;h3&gt;The things we will (probably) not do.&lt;/h3&gt;
-&lt;p&gt;Make a twitter account that shame people that use Legacy Python, though we
-might do a Parody account which say funny things, and push people toward Python 3.&lt;/p&gt;
-&lt;p&gt;Slow code on purpose and obviously on Legacy Python:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version_info&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
-    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
-
-
-&lt;p&gt;Though it would be fun.&lt;/p&gt;
-&lt;p&gt;Ask user at IDE/CLI startup time if they want to upgrade to Python3:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;$ python2
-Python &lt;span class="m"&gt;2&lt;/span&gt;.7.10 &lt;span class="o"&gt;(&lt;/span&gt;default, Jul &lt;span class="m"&gt;13&lt;/span&gt; &lt;span class="m"&gt;2015&lt;/span&gt;, &lt;span class="m"&gt;12&lt;/span&gt;:05:58&lt;span class="o"&gt;)&lt;/span&gt;
-Type &lt;span class="s2"&gt;"help"&lt;/span&gt;, &lt;span class="s2"&gt;"copyright"&lt;/span&gt;, &lt;span class="s2"&gt;"credits"&lt;/span&gt; or &lt;span class="s2"&gt;"license"&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
-
-Warning you are starting a Legacy Python interpreter. Aren&lt;span class="s1"&gt;'t you sure you don'&lt;/span&gt;t
-want not to upgrade to a newer version ? &lt;span class="o"&gt;[&lt;/span&gt;y&lt;span class="o"&gt;]&lt;/span&gt;:_
-&lt;/pre&gt;
-
-
-&lt;p&gt;Delay Legacy Python packages releases by a few weeks to incentive people to
-migrate, or should we actually consider the people on Python 2 as guinea pig
-and release nightly ?&lt;/p&gt;
-&lt;h2&gt;End word&lt;/h2&gt;
-&lt;p&gt;Remember, Legacy Python is responsible for global warming, encourage people to
-stay with IE6, and is voting for Donald Trump.&lt;/p&gt;
-&lt;p&gt;If you have any ideas, please send me a Pull Request, I'll be happy to discuss. &lt;/p&gt;
-&lt;p&gt;As usual my English is far from perfect, so Pull Request welcomed on this blog
-post. Thanks to @michaelpacer who already did some rereading/rephrasing of
-first draft.&lt;/p&gt;&lt;/div&gt;</description><category>python</category><guid>http://carreau.github.io/posts/planning-an-early-death-for-python-2.html</guid><pubDate>Thu, 24 Sep 2015 10:00:00 GMT</pubDate></item></channel></rss>
+that fix grammar, spelling and english expression.&lt;/p&gt;&lt;/div&gt;</description><category>anger</category><category>figshare</category><category>privacy</category><category>security</category><category>swearwords</category><guid>http://carreau.github.io/posts/19-about-security.html</guid><pubDate>Thu, 24 Sep 2015 21:33:24 GMT</pubDate></item></channel></rss>
