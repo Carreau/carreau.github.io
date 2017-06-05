@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Migration to Python 3 only | Random Thoughts</title>
+<link href="../assets/css/bitter.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="http://carreau.github.io/posts/28-migration-to-python-3-only.md.html">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
+<meta property="og:site_name" content="Random Thoughts">
+<meta property="og:title" content="Migration to Python 3 only">
+<meta property="og:url" content="http://carreau.github.io/posts/28-migration-to-python-3-only.md.html">
+<meta property="og:description" content="This is a personal experience of having migrated IPython from being single
+source Py2-Py3 to Python 3 only.
+The migration plan
+The migration of IPython to be Python 3 only, started about a year ago. F">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-04-18T10:00:00Z">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+            <li><a href="../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Migration to Python 3 only</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2017-04-18T10:00:00+00:00">2017-04-18 10:00</time>
+            
+                      |  
+        <a href="28-migration-to-python-3-only.md.md" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<p>This is a personal experience of having migrated IPython from being single
+source Py2-Py3 to Python 3 only.</p>
+<h2>The migration plan</h2>
+<p>The migration of IPython to be Python 3 only, started about a year ago. For the
+last couple of years, the IPython code base was "single source", meaning that yo
+could run it on Python 2 and Python 3 without a single change to the source
+code. </p>
+<p>We could have made the transition to a Python 3 only code base with the use of a
+transpiler (like 2to3, but 3to2), though there does not seem to be any commonly
+used tools. This would also have required taking care of functionality backport,
+which can be a pain, and things like async-io are quasi impossible to backport
+cleanly to Python 2</p>
+<p>So we just dropped Python 2 support</p>
+<h2>The levels of Non-support</h2>
+<p>While it is easy to use the term "non-supported" there are different level of
+non-support.</p>
+<ul>
+<li>Do not release for Python 2, but ou can "compile" or clone/install yourself.</li>
+<li>Officially saying "this software is not meant to run on Python 2", but it
+   still does and is released.</li>
+<li>CI Tests are run on Python 2 but "allow failure"<ul>
+<li>likely to break, but you accept PRs to fix things </li>
+</ul>
+</li>
+<li>CI Tests are not run on Python 2, PR fixing things are accepted</li>
+<li>PR to fix things on Python 2 are not accepted </li>
+<li>You are actively adding Python 3 only code</li>
+<li>You are actively removing Python 2 code</li>
+<li>You are actively keeping Python 2 compatibility, but make the software delete
+   user home directory.</li>
+</ul>
+<p>We settle somewhere in between adding python 3 only feature, and removing Python
+2 code. </p>
+<p>Making a codebase Python 3 only is "easy" in the sens that adding a single <code>yield
+from</code> is enough to make your code not valid Python 2, and no <code>__future__</code>
+statement can fix that.</p>
+<h2>Removing code</h2>
+<p>One of the things you will probably see in the background of this section is
+that static languages would be of great help for this task. I would tend to say
+"thank you captain obvious", but there is some truth. Though Python is not a
+static language and we are trying to see how we can write Python in a better way
+to ease the transition.</p>
+<h3>the obvious</h3>
+<p>There are obvious functions that are present only for Python 2. In general
+present in <code>if Py2</code> blocks. These can simply be deleted, and hopefully now your
+linter will complain about a ton of unused variable and import you can remove. </p>
+<p>This is not always the case with function definition as most linter assume
+function are exported. You can help with coverage, but then you have to make
+sure your function is not tested separately on Python 3. </p>
+<p>One of the indirect effect in many places was the reduced indentation.
+Especially at module level this lead to much greater readability as module-level
+function are easily confused for object methods when indented in an <code>if py2:</code></p>
+<h3>EAFP vs LBYL</h3>
+<p>It is common in Python to use try/except in place of if/else condition. 
+The well-known <code>hasattr</code> works by catching an exception, and if/else is subject
+to race conditions. So it's not uncommon to hear that "Easier to Ask Forgiveness
+than Permission" is preferred to  "Look Before you Leap". That might be a good
+move in a codebase with requirement that will never change, though in the
+context of code removal it is an hassle. Indeed when encountering a try/except
+which is <strong>likely</strong> meant to handle a change of behavior between versions of
+Python is hard to know for which version(s) of Python this was written – some
+changes are between minor versions ; in which order is the try/except written
+(Python 2 in the try, or in the except clause), and especially it is quasi
+impossible to <strong>find</strong> these location. </p>
+<p>In the other hand explicit if statement (<code>if sys.version_info &lt; (3,)</code>) are easy
+to find – remember you only need to compare the first item of the tuple – and
+easy to reduce to the only needed branch. It's also way easier to apply (and
+find) these for minor versions.</p>
+<p>The zen of Python had it right: Explicit is better than implicit. </p>
+<p>For me at least, <code>try/except ImportError, AttributeError</code> is a pattern I'll
+avoid in favor of explicit if/else.</p>
+<h3>byte/str/string/unicode</h3>
+<p>There is a couple location where you might have to deal with
+bytes/unicode/str/string – oh boy, these names are not well chosen. In
+particular in area where you are casting thing that are bytes to unicode and
+vice-versa. And I can never remember when I read <code>cast_bytes_py2</code> if it's doing
+nothing on Python 2, or nothing on Python 3. Though once you got the hang of it
+the code is soooo much shorter and simpler and clearer in your head. </p>
+<p>Remember <code>bytes&lt;-&gt;unicode</code> at boundary and keep things Unicode everywhere in
+your programs if you want to avoid headache. Good Python Code is boring Python
+code.</p>
+<h2>Python 2-ism</h2>
+<p>Dealing with removing Python 2 code made me realise that there is still a lot of
+Python-2-ism in most of the Python 3 code I write.</p>
+<h3>inheriting classes</h3>
+<p>Writing classes that do not need to inherit from <code>object</code> feels weird, and I
+definitively don't have the habit (yet) of not doing it. Having the ability to
+use a bare <code>super()</code> is great as I fevered remembered the order of parameter. </p>
+<h3>Pathlib</h3>
+<p>IPython uses a lot of path manipulation, so we keep using <code>os.path.join</code> in many
+paces, or even just use the <code>with open(...)</code> context manager. If you can afford
+it and target only recent python version <code>pathlib</code> and Path object are great
+alternative that we tend to forget exist. </p>
+<h3>decode</h3>
+<p>Most of decode/encode operation do the right things, there is almost no need to
+precise the encoding anywhere. This make handling <code>bytes-&gt; str</code> conversion even
+easier.</p>
+<h2>Python 3 ism</h2>
+<p>This are the feature of Python 3 which do not have equivalent in Python 2 and
+would make great addition in many code base. I tend to forget they exist and do
+not design code around them enough.</p>
+<h2>async/await</h2>
+<p>I'm just scratching the surface of async/await, and I definitively see great
+opportunities here. You need to design code to work in an async-fashion, but it
+should be <em>relatively</em> straightforward to use async code from synchronous one. I
+should learn more about sans-io (google is your friend) to make code reusable. </p>
+<h2>type anotations</h2>
+<p>Type annotation are an incredible feature that even just as visual annotation
+replace numpydoc. I have a small grudge against the pep8 that describe the
+position of space, but even without mypy the ability to annotate type is a huge
+boon for documentation. Now docstring can focus on why/how of functions.</p>
+<h2>kwarg only</h2>
+<p>Keyword arguments only is a great feature of Python 3, often under-appreciated
+the <code>*</code>-syntax is IMHO a bit clunky – but I don't have a better option. It give
+you a great flexibility in api without sacrifying backward compatibility. 
+I wish I had position only as well. </p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="27-Writing-an-async-REPL---Part-1.ipynb.html" rel="prev" title="Writing an async REPL - Part 1">Previous post</a>
+            </li>
+        </ul>
+</div>
+                    <footer id="footer"><p>Contents © 2017         <a href="mailto:bussonnier.matthias(at)mail-by-google(dot)com">Matthias Bussonnier</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"></a><br>This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Matthias Bussonnier</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+</p>
+            
+        </footer>
+</div>
+    </section><script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

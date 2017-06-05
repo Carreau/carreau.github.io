@@ -40,6 +40,138 @@ MathJax.Hub.Config({
 
         </ul></section><section class="page-content"><div class="content" rel="main">
         <div class="post">
+            <h1 class="title"><a href="posts/28-migration-to-python-3-only.md.html">Migration to Python 3 only</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2017-04-18T10:00:00+00:00">2017-04-18 10:00</time>
+</div>
+                <div class="stats">
+                    
+                </div>
+                
+            </div>
+            <div class="body">
+                <div>
+<p>This is a personal experience of having migrated IPython from being single
+source Py2-Py3 to Python 3 only.</p>
+<h2>The migration plan</h2>
+<p>The migration of IPython to be Python 3 only, started about a year ago. For the
+last couple of years, the IPython code base was "single source", meaning that yo
+could run it on Python 2 and Python 3 without a single change to the source
+code. </p>
+<p>We could have made the transition to a Python 3 only code base with the use of a
+transpiler (like 2to3, but 3to2), though there does not seem to be any commonly
+used tools. This would also have required taking care of functionality backport,
+which can be a pain, and things like async-io are quasi impossible to backport
+cleanly to Python 2</p>
+<p>So we just dropped Python 2 support</p>
+<h2>The levels of Non-support</h2>
+<p>While it is easy to use the term "non-supported" there are different level of
+non-support.</p>
+<ul>
+<li>Do not release for Python 2, but ou can "compile" or clone/install yourself.</li>
+<li>Officially saying "this software is not meant to run on Python 2", but it
+   still does and is released.</li>
+<li>CI Tests are run on Python 2 but "allow failure"<ul>
+<li>likely to break, but you accept PRs to fix things </li>
+</ul>
+</li>
+<li>CI Tests are not run on Python 2, PR fixing things are accepted</li>
+<li>PR to fix things on Python 2 are not accepted </li>
+<li>You are actively adding Python 3 only code</li>
+<li>You are actively removing Python 2 code</li>
+<li>You are actively keeping Python 2 compatibility, but make the software delete
+   user home directory.</li>
+</ul>
+<p>We settle somewhere in between adding python 3 only feature, and removing Python
+2 code. </p>
+<p>Making a codebase Python 3 only is "easy" in the sens that adding a single <code>yield
+from</code> is enough to make your code not valid Python 2, and no <code>__future__</code>
+statement can fix that.</p>
+<h2>Removing code</h2>
+<p>One of the things you will probably see in the background of this section is
+that static languages would be of great help for this task. I would tend to say
+"thank you captain obvious", but there is some truth. Though Python is not a
+static language and we are trying to see how we can write Python in a better way
+to ease the transition.</p>
+<h3>the obvious</h3>
+<p>There are obvious functions that are present only for Python 2. In general
+present in <code>if Py2</code> blocks. These can simply be deleted, and hopefully now your
+linter will complain about a ton of unused variable and import you can remove. </p>
+<p>This is not always the case with function definition as most linter assume
+function are exported. You can help with coverage, but then you have to make
+sure your function is not tested separately on Python 3. </p>
+<p>One of the indirect effect in many places was the reduced indentation.
+Especially at module level this lead to much greater readability as module-level
+function are easily confused for object methods when indented in an <code>if py2:</code></p>
+<h3>EAFP vs LBYL</h3>
+<p>It is common in Python to use try/except in place of if/else condition. 
+The well-known <code>hasattr</code> works by catching an exception, and if/else is subject
+to race conditions. So it's not uncommon to hear that "Easier to Ask Forgiveness
+than Permission" is preferred to  "Look Before you Leap". That might be a good
+move in a codebase with requirement that will never change, though in the
+context of code removal it is an hassle. Indeed when encountering a try/except
+which is <strong>likely</strong> meant to handle a change of behavior between versions of
+Python is hard to know for which version(s) of Python this was written – some
+changes are between minor versions ; in which order is the try/except written
+(Python 2 in the try, or in the except clause), and especially it is quasi
+impossible to <strong>find</strong> these location. </p>
+<p>In the other hand explicit if statement (<code>if sys.version_info &lt; (3,)</code>) are easy
+to find – remember you only need to compare the first item of the tuple – and
+easy to reduce to the only needed branch. It's also way easier to apply (and
+find) these for minor versions.</p>
+<p>The zen of Python had it right: Explicit is better than implicit. </p>
+<p>For me at least, <code>try/except ImportError, AttributeError</code> is a pattern I'll
+avoid in favor of explicit if/else.</p>
+<h3>byte/str/string/unicode</h3>
+<p>There is a couple location where you might have to deal with
+bytes/unicode/str/string – oh boy, these names are not well chosen. In
+particular in area where you are casting thing that are bytes to unicode and
+vice-versa. And I can never remember when I read <code>cast_bytes_py2</code> if it's doing
+nothing on Python 2, or nothing on Python 3. Though once you got the hang of it
+the code is soooo much shorter and simpler and clearer in your head. </p>
+<p>Remember <code>bytes&lt;-&gt;unicode</code> at boundary and keep things Unicode everywhere in
+your programs if you want to avoid headache. Good Python Code is boring Python
+code.</p>
+<h2>Python 2-ism</h2>
+<p>Dealing with removing Python 2 code made me realise that there is still a lot of
+Python-2-ism in most of the Python 3 code I write.</p>
+<h3>inheriting classes</h3>
+<p>Writing classes that do not need to inherit from <code>object</code> feels weird, and I
+definitively don't have the habit (yet) of not doing it. Having the ability to
+use a bare <code>super()</code> is great as I fevered remembered the order of parameter. </p>
+<h3>Pathlib</h3>
+<p>IPython uses a lot of path manipulation, so we keep using <code>os.path.join</code> in many
+paces, or even just use the <code>with open(...)</code> context manager. If you can afford
+it and target only recent python version <code>pathlib</code> and Path object are great
+alternative that we tend to forget exist. </p>
+<h3>decode</h3>
+<p>Most of decode/encode operation do the right things, there is almost no need to
+precise the encoding anywhere. This make handling <code>bytes-&gt; str</code> conversion even
+easier.</p>
+<h2>Python 3 ism</h2>
+<p>This are the feature of Python 3 which do not have equivalent in Python 2 and
+would make great addition in many code base. I tend to forget they exist and do
+not design code around them enough.</p>
+<h2>async/await</h2>
+<p>I'm just scratching the surface of async/await, and I definitively see great
+opportunities here. You need to design code to work in an async-fashion, but it
+should be <em>relatively</em> straightforward to use async code from synchronous one. I
+should learn more about sans-io (google is your friend) to make code reusable. </p>
+<h2>type anotations</h2>
+<p>Type annotation are an incredible feature that even just as visual annotation
+replace numpydoc. I have a small grudge against the pep8 that describe the
+position of space, but even without mypy the ability to annotate type is a huge
+boon for documentation. Now docstring can focus on why/how of functions.</p>
+<h2>kwarg only</h2>
+<p>Keyword arguments only is a great feature of Python 3, often under-appreciated
+the <code>*</code>-syntax is IMHO a bit clunky – but I don't have a better option. It give
+you a great flexibility in api without sacrifying backward compatibility. 
+I wish I had position only as well. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/27-Writing-an-async-REPL---Part-1.ipynb.html">Writing an async REPL - Part 1</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -158,7 +290,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>1.3.5
@@ -167,7 +301,9 @@ MathJax.Hub.Config({
 </div>
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[4]:</div>
+
 
 
 
@@ -212,7 +348,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[6]:</div>
+
 
 
 
@@ -244,7 +382,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[7]:</div>
+
 
 
 
@@ -276,7 +416,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[8]:</div>
+
 
 
 
@@ -355,7 +497,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[9]:</div>
+
 
 
 
@@ -399,7 +543,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_text output_error">
 <pre>
@@ -475,7 +621,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>hey
@@ -484,7 +632,9 @@ MathJax.Hub.Config({
 </div>
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[11]:</div>
+
 
 
 
@@ -531,7 +681,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_text output_error">
 <pre>
@@ -580,7 +732,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[13]:</div>
+
 
 
 
@@ -611,7 +765,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[14]:</div>
+
 
 
 
@@ -653,7 +809,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[15]:</div>
+
 
 
 
@@ -695,7 +853,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[16]:</div>
+
 
 
 
@@ -736,7 +896,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_text output_error">
 <pre>
@@ -861,7 +1023,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[2]:</div>
+
 
 
 
@@ -904,7 +1068,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[3]:</div>
+
 
 
 
@@ -945,7 +1111,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[4]:</div>
+
 
 
 
@@ -1021,7 +1189,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[6]:</div>
+
 
 
 
@@ -1052,7 +1222,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[7]:</div>
+
 
 
 
@@ -1126,7 +1298,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[9]:</div>
+
 
 
 
@@ -1157,7 +1331,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[10]:</div>
+
 
 
 
@@ -1188,7 +1364,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[11]:</div>
+
 
 
 
@@ -1229,7 +1407,9 @@ MathJax.Hub.Config({
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[12]:</div>
+
 
 
 
@@ -1435,7 +1615,9 @@ the UI and not to have to write a single line of code !</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>rm: output.gif: No such file or directory
@@ -1520,7 +1702,9 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1598,7 +1782,9 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1641,7 +1827,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[9]:</div>
+
 
 
 
@@ -1652,7 +1840,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1764,7 +1954,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[12]:</div>
+
 
 
 
@@ -1775,7 +1967,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1786,7 +1980,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1827,7 +2023,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[13]:</div>
+
 
 
 
@@ -1838,7 +2036,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1849,7 +2049,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1890,7 +2092,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[14]:</div>
+
 
 
 
@@ -1901,7 +2105,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1912,7 +2118,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1953,7 +2161,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[15]:</div>
+
 
 
 
@@ -1964,7 +2174,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -1975,7 +2187,9 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -2221,7 +2435,9 @@ F_{n-1}+F_{n-2} &amp; \mbox{otherwise }\end{cases}$$
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[1]:</div>
+
 
 
 
@@ -2301,7 +2517,9 @@ from another:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>10000 loops, best of 3: 34.9 µs per loop
@@ -2368,7 +2586,9 @@ from another:
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[4]:</div>
+
 
 
 
@@ -2409,7 +2629,9 @@ from another:
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[5]:</div>
+
 
 
 
@@ -2500,7 +2722,9 @@ from another:
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>creating file _XiKZxtsLwX.o
@@ -2538,7 +2762,9 @@ creating file _uKbssAzHBP.o
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>_DKCjzvlTuF.o
@@ -2587,7 +2813,9 @@ _wJJUbrPzpq.o
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[9]:</div>
+
 
 
 
@@ -2650,7 +2878,9 @@ _wJJUbrPzpq.o
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>ls: *.o: No such file or directory
@@ -2741,7 +2971,9 @@ _wJJUbrPzpq.o
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[13]:</div>
+
 
 
 
@@ -2791,7 +3023,9 @@ _wJJUbrPzpq.o
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[14]:</div>
+
 
 
 
@@ -2802,7 +3036,9 @@ _wJJUbrPzpq.o
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -2930,7 +3166,9 @@ abline<span class="p">(</span>my_summary<span class="p">)</span>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -2962,7 +3200,9 @@ my_summary
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -3043,7 +3283,9 @@ val
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -3087,7 +3329,9 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[21]:</div>
+
 
 
 
@@ -3133,7 +3377,9 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[22]:</div>
+
 
 
 
@@ -3251,7 +3497,9 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>ls: *.c: No such file or directory
@@ -3326,7 +3574,9 @@ int cfib(int n)
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[27]:</div>
+
 
 
 
@@ -3391,7 +3641,9 @@ int cfib(int n)
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[29]:</div>
+
 
 
 
@@ -3432,7 +3684,9 @@ int cfib(int n)
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The slowest run took 73.42 times longer than the fastest. This could mean that an intermediate result is being cached.
@@ -3462,7 +3716,9 @@ int cfib(int n)
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The slowest run took 4.65 times longer than the fastest. This could mean that an intermediate result is being cached.
@@ -3524,7 +3780,9 @@ int cfib(int n)
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>_cffi_cWtAstIlGT.c  _cffi_cWtAstIlGT.o  _cffi_yxGAKIqXRR.c  _cffi_yxGAKIqXRR.o
@@ -3593,7 +3851,9 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>injecting  rfib in user ns
@@ -3622,7 +3882,9 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[34]:</div>
+
 
 
 
@@ -3703,7 +3965,9 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>/Users/bussonniermatthias/anaconda/lib/python3.5/site-packages/fortranmagic.py:147: UserWarning: get_ipython_cache_dir has moved to the IPython.paths module since IPython 4.0.
@@ -3713,15 +3977,17 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
 
 
 
 
-<div id="448f23c9-b688-49d7-98cb-fc298ba212f1"></div>
+
+<div id="142aed36-ed59-4ed1-85b3-65951fe9e694"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#448f23c9-b688-49d7-98cb-fc298ba212f1');
+var element = $('#142aed36-ed59-4ed1-85b3-65951fe9e694');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
@@ -3777,7 +4043,9 @@ END SUBROUTINE ffib
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[37]:</div>
+
 
 
 
@@ -3891,7 +4159,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[41]:</div>
+
 
 
 
@@ -3932,7 +4202,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>100 loops, best of 3: 648 ns per loop
@@ -3961,7 +4233,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The slowest run took 11.60 times longer than the fastest. This could mean that an intermediate result is being cached.
@@ -3991,7 +4265,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>100 loops, best of 3: 147 ns per loop
@@ -4020,7 +4296,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>100 loops, best of 3: 45.6 ns per loop
@@ -4110,7 +4388,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Pray the demo-gods it wont segfault even without rust...
@@ -4158,7 +4438,9 @@ The same principle applies:</p>
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>fortran -&gt; cython -&gt; python -&gt; c : 5
@@ -4210,7 +4492,9 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>It worked ! I can run all the permutations !
@@ -4294,7 +4578,9 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Initializing Julia interpreter. This may take some time...
@@ -4324,7 +4610,9 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[53]:</div>
+
 
 
 
@@ -4396,7 +4684,9 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[56]:</div>
+
 
 
 
@@ -4407,7 +4697,9 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 </div>
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 
 
@@ -4456,7 +4748,9 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[57]:</div>
+
 
 
 
@@ -4546,7 +4840,9 @@ The key value here is that we get the <em>same</em> object from within Python an
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>(P(J(P(J(P(J(P(J(P)(P)))(P(J))(P(J))(P)))(P(J(P(J))(P)(P)(P)))(P(J(P(J))(P)(P)(P)))(P(J(P)(P)))))(P(J(P(J(P(J))(P)(P)(P)))(P(J(P)(P)))(P(J(P)(P)))(P(J))))(P(J(P(J(P(J))(P)(P)(P)))(P(J(P)(P)))(P(J(P)(P)))(P(J))))(P(J(P(J(P)(P)))(P(J))(P(J))(P)))))</pre>
@@ -4554,7 +4850,9 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[59]:</div>
+
 
 
 
@@ -4641,7 +4939,9 @@ The key value here is that we get the <em>same</em> object from within Python an
 
 
 <div class="output_area">
+
 <div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Pfiew
@@ -4650,7 +4950,9 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 
 <div class="output_area">
+
 <div class="prompt output_prompt">Out[60]:</div>
+
 
 
 
@@ -5184,183 +5486,6 @@ apparently you don't.</p>
 <h3>Thanks</h3>
 <p>As usual, I'm not a good at writing English so I appreciate any Pull Request
 that fix grammar, spelling and english expression.</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/planning-an-early-death-for-python-2.html">Planning an Early Death for Python 2</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-09-24T10:00:00+00:00">2015-09-24 10:00</time>
-</div>
-                <div class="stats">
-                    
-                </div>
-                        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/python.html" rel="tag">python</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>On September 18 and 19, 2015, the Data Structure for Data Science workshop
-gathered at UC Berkeley's BIDS [Berkeley Institute for Data Science]. It was a
-productive two days of presentation, discussion and working groups — a
-collaborative effort aimed at expanding what data science can do.</p>
-<p>Despite having mostly Python developers, the workshop reached out and included
-members from many other programming communities (e.g., C, C++, Julia, R, etc.)
-as the workshop's explicit goal was to improve cross language operability. In
-particular, the goal was to enable python's scientific computing tools
-(numpy, scipy, pandas, etc.) to have a consensus backbone data-structure that
-would enable easier interaction with other programming languages.</p>
-<p>Out of the discussion arose a topic that has long plagued the python community
-at large: code that requires legacy Python 2.7 is holding back the development
-of data-science toolsets and – by extension – the progress of data science as a
-whole. Python 2.7 was an important part of the history of scientific computing,
-but now it should be left as part of that history. Thus, we convened a small
-working group to plan a early death for Legacy Python.</p>
-<h3>Move over Legacy Python once and for all.</h3>
-<p>In collaboration with many developers among whom @jiffyclub, @tacasswell,
-@kbarbary, @teoliphant, @pzwang, @ogrisel, we discussed different options to
-push Legacy Python more or less gently through the door. We understand that
-some people are still requiring the use of Legacy Python in their code base, or
-the use some libraries which are still only available on Legacy Python and we
-don't blame them.  We understand that Legacy Python was a great language and
-that it's hard to move over it.  Though the retirement of Legacy Python is
-2020, you will ave to make the transition then, and it will be even harder to
-transition at that point.</p>
-<p>So what are the step we can do to push the transition forward.</p>
-<h3>Choose your words.</h3>
-<p>The choice of words you make on the internet and in real life will influence
-the vision people have for Legacy Python vs Python. Assume that Python 3 is
-just Python, and refer to Python 2 as legacy python.  IDEs and TwitterSphere is
-<a href="https://twitter.com/astrofrog/status/646976176657932288">starting</a> to <a href="https://twitter.com/almarklein/status/645542438937980929">do
-that</a>, join the
-movement.</p>
-<p>Refer to Legacy Python in the past tense. It will reinforce the old and
-deprecated state of Legacy Python. I still don't understand why people would
-like to stay with a language which that many defects:</p>
-<ul>
-<li>it did not protect you from mixing Unicode and bytes,</li>
-<li>tripped you with integer division</li>
-<li>did not allow you to replace the printing function</li>
-<li>had a range object which is not memory efficient</li>
-<li>did not permit to re-raise exception</li>
-<li>had a bad asynchronous support, without yield from</li>
-<li>forced you to repeat the current class in <code>super()</code> call.</li>
-<li>let you mix tab and space.</li>
-<li>did not support function annotations</li>
-</ul>
-<p>Legacy Python was missing many other feature which are now part of Python.</p>
-<p>Do not state what's better in Python 3, state that it was missing/broken in
-Legacy Python.  Like the missing matrix multiplication operator was missing
-multiplication operator. Legacy Python was preventing people to use efficient
-numeric library which are relying on the numerical operator.</p>
-<h3>Don't respond to "and on Python 2"</h3>
-<p>Personally during talks I plan to not pay attention to question regarding
-legacy Python, and will treat questions such questions as someone asking whether
-I support windows Vista. Next question please. The less you talk about Legacy Python
-the more you imply Legacy Python  is not a thing anymore.</p>
-<h3>Drop support for Legacy Python (at least on paper)</h3>
-<p>If you a library author, you have probably had to deal with user trying your
-software on Legacy Python, and spend lot of time making your codebase
-compatible with both Python 3 and legacy Python.  There are a few step you can
-take to push user toward Python 3.</p>
-<p>If a user is not willing to update to a new version on Python, and decide to stay on
-legacy Python, they can most likely pin the version on your library to versions which
-support Legacy Python.</p>
-<h4>Make your examples/documentation Python 3 only</h4>
-<p>Or at least do not make effort to have examples that work using Legacy Python.
-Sprinkle with function annotation, and <code>async</code>/<code>await</code> keyword can help with
-communicating your example are Python 3 only.</p>
-<p>You can even avoid mention of Legacy Python in your documentation and assume
-your users are using Python 3, this will make writing documentation much easier,
-and increase the chances to get examples right.</p>
-<h4>Ask user to reproduce but on up-to-date Python version.</h4>
-<p>Have you ever had a bug report where you ask users to upgrade your libraries
-dependencies ? Do the same with Python. If a user make a bug report with Python
-2.7 ask them if they can reproduce with an up-to date version of Python, even
-if the bug is obviously from your side.  If they really can't upgrade they will
-know, if they do and can reproduce, then you'll have at least converted one
-user from Legacy Python (and in the meantime you might have already corrected
-the bug).</p>
-<h4>Defer 2.7 support to companies like Continuum</h4>
-<p>This is already what <a href="http://www.curiousefficiency.org/posts/2015/04/stop-supporting-python26.html">Nick Coghlan
-recommands</a>
-for Python 2.6, and that's what you can do for Legacy Python fix. If you
-have a sufficient number of user which are asking for 2.7 support, accept the
-bug report, but as an open source maintainer do not work on it. You can partner
-with companies like Continuum or Enthought, from which user would "buy" 2.7 support
-for your libraries, in exchange of which the Companies could spend some of their
-developer time fixing your Legacy Python bugs.</p>
-<p>After a quick discussion with Peter Wang, it would be possible, but details
-need to be worked on.</p>
-<h3>Make Python 3 attractive</h3>
-<h4>Create new features</h4>
-<p>Plan you new features explicitly for Python 3, even if the feature would be
-simple to make Legacy Python compatible, disable it on old platforms, and issue
-a warning indicating that the feature is not available on Legacy Python
-install.</p>
-<p>You will be able to use all the shiny Python features which are lacking on
-Legacy Python like Unicode characters !</p>
-<h4>Create new Python packages</h4>
-<p>Make new packages Python 3 only, and make all the design decision you didn't do
-on your previous package. Pure python libraries are much easier to create and
-<a href="http://flit.readthedocs.org/en/latest/">build</a>  once you are not hold back by
-legacy Python.</p>
-<h3>Helping Other project</h3>
-<p>Despite all the good will in the world the Migration path from Legacy Python
-can be hard.  There are still a lot of things that can be done to help current
-and new project to push forward the adoption of Python.</p>
-<h4>Testing</h4>
-<p>Make sure that all the project you care about have continuous integration on
-Python 3, if possible even the documentation building done with Python 3, help
-to make Python 3 the default.</p>
-<p>With continuous integration, check that your favorites projects are tested on
-Python Nightly, most CI provider allow the tests to be ran on nightly, but do
-not make the status of the project turn red if the test are failing. See
-<a href="http://docs.travis-ci.com/user/customizing-the-build/#Rows-that-are-Allowed-to-Fail"><code>allow_faillure</code></a>
-on Travis-CI for example.</p>
-<h4>Porting C-extensions, move to Cython</h4>
-<p>The path to migrate C-extension is not well documented, the preferred approach
-is to use <a href="https://cffi.readthedocs.org/en/latest/">CFFI</a>, but there is still
-alack of well written centralised, document on how to integrate with Python 3.
-IF you are knowledgeable on this domain, your help is welcomed.</p>
-<h3>The things we will (probably) not do.</h3>
-<p>Make a twitter account that shame people that use Legacy Python, though we
-might do a Parody account which say funny things, and push people toward Python 3.</p>
-<p>Slow code on purpose and obviously on Legacy Python:</p>
-<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">time</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre>
-
-
-<p>Though it would be fun.</p>
-<p>Ask user at IDE/CLI startup time if they want to upgrade to Python3:</p>
-<pre class="code literal-block"><span></span>$ python2
-Python <span class="m">2</span>.7.10 <span class="o">(</span>default, Jul <span class="m">13</span> <span class="m">2015</span>, <span class="m">12</span>:05:58<span class="o">)</span>
-Type <span class="s2">"help"</span>, <span class="s2">"copyright"</span>, <span class="s2">"credits"</span> or <span class="s2">"license"</span> <span class="k">for</span> more information.
-
-Warning you are starting a Legacy Python interpreter. Aren<span class="s1">'t you sure you don'</span>t
-want not to upgrade to a newer version ? <span class="o">[</span>y<span class="o">]</span>:_
-</pre>
-
-
-<p>Delay Legacy Python packages releases by a few weeks to incentive people to
-migrate, or should we actually consider the people on Python 2 as guinea pig
-and release nightly ?</p>
-<h2>End word</h2>
-<p>Remember, Legacy Python is responsible for global warming, encourage people to
-stay with IE6, and is voting for Donald Trump.</p>
-<p>If you have any ideas, please send me a Pull Request, I'll be happy to discuss. </p>
-<p>As usual my English is far from perfect, so Pull Request welcomed on this blog
-post. Thanks to @michaelpacer who already did some rereading/rephrasing of
-first draft.</p>
 </div>
             </div>
         </div>
