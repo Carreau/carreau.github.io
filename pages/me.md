@@ -119,23 +119,24 @@ Also right now my background is beige for the top half of the wall.
 - **Actin gel mechanics** – University Paris VII archives – 2014 – Bussonnier, Matthias;
 - **The Jupyter/IPython architecture: a unified view of computational research, from interactive exploration to communication and publication.** – AGU – 2014 – Ragan-Kelley, M.; Perez, F.; Granger, B.; Kluyver, T.; Ivanov, P.; Frederic, J.; Bussonnier, M.;
 - **Nuclear positioning powered by F-actin flows in oocytes** – MOLECULAR BIOLOGY OF THE CELL – 2013 – Almonacid, M; Bussonnier, M; Betz, T; Luksza, M; Queguiner, I; Voituriez, R; Gov, N; Verlhac, MH;
-- **IPython: components for interactive and parallel computing across disciplines. (Invited)** – AGU – 2013 – Perez, F.; Bussonnier, M.; Frederic, J. D.; Froehle, B. M.; Granger, B. E.; Ivanov, P.; Kluyver, T.; Patterson, E.; Ragan-Kelley, B.; Sailer, Z.;
 - **IPython: components for interactive and parallel computing across disciplines** – AGU – 2013 – Perez, F.; Bussonnier, M.; Frederic, J. D.; Froehle, B. M.; Granger, B. E.; Ivanov, P.; Kluyver, T.; Patterson, E.; Ragan-Kelley, B.; Sailer, Z.;
 
 ### Talks
 
+- **Jupyter, Kernels and Protocols** – [JupyterCon](https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/63159) – [JupyterCon](https://youtu.be/GExKsQ-OU78) – 2017 – M. Bussonnier, P. Ivanov
+- **Building Bridges: Stopping Python 2 support in libraries without damages**  – [PyBay](https://pybay.com/speaker/matthias-bussonnier/) – 2017 – M. Bussonnier – [slides](http://carreau.github.io/talks/2017-08-13-pybay/docs/index.html#/) ([source](https://github.com/Carreau/talks/tree/master/2017-08-13-pybay)) – [video](https://www.youtube.com/watch?v=3i6n1RwqQCo)
 - **Ending Py2/Py3 compatibility in a user friendly manner** – PyCon – 2017 – M. Bussonnier, M. Pacer, T. Kluyver – [slides](https://carreau.github.io/pycon2017/) – [video](https://www.youtube.com/watch?v=2DkfPzWWC2Q)
 - **Documentation and Continuous Integration in Python with Sphinx and Travis CI** – The Hacker Within, Berkeley – 2017 – Nelle Varoquaux, Chris Holdgraf, Matthias Bussonnier
-- **Continuous integration, Documentation and Travis CI** – Docathon Conference, Berkeley – 2017 – Matthias Bussonnier - [slides](https://speakerdeck.com/carreau/continuous-integration-documentation-and-travis-ci)
+- **Continuous integration, Documentation and Travis CI** – Docathon Conference, Berkeley – 2017 – Matthias Bussonnier – [slides](https://speakerdeck.com/carreau/continuous-integration-documentation-and-travis-ci)
 - **Git and GitHub** – The Hacker Within, Berkeley – 2017 – Ciera Martinez and Matthias Bussonnier
 - **Keynote: Jupyter : an insider story** – JupyterDay Boston , Invited Keynote, about the history of Jupyter and the challenges of managing a growing open source project
 - **Project Jupyter Overview** – PyBay – 2016 – By Jamie Whitacre, and Matthias Bussonnier
-- **Xonsh :Put some Python in your shell** PyBay – 2016 – Matthias Bussonnier and the Xonsh Core team – [video](https://www.youtube.com/watch?v=lopI4HkA9rE) [slides](https://speakerdeck.com/carreau/xonsh-pybay-2016)
+- **Xonsh: Put some Python in your shell** PyBay – 2016 – Matthias Bussonnier and the Xonsh Core team – [video](https://www.youtube.com/watch?v=lopI4HkA9rE) [slides](https://speakerdeck.com/carreau/xonsh-pybay-2016)
 - **Python Metaprogramming and Conversion to Python 3** – 2016 – The hacker Within, Berkeley – Ryan Pavlovsky wand Matthias Bussonnier
 - **Jupyter, from data gathering to publications** – PLoS: Lunch and Learn, talks and Posdcast – 2016 – Matthias Bussonnier
-- **Talks Python to me : Episode #44: Project Jupyter and IPython** – Podcast – 2016 - Min RK, Michael Kennedy, Matthias Bussonnier
+- **Talks Python to me : Episode #44: Project Jupyter and IPython** – Podcast – 2016 – Min RK, Michael Kennedy, Matthias Bussonnier
 - **Jupyter: A tool for Open Science** – UC Merced – 2016 – Invited presentation for the UC Merced Applied Math Department
-- **Jupyter, State of Real–Time collaboration** – SciPy – 2015– Matthias Bussonnier and Kester Tong - [video](https://www.youtube.com/watch?v=DyGoHAP8B_s)
+- **Jupyter, State of Real–Time collaboration** – SciPy – 2015– Matthias Bussonnier and Kester Tong – [video](https://www.youtube.com/watch?v=DyGoHAP8B_s)
 - **Jupyter: A tool for datascience at scale** – LBL Labtech – 2015 – Presentation about the current and future state of Jupyter at the Lawrence Berkeley National Laboratory LabTech conference.
 - **IPython: protocol, kernels and new features** – EuroSciPy – 2014 – By Thomas Kluyver and Matthias Bussonnier
 - **Jupyter/IPython notebook, a tool for data science** – NSLS–II workshop at Brookhaven National Lab. – 2013 – Matthias Bussonnier
