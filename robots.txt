@@ -1,4 +1,4 @@
-Sitemap: http://carreau.github.io/sitemapindex.xml
+Sitemap: https://carreau.github.io/sitemapindex.xml
 
 User-Agent: *
 Host: carreau.github.io
