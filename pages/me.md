@@ -108,6 +108,7 @@ Also right now my background is beige for the top half of the wall.
 
 ### Peer reviewed article
 
+
 - **Active mechanics in living oocytes reveal molecular-scale force kinetics** – Biophysical Journal – 2016 – Ahmed, Wylie; Fodor, Etienne; Almonacid, Maria; Bussonnier, Matthias; Verlhac, Marie-Helene; Gov, Nir; Visco, Paolo; van Wijland, Frederic; Betz, Timo;
 - **Nonequilibrium dissipation in living oocytes** – EPL (Europhysics Letters) – 2016 – Fodor, Étienne; Ahmed, Wylie W; Almonacid, Maria; Bussonnier, Matthias; Gov, Nir S; Verlhac, M-H; Betz, Timo; Visco, Paolo; van Wijland, Frédéric;
 - **Cell-sized liposome doublets reveal active tension build-up driven by acto-myosin dynamics** – Soft Matter – 2016 – Caorsi, V; Lemière, J; Campillo, C; Bussonnier, M; Manzi, J; Betz, T; Plastino, J; Carvalho, K; Sykes, C;
@@ -123,6 +124,7 @@ Also right now my background is beige for the top half of the wall.
 
 ### Talks
 
+- **Jupyter and the IPython kernel, hidden and awaiting implementation features** – [PyData Meetup Paris , FR](https://www.meetup.com/fr-FR/PyData-Paris/events/243324756/?eventId=243324756)– Nov 2017 – M. Bussonnier
 - **Jupyter, Kernels and Protocols** – [JupyterCon](https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/63159) – [JupyterCon](https://youtu.be/GExKsQ-OU78) – 2017 – M. Bussonnier, P. Ivanov
 - **Building Bridges: Stopping Python 2 support in libraries without damages**  – [PyBay](https://pybay.com/speaker/matthias-bussonnier/) – 2017 – M. Bussonnier – [slides](http://carreau.github.io/talks/2017-08-13-pybay/docs/index.html#/) ([source](https://github.com/Carreau/talks/tree/master/2017-08-13-pybay)) – [video](https://www.youtube.com/watch?v=3i6n1RwqQCo)
 - **Ending Py2/Py3 compatibility in a user friendly manner** – PyCon – 2017 – M. Bussonnier, M. Pacer, T. Kluyver – [slides](https://carreau.github.io/pycon2017/) – [video](https://www.youtube.com/watch?v=2DkfPzWWC2Q)
