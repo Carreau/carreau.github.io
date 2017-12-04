@@ -89,10 +89,6 @@ div.text_cell_render {
   border: thin silver solid;
 }
 
-.page-content > .content p {
-  margin: 0 0 0px;
-}
-
 div.input, div.output_area {
     flex-direction: row;
 }
