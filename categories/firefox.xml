@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts (Posts about firefox)</title><link>http://carreau.github.io/</link><description></description><atom:link href="http://carreau.github.io/categories/firefox.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 22 Nov 2017 18:46:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Browser Extension</title><link>http://carreau.github.io/posts/31-open-in-binder-browser-extension.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I am please to announce the release of a first project I've been working
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about firefox)</title><link>https://carreau.github.io/</link><description></description><atom:link rel="self" href="https://carreau.github.io/categories/firefox.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 04 Dec 2017 13:35:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Browser Extension</title><link>https://carreau.github.io/posts/31-open-in-binder-browser-extension.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I am please to announce the release of a first project I've been working
 on for a bout a week: A Firefox extension to open the GitHub repository you are
 visiting using MyBinder.org. &lt;/p&gt;
 &lt;p&gt;If you are in a hurry, just head there to &lt;a href="https://addons.mozilla.org/en-US/firefox/addon/open-with-binder/"&gt;Install version 0.1.0 for
 Firefox&lt;/a&gt;.
 If you like to know more read on. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Binder Logo" src="http://carreau.github.io/posts/img/binder_logo_128x128.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Binder Logo" src="https://carreau.github.io/posts/img/binder_logo_128x128.png"&gt;&lt;/p&gt;
 &lt;h3&gt;Back to Firefox.&lt;/h3&gt;
 &lt;p&gt;I've been using Chrome for a couple of years now, but heard a lot of good stuff
 about &lt;a href="https://www.rust-lang.org/en-US/"&gt;Rust&lt;/a&gt; and all the good stuff it has
@@ -13,7 +13,7 @@ done or &lt;a href="https://blog.mozilla.org/blog/2017/11/14/introducing-firefox
 Ok that's a bit of marketing but it got me to retry Firefox (Nightly please),
 and except for my password manager which took some week to update to the new
 Firefox API, I rapidly barely used Chrome. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Firefox Nightly Logo" src="http://carreau.github.io/posts/img/Firefox_Nightly_Logo_2017.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Firefox Nightly Logo" src="https://carreau.github.io/posts/img/Firefox_Nightly_Logo_2017.png"&gt;&lt;/p&gt;
 &lt;h3&gt;MyBinder.org&lt;/h3&gt;
 &lt;p&gt;I'm also spending more and more time working with the JupyterHub team on
 &lt;a href="https://MyBinder.org"&gt;Binder&lt;/a&gt;, and see more and more developer adding binder
@@ -64,7 +64,7 @@ staggering 27 lines (including 7 line business logic) extension that does that:&
 
 
 &lt;p&gt;You can find the &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js"&gt;original source here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Firefox Dev Logo" src="http://carreau.github.io/posts/img/firefox-dev-logo.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Firefox Dev Logo" src="https://carreau.github.io/posts/img/firefox-dev-logo.png"&gt;&lt;/p&gt;
 &lt;p&gt;The hardest part was finding the API and learning how to package and set the
 icons correctly. There are still &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues"&gt;plenty of missing
 features&lt;/a&gt;
@@ -109,4 +109,4 @@ process of figuring things out, so that you can contribute easily:&lt;/p&gt;
 &lt;li&gt;Add Screenshots and descriptions to the Addon Store.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;So see you
-&lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension"&gt;there&lt;/a&gt; !&lt;/p&gt;&lt;/div&gt;</description><category>binder</category><category>firefox</category><guid>http://carreau.github.io/posts/31-open-in-binder-browser-extension.html</guid><pubDate>Wed, 22 Nov 2017 17:25:31 GMT</pubDate></item></channel></rss>
+&lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension"&gt;there&lt;/a&gt; !&lt;/p&gt;&lt;/div&gt;</description><category>binder</category><category>firefox</category><guid>https://carreau.github.io/posts/31-open-in-binder-browser-extension.html</guid><pubDate>Wed, 22 Nov 2017 17:25:31 GMT</pubDate></item></channel></rss>
