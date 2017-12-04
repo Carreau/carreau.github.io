@@ -328,8 +328,11 @@ div.prompt {
 .page-content {
   min-height: 100%;
   padding: 48px 0 60px 42px;
-  margin-left: 180px;
-  background: url('../images/cream-dust.png') #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80;
+  /*background: url('../images/cream-dust.png') #ffffff;*/
+  background-color: white;
   max-width: 800px;
   padding-right: 42px;
 }
@@ -2093,9 +2096,8 @@ dd {
   cursor: default;
 }
 body {
-  font-size: 16px;
-  font-size: 15px;
-  line-height: 24px;
+  font-size: 17px;
+  line-height: 1.4em;
   color: #333333;
 }
 a {
@@ -2143,7 +2145,7 @@ a:focus {
   -moz-transition: opacity 0.5s;
   -o-transition: opacity 0.5s;
   transition: opacity 0.5s;
-  font-size: 3em;
+  font-size: 2em;
 }
 .social a [class^="icon-"].icon-border {
   border-width: 3px;
@@ -2168,7 +2170,7 @@ a:focus {
   font-size: 26.25px;
 }
 .page-content {
-  font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, "Helvetica", "Bitter", "Georgia", "Times New Roman", serif;
+  font-family: 'Georgia', 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, "Helvetica", "Bitter", "Georgia", "Times New Roman", serif;
 }
 .page-content > .content {
   text-rendering: optimizeLegibility;
@@ -2187,7 +2189,7 @@ a:focus {
 .page-content > .content .h6 {
   margin: 12px 0;
   font-family: inherit;
-  line-height: 24px;
+  line-height: 1.6em;
   color: #2e2e2e;
   text-rendering: optimizelegibility;
 }
@@ -2436,6 +2438,7 @@ pre.code {
 }
 .post h1.title {
   margin: 6px 0;
+  margin-bottom: 1em;
 }
 .post h1.title a {
   color: inherit;
