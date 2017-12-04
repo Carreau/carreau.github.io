@@ -1,0 +1,53 @@
+https://keybase.io/mbussonn
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://carreau.github.io
+  * I am mbussonn (https://keybase.io/mbussonn) on keybase.
+  * I have a public key ASCnMPrYcBgBueQ180i9ks1TWulXMXFYs_bdj1xJ6pVxtgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120a730fad8701801b9e435f348bd92cd535ae957317158b3f6dd8f5c49ea9571b60a",
+      "host": "keybase.io",
+      "kid": "0120a730fad8701801b9e435f348bd92cd535ae957317158b3f6dd8f5c49ea9571b60a",
+      "uid": "2811e01161926bd8a2cc08d096142b19",
+      "username": "mbussonn"
+    },
+    "merkle_root": {
+      "ctime": 1512396404,
+      "hash": "3c83535a7b49c5486cda517b7134685ba84bcf4f2025ceb8e4efbddcf3b25f372c646ac20fe65115606314810da1c502e2382228fdcc48c39f2092f99cb8e6e8",
+      "hash_meta": "927cb4f3b1e16fa46b7deb18ff2207be379a1bd7394a0cbef2b301e4265d8105",
+      "seqno": 1776798
+    },
+    "service": {
+      "hostname": "carreau.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.36"
+  },
+  "ctime": 1512396429,
+  "expire_in": 504576000,
+  "prev": "fa72efcdf3f891b41c1472977d5bff10cae0dbc7b71defd687cbfe8710059759",
+  "seqno": 30,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgpzD62HAYAbnkNfNIvZLNU1rpVzFxWLP23Y9cSeqVcbYKp3BheWxvYWTFA0p7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwYTczMGZhZDg3MDE4MDFiOWU0MzVmMzQ4YmQ5MmNkNTM1YWU5NTczMTcxNThiM2Y2ZGQ4ZjVjNDllYTk1NzFiNjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwYTczMGZhZDg3MDE4MDFiOWU0MzVmMzQ4YmQ5MmNkNTM1YWU5NTczMTcxNThiM2Y2ZGQ4ZjVjNDllYTk1NzFiNjBhIiwidWlkIjoiMjgxMWUwMTE2MTkyNmJkOGEyY2MwOGQwOTYxNDJiMTkiLCJ1c2VybmFtZSI6Im1idXNzb25uIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTEyMzk2NDA0LCJoYXNoIjoiM2M4MzUzNWE3YjQ5YzU0ODZjZGE1MTdiNzEzNDY4NWJhODRiY2Y0ZjIwMjVjZWI4ZTRlZmJkZGNmM2IyNWYzNzJjNjQ2YWMyMGZlNjUxMTU2MDYzMTQ4MTBkYTFjNTAyZTIzODIyMjhmZGNjNDhjMzlmMjA5MmY5OWNiOGU2ZTgiLCJoYXNoX21ldGEiOiI5MjdjYjRmM2IxZTE2ZmE0NmI3ZGViMThmZjIyMDdiZTM3OWExYmQ3Mzk0YTBjYmVmMmIzMDFlNDI2NWQ4MTA1Iiwic2Vxbm8iOjE3NzY3OTh9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiY2FycmVhdS5naXRodWIuaW8iLCJwcm90b2NvbCI6Imh0dHBzOiJ9LCJ0eXBlIjoid2ViX3NlcnZpY2VfYmluZGluZyIsInZlcnNpb24iOjF9LCJjbGllbnQiOnsibmFtZSI6ImtleWJhc2UuaW8gZ28gY2xpZW50IiwidmVyc2lvbiI6IjEuMC4zNiJ9LCJjdGltZSI6MTUxMjM5NjQyOSwiZXhwaXJlX2luIjo1MDQ1NzYwMDAsInByZXYiOiJmYTcyZWZjZGYzZjg5MWI0MWMxNDcyOTc3ZDViZmYxMGNhZTBkYmM3YjcxZGVmZDY4N2NiZmU4NzEwMDU5NzU5Iiwic2Vxbm8iOjMwLCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQP4j6BtCjiSC52QXff0tQeENgn6mU7f67Ja3/xbECGbY0NomfJ1avmabeNSA1xB9v8BUCUJ8DeXHXu9fHJSNbwGoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCAfPYEt6nalvrVpEirMa6PQHqh4dgK5KYHEoiMof5HBSqN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mbussonn
+
