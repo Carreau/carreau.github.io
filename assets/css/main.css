@@ -226,7 +226,6 @@ html {
 }
 body {
   height: 100%;
-  background: url('../images/bright_squares.png') #ffffff;
 }
 section {
   margin: 0;
@@ -235,13 +234,12 @@ section {
 .social {
   float: left;
   min-height: 100%;
-  background: url('../images/bright_squares.png') #ffffff;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  width: 180px;
+  width: 60px;
 }
 @media (max-width: 773px) {
   .social {
@@ -250,7 +248,7 @@ section {
 }
 @media (min-width: 774px) and (max-width: 1047px) {
   .social {
-    width: 210px;
+    width: 60px;
   }
 }
 @media (max-width: 773px) {
@@ -263,7 +261,7 @@ section {
   margin: 0;
   top: 50px;
   display: table;
-  width: 180px;
+  width: 60px;
 }
 @media (max-width: 773px) {
   .social ul {
@@ -278,7 +276,7 @@ section {
 }
 @media (min-width: 774px) and (max-width: 1047px) {
   .social ul {
-    width: 210px;
+    width: 60px;
   }
 }
 .social ul li {
@@ -330,16 +328,15 @@ div.prompt {
   padding: 48px 0 60px 42px;
   margin-left: auto;
   margin-right: auto;
-  width: 80;
+  width: 80%;
   /*background: url('../images/cream-dust.png') #ffffff;*/
   background-color: white;
-  max-width: 800px;
+  max-width: 700px;
   padding-right: 42px;
 }
 @media (min-width: 774px) and (max-width: 1047px) {
   .page-content {
     padding-left: 24px;
-    margin-left: 214px;
   }
 }
 @media (max-width: 773px) {
@@ -360,8 +357,8 @@ div.prompt {
 @media (max-width: 773px) {
   .page-content > .content {
     min-width: auto;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-right: auto;
     margin-left: auto;
   }
