@@ -235,62 +235,79 @@ section {
   float: left;
   min-height: 100%;
   position: absolute;
-  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 60px;
 }
+
+@media (max-width: 400px) {
+    p {
+        text-align: justify;
+    }
+}
+
+.social ul li {
+    display: table-row;
+}
+
 @media (max-width: 773px) {
   .social {
     position: relative;
   }
 }
-@media (min-width: 774px) and (max-width: 1047px) {
+@media (min-width: 774px){
   .social {
+    width: 60px;
+    position: fixed;
+    margin: 0;
+    top: 50px;
+    display: table;
     width: 60px;
   }
 }
 @media (max-width: 773px) {
   .social {
-    width: 100%;
-  }
-}
-.social ul {
-  position: fixed;
-  margin: 0;
-  top: 50px;
-  display: table;
-  width: 60px;
-}
-@media (max-width: 773px) {
-  .social ul {
-    position: relative;
-  }
-}
-@media (max-width: 773px) {
-  .social ul {
+    width: 90%;
     display: block;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .social ul {
+    display: flex;
     top: 0px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .social ul li {
+      flex-grow: 1;
+      padding:0;
   }
 }
+
+@media (min-width: 774px)
+    .social ul {
+      position: fixed;
+      margin: 0;
+      top: 50px;
+      display: table;
+      width: 60px;
+    }
+}
+
+
 @media (min-width: 774px) and (max-width: 1047px) {
   .social ul {
     width: 60px;
+  }
+  .social ul li {
+    display: block;
   }
 }
 .social ul li {
-  display: block;
   text-align: center;
   margin-top: 10px;
-}
-@media (max-width: 773px) {
-  .social ul li {
-    padding-top: 5%;
-    padding-left: 3%;
-    text-align: left;
-    display: table-cell;
-  }
 }
 .social ul li a {
   display: block;
@@ -357,8 +374,8 @@ div.prompt {
 @media (max-width: 773px) {
   .page-content > .content {
     min-width: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -2142,7 +2159,7 @@ a:focus {
   -moz-transition: opacity 0.5s;
   -o-transition: opacity 0.5s;
   transition: opacity 0.5s;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 .social a [class^="icon-"].icon-border {
   border-width: 3px;
@@ -2152,7 +2169,7 @@ a:focus {
 }
 @media (max-width: 773px) {
   .social a [class^="icon-"] {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .social a [class^="icon-"].icon-border {
     border-width: 2px;
@@ -2259,6 +2276,13 @@ a:focus {
   hyphens: auto;
   margin: 0 0 12px;
 }
+
+.page-content >  .content p > img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 .page-content > .content em {
   font-style: italic;
 }
@@ -2384,6 +2408,9 @@ code {
   background-color: #f7f7f9;
   border: 1px solid #e1e1e8;
   white-space: nowrap;
+  max-width: 95%;
+  overflow: scroll;
+  display: inline-block;
 }
 pre {
   display: block;
@@ -2589,4 +2616,10 @@ pre.code {
 }
 .post + .post {
   margin-top: 48px;
+}
+
+.rendered_html p pre, .rendered_html p  code {
+    font-size: 85%;
+    line-height: 1.2em;
+    vertical-align: bottom;
 }
