@@ -77,7 +77,7 @@ issue</a>.</p>
 intention, by re-reading it I still do not feel it. Maybe this is because I'm
 still not skilled enough with words in English, and this is typically the kind
 of feedback I appreciate.</p>
-<h3>Don't break user code</h3>
+<h3 id="dont-break-user-code">Don't break user code</h3>
 <p>One other thing that seem to leek through my post was the impression I was
 advocating breaking user code. What I am advocating is to make a step
 forward, by actually dropping compatibility with previous version.  I really
@@ -125,7 +125,7 @@ the Py2/Py3 transition might look complicated to some people.  One example is
 Python3 environment. In a perfect world you would just pip install your package
 and get the last compatible version without worrying about the Legacy
 Python/Python 3 compatibility, but we venture in Packaging, so here be dragons.</p>
-<h3>Python 3 does improve on Python 2</h3>
+<h3 id="python-3-does-improve-on-python-2">Python 3 does improve on Python 2</h3>
 <p>Even if, as a scientist, you might see Python as only a tool; this tool rely on
 a lot of work done by other. You might not feel the difference on the day to
 day basis when using Python, but , the feature that Python 3 provide do make a
@@ -161,7 +161,7 @@ course there is a learning curve, and yes it is not easy: I went through it
 more than a year ago when it was harder than today. It was not fun nor was I
 convince after a week, but after spending some time with Python 3, I really
 feel impaired when having to go back to Legacy Python.</p>
-<h3>Just one Python</h3>
+<h3 id="just-one-python">Just one Python</h3>
 <p>So while not all scientist are seeing the immediate effect of Python 3, I would
 really hope for all the core packages to be able to just forget about Legacy
 Python compatibility and have the ability to focus their energy on only pushing
@@ -212,7 +212,7 @@ some point need to be financed by institution. The current  cost is partially
 hidden as it goes into Graduate student and Post-Doc time, who in the end will
 write the software. The Graduate and Post-doc  often lack the best practices of
 a good software engineer which leads to technical dept accumulation.</p>
-<h4>Which path forward</h4>
+<h4 id="which-path-forward">Which path forward</h4>
 <p>The Python Scientific community is still growing. Laboratories are still
 starting to adopt Python. Wether or not it is a good thing, Python 2 will reach
 it's end of life is a couple of year. And despite the many in-house libraries
@@ -225,8 +225,8 @@ passing, we will always have some necessity fro developers speaking Legacy
 Python,  in the same way that <a href="http://www.popularmechanics.com/space/a17991/voyager-1-voyager-2-retiring-engineer/">Nasa is looking for programmer fluent in 60
 Years-old
 languages</a></p>
-<h2>Alternatives</h2>
-<h3>Reviving Python 2.7</h3>
+<h2 id="alternatives">Alternatives</h2>
+<h3 id="reviving-python-27">Reviving Python 2.7</h3>
 <p>I'm Playing devil advocate here, to try to understand how this could go
 forward. The scientific community is likely not the only one to use old version
 of Python. Google <a href="https://developers.google.com/google-apps/realtime/realtime-quickstart#prerequisites">recommend to install Python
@@ -242,7 +242,7 @@ forked to Egcs, (which in the end was re-named Gcc), as well as Libre
 Office, successful alternative to it's "Open" sibling.</p>
 <p>Seeing that the Scientific community has already a lack of time and funding, I
 find the chance of this happening slim. </p>
-<h3>Leapfrog</h3>
+<h3 id="leapfrog">Leapfrog</h3>
 <p>One of the main pain in the transition to Python 3 is keeping compatibility
 with both Python. Maybe one of the solution that will come up is actually
 jumping over all this Python 2/3 problem to an alternative interpreter like
@@ -258,7 +258,7 @@ needed.  I'm still unsure that this is a good solution as C-API/ABI
 compatibility CPython 2.x is a complex task that does hinder language
 development.  More generally, CPython implementation details, do leak into the
 language definitions and make alternative implementation harder.</p>
-<h3>Conversion tools</h3>
+<h3 id="conversion-tools">Conversion tools</h3>
 <p>The Julia community dealt with migrating code from Fortran by writing a
 <a href="http://thisweekinjulia.github.io/julia/2014/10/10/October-10.html">Fortran-to-julia
 transpiler</a>,
@@ -269,7 +269,7 @@ case more seamlessly, or even import-hooks that would allow to import packages c
 Maybe having a <a href="https://github.com/almarklein/commonast">common AST</a> module for
 all version of Python and have tools <a href="https://github.com/davidhalter/jedi/issues/630">working more
 together</a> is the way forward. </p>
-<h2>Step forward</h2>
+<h2 id="step-forward">Step forward</h2>
 <p>Make Python 3 adoption easier, or make it clearer what is not Python 3
 compatible, both for humans and machine. There are some simple steps that can
 be taken: Make sure you favorite library run tests on latest python version,
@@ -292,7 +292,7 @@ can't do.</p>
             </li>
         </ul>
 </div>
-                    <footer id="footer"><p>Contents © 2017         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer"><p>Contents © 2018         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             

@@ -2,17 +2,17 @@
 .. title: Me, Myself, and I
 -->
 
-Hi, I'm Matthias. You may not her it while reading this, but I have a relatively
-strong French Akeussent. 
+Hi, I'm Matthias. You may not here it while reading this, but I have a relatively
+strong French _Akeussent_. 
 
 # What do you like to be known for ? 
 
 I mostly like to be known for writing tools that get out of your way. Which is a
-bit of a bummer as as a Scientist I'm mostly judged on my publication while I
+bit of a bummer as as a Scientist I'm mostly judged on my publications while I
 prefer to enable others to do their work more efficiently and give them ideas. 
 
 One of the software I'm the most proud of is [IPython](https://ipython.org), I
-did not create it, [Fernando](https://fperez.org), but I think the current
+did not create it, [Fernando](https://fperez.org) did, but I think the current
 version I maintain with [Thomas](https://github.com/takluyver) and
 [Min](https://github.com/minrk) is one of the best tools for Python programmers
 and Python scientist since Slice Bread. 
@@ -93,7 +93,6 @@ mostly myself had impact on thousand of people. I understood better that if I
 spend an hour making 60 scientist do their job 1 minute faster, then my global
 impact on Science is positive. 
 
-
 Also right now my background is beige for the top half of the wall. 
 
 # More Casual CV:
@@ -104,7 +103,7 @@ Also right now my background is beige for the top half of the wall.
 - Moore Data Fellow – Moore Data-Driven Discovery
 - AXA Research Fund Doctoral Fellowship 2010-2014
 
-## Publication and Presentation
+## Publications and Presentations
 
 ### Peer reviewed article
 
@@ -124,7 +123,7 @@ Also right now my background is beige for the top half of the wall.
 
 ### Talks
 
-- **Jupyter and the IPython kernel, hidden and awaiting implementation features** – [PyData Meetup Paris , FR](https://www.meetup.com/fr-FR/PyData-Paris/events/243324756/?eventId=243324756)– Nov 2017 – M. Bussonnier
+- **Jupyter and the IPython kernel, hidden and awaiting implementation features** – [PyData Meetup Paris , FR](https://www.meetup.com/fr-FR/PyData-Paris/events/243324756/?eventId=243324756) – Nov 2017 – M. Bussonnier
 - **Jupyter, Kernels and Protocols** – [JupyterCon](https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/63159) – [JupyterCon](https://youtu.be/GExKsQ-OU78) – 2017 – M. Bussonnier, P. Ivanov
 - **Building Bridges: Stopping Python 2 support in libraries without damages**  – [PyBay](https://pybay.com/speaker/matthias-bussonnier/) – 2017 – M. Bussonnier – [slides](http://carreau.github.io/talks/2017-08-13-pybay/docs/index.html#/) ([source](https://github.com/Carreau/talks/tree/master/2017-08-13-pybay)) – [video](https://www.youtube.com/watch?v=3i6n1RwqQCo)
 - **Ending Py2/Py3 compatibility in a user friendly manner** – PyCon – 2017 – M. Bussonnier, M. Pacer, T. Kluyver – [slides](https://carreau.github.io/pycon2017/) – [video](https://www.youtube.com/watch?v=2DkfPzWWC2Q)

@@ -5,6 +5,12 @@
 
 body {
   position: static;
+  font-size: 21px;
+  line-height: 1.6em;
+  color: #333333;
+  letter-spacing: -0.003em;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
 }
 
 pre {
