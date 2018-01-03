@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts (Posts about binder)</title><link>https://carreau.github.io/</link><description></description><atom:link type="application/rss+xml" href="https://carreau.github.io/categories/binder.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 04 Dec 2017 18:05:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Chrome Extension</title><link>https://carreau.github.io/posts/32-open-with-binder-chrome.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Two weeks ago I was pleased to announce the release of the &lt;a href="https://carreau.github.io/posts/31-open-in-binder-browser-extension.html"&gt;Open-with-Binder for
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about binder)</title><link>https://carreau.github.io/</link><description></description><atom:link rel="self" type="application/rss+xml" href="https://carreau.github.io/categories/binder.xml"></atom:link><language>en</language><lastBuildDate>Wed, 03 Jan 2018 13:53:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Chrome Extension</title><link>https://carreau.github.io/posts/32-open-with-binder-chrome.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Two weeks ago I was pleased to announce the release of the &lt;a href="https://carreau.github.io/posts/31-open-in-binder-browser-extension.html"&gt;Open-with-Binder for
 Firefox extension&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After &lt;a href="https://twitter.com/Mbussonn/status/933746729828134912"&gt;asking on twitter if people were interested in the same for
 Chrome&lt;/a&gt; (29 Yes, 67 No,
@@ -27,7 +27,7 @@ visiting using MyBinder.org. &lt;/p&gt;
 Firefox&lt;/a&gt;.
 If you like to know more read on. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="Binder Logo" src="https://carreau.github.io/posts/img/binder_logo_128x128.png"&gt;&lt;/p&gt;
-&lt;h3&gt;Back to Firefox.&lt;/h3&gt;
+&lt;h3 id="back-to-firefox"&gt;Back to Firefox.&lt;/h3&gt;
 &lt;p&gt;I've been using Chrome for a couple of years now, but heard a lot of good stuff
 about &lt;a href="https://www.rust-lang.org/en-US/"&gt;Rust&lt;/a&gt; and all the good stuff it has
 done or &lt;a href="https://blog.mozilla.org/blog/2017/11/14/introducing-firefox-quantum/"&gt;Firefox&lt;/a&gt;. 
@@ -35,7 +35,7 @@ Ok that's a bit of marketing but it got me to retry Firefox (Nightly please),
 and except for my password manager which took some week to update to the new
 Firefox API, I rapidly barely used Chrome. &lt;/p&gt;
 &lt;p&gt;&lt;img alt="Firefox Nightly Logo" src="https://carreau.github.io/posts/img/Firefox_Nightly_Logo_2017.png"&gt;&lt;/p&gt;
-&lt;h3&gt;MyBinder.org&lt;/h3&gt;
+&lt;h3 id="mybinderorg"&gt;MyBinder.org&lt;/h3&gt;
 &lt;p&gt;I'm also spending more and more time working with the JupyterHub team on
 &lt;a href="https://MyBinder.org"&gt;Binder&lt;/a&gt;, and see more and more developer adding binder
 badges to their repository. Mid of last week I though:&lt;/p&gt;
@@ -46,7 +46,7 @@ badge which is at the bottom of the readme.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;You know what would be great to fix that ? A button in the toolbar doing the
 work for me.&lt;/p&gt;
-&lt;h3&gt;Writing the extension&lt;/h3&gt;
+&lt;h3 id="writing-the-extension"&gt;Writing the extension&lt;/h3&gt;
 &lt;p&gt;As I know Mozilla (which has a not so great &lt;a href="https://blog.mozilla.org/opendesign/mdns-new-design-beta/"&gt;new
 design&lt;/a&gt; BTW, but
 personal opinion) cares about making standard and things simple for their users,
@@ -54,37 +54,34 @@ I though I would have a look at the new
 &lt;a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions"&gt;WebExtension&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;And 7 days later, after a couple of 30 minutes break, I present to you a
 staggering 27 lines (including 7 line business logic) extension that does that:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;handleClick&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nx"&gt;browser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;active&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;currentWindow&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]})&lt;/span&gt;
-    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;tab&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;URL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tab&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hostname&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;'github.com'&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-       &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Open in binder only works on GitHub repositories for now.'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-       &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-      &lt;span class="p"&gt;};&lt;/span&gt;
-      &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;parts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;pathname&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;parts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-        &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'While you are on GitHub, You do not appear to be in a github repository. Aborting.'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-      &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;my_binder_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://mybinder.org/v2/gh/'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;parts&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;parts&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'/master'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-      &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Opening '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'using mybinder.org... enjoy !'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="nx"&gt;browser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;tabs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;create&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;'url'&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;my_binder_url&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
-    &lt;span class="p"&gt;})&lt;/span&gt;
-
-  &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'(Re) loading open-in-binder extension.'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="nx"&gt;browser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;browserAction&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;onClicked&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;handleClick&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'❤️ If you are reading this then you know about binder and javascript. ❤️'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;})()&lt;/span&gt;
-&lt;/pre&gt;
-
-
-&lt;p&gt;You can find the &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js"&gt;original source here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;```js
+(function() {
+  function handleClick(){
+    browser.tabs.query({active: true, currentWindow: true})
+    .then((tabs) =&amp;gt; {return tabs[0]})
+    .then((tab) =&amp;gt; {
+      let url = new URL(tab.url);
+      if (url.hostname != 'github.com'){
+       console.warn('Open in binder only works on GitHub repositories for now.');
+       return;
+      };
+      let parts = url.pathname.split('/');
+      if (parts.length &amp;lt; 3){
+        console.warn('While you are on GitHub, You do not appear to be in a github repository. Aborting.');
+        return;
+      }
+      let my_binder_url = 'https://mybinder.org/v2/gh/'+parts[1] +'/'+parts[2] +'/master';
+      console.info('Opening ' + url + 'using mybinder.org... enjoy !')
+      browser.tabs.create({'url':my_binder_url});
+    })&lt;/p&gt;
+&lt;p&gt;}
+  console.info('(Re) loading open-in-binder extension.');
+  browser.browserAction.onClicked.addListener(handleClick);&lt;/p&gt;
+&lt;p&gt;console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
+  console.info('❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️');
+})()
+```
+You can find the &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js"&gt;original source here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Firefox Dev Logo" src="https://carreau.github.io/posts/img/firefox-dev-logo.png"&gt;&lt;/p&gt;
 &lt;p&gt;The hardest part was finding the API and learning how to package and set the
 icons correctly. There are still &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues"&gt;plenty of missing
@@ -93,7 +90,7 @@ and &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/is
 fruits&lt;/a&gt;,
 even if you have never written an extension before (hey it's my first and I
 averaged 1-useful line/day writing it...).&lt;/p&gt;
-&lt;h3&gt;General Feeling&lt;/h3&gt;
+&lt;h3 id="general-feeling"&gt;General Feeling&lt;/h3&gt;
 &lt;p&gt;Remember that I'm new to that and started a week ago.&lt;/p&gt;
 &lt;p&gt;The Mozilla docs are good but highly varying in quality, it feels (and is) a
 wiki. More opinionated tutorials might have been less confusing. A lot of
@@ -119,7 +116,7 @@ been done (That's usually where Apple is know to shine). For example your store
 icon will be resized to 64x64 (px) and display in a 64x64 (px) square but I have
 a retina screen ! So even if I submitted a 128x128 now my icon looks blurry !
 WTF !&lt;/p&gt;
-&lt;h3&gt;You can contribute&lt;/h3&gt;
+&lt;h3 id="you-can-contribute"&gt;You can contribute&lt;/h3&gt;
 &lt;p&gt;As I said earlier there is a lot of low hanging fruits ! I went through the
 process of figuring things out, so that you can contribute easily:&lt;/p&gt;
 &lt;ul&gt;

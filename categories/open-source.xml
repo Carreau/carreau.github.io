@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts (Posts about open-source)</title><link>https://carreau.github.io/</link><description></description><atom:link type="application/rss+xml" href="https://carreau.github.io/categories/open-source.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 04 Dec 2017 18:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>One less Pull Request</title><link>https://carreau.github.io/posts/21-one-less-pull-request.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about open-source)</title><link>https://carreau.github.io/</link><description></description><atom:link rel="self" type="application/rss+xml" href="https://carreau.github.io/categories/open-source.xml"></atom:link><language>en</language><lastBuildDate>Wed, 03 Jan 2018 13:53:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>One less Pull Request</title><link>https://carreau.github.io/posts/21-one-less-pull-request.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
 websites and organisation will push you to make contribution to Open-Source,
 for example via &lt;a href="https://hacktoberfest.digitalocean.com/"&gt;hacktoberfest&lt;/a&gt; I got
 a nice T-shirt last year, and &lt;a href="http://24pullrequests.com/"&gt;24pullrequests&lt;/a&gt; seem
@@ -8,7 +8,7 @@ users of open-source to start contributing and already seasons developers to
 try touch new project. &lt;/p&gt;
 &lt;p&gt;Here is a request I got for you whether you participate or not to these events:
 Please close a Pull Request. &lt;/p&gt;
-&lt;h2&gt;Less is More&lt;/h2&gt;
+&lt;h2 id="less-is-more"&gt;Less is More&lt;/h2&gt;
 &lt;p&gt;While I really appreciate having new contributions, there is a point were too
 many opened pull-requests can – I think – be harmful. I'm going to expose the
 various case, why I think these are harmful and what can be done.&lt;/p&gt;
@@ -20,7 +20,7 @@ are absolutely extraordinary and reactive. The current count of opened PR is
 at &lt;a href="https://twitter.com/tacaswell/status/780508160490692609"&gt;207&lt;/a&gt;. You can see
 in the discussion linked here that maintainers feel differently about high
 number of PRs.&lt;/p&gt;
-&lt;h3&gt;I open to many pull requests&lt;/h3&gt;
+&lt;h3 id="i-open-to-many-pull-requests"&gt;I open to many pull requests&lt;/h3&gt;
 &lt;p&gt;I currently have 12 opened pull requests, see how many &lt;a href="https://github.com/pulls"&gt;you
 have&lt;/a&gt;. This mean that I (at least) have to follow-up
 with around 12 projects every days. This is an extremely hight cognitive cost
@@ -38,7 +38,7 @@ merged, I would prefer you don't give me false hope, and close it. Explain why.
 Even if it's just that's you are busy on something else and would appreciate if
 this was resubmitted later. I'm more likely to get over it and try a few other
 time than if my first contribution got no responses.&lt;/p&gt;
-&lt;h3&gt;I receive too many pull-requests&lt;/h3&gt;
+&lt;h3 id="i-receive-too-many-pull-requests"&gt;I receive too many pull-requests&lt;/h3&gt;
 &lt;p&gt;I strongly encourage you to try
 &lt;a href="https://minrk.github.io/all-my-pulls/"&gt;minrk.github.io/all-my-pulls&lt;/a&gt; it allows
 you to view all the pull-requests you have the ability to merge. And filter by
@@ -65,7 +65,7 @@ maintainer to do everything.&lt;/p&gt;
 pull-requests. I can keep track of each of them, judge whether or not the work
 will conflict and give proper care to each of these. I fail to do so when there
 are many pages. &lt;/p&gt;
-&lt;h3&gt;I don't contribute to repository that have too many PRs.&lt;/h3&gt;
+&lt;h3 id="i-dont-contribute-to-repository-that-have-too-many-prs"&gt;I don't contribute to repository that have too many PRs.&lt;/h3&gt;
 &lt;p&gt;When I come across a repository with more than 20-ish pull-requests, I tend to
 think that the authors are not responding so why bother to contribute. I know
 that often these are only &lt;em&gt;impressions&lt;/em&gt; and I can get over it because &lt;em&gt;I have
@@ -84,7 +84,7 @@ number of open non active Pull requests. I've
 &lt;a href="https://twitter.com/Mbussonn/status/780474037977751552"&gt;asked&lt;/a&gt; on twitter and
 it looks like roughly every other respondent are discouraged to contribute if
 too many PR are opened.&lt;/p&gt;
-&lt;h2&gt;What do you think ?&lt;/h2&gt;
+&lt;h2 id="what-do-you-think"&gt;What do you think ?&lt;/h2&gt;
 &lt;p&gt;The above paragraphs are my though on too many opened pull-requests ? How are
 you feeling about that ? As you might have read in the twitter conversation
 linked to above, different people have different opinions.&lt;/p&gt;
@@ -92,7 +92,7 @@ linked to above, different people have different opinions.&lt;/p&gt;
 GitHub&lt;/a&gt;, and if you have the courage
 to help improve my English feel free to send me a PR (sic) to make this more
 readable.&lt;/p&gt;
-&lt;h2&gt;Close a PR !&lt;/h2&gt;
+&lt;h2 id="close-a-pr"&gt;Close a PR !&lt;/h2&gt;
 &lt;p&gt;Thanks you for reading up until here ! If you want to restore part of the
 sanity of some maintainers, or want to appeal a bit more to some users, please
 go close a PRs ! Or help finish a Pr that have stalled ! I can't give you a

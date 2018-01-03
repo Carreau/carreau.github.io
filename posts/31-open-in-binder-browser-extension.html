@@ -81,7 +81,7 @@ visiting using MyBinder.org. </p>
 Firefox</a>.
 If you like to know more read on. </p>
 <p><img alt="Binder Logo" src="img/binder_logo_128x128.png"></p>
-<h3>Back to Firefox.</h3>
+<h3 id="back-to-firefox">Back to Firefox.</h3>
 <p>I've been using Chrome for a couple of years now, but heard a lot of good stuff
 about <a href="https://www.rust-lang.org/en-US/">Rust</a> and all the good stuff it has
 done or <a href="https://blog.mozilla.org/blog/2017/11/14/introducing-firefox-quantum/">Firefox</a>. 
@@ -89,7 +89,7 @@ Ok that's a bit of marketing but it got me to retry Firefox (Nightly please),
 and except for my password manager which took some week to update to the new
 Firefox API, I rapidly barely used Chrome. </p>
 <p><img alt="Firefox Nightly Logo" src="img/Firefox_Nightly_Logo_2017.png"></p>
-<h3>MyBinder.org</h3>
+<h3 id="mybinderorg">MyBinder.org</h3>
 <p>I'm also spending more and more time working with the JupyterHub team on
 <a href="https://MyBinder.org">Binder</a>, and see more and more developer adding binder
 badges to their repository. Mid of last week I though:</p>
@@ -100,7 +100,7 @@ badge which is at the bottom of the readme.</p>
 </blockquote>
 <p>You know what would be great to fix that ? A button in the toolbar doing the
 work for me.</p>
-<h3>Writing the extension</h3>
+<h3 id="writing-the-extension">Writing the extension</h3>
 <p>As I know Mozilla (which has a not so great <a href="https://blog.mozilla.org/opendesign/mdns-new-design-beta/">new
 design</a> BTW, but
 personal opinion) cares about making standard and things simple for their users,
@@ -108,37 +108,34 @@ I though I would have a look at the new
 <a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a>.</p>
 <p>And 7 days later, after a couple of 30 minutes break, I present to you a
 staggering 27 lines (including 7 line business logic) extension that does that:</p>
-<pre class="code literal-block"><span></span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nx">handleClick</span><span class="p">(){</span>
-    <span class="nx">browser</span><span class="p">.</span><span class="nx">tabs</span><span class="p">.</span><span class="nx">query</span><span class="p">({</span><span class="nx">active</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">currentWindow</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">tabs</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">tabs</span><span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">tab</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">URL</span><span class="p">(</span><span class="nx">tab</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">hostname</span> <span class="o">!=</span> <span class="s1">'github.com'</span><span class="p">){</span>
-       <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'Open in binder only works on GitHub repositories for now.'</span><span class="p">);</span>
-       <span class="k">return</span><span class="p">;</span>
-      <span class="p">};</span>
-      <span class="kd">let</span> <span class="nx">parts</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">pathname</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">parts</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">){</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'While you are on GitHub, You do not appear to be in a github repository. Aborting.'</span><span class="p">);</span>
-        <span class="k">return</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="kd">let</span> <span class="nx">my_binder_url</span> <span class="o">=</span> <span class="s1">'https://mybinder.org/v2/gh/'</span><span class="o">+</span><span class="nx">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="s1">'/'</span><span class="o">+</span><span class="nx">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span><span class="s1">'/master'</span><span class="p">;</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'Opening '</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">'using mybinder.org... enjoy !'</span><span class="p">)</span>
-      <span class="nx">browser</span><span class="p">.</span><span class="nx">tabs</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="s1">'url'</span><span class="o">:</span><span class="nx">my_binder_url</span><span class="p">});</span>
-    <span class="p">})</span>
-
-  <span class="p">}</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'(Re) loading open-in-binder extension.'</span><span class="p">);</span>
-  <span class="nx">browser</span><span class="p">.</span><span class="nx">browserAction</span><span class="p">.</span><span class="nx">onClicked</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">handleClick</span><span class="p">);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'❤️ If you are reading this then you know about binder and javascript. ❤️'</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️'</span><span class="p">);</span>
-<span class="p">})()</span>
-</pre>
-
-
-<p>You can find the <a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js">original source here</a></p>
+<p>```js
+(function() {
+  function handleClick(){
+    browser.tabs.query({active: true, currentWindow: true})
+    .then((tabs) =&gt; {return tabs[0]})
+    .then((tab) =&gt; {
+      let url = new URL(tab.url);
+      if (url.hostname != 'github.com'){
+       console.warn('Open in binder only works on GitHub repositories for now.');
+       return;
+      };
+      let parts = url.pathname.split('/');
+      if (parts.length &lt; 3){
+        console.warn('While you are on GitHub, You do not appear to be in a github repository. Aborting.');
+        return;
+      }
+      let my_binder_url = 'https://mybinder.org/v2/gh/'+parts[1] +'/'+parts[2] +'/master';
+      console.info('Opening ' + url + 'using mybinder.org... enjoy !')
+      browser.tabs.create({'url':my_binder_url});
+    })</p>
+<p>}
+  console.info('(Re) loading open-in-binder extension.');
+  browser.browserAction.onClicked.addListener(handleClick);</p>
+<p>console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
+  console.info('❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️');
+})()
+```
+You can find the <a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js">original source here</a></p>
 <p><img alt="Firefox Dev Logo" src="img/firefox-dev-logo.png"></p>
 <p>The hardest part was finding the API and learning how to package and set the
 icons correctly. There are still <a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues">plenty of missing
@@ -147,7 +144,7 @@ and <a href="https://github.com/Carreau/open-with-binder-firefox-extension/issue
 fruits</a>,
 even if you have never written an extension before (hey it's my first and I
 averaged 1-useful line/day writing it...).</p>
-<h3>General Feeling</h3>
+<h3 id="general-feeling">General Feeling</h3>
 <p>Remember that I'm new to that and started a week ago.</p>
 <p>The Mozilla docs are good but highly varying in quality, it feels (and is) a
 wiki. More opinionated tutorials might have been less confusing. A lot of
@@ -173,7 +170,7 @@ been done (That's usually where Apple is know to shine). For example your store
 icon will be resized to 64x64 (px) and display in a 64x64 (px) square but I have
 a retina screen ! So even if I submitted a 128x128 now my icon looks blurry !
 WTF !</p>
-<h3>You can contribute</h3>
+<h3 id="you-can-contribute">You can contribute</h3>
 <p>As I said earlier there is a lot of low hanging fruits ! I went through the
 process of figuring things out, so that you can contribute easily:</p>
 <ul>
@@ -196,7 +193,7 @@ process of figuring things out, so that you can contribute easily:</p>
             </li>
         </ul>
 </div>
-                    <footer id="footer"><p>Contents © 2017         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer"><p>Contents © 2018         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel><title>Random Thoughts (Posts about swearwords)</title><link>https://carreau.github.io/</link><description></description><atom:link type="application/rss+xml" href="https://carreau.github.io/categories/swearwords.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 04 Dec 2017 18:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>About security</title><link>https://carreau.github.io/posts/19-about-security.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This is a bit of an anger post, I won't explicitly give name, but if you know
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about swearwords)</title><link>https://carreau.github.io/</link><description></description><atom:link rel="self" type="application/rss+xml" href="https://carreau.github.io/categories/swearwords.xml"></atom:link><language>en</language><lastBuildDate>Wed, 03 Jan 2018 13:53:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>About security</title><link>https://carreau.github.io/posts/19-about-security.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This is a bit of an anger post, I won't explicitly give name, but if you know
 me you should be able to put the pieces together.&lt;/p&gt;
 &lt;p&gt;I'm angry for the reason that almost a year ago, I warn a known Londonian
 startup, that they had a large security flaw in their software. They responded
@@ -9,7 +9,7 @@ card number are potentially in the wild, and they are responding to me and
 twitter that basically I don't understand security.&lt;/p&gt;
 &lt;p&gt;I have a tip for them. If people disagree whether a system is secure or not,
 then the system is most likely not secure.&lt;/p&gt;
-&lt;h3&gt;Do you trust your postman ?&lt;/h3&gt;
+&lt;h3 id="do-you-trust-your-postman"&gt;Do you trust your postman ?&lt;/h3&gt;
 &lt;p&gt;To be more accessible, I'll take the example of Alice and Bob communicating by
 snail mail, instead of use the https/ssl encryption jargon.&lt;/p&gt;
 &lt;p&gt;Alice and Bob have never met, though they are communicating regularly by mail.
@@ -35,13 +35,13 @@ realising Bob's was not receiving mail.&lt;/p&gt;
 http, and you tell me that the password is send over https, nothing prevent me
 to Man in the middle your login form and have it submitted to a different
 address.&lt;/p&gt;
-&lt;h3&gt;I'm not a clown&lt;/h3&gt;
+&lt;h3 id="im-not-a-clown"&gt;I'm not a clown&lt;/h3&gt;
 &lt;p&gt;This is &lt;strong&gt;basic&lt;/strong&gt; security when you care a bit on what you are doing, and
 please be aware that people that will take the time to submit you such bug
 report, are not clowns and actually take time to explain you these things.
 Please respect them instead of raising some funds by venture capitals.&lt;/p&gt;
 &lt;p&gt;You get a statement on your website that you care about user privacy,
 apparently you don't.&lt;/p&gt;
-&lt;h3&gt;Thanks&lt;/h3&gt;
+&lt;h3 id="thanks"&gt;Thanks&lt;/h3&gt;
 &lt;p&gt;As usual, I'm not a good at writing English so I appreciate any Pull Request
 that fix grammar, spelling and english expression.&lt;/p&gt;&lt;/div&gt;</description><category>anger</category><category>figshare</category><category>privacy</category><category>security</category><category>swearwords</category><guid>https://carreau.github.io/posts/19-about-security.html</guid><pubDate>Thu, 24 Sep 2015 21:33:24 GMT</pubDate></item></channel></rss>

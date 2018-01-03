@@ -67,7 +67,7 @@ The migration of IPython to be Python 3 only, started about a year ago. F">
             <div>
 <p>This is a personal experience of having migrated IPython from being single
 source Py2-Py3 to Python 3 only.</p>
-<h2>The migration plan</h2>
+<h2 id="the-migration-plan">The migration plan</h2>
 <p>The migration of IPython to be Python 3 only, started about a year ago. For the
 last couple of years, the IPython code base was "single source", meaning that yo
 could run it on Python 2 and Python 3 without a single change to the source
@@ -78,7 +78,7 @@ used tools. This would also have required taking care of functionality backport,
 which can be a pain, and things like async-io are quasi impossible to backport
 cleanly to Python 2</p>
 <p>So we just dropped Python 2 support</p>
-<h2>The levels of Non-support</h2>
+<h2 id="the-levels-of-non-support">The levels of Non-support</h2>
 <p>While it is easy to use the term "non-supported" there are different level of
 non-support.</p>
 <ul>
@@ -101,13 +101,13 @@ non-support.</p>
 <p>Making a codebase Python 3 only is "easy" in the sens that adding a single <code>yield
 from</code> is enough to make your code not valid Python 2, and no <code>__future__</code>
 statement can fix that.</p>
-<h2>Removing code</h2>
+<h2 id="removing-code">Removing code</h2>
 <p>One of the things you will probably see in the background of this section is
 that static languages would be of great help for this task. I would tend to say
 "thank you captain obvious", but there is some truth. Though Python is not a
 static language and we are trying to see how we can write Python in a better way
 to ease the transition.</p>
-<h3>the obvious</h3>
+<h3 id="the-obvious">the obvious</h3>
 <p>There are obvious functions that are present only for Python 2. In general
 present in <code>if Py2</code> blocks. These can simply be deleted, and hopefully now your
 linter will complain about a ton of unused variable and import you can remove. </p>
@@ -117,7 +117,7 @@ sure your function is not tested separately on Python 3. </p>
 <p>One of the indirect effect in many places was the reduced indentation.
 Especially at module level this lead to much greater readability as module-level
 function are easily confused for object methods when indented in an <code>if py2:</code></p>
-<h3>EAFP vs LBYL</h3>
+<h3 id="eafp-vs-lbyl">EAFP vs LBYL</h3>
 <p>It is common in Python to use try/except in place of if/else condition. 
 The well-known <code>hasattr</code> works by catching an exception, and if/else is subject
 to race conditions. So it's not uncommon to hear that "Easier to Ask Forgiveness
@@ -136,7 +136,7 @@ find) these for minor versions.</p>
 <p>The zen of Python had it right: Explicit is better than implicit. </p>
 <p>For me at least, <code>try/except ImportError, AttributeError</code> is a pattern I'll
 avoid in favor of explicit if/else.</p>
-<h3>byte/str/string/unicode</h3>
+<h3 id="bytestrstringunicode">byte/str/string/unicode</h3>
 <p>There is a couple location where you might have to deal with
 bytes/unicode/str/string – oh boy, these names are not well chosen. In
 particular in area where you are casting thing that are bytes to unicode and
@@ -146,37 +146,37 @@ the code is soooo much shorter and simpler and clearer in your head. </p>
 <p>Remember <code>bytes&lt;-&gt;unicode</code> at boundary and keep things Unicode everywhere in
 your programs if you want to avoid headache. Good Python Code is boring Python
 code.</p>
-<h2>Python 2-ism</h2>
+<h2 id="python-2-ism">Python 2-ism</h2>
 <p>Dealing with removing Python 2 code made me realise that there is still a lot of
 Python-2-ism in most of the Python 3 code I write.</p>
-<h3>inheriting classes</h3>
+<h3 id="inheriting-classes">inheriting classes</h3>
 <p>Writing classes that do not need to inherit from <code>object</code> feels weird, and I
 definitively don't have the habit (yet) of not doing it. Having the ability to
 use a bare <code>super()</code> is great as I fevered remembered the order of parameter. </p>
-<h3>Pathlib</h3>
+<h3 id="pathlib">Pathlib</h3>
 <p>IPython uses a lot of path manipulation, so we keep using <code>os.path.join</code> in many
 paces, or even just use the <code>with open(...)</code> context manager. If you can afford
 it and target only recent python version <code>pathlib</code> and Path object are great
 alternative that we tend to forget exist. </p>
-<h3>decode</h3>
+<h3 id="decode">decode</h3>
 <p>Most of decode/encode operation do the right things, there is almost no need to
 precise the encoding anywhere. This make handling <code>bytes-&gt; str</code> conversion even
 easier.</p>
-<h2>Python 3 ism</h2>
+<h2 id="python-3-ism">Python 3 ism</h2>
 <p>This are the feature of Python 3 which do not have equivalent in Python 2 and
 would make great addition in many code base. I tend to forget they exist and do
 not design code around them enough.</p>
-<h2>async/await</h2>
+<h2 id="asyncawait">async/await</h2>
 <p>I'm just scratching the surface of async/await, and I definitively see great
 opportunities here. You need to design code to work in an async-fashion, but it
 should be <em>relatively</em> straightforward to use async code from synchronous one. I
 should learn more about sans-io (google is your friend) to make code reusable. </p>
-<h2>type anotations</h2>
+<h2 id="type-anotations">type anotations</h2>
 <p>Type annotation are an incredible feature that even just as visual annotation
 replace numpydoc. I have a small grudge against the pep8 that describe the
 position of space, but even without mypy the ability to annotate type is a huge
 boon for documentation. Now docstring can focus on why/how of functions.</p>
-<h2>kwarg only</h2>
+<h2 id="kwarg-only">kwarg only</h2>
 <p>Keyword arguments only is a great feature of Python 3, often under-appreciated
 the <code>*</code>-syntax is IMHO a bit clunky – but I don't have a better option. It give
 you a great flexibility in api without sacrifying backward compatibility. 
@@ -192,7 +192,7 @@ I wish I had position only as well. </p>
             </li>
         </ul>
 </div>
-                    <footer id="footer"><p>Contents © 2017         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer"><p>Contents © 2018         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             
