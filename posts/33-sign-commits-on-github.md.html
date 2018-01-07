@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html prefix="
+og: http://ogp.me/ns#
+article: http://ogp.me/ns/article#
+" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Sign commits on GitHub | Random Thoughts</title>
+<link href="../assets/css/bitter.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="https://carreau.github.io/posts/33-sign-commits-on-github.md.html">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
+<meta property="og:site_name" content="Random Thoughts">
+<meta property="og:title" content="Sign commits on GitHub">
+<meta property="og:url" content="https://carreau.github.io/posts/33-sign-commits-on-github.md.html">
+<meta property="og:description" content="Signing Commit on Tags on GitHub
+I've recently set-up keybase and integrated my public key
+with git to be able to sign commits.
+I decided to not automatically sign, as auto-signing would allow any att">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-01-07T13:30:00Z">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="pgp">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/matthias-bussonnier-2512256a" title="Linked In"><i class="icon-linkedin"></i></a></li>
+            <li><a href="https://keybase.io/mbussonn/" title="Keybase"><i class="icon-key"></i></a></li>
+            <li><a href="https://stackoverflow.com/users/137794/matt" title="StackOverflow"><i class="icon-stackexchange"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-archive"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Sign commits on GitHub</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2018-01-07T13:30:00+00:00">2018-01-07 13:30</time>
+            
+                      |  
+        <a href="33-sign-commits-on-github.md.md" id="sourcelink">Source</a>
+
+            </div>
+                    <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="../categories/github.html" rel="tag">github</a></li>
+           <li><a class="tag p-category" href="../categories/pgp.html" rel="tag">pgp</a></li>
+        </ul>
+</div>
+
+        </div>
+        <div class="body">
+            <div>
+<h2 id="signing-commit-on-tags-on-github">Signing Commit on Tags on GitHub</h2>
+<p>I've recently set-up <a href="https://keybase.io/">keybase</a> and integrated my public key
+with git to be able to sign commits.</p>
+<p>I decided to not automatically sign, as auto-signing would allow any attacker
+that takes control of my machine to create signed commit. The git <a href="https://en.wikipedia.org/wiki/Merkle_tree">Merkle
+tree</a> of git still insure repos are
+not tampered with, as long as you issue <code>$ git fsck --full</code> on a repo or <code>$ git
+config --global transfer.fsckobjects true</code> once and forget it.</p>
+<p>Using <code>$ git log --show-signatur</code> you can now check that commits (and tags) are
+correctly signed. Be careful though, correct signature does not mean trusted,
+and if you have a PGP key set; GitHub will helpfully signed the commit you make
+on their platform with <strong>their key</strong>. </p>
+<pre><code>* commit 5ced6c6936563fea7ba7efccecbc4248d84cfabb (tag: 5.2.1, origin/5.2.x, 5.2.x)
+| gpg: Signature made Tue Jan  2 19:51:17 2018 CET
+| gpg:                using RSA key 99B17F64FD5C94692E9EF8064968B2CC0208DCC8
+| gpg: Good signature from "Matthias Bussonnier &lt;bussonniermatthias@gmail.com&gt;" [ultimate]
+| Author: Matthias Bussonnier &lt;bussonniermatthias@gmail.com&gt;
+| Date:   Tue Jan 2 19:49:34 2018 +0100
+|
+|     Bump version number to 5.2.1 for release
+|
+*   commit 5a28fb0a121c286e35db309fe11b53693969b2d6
+|\  gpg: Signature made Tue Jan  2 13:58:08 2018 CET
+| | gpg:                using RSA key 4AEE18F83AFDEB23
+| | gpg: Good signature from "GitHub (web-flow commit signing) &lt;noreply@github.com&gt;" [unknown]
+| | gpg: WARNING: This key is not certified with a trusted signature!
+| | gpg:          There is no indication that the signature belongs to the owner.
+| | Primary key fingerprint: 5DE3 E050 9C47 EA3C F04A  42D3 4AEE 18F8 3AFD EB23
+| | Merge: 3fd21bc 065a16a
+| | Author: Min RK &lt;benjaminrk@gmail.com&gt;
+| | Date:   Tue Jan 2 13:58:08 2018 +0100
+| |
+| |     Merge pull request #326 from jupyter/auto-backport-of-pr-325
+| |
+| |     Backport PR #325 on branch 5.2.x
+| |
+| * commit 065a16aad2e84d506b36bb2c874a7c287c53c61f (origin/pr/326)
+|/  Author: Min RK &lt;benjaminrk@gmail.com&gt;
+|   Date:   Tue Jan 2 10:57:13 2018 +0100
+|
+|       Backport PR #325: Parenthesize conditional requirement in setup.py
+</code></pre>
+<p>So in the previous block, you can see that <code>5ced6c6...</code> have been done <strong>and
+signed</strong> by me, while <code>5a28fb0...</code> has be allegedly done by Min, <em>but</em> signed by
+GitHub.</p>
+<p>By default you do not have GitHub Signature locally, so the GitHub Signed
+commits can appear as unverified. </p>
+<p>To do so fetch the GitHub Key:</p>
+<p><code>$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 4AEE18F83AFDEB23</code></p>
+<p>Where <code>4AEE18F83AFDEB23</code> is the key you do not have locally. 
+And remember Valid Signature, does not mean trusted.</p>
+<h3 id="verifying-tags">verifying Tags</h3>
+<p>Tags can be signed, and need to be checked <strong>independently of commits</strong> :</p>
+<pre><code>$ git tag --verify 5.2.1
+object 5ced6c6936563fea7ba7efccecbc4248d84cfabb
+type commit
+tag 5.2.1
+tagger Matthias Bussonnier &lt;bussonniermatthias@gmail.com&gt; 1514919438 +0100
+
+release version 5.2.1
+gpg: Signature made Tue Jan  2 19:57:18 2018 CET
+gpg:                using RSA key 99B17F64FD5C94692E9EF8064968B2CC0208DCC8
+gpg: Good signature from "Matthias Bussonnier &lt;bussonniermatthias@gmail.com&gt;" [ultimate]
+</code></pre>
+<p>So you can check that <em>I</em> tagged this commit.</p>
+<h3 id="learn-more">learn more</h3>
+<p>As usual the <a href="https://git-scm.com/book/id/v2/Git-Tools-Signing-Your-Work">git documentation</a>
+has more to say about this. And signing is not really useful without checking
+the integrity of Git history, so please set <code>$ git config --global transfer.fsckobjects true</code> as well !</p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="32-open-with-binder-chrome.html" rel="prev" title="Open in Binder Chrome Extension">Previous post</a>
+            </li>
+        </ul>
+</div>
+                    <footer id="footer"><p>Contents © 2018         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
+</p>
+            
+        </footer>
+</div>
+    </section><script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110089201-1"></script><script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-110089201-1');
+        </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts (Posts about github)</title><link>https://carreau.github.io/</link><description></description><atom:link href="https://carreau.github.io/categories/github.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 07 Jan 2018 14:14:06 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Sign commits on GitHub</title><link>https://carreau.github.io/posts/33-sign-commits-on-github.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2 id="signing-commit-on-tags-on-github"&gt;Signing Commit on Tags on GitHub&lt;/h2&gt;
+&lt;p&gt;I've recently set-up &lt;a href="https://keybase.io/"&gt;keybase&lt;/a&gt; and integrated my public key
+with git to be able to sign commits.&lt;/p&gt;
+&lt;p&gt;I decided to not automatically sign, as auto-signing would allow any attacker
+that takes control of my machine to create signed commit. The git &lt;a href="https://en.wikipedia.org/wiki/Merkle_tree"&gt;Merkle
+tree&lt;/a&gt; of git still insure repos are
+not tampered with, as long as you issue &lt;code&gt;$ git fsck --full&lt;/code&gt; on a repo or &lt;code&gt;$ git
+config --global transfer.fsckobjects true&lt;/code&gt; once and forget it.&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;$ git log --show-signatur&lt;/code&gt; you can now check that commits (and tags) are
+correctly signed. Be careful though, correct signature does not mean trusted,
+and if you have a PGP key set; GitHub will helpfully signed the commit you make
+on their platform with &lt;strong&gt;their key&lt;/strong&gt;. &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* commit 5ced6c6936563fea7ba7efccecbc4248d84cfabb (tag: 5.2.1, origin/5.2.x, 5.2.x)
+| gpg: Signature made Tue Jan  2 19:51:17 2018 CET
+| gpg:                using RSA key 99B17F64FD5C94692E9EF8064968B2CC0208DCC8
+| gpg: Good signature from "Matthias Bussonnier &amp;lt;bussonniermatthias@gmail.com&amp;gt;" [ultimate]
+| Author: Matthias Bussonnier &amp;lt;bussonniermatthias@gmail.com&amp;gt;
+| Date:   Tue Jan 2 19:49:34 2018 +0100
+|
+|     Bump version number to 5.2.1 for release
+|
+*   commit 5a28fb0a121c286e35db309fe11b53693969b2d6
+|\  gpg: Signature made Tue Jan  2 13:58:08 2018 CET
+| | gpg:                using RSA key 4AEE18F83AFDEB23
+| | gpg: Good signature from "GitHub (web-flow commit signing) &amp;lt;noreply@github.com&amp;gt;" [unknown]
+| | gpg: WARNING: This key is not certified with a trusted signature!
+| | gpg:          There is no indication that the signature belongs to the owner.
+| | Primary key fingerprint: 5DE3 E050 9C47 EA3C F04A  42D3 4AEE 18F8 3AFD EB23
+| | Merge: 3fd21bc 065a16a
+| | Author: Min RK &amp;lt;benjaminrk@gmail.com&amp;gt;
+| | Date:   Tue Jan 2 13:58:08 2018 +0100
+| |
+| |     Merge pull request #326 from jupyter/auto-backport-of-pr-325
+| |
+| |     Backport PR #325 on branch 5.2.x
+| |
+| * commit 065a16aad2e84d506b36bb2c874a7c287c53c61f (origin/pr/326)
+|/  Author: Min RK &amp;lt;benjaminrk@gmail.com&amp;gt;
+|   Date:   Tue Jan 2 10:57:13 2018 +0100
+|
+|       Backport PR #325: Parenthesize conditional requirement in setup.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So in the previous block, you can see that &lt;code&gt;5ced6c6...&lt;/code&gt; have been done &lt;strong&gt;and
+signed&lt;/strong&gt; by me, while &lt;code&gt;5a28fb0...&lt;/code&gt; has be allegedly done by Min, &lt;em&gt;but&lt;/em&gt; signed by
+GitHub.&lt;/p&gt;
+&lt;p&gt;By default you do not have GitHub Signature locally, so the GitHub Signed
+commits can appear as unverified. &lt;/p&gt;
+&lt;p&gt;To do so fetch the GitHub Key:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 4AEE18F83AFDEB23&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;code&gt;4AEE18F83AFDEB23&lt;/code&gt; is the key you do not have locally. 
+And remember Valid Signature, does not mean trusted.&lt;/p&gt;
+&lt;h3 id="verifying-tags"&gt;verifying Tags&lt;/h3&gt;
+&lt;p&gt;Tags can be signed, and need to be checked &lt;strong&gt;independently of commits&lt;/strong&gt; :&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git tag --verify 5.2.1
+object 5ced6c6936563fea7ba7efccecbc4248d84cfabb
+type commit
+tag 5.2.1
+tagger Matthias Bussonnier &amp;lt;bussonniermatthias@gmail.com&amp;gt; 1514919438 +0100
+
+release version 5.2.1
+gpg: Signature made Tue Jan  2 19:57:18 2018 CET
+gpg:                using RSA key 99B17F64FD5C94692E9EF8064968B2CC0208DCC8
+gpg: Good signature from "Matthias Bussonnier &amp;lt;bussonniermatthias@gmail.com&amp;gt;" [ultimate]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So you can check that &lt;em&gt;I&lt;/em&gt; tagged this commit.&lt;/p&gt;
+&lt;h3 id="learn-more"&gt;learn more&lt;/h3&gt;
+&lt;p&gt;As usual the &lt;a href="https://git-scm.com/book/id/v2/Git-Tools-Signing-Your-Work"&gt;git documentation&lt;/a&gt;
+has more to say about this. And signing is not really useful without checking
+the integrity of Git history, so please set &lt;code&gt;$ git config --global transfer.fsckobjects true&lt;/code&gt; as well !&lt;/p&gt;&lt;/div&gt;</description><category>git</category><category>github</category><category>pgp</category><guid>https://carreau.github.io/posts/33-sign-commits-on-github.md.html</guid><pubDate>Sun, 07 Jan 2018 13:30:00 GMT</pubDate></item></channel></rss>

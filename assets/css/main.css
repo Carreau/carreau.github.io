@@ -2184,7 +2184,7 @@ a:focus {
   font-size: 26.25px;
 }
 .page-content {
-  font-family: 'Georgia', 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, "Helvetica", "Bitter", "Georgia", "Times New Roman", serif;
+  font-family: garamond, 'Georgia', 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, "Helvetica",  "Times New Roman", serif;
 }
 .page-content > .content {
   text-rendering: optimizeLegibility;
@@ -2275,6 +2275,7 @@ a:focus {
   -o-hyphens: auto;
   hyphens: auto;
   margin: 0 0 12px;
+  font-family: garamond;
 }
 
 .page-content >  .content p > img {
@@ -2432,10 +2433,10 @@ pre.prettyprint {
   margin-bottom: 24px;
 }
 pre code {
+  line-height: 1.25em;
   padding: 0;
   color: inherit;
   white-space: pre;
-  white-space: pre-wrap;
   background-color: transparent;
   border: 0;
 }
@@ -2622,4 +2623,8 @@ pre.code {
     font-size: 85%;
     line-height: 1.2em;
     vertical-align: bottom;
+}
+
+code {
+  display: inline;
 }
