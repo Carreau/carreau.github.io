@@ -258,12 +258,11 @@ section {
 }
 @media (min-width: 774px){
   .social {
-    width: 60px;
     position: fixed;
     margin: 0;
     top: 50px;
     display: table;
-    width: 60px;
+    width: 10%;
   }
 }
 @media (max-width: 773px) {
@@ -1873,7 +1872,7 @@ ol ul {
   margin-bottom: 0;
 }
 li {
-  line-height: 24px;
+ /*  line-height: 24px; */
 }
 ul.unstyled,
 ol.unstyled {
@@ -2182,9 +2181,6 @@ a:focus {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 26.25px;
-}
-.page-content {
-  font-family: garamond, 'Georgia', 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif, "Helvetica",  "Times New Roman", serif;
 }
 .page-content > .content {
   text-rendering: optimizeLegibility;
