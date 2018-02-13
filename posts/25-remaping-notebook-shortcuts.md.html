@@ -79,8 +79,7 @@ with an empty cache. So let see how we can remap the Jupyter notebook
 shortcut. </p>
 <h3 id="tl-dr">TL; DR;</h3>
 <p>Use the following in your <code>~/.jupyter/custom/custom.js</code> :</p>
-<p><code>javascript
-require(['base/js/namespace'], function(Jupyter){
+<pre><code>require(['base/js/namespace'], function(Jupyter){
   // we might want to but that in a callback on wait for 
   // en even telling us the ntebook is ready.
   console.log('== remaping command palette shortcut ==')
@@ -92,7 +91,8 @@ require(['base/js/namespace'], function(Jupyter){
   cmd_shortcuts.add_shortcut(target_sht, action_name)
   cmd_shortcuts.remove_shortcut(source_sht)
   console.log('== ', action_name, 'remaped from', source_sht, 'to', target_sht )
-})</code></p>
+})
+</code></pre>
 <h3 id="details">details</h3>
 <p>We need to use <code>require</code> and register a callback once the notebook is
 loaded:</p>

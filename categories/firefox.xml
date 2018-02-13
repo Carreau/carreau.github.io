@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts (Posts about firefox)</title><link>https://carreau.github.io/</link><description></description><atom:link rel="self" type="application/rss+xml" href="https://carreau.github.io/categories/firefox.xml"></atom:link><language>en</language><lastBuildDate>Wed, 07 Feb 2018 05:07:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Browser Extension</title><link>https://carreau.github.io/posts/31-open-in-binder-browser-extension.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I am please to announce the release of a first project I've been working
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Random Thoughts (Posts about firefox)</title><link>https://carreau.github.io/</link><description></description><atom:link type="application/rss+xml" rel="self" href="https://carreau.github.io/categories/firefox.xml"></atom:link><language>en</language><lastBuildDate>Tue, 13 Feb 2018 21:59:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Browser Extension</title><link>https://carreau.github.io/posts/31-open-in-binder-browser-extension.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I am please to announce the release of a first project I've been working
 on for a bout a week: A Firefox extension to open the GitHub repository you are
 visiting using MyBinder.org. &lt;/p&gt;
 &lt;p&gt;If you are in a hurry, just head there to &lt;a href="https://addons.mozilla.org/en-US/firefox/addon/open-with-binder/"&gt;Install version 0.1.0 for
@@ -33,16 +33,15 @@ I though I would have a look at the new
 &lt;a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions"&gt;WebExtension&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;And 7 days later, after a couple of 30 minutes break, I present to you a
 staggering 27 lines (including 7 line business logic) extension that does that:&lt;/p&gt;
-&lt;p&gt;```js
-(function() {
+&lt;pre&gt;&lt;code&gt;(function() {
   function handleClick(){
     browser.tabs.query({active: true, currentWindow: true})
     .then((tabs) =&amp;gt; {return tabs[0]})
     .then((tab) =&amp;gt; {
       let url = new URL(tab.url);
       if (url.hostname != 'github.com'){
-       console.warn('Open in binder only works on GitHub repositories for now.');
-       return;
+      console.warn('Open in binder only works on GitHub repositories for now.');
+      return;
       };
       let parts = url.pathname.split('/');
       if (parts.length &amp;lt; 3){
@@ -52,15 +51,17 @@ staggering 27 lines (including 7 line business logic) extension that does that:&
       let my_binder_url = 'https://mybinder.org/v2/gh/'+parts[1] +'/'+parts[2] +'/master';
       console.info('Opening ' + url + 'using mybinder.org... enjoy !')
       browser.tabs.create({'url':my_binder_url});
-    })&lt;/p&gt;
-&lt;p&gt;}
+    })
+
+  }
   console.info('(Re) loading open-in-binder extension.');
-  browser.browserAction.onClicked.addListener(handleClick);&lt;/p&gt;
-&lt;p&gt;console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
+  browser.browserAction.onClicked.addListener(handleClick);
+
+  console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
   console.info('❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️');
 })()
-```
-You can find the &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js"&gt;original source here&lt;/a&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can find the &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js"&gt;original source here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Firefox Dev Logo" src="https://carreau.github.io/posts/img/firefox-dev-logo.png"&gt;&lt;/p&gt;
 &lt;p&gt;The hardest part was finding the API and learning how to package and set the
 icons correctly. There are still &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues"&gt;plenty of missing

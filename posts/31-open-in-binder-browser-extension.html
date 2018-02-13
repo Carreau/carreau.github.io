@@ -109,16 +109,15 @@ I though I would have a look at the new
 <a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a>.</p>
 <p>And 7 days later, after a couple of 30 minutes break, I present to you a
 staggering 27 lines (including 7 line business logic) extension that does that:</p>
-<p>```js
-(function() {
+<pre><code>(function() {
   function handleClick(){
     browser.tabs.query({active: true, currentWindow: true})
     .then((tabs) =&gt; {return tabs[0]})
     .then((tab) =&gt; {
       let url = new URL(tab.url);
       if (url.hostname != 'github.com'){
-       console.warn('Open in binder only works on GitHub repositories for now.');
-       return;
+      console.warn('Open in binder only works on GitHub repositories for now.');
+      return;
       };
       let parts = url.pathname.split('/');
       if (parts.length &lt; 3){
@@ -128,15 +127,17 @@ staggering 27 lines (including 7 line business logic) extension that does that:<
       let my_binder_url = 'https://mybinder.org/v2/gh/'+parts[1] +'/'+parts[2] +'/master';
       console.info('Opening ' + url + 'using mybinder.org... enjoy !')
       browser.tabs.create({'url':my_binder_url});
-    })</p>
-<p>}
+    })
+
+  }
   console.info('(Re) loading open-in-binder extension.');
-  browser.browserAction.onClicked.addListener(handleClick);</p>
-<p>console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
+  browser.browserAction.onClicked.addListener(handleClick);
+
+  console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
   console.info('❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️');
 })()
-```
-You can find the <a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js">original source here</a></p>
+</code></pre>
+<p>You can find the <a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js">original source here</a></p>
 <p><img alt="Firefox Dev Logo" src="img/firefox-dev-logo.png"></p>
 <p>The hardest part was finding the API and learning how to package and set the
 icons correctly. There are still <a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues">plenty of missing
