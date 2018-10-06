@@ -2616,9 +2616,7 @@ pre.code {
 }
 
 .rendered_html p pre, .rendered_html p  code {
-    font-size: 85%;
     line-height: 1.2em;
-    vertical-align: bottom;
 }
 
 code {
