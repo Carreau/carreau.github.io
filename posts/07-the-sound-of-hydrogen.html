@@ -37,9 +37,8 @@ MathJax.Hub.Config({
 
 
 
-
 Inspired by minutephysics, and the explanation do do it in mathematica: The sound of hydrogen.
-The goal of this notebook is to show how one can play a sound file in noteb">
+The goal of this notebook is to show how one can play a sound file in notebo">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-07-01T20:00:00Z">
 </head>
@@ -117,7 +116,7 @@ sonification or auralizing according to the comment on twitter.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -137,7 +136,7 @@ sonification or auralizing according to the comment on twitter.</p>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -215,7 +214,7 @@ sonification or auralizing according to the comment on twitter.</p>
     <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">src</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -243,7 +242,7 @@ sonification or auralizing according to the comment on twitter.</p>
     <span class="k">pass</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -264,7 +263,7 @@ sonification or auralizing according to the comment on twitter.</p>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">duration</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">rate</span><span class="o">*</span><span class="n">duration</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -293,7 +292,7 @@ sonification or auralizing according to the comment on twitter.</p>
 <span class="kn">import</span> <span class="nn">warnings</span>    
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -315,7 +314,7 @@ sonification or auralizing according to the comment on twitter.</p>
 <span class="n">wavPlayer</span><span class="p">(</span><span class="n">ampl</span><span class="p">,</span> <span class="n">rate</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -325,7 +324,7 @@ sonification or auralizing according to the comment on twitter.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -340,7 +339,7 @@ sonification or auralizing according to the comment on twitter.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -361,10 +360,8 @@ sonification or auralizing according to the comment on twitter.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The differents frequencies emmited by an hydrogen atom is given by the rydberg formulae :</p>
-<p>$$ {1 \over \lambda}  = R \left({1\over n_1}-{1\over n_2}\right) $$</p>
-<p>Which gives a similar relation on the emitted frequencies of the Hydrogen :</p>
-<p>$$ f_{n,m}={c \over \lambda}  = {R_h\over h} \left({1\over n}-{1\over m}\right) $$</p>
-<p>for $n=1$ we've got the Lyman series, and for $n=2$ we have the Balmer series</p>
+$$ {1 \over \lambda}  = R \left({1\over n_1}-{1\over n_2}\right) $$<p>Which gives a similar relation on the emitted frequencies of the Hydrogen :</p>
+$$ f_{n,m}={c \over \lambda}  = {R_h\over h} \left({1\over n}-{1\over m}\right) $$<p>for $n=1$ we've got the Lyman series, and for $n=2$ we have the Balmer series</p>
 
 </div>
 </div>
@@ -381,7 +378,7 @@ sonification or auralizing according to the comment on twitter.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"we can shift the spectrum for it to be at 440 Hz (A)"</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -391,7 +388,7 @@ sonification or auralizing according to the comment on twitter.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -415,7 +412,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 <span class="n">fbalmer</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">ryd</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -432,7 +429,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 <span class="n">serv</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">ser</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -445,7 +442,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ss</span> <span class="o">=</span> <span class="n">serv</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -459,7 +456,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 <span class="n">ss</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">15</span><span class="o">*</span><span class="n">ss</span><span class="o">/</span> <span class="n">ss</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -469,7 +466,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -493,7 +490,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 <span class="n">wavPlayer</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">),</span><span class="n">rate</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -503,7 +500,7 @@ we can shift the spectrum for it to be at 440 Hz (A)
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 

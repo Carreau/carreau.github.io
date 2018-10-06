@@ -93,21 +93,23 @@ mostly myself had impact on thousand of people. I understood better that if I
 spend an hour making 60 scientist do their job 1 minute faster, then my global
 impact on Science is positive. 
 
-Also right now my background is beige for the top half of the wall. 
-
 # More Casual CV:
 
 
 ### awards and fellowship
 
+- [ACM System Sofware Award 2017](https://en.wikipedia.org/wiki/ACM_Software_System_Award)
 - Moore Data Fellow – Moore Data-Driven Discovery
 - AXA Research Fund Doctoral Fellowship 2010-2014
+- [PyDev of the Week](https://www.blog.pythonlibrary.org/2017/09/04/pydev-of-the-week-matthias-bussonnier/)
 
 ## Publications and Presentations
 
 ### Peer reviewed article
 
-
+- **Binder 2.0 - Reproducible, interactive, sharable environments for science at scale** – SciPy 2018 Proceeding – 2018 – Project Jupyter, Matthias Bussonnier, Jessica Forde, Jeremy Freeman, Brian Granger, Tim Head, Chris Holdgraf, Kyle Kelley, Gladys Nalvarte, Andrew Osheroff, M Pacer, Yuvi Panda, Fernando Perez, Benjamin Ragan-Kelley,
+Carol Willing; [DOI: 10.25080/Majora-4af1f417-011](https://doi.org/10.25080/Majora-4af1f417-011)
+- **Active mechanics reveal molecular-scale force kinetics in living oocytes** - Biophysical Journal – 2018 – W. W. Ahmed, E. Fodor, M. Almonacid, M. Bussonnier, M-H Verlhac, N. Gov, P. Visco, F. van Wijland, T. Betz;
 - **Active mechanics in living oocytes reveal molecular-scale force kinetics** – Biophysical Journal – 2016 – Ahmed, Wylie; Fodor, Etienne; Almonacid, Maria; Bussonnier, Matthias; Verlhac, Marie-Helene; Gov, Nir; Visco, Paolo; van Wijland, Frederic; Betz, Timo;
 - **Nonequilibrium dissipation in living oocytes** – EPL (Europhysics Letters) – 2016 – Fodor, Étienne; Ahmed, Wylie W; Almonacid, Maria; Bussonnier, Matthias; Gov, Nir S; Verlhac, M-H; Betz, Timo; Visco, Paolo; van Wijland, Frédéric;
 - **Cell-sized liposome doublets reveal active tension build-up driven by acto-myosin dynamics** – Soft Matter – 2016 – Caorsi, V; Lemière, J; Campillo, C; Bussonnier, M; Manzi, J; Betz, T; Plastino, J; Carvalho, K; Sykes, C;
@@ -123,6 +125,9 @@ Also right now my background is beige for the top half of the wall.
 
 ### Talks
 
+- **State of Jupyter** – Jupyter Pop-Up Boston – March 2018 – [video](https://www.youtube.com/watch?v=Yf8f7tU5msw)
+- **Jupyter in HPC** – IDEA Webinar – Feb 2018 – M. Bussonnier
+- **Jupyter and High Performance Computing** – Invited Talks at NERSC – Feb 2018 – M. Bussonnier
 - **Jupyter and the IPython kernel, hidden and awaiting implementation features** – [PyData Meetup Paris , FR](https://www.meetup.com/fr-FR/PyData-Paris/events/243324756/?eventId=243324756) – Nov 2017 – M. Bussonnier
 - **Jupyter, Kernels and Protocols** – [JupyterCon](https://conferences.oreilly.com/jupyter/jup-ny/public/schedule/detail/63159) – [JupyterCon](https://youtu.be/GExKsQ-OU78) – 2017 – M. Bussonnier, P. Ivanov
 - **Building Bridges: Stopping Python 2 support in libraries without damages**  – [PyBay](https://pybay.com/speaker/matthias-bussonnier/) – 2017 – M. Bussonnier – [slides](http://carreau.github.io/talks/2017-08-13-pybay/docs/index.html#/) ([source](https://github.com/Carreau/talks/tree/master/2017-08-13-pybay)) – [video](https://www.youtube.com/watch?v=3i6n1RwqQCo)
@@ -144,6 +149,7 @@ Also right now my background is beige for the top half of the wall.
 
 ## Workshop conference: organizer / lecturer / instructor / helper
 
+- **JupyterCon 2018 Program commitee** – JupyterCon – 2018
 - **Jupyter Tutorial** – PyCon – 2017 – Michael Bright, Matthias Bussonnier
 - **Jupyter Advanced Topics Tutorial** – SciPy – 2015 – Matthias Bussonnier, Jonathan Frederic and Thomas Kluyver – [video](https://www.youtube.com/watch?v=38R7jiCspkw)
 - **Python Bootcamp Fall 2016** – Berkeley - 2016
@@ -175,6 +181,15 @@ rare to see software cited in a paper. Tools like `depsy.org` try to
 aggregate software impact as one metric and put IPython  in the 100\%
 percentile. We can also use various proxy measures to understand that tools I
 developed have impact in all disciplines, in education, and in industry.
+
+## Articles on Jupyter:
+
+ - [The scientific Paper is Obsolete](https://www.theatlantic.com/science/archive/2018/04/the-scientific-paper-is-obsolete/556676/)
+ - [Jupyter, Mathematica, and the Future of the Research Paper](https://paulromer.net/jupyter-mathematica-and-the-future-of-the-research-paper/)
+
+## Misc articles to read:
+
+ - [Somewhere Over the Rainbow: An Empirical Assessment of Quantitative Colormaps](http://idl.cs.washington.edu/files/2018-QuantitativeColor-CHI.pdf)
 
 ### Jupyter Notebooks on GitHub
 

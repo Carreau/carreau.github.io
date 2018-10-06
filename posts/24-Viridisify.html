@@ -37,7 +37,6 @@ MathJax.Hub.Config({
 
 
 
-
 As usual this is available and as been written as a jupyter notebook if you like to play with the code feel free to fork it.
 
 
@@ -47,8 +46,7 @@ As usual this is available and as been written as a jupyter notebook if you like
 
 
 
-
-The jet colormap (AKA "rainbow") is ubiquitous,'>
+The jet colormap (AKA "rainbow") is ubiquitous, t'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-10-07T20:00:00Z">
 </head>
@@ -135,7 +133,7 @@ The jet colormap (AKA "rainbow") is ubiquitous,'>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -148,7 +146,7 @@ The jet colormap (AKA "rainbow") is ubiquitous,'>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -161,7 +159,7 @@ The jet colormap (AKA "rainbow") is ubiquitous,'>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm *.png *.gif out*
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -171,7 +169,7 @@ The jet colormap (AKA "rainbow") is ubiquitous,'>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -208,7 +206,7 @@ $ ffmpeg -i out.mp4  output.gif</code></pre>
 ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel panic
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -232,7 +230,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 <span class="n">img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">'img01.png'</span><span class="p">)[:,:,:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -248,7 +246,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 <span class="n">fig</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -258,7 +256,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -295,7 +293,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -328,7 +326,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">rep</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -338,7 +336,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -373,7 +371,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rep</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="s1">'jet'</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -383,7 +381,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -396,7 +394,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -442,7 +440,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -486,7 +484,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
     <span class="k">return</span> <span class="n">blend</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -500,7 +498,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <span class="n">rep</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -510,7 +508,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -523,7 +521,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -536,7 +534,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -569,7 +567,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rep</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -579,7 +577,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
@@ -592,7 +590,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -605,7 +603,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -638,7 +636,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rep</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">,</span> <span class="n">sub</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.4</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -648,7 +646,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[14]:</div>
 
 
 
@@ -661,7 +659,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -674,7 +672,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -707,7 +705,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rep</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">,</span> <span class="n">sub</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -717,7 +715,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -730,7 +728,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -743,7 +741,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -792,7 +790,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
     <span class="n">mpimg</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">tplv</span> <span class="o">%</span><span class="k">i</span>, vimg)
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -806,7 +804,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 ffmpeg -framerate <span class="m">8</span> -i vir-img%02d.png -c:v libx264 -r <span class="m">8</span> -pix_fmt yuv420p out.mp4 -y -loglevel panic
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -820,7 +818,7 @@ ffmpeg -framerate <span class="m">8</span> -i vir-img%02d.png -c:v libx264 -r <s
 ffmpeg -i out.mp4  output.gif -y -loglevel panic
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 

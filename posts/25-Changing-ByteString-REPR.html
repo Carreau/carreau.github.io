@@ -125,7 +125,7 @@ One particular topic which caught my eye was the byte">
 <span class="n">requests_cache</span><span class="o">.</span><span class="n">install_cache</span><span class="p">(</span><span class="s1">'cachedb.tmp'</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -138,7 +138,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/1'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -148,7 +148,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -183,7 +183,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://avatars0.githubusercontent.com/u/335567'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -193,7 +193,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -226,7 +226,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/2'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -236,7 +236,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -289,7 +289,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">text_formatter</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">display_formatter</span><span class="o">.</span><span class="n">formatters</span><span class="p">[</span><span class="s1">'text/plain'</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -304,7 +304,7 @@ One particular topic which caught my eye was the byte">
 <span class="n">text_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">_print_bytestr</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -314,7 +314,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -337,7 +337,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/4'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -347,7 +347,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -398,7 +398,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ellide</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">75</span><span class="p">)</span> <span class="k">else</span>  <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">+</span><span class="s1">'...'</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">:]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -413,7 +413,7 @@ One particular topic which caught my eye was the byte">
 <span class="n">text_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">_print_bytestr</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -423,7 +423,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -446,7 +446,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/12'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -456,7 +456,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -479,7 +479,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/12'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -489,7 +489,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[11]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -522,7 +522,7 @@ One particular topic which caught my eye was the byte">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://avatars0.githubusercontent.com/u/335567'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -532,7 +532,7 @@ One particular topic which caught my eye was the byte">
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*
-	Copyright © 2014-2017 Daniel Aleksandersen and others.
+	Copyright © 2014-2016 Daniel Aleksandersen and others.
 
 	Permission is hereby granted, free of charge, to any
 	person obtaining a copy of this software and associated
@@ -84,7 +84,7 @@ body {
 	float: left;
 }
 
-.posttranslations h3, .translationslist h3 {
+.posttranslations h3 {
 	display: inline;
 	font-size: 1em;
 }
@@ -93,7 +93,7 @@ body {
 	font-size: 2em;
 }
 
-.posttranslations h3:last-child, .translationslist h3:last-child {
+.posttranslations h3:last-child {
 	display: none;
 }
 
@@ -120,8 +120,7 @@ body {
 }
 .metadata p:before,
 .postpromonav .tags li:before,
-.postlist .listdate:after,
-.translationslist p:before {
+.postlist .listdate:after {
 	content: " — ";
 }
 .postlist li {
@@ -132,30 +131,24 @@ body {
 .postindexpager .pager .next:before {
 	content: "↓ ";
 }
-.postindexpager .pager .previous:before,
-.archivenav .pager .up:before {
+.postindexpager .pager .previous:before {
 	content: "↑ ";
 }
-.postpromonav .pager .next:after,
-.archivenav .pager .next:after {
+.postpromonav .pager .next:after {
 	content: " →";
 }
-.postpromonav .pager .previous:dir(rtl):after,
-.archivenav .pager .previous:dir(rtl):after {
+.postpromonav .pager .previous:dir(rtl):after {
 	content: " →";
 }
-.postpromonav .pager .previous:before,
-.archivenav .pager .previous:before {
+.postpromonav .pager .previous:before {
 	content: "← ";
 }
-.postpromonav .pager .next:dir(rtl):before,
-.archivenav .pager .next:dir(rtl):before {
+.postpromonav .pager .next:dir(rtl):before {
 	content: "← ";
 }
 
 .metadata p:first-of-type:before,
-.postpromonav .tags li:first-of-type:before,
-.translationslist p:first-of-type:before {
+.postpromonav .tags li:first-of-type:before {
 	content: "";
 }
 .postpromonav .pager {
@@ -163,40 +156,24 @@ body {
 	height: 1em;
 }
 .postpromonav .tags li,
-.postpromonav .pager li,
-.archivenav .pager li {
+.postpromonav .pager li {
 	display: inline-block;
 }
-.archivenav .pager {
-	text-align: center
-}
-.postpromonav .pager .next,
-.archivenav .pager .next {
+.postpromonav .pager .next {
 	float: right;
 }
-.postpromonav .pager .next:dir(rtl),
-.archivenav .pager .next:dir(rtl) {
+.postpromonav .pager .next:dir(rtl) {
 	float: left;
 }
 
-.postpromonav .pager .previous,
-.archivenav .pager .previous {
+.postpromonav .pager .previous {
 	float: left;
 }
-.postpromonav .pager .previous:dir(rtl),
-.archivenav .pager .previous:dir(rtl) {
+.postpromonav .pager .previous:dir(rtl) {
 	float: right;
 }
 
-.archivenav .pager .disabled,
-.archivenav .pager .disabled a,
-.archivenav .pager .disabled:link {
-    color: #888;
-    cursor: not-allowed;
-}
-
-.metadata p,
-.translationslist p {
+.metadata p {
 	display: inline;
 }
 

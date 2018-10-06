@@ -37,7 +37,6 @@ MathJax.Hub.Config({
 
 
 
-
 NBconvert migration¶
 
 
@@ -45,8 +44,9 @@ NBconvert migration¶
 
 
 
-
 NBconvert has now been merged into IPython itself. You will need IPython 1.0 or above to have this works (asuuming the API have not changed)
+
+
 
 
 ">
@@ -170,7 +170,7 @@ a pipeline through which each notebook you want to export with go through.</p>
 <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span><span class="o">+</span><span class="s1">'...'</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -180,7 +180,7 @@ a pipeline through which each notebook you want to export with go through.</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+    <div class="prompt output_prompt">Out[1]:</div>
 
 
 
@@ -217,7 +217,7 @@ guarantee that the notebook structure is valid.</p>
 <span class="n">jake_notebook</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -227,7 +227,7 @@ guarantee that the notebook structure is valid.</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -276,7 +276,7 @@ the downloaded notebook.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">IPython.nbconvert</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -294,7 +294,7 @@ the downloaded notebook.</p>
 <span class="n">exportHtml</span> <span class="o">=</span> <span class="n">HTMLExporter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">Config</span><span class="p">({</span><span class="s1">'HTMLExporter'</span><span class="p">:{</span><span class="s1">'default_template'</span><span class="p">:</span><span class="s1">'basic'</span><span class="p">}}))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -307,7 +307,7 @@ the downloaded notebook.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">body</span><span class="p">,</span><span class="n">resources</span><span class="p">)</span> <span class="o">=</span> <span class="n">exportHtml</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">jake_notebook</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -337,7 +337,7 @@ You can directly re-use the instance to convert another notebook. Each exporter 
 <span class="c1"># print resources['inlining'] # too lng to be shown</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -347,7 +347,7 @@ You can directly re-use the instance to convert another notebook. Each exporter 
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -372,7 +372,7 @@ html
 <span class="nb">print</span> <span class="n">body</span><span class="p">[:</span><span class="mi">400</span><span class="p">]</span><span class="o">+</span><span class="s1">'...'</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -382,7 +382,7 @@ html
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -443,7 +443,7 @@ html
 <span class="p">(</span><span class="n">body</span><span class="p">,</span><span class="n">resources</span><span class="p">)</span> <span class="o">=</span> <span class="n">rst_export</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">jake_notebook</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -458,7 +458,7 @@ html
 <span class="nb">print</span> <span class="n">body</span><span class="p">[</span><span class="mi">800</span><span class="p">:</span><span class="mi">1200</span><span class="p">]</span><span class="o">+</span><span class="s1">'...'</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -468,7 +468,7 @@ html
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -572,7 +572,7 @@ Of course to help you in this task all those naming are configurable in the righ
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">resources</span><span class="p">[</span><span class="s1">'outputs'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -582,7 +582,7 @@ Of course to help you in this task all those naming are configurable in the righ
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -631,7 +631,7 @@ keep in mind that a object having multiple <em>repr</em> will store all it's rep
 <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">resources</span><span class="p">[</span><span class="s1">'outputs'</span><span class="p">][</span><span class="s1">'output_3_0.png'</span><span class="p">],</span><span class="nb">format</span><span class="o">=</span><span class="s1">'png'</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -641,7 +641,7 @@ keep in mind that a object having multiple <em>repr</em> will store all it's rep
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[11]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -749,7 +749,7 @@ finding all the figures, and put them into the resources directory, as well as c
 <span class="n">exportHtml</span><span class="o">.</span><span class="n">_transformers</span> <span class="c1"># 3rd one shouel be &lt;ExtractOutputTransformer&gt;</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -759,7 +759,7 @@ finding all the figures, and put them into the resources directory, as well as c
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -819,7 +819,7 @@ this will look pretty familiar to you. Configuration option are always of the fo
 <span class="n">resources_with_fig</span><span class="p">[</span><span class="s1">'outputs'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> 
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -829,7 +829,7 @@ this will look pretty familiar to you. Configuration option are always of the fo
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -844,7 +844,7 @@ Here we have one more field
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
@@ -923,7 +923,7 @@ independently to each cell, for more advance transformation that support configu
 <span class="nb">print</span> <span class="s1">'============================='</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -933,7 +933,7 @@ independently to each cell, for more advance transformation that support configu
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1033,7 +1033,7 @@ independently to each cell, for more advance transformation that support configu
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.utils.traitlets</span> <span class="k">import</span> <span class="n">Integer</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1063,7 +1063,7 @@ independently to each cell, for more advance transformation that support configu
         <span class="k">return</span> <span class="n">nbc</span><span class="p">,</span> <span class="n">resources</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1083,7 +1083,7 @@ independently to each cell, for more advance transformation that support configu
             <span class="p">})</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1106,7 +1106,7 @@ independently to each cell, for more advance transformation that support configu
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pelican</span> <span class="o">=</span> <span class="n">RSTExporter</span><span class="p">(</span><span class="n">transformers</span><span class="o">=</span><span class="p">[</span><span class="n">PelicanSubCell</span><span class="p">],</span> <span class="n">config</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1119,7 +1119,7 @@ independently to each cell, for more advance transformation that support configu
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="n">pelican</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">jake_notebook</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1129,7 +1129,7 @@ independently to each cell, for more advance transformation that support configu
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1258,7 +1258,7 @@ they can magically read your config file.</p>
 <span class="p">(</span><span class="n">body</span><span class="p">,</span><span class="n">resources</span><span class="p">)</span> <span class="o">=</span> <span class="n">exportHtml</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">jake_notebook</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1286,7 +1286,7 @@ they can magically read your config file.</p>
     <span class="nb">print</span> <span class="n">l</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1296,7 +1296,7 @@ they can magically read your config file.</p>
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
