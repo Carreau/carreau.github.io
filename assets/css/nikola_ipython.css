@@ -1,6 +1,5 @@
 .body p {
     padding-bottom: 10px;
-    font-weight: 200;
 }
 
 .social img {
@@ -11,7 +10,6 @@
 
 
 .social a {
-  min-width: 60px;
   transition: opacity ease 0.3s;
 }
 
