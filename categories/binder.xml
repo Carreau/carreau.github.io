@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Random Thoughts (binder)</title><link>https://carreau.github.io/</link><description></description><atom:link href="https://carreau.github.io/categories/binder.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 06 Oct 2018 04:12:32 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Chrome Extension</title><link>https://carreau.github.io/posts/32-open-with-binder-chrome.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Two weeks ago I was pleased to announce the release of the &lt;a href="https://carreau.github.io/posts/31-open-in-binder-browser-extension.html"&gt;Open-with-Binder for
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (binder)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/binder.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Thu, 11 Oct 2018 01:34:23 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Open in Binder Chrome Extension</title><link>https://carreau.github.io/posts/32-open-with-binder-chrome.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Two weeks ago I was pleased to announce the release of the &lt;a href="https://carreau.github.io/posts/31-open-in-binder-browser-extension.html"&gt;Open-with-Binder for
 Firefox extension&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;After &lt;a href="https://twitter.com/Mbussonn/status/933746729828134912"&gt;asking on twitter if people were interested in the same for
 Chrome&lt;/a&gt; (29 Yes, 67 No,
@@ -7,8 +6,8 @@ Chrome&lt;/a&gt; (29 Yes, 67 No,
 Chrome App store, I decided to take my chance and try to publish it last week. &lt;/p&gt;
 &lt;p&gt;I almost just had to use Mozilla WebExt Shim for Chrome, downgrade a few artwork
 from SVG to PNG (like really??) and upload all by hand, like really again ?&lt;/p&gt;
-&lt;p&gt;The Chrome Store  &lt;strong&gt;has way more fields&lt;/strong&gt; and it is quite &lt;strong&gt;complicated&lt;/strong&gt; –
-compared to the Mozilla Addons website at least – It is sometime confusing
+&lt;p&gt;The Chrome Store  &lt;strong&gt;has way more fields&lt;/strong&gt; and it is quite &lt;strong&gt;complicated&lt;/strong&gt; &#8211;
+compared to the Mozilla Addons website at least &#8211; It is sometime confusing
 &lt;strong&gt;whether fields are optional or not&lt;/strong&gt;, or if they are &lt;strong&gt;per addons on per
 developer ?&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;It does though allow you to upload &lt;strong&gt;more art&lt;/strong&gt; that will be show in a store
@@ -78,8 +77,8 @@ staggering 27 lines (including 7 line business logic) extension that does that:&
   console.info('(Re) loading open-in-binder extension.');
   browser.browserAction.onClicked.addListener(handleClick);
 
-  console.info('❤️ If you are reading this then you know about binder and javascript. ❤️');
-  console.info('❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️');
+  console.info('&#10084;&#65039; If you are reading this then you know about binder and javascript. &#10084;&#65039;');
+  console.info('&#10084;&#65039; So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ &#10084;&#65039;');
 })()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can find the &lt;a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js"&gt;original source here&lt;/a&gt;&lt;/p&gt;
