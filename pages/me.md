@@ -2,7 +2,7 @@
 .. title: Me, Myself, and I
 -->
 
-Hi, I'm Matthias. You may not here it while reading this, but I have a relatively
+Hi, I'm Matthias. You may not hear it while reading this, but I have a relatively
 strong French _Akeussent_. 
 
 # What do you like to be known for ? 
