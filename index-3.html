@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html prefix="
-og: http://ogp.me/ns#
-article: http://ogp.me/ns/article#
-" lang="en">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Random, often unfinished thoughts about things, mostly programming and Python">
@@ -44,7 +41,92 @@ MathJax.Hub.Config({
 
         </ul></section><section class="page-content"><div class="content" rel="main">
         <div class="post">
-            <h1 class="title"><a href="posts/24-Viridisify.html">Viridisify</a></h1>
+            <h1 class="title"><a href="posts/25-remaping-notebook-shortcuts.md/">Remapping notebook shortcuts</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-11-30T11:00:00+00:00">2016-11-30 11:00</time>
+</div>
+                <div class="stats">
+                    
+                </div>
+                
+            </div>
+            <div class="body">
+                <div>
+<p>As Jupyter notebook run in a browser for technical and practical
+reasons we only have a limited number of shortcuts available and
+choices need to be made. Often this choices may conflict with browser
+shortcut, and you might need to remap it. </p>
+<p>Today I was inform by Stefan van Der Walt that <code>Cmd-Shift-P</code> conflict
+for Firefox. It is mapped both to open the <em>Command palette</em> for the
+notebook and  open a new <em>Private Browsing</em> window. </p>
+<p>Using <em>Private Browsing</em> windows is extremely useful. When developing
+a website you might want to look at it without being logged in, and
+with an empty cache. So let see how we can remap the Jupyter notebook
+shortcut. </p>
+<h3>TL; DR;</h3>
+<p>Use the following in your <code>~/.jupyter/custom/custom.js</code> :</p>
+<pre class="code literal-block"><span></span><code><span class="err">require(['base/js/namespace'], function(Jupyter){</span>
+<span class="err">  // we might want to but that in a callback on wait for </span>
+<span class="err">  // en even telling us the ntebook is ready.</span>
+<span class="err">  console.log('== remaping command palette shortcut ==')</span>
+<span class="err">  // note that meta is the command key on mac.</span>
+<span class="err">  var source_sht = 'meta-shift-p'</span>
+<span class="err">  var target_sht = 'meta-/'</span>
+<span class="err">  var cmd_shortcuts = Jupyter.keyboard_manager.command_shortcuts;</span>
+<span class="err">  var action_name = cmd_shortcuts.get_shortcut(source_sht)</span>
+<span class="err">  cmd_shortcuts.add_shortcut(target_sht, action_name)</span>
+<span class="err">  cmd_shortcuts.remove_shortcut(source_sht)</span>
+<span class="err">  console.log('== ', action_name, 'remaped from', source_sht, 'to', target_sht )</span>
+<span class="err">})</span>
+</code></pre>
+
+
+<h3>details</h3>
+<p>We need to use <code>require</code> and register a callback once the notebook is
+loaded:</p>
+<pre class="code literal-block"><span></span><code><span class="err">require(['base/js/namespace'], function(Jupyter){</span>
+<span class="err">  ...</span>
+<span class="err">})</span>
+</code></pre>
+
+
+<p>Here we grab the main namespace and name it Jupyter.</p>
+<p>Then get the object that hold the various shortcuts: <code>var
+cmd_shortcuts = Jupyter.keyboard_manager.command_shortcuts</code>.</p>
+<p>Shortcuts are define by sequence on keys with modifiers. Modifiers are
+dash-separated (need to be pressed at the same time). Sequence are
+comma separated. Example quiting in vim would be <code>esc,;,w,q</code>, in emacs
+<code>ctrl-x,ctrl-c</code>. </p>
+<p>Here we want to unbind <code>meta-shift-p</code> (<code>p</code> is lowercase despite shift
+being pressed) and bind <code>meta-/</code> (The shortcut Stefan wants). Note
+that <code>meta-</code> is the command key on mac.</p>
+<p>We need to get the current command bound to this shortcut
+(<code>cmd_shortcuts.get_shortcut(source_sht)</code>). You could hardcode the
+name of the command but it may change a bit depending on notebook
+version (this is not yet public API). Here it is <code>jupyter-notebook:show-command-palette</code>. </p>
+<p>You now bind it to your new shortcut:</p>
+<pre class="code literal-block"><span></span><code><span class="err">cmd_shortcuts.add_shortcut('meta-/', action_name)</span>
+</code></pre>
+
+
+<p>And finally unbind the original one</p>
+<pre class="code literal-block"><span></span><code><span class="err">cmd_shortcuts.remove_shortcut('meta-shift-p')</span>
+</code></pre>
+
+
+<h3>UI reflect your changes !</h3>
+<p>If you open the command palette, you should see that the <code>Show command
+palette</code> command now display <code>Command-/</code> as its shortcut !</p>
+<h3>Future</h3>
+<p>We are working on an interface to edit shortcuts directly from within
+the UI and not to have to write a single line of code !</p>
+<p>Questions, feedback and fixes <a href="https://github.com/carreau/posts">welcomed</a></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/24-Viridisify/">Viridisify</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2016-10-07T20:00:00+00:00">2016-10-07 20:00</time>
@@ -55,15 +137,13 @@ MathJax.Hub.Config({
                 
             </div>
             <div class="body">
-                <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
+                <div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Viridisify">Viridisify<a class="anchor-link" href="posts/24-Viridisify.html#Viridisify">¶</a>
+<h2 id="Viridisify">Viridisify<a class="anchor-link" href="posts/24-Viridisify/#Viridisify">¶</a>
 </h2>
 </div>
 </div>
@@ -265,7 +345,7 @@ ffmpeg -i input.mp4 -r <span class="m">8</span> -f image2 img%02d.png -loglevel 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -414,7 +494,7 @@ We can guess the effect of various compressions artifacts have jittered the pixe
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">cKDTree</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">cKDTree</span>
 </pre></div>
 
     </div>
@@ -822,13 +902,11 @@ ffmpeg -i out.mp4  output.gif -y -loglevel panic
 </div>
 </div>
 </div>
-    </div>
-  </div>
-
+</div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/23-Cross-Language-Integration.html">Cross Language Integration</a></h1>
+            <h1 class="title"><a href="posts/23-Cross-Language-Integration/">Cross Language Integration</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2016-10-04T17:20:00+00:00">2016-10-04 17:20</time>
@@ -839,15 +917,13 @@ ffmpeg -i out.mp4  output.gif -y -loglevel panic
                 
             </div>
             <div class="body">
-                <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
+                <div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Jupyter-and-multiple-Languages">Jupyter and multiple Languages<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Jupyter-and-multiple-Languages">¶</a>
+<h2 id="Jupyter-and-multiple-Languages">Jupyter and multiple Languages<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Jupyter-and-multiple-Languages">¶</a>
 </h2>
 </div>
 </div>
@@ -879,7 +955,7 @@ Also note that this notebook is basedaround multiple example that have been writ
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="IPython-and-cross-language-integration">IPython and cross language integration<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#IPython-and-cross-language-integration">¶</a>
+<h2 id="IPython-and-cross-language-integration">IPython and cross language integration<a class="anchor-link" href="posts/23-Cross-Language-Integration/#IPython-and-cross-language-integration">¶</a>
 </h2>
 </div>
 </div>
@@ -901,7 +977,7 @@ Also note that this notebook is basedaround multiple example that have been writ
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-good-old-example-of-Fibonacci">The good old example of Fibonacci<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#The-good-old-example-of-Fibonacci">¶</a>
+<h4 id="The-good-old-example-of-Fibonacci">The good old example of Fibonacci<a class="anchor-link" href="posts/23-Cross-Language-Integration/#The-good-old-example-of-Fibonacci">¶</a>
 </h4>
 </div>
 </div>
@@ -942,7 +1018,7 @@ F_{n-1}+F_{n-2} &amp; \mbox{otherwise }\end{cases}$$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Basic-Python-cross-language-integration">Basic Python cross-language integration<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Basic-Python-cross-language-integration">¶</a>
+<h2 id="Basic-Python-cross-language-integration">Basic Python cross-language integration<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Basic-Python-cross-language-integration">¶</a>
 </h2>
 </div>
 </div>
@@ -1066,7 +1142,7 @@ from another:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Streamlining-calling-subprocess">Streamlining calling subprocess<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Streamlining-calling-subprocess">¶</a>
+<h3 id="Streamlining-calling-subprocess">Streamlining calling subprocess<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Streamlining-calling-subprocess">¶</a>
 </h3>
 </div>
 </div>
@@ -1190,7 +1266,7 @@ from another:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Send-variables-in">Send variables in<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Send-variables-in">¶</a>
+<h4 id="Send-variables-in">Send variables in<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Send-variables-in">¶</a>
 </h4>
 </div>
 </div>
@@ -1437,7 +1513,7 @@ _wJJUbrPzpq.o
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Add-some-state">Add some state<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Add-some-state">¶</a>
+<h3 id="Add-some-state">Add some state<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Add-some-state">¶</a>
 </h3>
 </div>
 </div>
@@ -1938,7 +2014,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="CFFI">CFFI<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#CFFI">¶</a>
+<h2 id="CFFI">CFFI<a class="anchor-link" href="posts/23-Cross-Language-Integration/#CFFI">¶</a>
 </h2>
 </div>
 </div>
@@ -1958,7 +2034,7 @@ X            0.4797571 0.001523832 314.83597 1.137181e-49
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Mix-and-Match-:-C">Mix and Match : C<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Mix-and-Match-:-C">¶</a>
+<h3 id="Mix-and-Match-:-C">Mix and Match : C<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Mix-and-Match-:-C">¶</a>
 </h3>
 </div>
 </div>
@@ -2276,7 +2352,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Implementation-detail">Implementation detail<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Implementation-detail">¶</a>
+<h4 id="Implementation-detail">Implementation detail<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Implementation-detail">¶</a>
 </h4>
 </div>
 </div>
@@ -2339,7 +2415,7 @@ int cfib(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Mix-and-Match-:-rust">Mix and Match : rust<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Mix-and-Match-:-rust">¶</a>
+<h3 id="Mix-and-Match-:-rust">Mix and Match : rust<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Mix-and-Match-:-rust">¶</a>
 </h3>
 </div>
 </div>
@@ -2443,7 +2519,7 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Still-in-development">Still in development<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Still-in-development">¶</a>
+<h4 id="Still-in-development">Still in development<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Still-in-development">¶</a>
 </h4>
 </div>
 </div>
@@ -2463,7 +2539,7 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Fortran">Fortran<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Fortran">¶</a>
+<h3 id="Fortran">Fortran<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Fortran">¶</a>
 </h3>
 </div>
 </div>
@@ -2514,10 +2590,10 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 
 
 
-<div id="3815b194-2780-4383-9d7f-a02aac738dd8"></div>
+<div id="d5647339-f68c-4119-b2fe-019cacd031e1"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3815b194-2780-4383-9d7f-a02aac738dd8');
+var element = $('#d5647339-f68c-4119-b2fe-019cacd031e1');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
@@ -2604,7 +2680,7 @@ END SUBROUTINE ffib
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Cython">Cython<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Cython">¶</a>
+<h3 id="Cython">Cython<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Cython">¶</a>
 </h3>
 </div>
 </div>
@@ -2710,7 +2786,7 @@ The same principle applies:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="benchmark">benchmark<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#benchmark">¶</a>
+<h4 id="benchmark">benchmark<a class="anchor-link" href="posts/23-Cross-Language-Integration/#benchmark">¶</a>
 </h4>
 </div>
 </div>
@@ -2878,7 +2954,7 @@ The same principle applies:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-Cake-is-not-a-lie!">The Cake is not a lie!<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#The-Cake-is-not-a-lie!">¶</a>
+<h4 id="The-Cake-is-not-a-lie!">The Cake is not a lie!<a class="anchor-link" href="posts/23-Cross-Language-Integration/#The-Cake-is-not-a-lie!">¶</a>
 </h4>
 </div>
 </div>
@@ -3041,7 +3117,7 @@ c -&gt; python -&gt; cython -&gt; fortran : 5
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-Cherry-on-the-Layer-Cake,-with-Julia">The Cherry on the Layer Cake, with Julia<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#The-Cherry-on-the-Layer-Cake,-with-Julia">¶</a>
+<h2 id="The-Cherry-on-the-Layer-Cake,-with-Julia">The Cherry on the Layer Cake, with Julia<a class="anchor-link" href="posts/23-Cross-Language-Integration/#The-Cherry-on-the-Layer-Cake,-with-Julia">¶</a>
 </h2>
 </div>
 </div>
@@ -3323,7 +3399,7 @@ The key value here is that we get the <em>same</em> object from within Python an
 <div class="prompt input_prompt">In [58]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 
 
 <span class="c1"># julia fib function</span>
@@ -3401,7 +3477,7 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Cross-language-is-Easy">Cross language is Easy<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Cross-language-is-Easy">¶</a>
+<h2 id="Cross-language-is-Easy">Cross language is Easy<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Cross-language-is-Easy">¶</a>
 </h2>
 </div>
 </div>
@@ -3423,7 +3499,7 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comments">Comments<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Comments">¶</a>
+<h3 id="Comments">Comments<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Comments">¶</a>
 </h3>
 <p>If you have comments suggestions please <a href="https://github.com/carreau/posts/">open an issue on GitHub</a></p>
 
@@ -3435,7 +3511,7 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Cat-Tax">Cat Tax<a class="anchor-link" href="posts/23-Cross-Language-Integration.html#Cat-Tax">¶</a>
+<h2 id="Cat-Tax">Cat Tax<a class="anchor-link" href="posts/23-Cross-Language-Integration/#Cat-Tax">¶</a>
 </h2>
 </div>
 </div>
@@ -3455,7 +3531,7 @@ The key value here is that we get the <em>same</em> object from within Python an
 <div class="prompt input_prompt">In [60]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Pfiew'</span><span class="p">)</span>
 <span class="n">Image</span><span class="p">(</span><span class="s1">'http://static.boredpanda.com/blog/wp-content/uploads/2016/02/fibonacci-composition-cats-furbonacci-91__700.jpg'</span><span class="p">)</span>
 </pre></div>
@@ -3496,13 +3572,11 @@ The key value here is that we get the <em>same</em> object from within Python an
 </div>
 
 </div>
-    </div>
-  </div>
-
+</div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/22-one-less-pull-request-followup.md.html">One less Pull Request Followup</a></h1>
+            <h1 class="title"><a href="posts/22-one-less-pull-request-followup.md/">One less Pull Request Followup</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2016-09-27T20:00:00+00:00">2016-09-27 20:00</time>
@@ -3527,7 +3601,7 @@ post</a> to
 see what’s changed this year and share on your favorite social media networks
 with #Hacktoberfest.</p>
 </blockquote>
-<h2 id="community-feedback">Community Feedback.</h2>
+<h2>Community Feedback.</h2>
 <p>I quickly got some feedback in particular from <a href="https://twitter.com/Mbussonn/status/780617317759672320">Aaron
 Meurer</a>. First there is
 no comment box on this blog. I tried it's painful to maintain, need moderation
@@ -3545,7 +3619,7 @@ many pull requests</p>
 </blockquote>
 <p>I would argue that if 50% of your users are not discouraged, you still
 discourage the other half. Which might be fine according to your own metrics. </p>
-<h3 id="how-to-close">How to close ?</h3>
+<h3>How to close ?</h3>
 <p>Aaron expressed his concern that closing a PR without a comment might send the
 unintended message that:</p>
 <ul>
@@ -3567,7 +3641,7 @@ need to be written first. Feel free to re-open when the tests are ready.</p>
 <li>You plan to work later on that</li>
 <li>If what you did can be reuse by future developers.</li>
 </ul>
-<h3 id="when-not-to-close">When not to close</h3>
+<h3>When not to close</h3>
 <p>Aaron pointed again that as a maintainer he prefers to keep PRs open. Now that
 GitHub allows you to give maintainers ability to push on your branch, You can
 give maintainers the ability to push on the PR. In case you disagree whether
@@ -3575,7 +3649,7 @@ the PR should be close or not, exchange with the maintainer. The commits of a
 close PR can still be accessed and maybe a best course of action is for the
 maintainer to for your branch and re-issue the PR. They will have more control
 over it. Regardless discuss with the maintainer, convey your intent. </p>
-<h3 id="look-deeper-into-maintainers-habits">Look deeper into maintainers habits.</h3>
+<h3>Look deeper into maintainers habits.</h3>
 <p>I purposely avoided the subject, but <a href="https://twitter.com/amuellerml/status/780735097129558016">Andreas
 Mueller</a> pointed out
 that you can actually look at recently merged PRs, and commit history. Only if
@@ -3583,7 +3657,7 @@ all PR are old is Andreas discouraged. </p>
 <p>This is a valid strategy, but it requires time from the person that want to
 submit the PR. And it's not always easy to do. I tend to go this extra step
 when I really think the PR is worth it. </p>
-<h2 id="things-are-subjective">Things are subjective</h2>
+<h2>Things are subjective</h2>
 <p>Again, all these are personal thoughts and preferences. I prefer to have few
 PR, like I would prefer to have zero-inbox. I would be curious to see analysis
 of general <em>type</em> of contribution vs number of opened PRs. Are novice users
@@ -3595,12 +3669,12 @@ structures of networks across project different ?</p>
         </div>
             <nav class="postindexpager"><ul class="pager">
 <li class="previous">
-                <a href="index.html" rel="prev">Newer posts</a>
+                <a href="." rel="prev">Newer posts</a>
             </li>
             <li class="next">
                 <a href="index-2.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><footer id="footer"><p>Contents © 2019         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             

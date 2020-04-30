@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Open in Binder Browser Extension | Random Thoughts</title>
+<link href="../../assets/css/bitter.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://carreau.github.io/posts/31-open-in-binder-browser-extension/">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
+<meta property="og:site_name" content="Random Thoughts">
+<meta property="og:title" content="Open in Binder Browser Extension">
+<meta property="og:url" content="https://carreau.github.io/posts/31-open-in-binder-browser-extension/">
+<meta property="og:description" content="Today I am please to announce the release of a first project I've been working
+on for a bout a week: A Firefox extension to open the GitHub repository you are
+visiting using MyBinder.org. 
+If you are ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-11-22T17:25:31Z">
+<meta property="article:tag" content="binder">
+<meta property="article:tag" content="firefox">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../../pages/me.html" title="Me"><img src="https://avatars2.githubusercontent.com/u/335567?v=3&amp;s=400"></a></li>
+        <li><a href="../../index.html" title="Home"><i class="icon-home"></i></a></li>
+        <li><a href="../../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
+        <li><a href="../../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/matthias-bussonnier-2512256a" title="Linked In"><i class="icon-linkedin"></i></a></li>
+        <li><a href="https://keybase.io/mbussonn/" title="Keybase"><i class="icon-key"></i></a></li>
+        <li><a href="https://stackoverflow.com/users/137794/matt" title="StackOverflow"><i class="icon-stackexchange"></i></a></li>
+        <li><a href="../../archive.html" title="Archives"><i class="icon-archive"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Open in Binder Browser Extension</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2017-11-22T17:25:31+00:00">2017-11-22 17:25</time>
+            
+                      |  
+        <a href="index.md" id="sourcelink">Source</a>
+
+            </div>
+                    <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../../categories/binder/" rel="tag">binder</a></li>
+           <li><a class="tag p-category" href="../../categories/firefox/" rel="tag">firefox</a></li>
+        </ul>
+</div>
+
+        </div>
+        <div class="body">
+            <div>
+<p>Today I am please to announce the release of a first project I've been working
+on for a bout a week: A Firefox extension to open the GitHub repository you are
+visiting using MyBinder.org. </p>
+<p>If you are in a hurry, just head there to <a href="https://addons.mozilla.org/en-US/firefox/addon/open-with-binder/">Install version 0.1.0 for
+Firefox</a>.
+If you like to know more read on. </p>
+<p><img alt="Binder Logo" src="img/binder_logo_128x128.png"></p>
+<h3>Back to Firefox.</h3>
+<p>I've been using Chrome for a couple of years now, but heard a lot of good stuff
+about <a href="https://www.rust-lang.org/en-US/">Rust</a> and all the good stuff it has
+done or <a href="https://blog.mozilla.org/blog/2017/11/14/introducing-firefox-quantum/">Firefox</a>. 
+Ok that's a bit of marketing but it got me to retry Firefox (Nightly please),
+and except for my password manager which took some week to update to the new
+Firefox API, I rapidly barely used Chrome. </p>
+<p><img alt="Firefox Nightly Logo" src="img/Firefox_Nightly_Logo_2017.png"></p>
+<h3>MyBinder.org</h3>
+<p>I'm also spending more and more time working with the JupyterHub team on
+<a href="https://MyBinder.org">Binder</a>, and see more and more developer adding binder
+badges to their repository. Mid of last week I though:</p>
+<blockquote>
+<p>You know what's not optimal? It's painful to browse repositories that don't
+have the binder badge on MyBinder.org, also sometime you have to <em>find</em> the
+badge which is at the bottom of the readme.</p>
+</blockquote>
+<p>You know what would be great to fix that ? A button in the toolbar doing the
+work for me.</p>
+<h3>Writing the extension</h3>
+<p>As I know Mozilla (which has a not so great <a href="https://blog.mozilla.org/opendesign/mdns-new-design-beta/">new
+design</a> BTW, but
+personal opinion) cares about making standard and things simple for their users,
+I though I would have a look at the new
+<a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a>.</p>
+<p>And 7 days later, after a couple of 30 minutes break, I present to you a
+staggering 27 lines (including 7 line business logic) extension that does that:</p>
+<pre class="code literal-block"><span></span><code><span class="o">(</span><span class="nt">function</span><span class="o">()</span> <span class="p">{</span>
+  <span class="err">function</span> <span class="err">handleClick(){</span>
+    <span class="err">browser.tabs.query({</span><span class="n">active</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">currentWindow</span><span class="o">:</span> <span class="n">true</span><span class="p">}</span><span class="o">)</span>
+    <span class="p">.</span><span class="nc">then</span><span class="o">((</span><span class="nt">tabs</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="err">return</span> <span class="err">tabs</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">}</span><span class="o">)</span>
+    <span class="p">.</span><span class="nc">then</span><span class="o">((</span><span class="nt">tab</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="err">let</span> <span class="err">url</span> <span class="err">=</span> <span class="err">new</span> <span class="err">URL(tab.url)</span><span class="p">;</span>
+      <span class="err">if</span> <span class="err">(url.hostname</span> <span class="err">!=</span> <span class="err">'github.com'){</span>
+      <span class="err">console.warn('Open</span> <span class="err">in</span> <span class="err">binder</span> <span class="err">only</span> <span class="err">works</span> <span class="err">on</span> <span class="err">GitHub</span> <span class="err">repositories</span> <span class="err">for</span> <span class="err">now.')</span><span class="p">;</span>
+      <span class="err">return</span><span class="p">;</span>
+      <span class="p">}</span><span class="o">;</span>
+      <span class="nt">let</span> <span class="nt">parts</span> <span class="o">=</span> <span class="nt">url</span><span class="p">.</span><span class="nc">pathname</span><span class="p">.</span><span class="nc">split</span><span class="o">(</span><span class="s1">'/'</span><span class="o">);</span>
+      <span class="nt">if</span> <span class="o">(</span><span class="nt">parts</span><span class="p">.</span><span class="nc">length</span> <span class="o">&lt;</span> <span class="nt">3</span><span class="o">)</span><span class="p">{</span>
+        <span class="err">console.warn('While</span> <span class="err">you</span> <span class="err">are</span> <span class="err">on</span> <span class="err">GitHub,</span> <span class="err">You</span> <span class="err">do</span> <span class="err">not</span> <span class="err">appear</span> <span class="err">to</span> <span class="err">be</span> <span class="err">in</span> <span class="err">a</span> <span class="err">github</span> <span class="err">repository.</span> <span class="err">Aborting.')</span><span class="p">;</span>
+        <span class="err">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">let</span> <span class="nt">my_binder_url</span> <span class="o">=</span> <span class="s1">'https://mybinder.org/v2/gh/'</span><span class="o">+</span><span class="nt">parts</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> <span class="o">+</span><span class="s1">'/'</span><span class="o">+</span><span class="nt">parts</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span> <span class="o">+</span><span class="s1">'/master'</span><span class="o">;</span>
+      <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'Opening '</span> <span class="o">+</span> <span class="nt">url</span> <span class="o">+</span> <span class="s1">'using mybinder.org... enjoy !'</span><span class="o">)</span>
+      <span class="nt">browser</span><span class="p">.</span><span class="nc">tabs</span><span class="p">.</span><span class="nc">create</span><span class="o">(</span><span class="p">{</span><span class="err">'url':my_binder_url</span><span class="p">}</span><span class="o">);</span>
+    <span class="err">}</span><span class="o">)</span>
+
+  <span class="err">}</span>
+  <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'(Re) loading open-in-binder extension.'</span><span class="o">);</span>
+  <span class="nt">browser</span><span class="p">.</span><span class="nc">browserAction</span><span class="p">.</span><span class="nc">onClicked</span><span class="p">.</span><span class="nc">addListener</span><span class="o">(</span><span class="nt">handleClick</span><span class="o">);</span>
+
+  <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'❤️ If you are reading this then you know about binder and javascript. ❤️'</span><span class="o">);</span>
+  <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️'</span><span class="o">);</span>
+<span class="err">}</span><span class="o">)()</span>
+</code></pre>
+
+
+<p>You can find the <a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js">original source here</a></p>
+<p><img alt="Firefox Dev Logo" src="img/firefox-dev-logo.png"></p>
+<p>The hardest part was finding the API and learning how to package and set the
+icons correctly. There are still <a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues">plenty of missing
+features</a>
+and <a href="https://github.com/Carreau/open-with-binder-firefox-extension/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">really low hanging
+fruits</a>,
+even if you have never written an extension before (hey it's my first and I
+averaged 1-useful line/day writing it...).</p>
+<h3>General Feeling</h3>
+<p>Remember that I'm new to that and started a week ago.</p>
+<p>The Mozilla docs are good but highly varying in quality, it feels (and is) a
+wiki. More opinionated tutorials might have been less confusing. A lot of
+statements are correct but not quite, and leaving the choice too users is just
+confusing. For example : you can use SVG or PNG icons, which I did, but then
+some area don't like SVG (addons.mozilla.org), and the WebExtensions should work
+on Chrome, but Chrome requires PNG. Telling me that I could use SVG was not
+useful.</p>
+<p>The review of addons is blazingly fast (7min from first submissions to Human
+approved). Apple could learn from that if what I've heard here and there is
+correct..</p>
+<p>The submission process has way to many manual steps, I'm ok for first
+submission, but updates, really ? I want to be able to fill-in all the
+information ahead of time (or generate them) and then have a cli to submit
+things. I hate filling forms online.</p>
+<p>The first submission even if marked Beta will not be considered beta. So
+basically I published a 0.1.0beta1, then 0.1.0beta2 which did not trigger
+automatic update because the beta1 was not considered beta. Super confusing. I
+could "force" to see the beta3 page but with a warning that beta3 was an older
+version than beta1 ? What ? </p>
+<p>There is still this feeling that this last 1% of polishing the process has not
+been done (That's usually where Apple is know to shine). For example your store
+icon will be resized to 64x64 (px) and display in a 64x64 (px) square but I have
+a retina screen ! So even if I submitted a 128x128 now my icon looks blurry !
+WTF !</p>
+<h3>You can contribute</h3>
+<p>As I said earlier there is a lot of low hanging fruits ! I went through the
+process of figuring things out, so that you can contribute easily:</p>
+<ul>
+<li>detect if not on /master/ and craft corresponding binder URL</li>
+<li>Switch Icons to PNGs</li>
+<li>test/package for Chrome</li>
+<li>Add options for other binders than MyBinder.org</li>
+<li>Add Screenshots and descriptions to the Addon Store.</li>
+</ul>
+<p>So see you
+<a href="https://github.com/Carreau/open-with-binder-firefox-extension">there</a> !</p>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="../29-JupyterCon-DisplayProtocol.ipynb/" rel="prev" title="JupyterCon - Display Protocol">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../32-open-with-binder-chrome/" rel="next" title="Open in Binder Chrome Extension">Next post</a>
+            </li>
+        </ul>
+</div>
+                    <footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
+</p>
+            
+        </footer>
+</div>
+    </section><script src="../../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110089201-1"></script><script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-110089201-1');
+        </script>
+</body>
+</html>

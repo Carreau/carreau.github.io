@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Writing an async REPL - Part 1 | Random Thoughts</title>
+<link href="../../assets/css/bitter.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb/">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
+<meta property="og:site_name" content="Random Thoughts">
+<meta property="og:title" content="Writing an async REPL - Part 1">
+<meta property="og:url" content="https://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb/">
+<meta property="og:description" content="This is a first part in a series of blog post which explain how I implemented the ability to await code at the top level scope in the IPython REPL. Don't expect the second part soon, or bother me for ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-04-06T13:00:00Z">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../../pages/me.html" title="Me"><img src="https://avatars2.githubusercontent.com/u/335567?v=3&amp;s=400"></a></li>
+        <li><a href="../../index.html" title="Home"><i class="icon-home"></i></a></li>
+        <li><a href="../../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
+        <li><a href="../../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/matthias-bussonnier-2512256a" title="Linked In"><i class="icon-linkedin"></i></a></li>
+        <li><a href="https://keybase.io/mbussonn/" title="Keybase"><i class="icon-key"></i></a></li>
+        <li><a href="https://stackoverflow.com/users/137794/matt" title="StackOverflow"><i class="icon-stackexchange"></i></a></li>
+        <li><a href="../../archive.html" title="Archives"><i class="icon-archive"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Writing an async REPL - Part 1</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2017-04-06T13:00:00+00:00">2017-04-06 13:00</time>
+            
+                      |  
+        <a href="index.ipynb" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a first part in a series of blog post which explain how I implemented the ability to <code>await</code> code at the top level scope in the IPython REPL. Don't expect the second part soon, or bother me for it. I know I shoudl write it, but time is a rarte luxury.</p>
+<p>It is an interesting adventure into how Python code get executed, and I must admit it changed quite a bit how I understand python code now days and made me even more excited about <code>async</code>/<code>await</code> in Python.</p>
+<p>It should also dive quite a bit in the internals of Python/CPython if you ever are interested in what some of these things are.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># we cheat and deactivate the new IPython feature to match Python repl behavior</span>
+<span class="o">%</span><span class="k">autoawait</span> False
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Async-or-not-async,-that-is-the-question">Async or not async, that is the question<a class="anchor-link" href="#Async-or-not-async,-that-is-the-question">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You might now have noticed it, but since Python 3.5 the following is valid Python syntax:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">a_function</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">contextmanager</span><span class="p">()</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">f</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'stuff'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So you've been curious and read a lot about <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a>, and may have come across a few new libraries like <a href="http://aiohttp.readthedocs.io/en/stable/">aiohttp</a> and all hte <a href="https://github.com/aio-libs">aio-libs</a>, heard about <a href="sans-io.readthedocs.io">sans-io</a>, read <a href="https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/">complaints</a> and we can take <a href="http://curio.readthedocs.io/en/latest/">differents approaches</a>, and maybe even maybe <a href="trio.readthedocs.org">do better</a>. You vaguely understand the concept of loops and futures, the term coroutine is still unclear. So you decide to poke around yourself in the REPL.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">aiohttp</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">aiohttp</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="n">coro_req</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://api.github.com'</span><span class="p">)</span>
+<span class="n">coro_req</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1.3.5
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;aiohttp.client._DetachedRequestContextManager at 0x1045289d8&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">coro_req</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;ClientResponse(https://api.github.com) [200 OK]&gt;
+&lt;CIMultiDictProxy('Server': 'GitHub.com', 'Date': 'Thu, 06 Apr 2017 19:49:20 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Status': '200 OK', 'X-Ratelimit-Limit': '60', 'X-Ratelimit-Remaining': '50', 'X-Ratelimit-Reset': '1491508909', 'Cache-Control': 'public, max-age=60, s-maxage=60', 'Vary': 'Accept', 'Etag': 'W/"7dc470913f1fe9bb6c7355b50a0737bc"', 'X-Github-Media-Type': 'github.v3; format=json', 'Access-Control-Expose-Headers': 'ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval', 'Access-Control-Allow-Origin': '*', 'Content-Security-Policy': "default-src 'none'", 'Strict-Transport-Security': 'max-age=31536000; includeSubdomains; preload', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'deny', 'X-Xss-Protection': '1; mode=block', 'Vary': 'Accept-Encoding', 'X-Served-By': 'a51acaae89a7607fd7ee967627be18e4', 'Content-Encoding': 'gzip', 'X-Github-Request-Id': '8182:3911:C50FFE:EF0636:58E69BC0')&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;generator object ClientResponse.json at 0x1052cd9e8&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">json</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="n">json</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'authorizations_url': 'https://api.github.com/authorizations',
+ 'code_search_url': 'https://api.github.com/search/code?q={query}{&amp;page,per_page,sort,order}',
+ 'commit_search_url': 'https://api.github.com/search/commits?q={query}{&amp;page,per_page,sort,order}',
+ 'current_user_authorizations_html_url': 'https://github.com/settings/connections/applications{/client_id}',
+ 'current_user_repositories_url': 'https://api.github.com/user/repos{?type,page,per_page,sort}',
+ 'current_user_url': 'https://api.github.com/user',
+ 'emails_url': 'https://api.github.com/user/emails',
+ 'emojis_url': 'https://api.github.com/emojis',
+ 'events_url': 'https://api.github.com/events',
+ 'feeds_url': 'https://api.github.com/feeds',
+ 'followers_url': 'https://api.github.com/user/followers',
+ 'following_url': 'https://api.github.com/user/following{/target}',
+ 'gists_url': 'https://api.github.com/gists{/gist_id}',
+ 'hub_url': 'https://api.github.com/hub',
+ 'issue_search_url': 'https://api.github.com/search/issues?q={query}{&amp;page,per_page,sort,order}',
+ 'issues_url': 'https://api.github.com/issues',
+ 'keys_url': 'https://api.github.com/user/keys',
+ 'notifications_url': 'https://api.github.com/notifications',
+ 'organization_repositories_url': 'https://api.github.com/orgs/{org}/repos{?type,page,per_page,sort}',
+ 'organization_url': 'https://api.github.com/orgs/{org}',
+ 'public_gists_url': 'https://api.github.com/gists/public',
+ 'rate_limit_url': 'https://api.github.com/rate_limit',
+ 'repository_search_url': 'https://api.github.com/search/repositories?q={query}{&amp;page,per_page,sort,order}',
+ 'repository_url': 'https://api.github.com/repos/{owner}/{repo}',
+ 'starred_gists_url': 'https://api.github.com/gists/starred',
+ 'starred_url': 'https://api.github.com/user/starred{/owner}{/repo}',
+ 'team_url': 'https://api.github.com/teams',
+ 'user_organizations_url': 'https://api.github.com/user/orgs',
+ 'user_repositories_url': 'https://api.github.com/users/{user}/repos{?type,page,per_page,sort}',
+ 'user_search_url': 'https://api.github.com/search/users?q={query}{&amp;page,per_page,sort,order}',
+ 'user_url': 'https://api.github.com/users/{user}'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It's a bit painful to pass everything to run_until_complete, you know how to write async-def function and pass this to an event loop:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://api.github.com/rate_limit'</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_json</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="n">run</span><span class="p">(</span><span class="n">get_json</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'rate': {'limit': 60, 'remaining': 50, 'reset': 1491508909},
+ 'resources': {'core': {'limit': 60, 'remaining': 50, 'reset': 1491508909},
+  'graphql': {'limit': 0, 'remaining': 0, 'reset': 1491511760},
+  'search': {'limit': 10, 'remaining': 10, 'reset': 1491508220}}}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Good ! And the you wonder, why do I have to wrap thing ina function, if I have a default <code>loop</code> isn't it obvious what where I want to run my code ? Can't I await things directly ? So you try:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">await</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"&lt;ipython-input-10-055eb13ed07d&gt;"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">1</span>
+<span class="ansi-red-fg">    await aiohttp.get(url)</span>
+                ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What ? Oh that's right there is no way in Pyton to set a default loop... but a <code>SyntaxError</code> ? Well, that's annoying.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Outsmart-Python">Outsmart Python<a class="anchor-link" href="#Outsmart-Python">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hopefully you (in this case me), are in control of the REPL. You can bend it to your will. Sure you can do some things. First you try to remember how a REPL works:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mycode</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">a = 1</span>
+<span class="s2">print('hey')</span>
+<span class="s2">"""</span>
+<span class="k">def</span> <span class="nf">fake_repl</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">ast</span>
+    <span class="n">module_ast</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">mycode</span><span class="p">)</span>
+    <span class="n">bytecode</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">module_ast</span><span class="p">,</span> <span class="s1">'&lt;fakefilename&gt;'</span><span class="p">,</span> <span class="s1">'exec'</span><span class="p">)</span>
+    <span class="n">global_ns</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">local_ns</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">exec</span><span class="p">(</span><span class="n">bytecode</span><span class="p">,</span> <span class="n">global_ns</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">local_ns</span>
+
+<span class="n">fake_repl</span><span class="p">(</span><span class="n">mycode</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hey
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'a': 1}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We don't show <code>global_ns</code> as it is huge, it will contain all that's availlable by default in Python. Let see where it fails if you use try a top-level async statement:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">ast</span>
+<span class="n">mycode</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">import aiohttp</span>
+<span class="s2">await aiohttp.get('https://aip.github.com/')</span>
+<span class="s2">"""</span>
+
+<span class="n">module_ast</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">mycode</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"&lt;unknown&gt;"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">3</span>
+<span class="ansi-red-fg">    await aiohttp.get('https://aip.github.com/')</span>
+                ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ouch, so we can't even compile it. Let be smart can we get the inner code ?  if we wrap in async-def ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mycode</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">async def fake():</span>
+<span class="s2">    import aiohttp</span>
+<span class="s2">    await aiohttp.get('https://aip.github.com/')</span>
+<span class="s2">"""</span>
+<span class="n">module_ast</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">mycode</span><span class="p">)</span>
+<span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">module_ast</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>"Module(body=[AsyncFunctionDef(name='fake', args=arguments(args=[], vararg=None, kwonlyargs=[], kw_defaults=[], kwarg=None, defaults=[]), body=[Import(names=[alias(name='aiohttp', asname=None)]), Expr(value=Await(value=Call(func=Attribute(value=Name(id='aiohttp', ctx=Load()), attr='get', ctx=Load()), args=[Str(s='https://aip.github.com/')], keywords=[])))], decorator_list=[], returns=None)])"</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">module_ast</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>"AsyncFunctionDef(name='fake', args=arguments(args=[], vararg=None, kwonlyargs=[], kw_defaults=[], kwarg=None, defaults=[]), body=[Import(names=[alias(name='aiohttp', asname=None)]), Expr(value=Await(value=Call(func=Attribute(value=Name(id='aiohttp', ctx=Load()), attr='get', ctx=Load()), args=[Str(s='https://aip.github.com/')], keywords=[])))], decorator_list=[], returns=None)"</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As a reminder, as AST stands for Abstract Syntax Tree, you may construct an AST which is not a valid Python, program, like an if-else-else. AST tree can be modified. What we are interested in it the body of the function, which itself is the first object of a dummy module:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">body</span> <span class="o">=</span> <span class="n">module_ast</span><span class="o">.</span><span class="n">body</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">body</span>
+<span class="n">body</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;_ast.Import at 0x105d503c8&gt;, &lt;_ast.Expr at 0x105d50438&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's pull out the body of the function and put it at the top level of a newly created module:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">async_mod</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">Module</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">async_mod</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>"Module(body=[Import(names=[alias(name='aiohttp', asname=None)]), Expr(value=Await(value=Call(func=Attribute(value=Name(id='aiohttp', ctx=Load()), attr='get', ctx=Load()), args=[Str(s='https://aip.github.com/')], keywords=[])))])"</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Mouahahahahahahahahah, you managed to get a valid top-level async ast ! Victory is yours !</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bytecode</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">async_mod</span><span class="p">,</span> <span class="s1">'&lt;fakefile&gt;'</span><span class="p">,</span> <span class="s1">'exec'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"&lt;fakefile&gt;"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">4</span>
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> 'await' outside function
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Grumlgrumlgruml. You haven't said your last word. Your going to take your revenge later. Let's see waht we can do in Part II, not written yet.</p>
+
+</div>
+</div>
+</div>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="../25-Changing-ByteString-REPR/" rel="prev" title="Changing ByteStr REPR">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../28-migration-to-python-3-only.md/" rel="next" title="Migration to Python 3 only">Next post</a>
+            </li>
+        </ul>
+</div>
+                    <footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
+</p>
+            
+        </footer>
+</div>
+    </section><script src="../../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110089201-1"></script><script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-110089201-1');
+        </script>
+</body>
+</html>

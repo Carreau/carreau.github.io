@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Pip Create | Random Thoughts</title>
+<link href="../../assets/css/bitter.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://carreau.github.io/posts/14-Pip-Create/">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
+<meta property="og:site_name" content="Random Thoughts">
+<meta property="og:title" content="Pip Create">
+<meta property="og:url" content="https://carreau.github.io/posts/14-Pip-Create/">
+<meta property="og:description" content="A long time without news¶
+
+
+
+
+
+
+Since Last post lots of things happend, I had 2 pull requests on github to fix some typos on previous posts (now updated). We had yet another Jupyter/IPython developper">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2014-12-09T19:40:00Z">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../../pages/me.html" title="Me"><img src="https://avatars2.githubusercontent.com/u/335567?v=3&amp;s=400"></a></li>
+        <li><a href="../../index.html" title="Home"><i class="icon-home"></i></a></li>
+        <li><a href="../../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
+        <li><a href="../../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/matthias-bussonnier-2512256a" title="Linked In"><i class="icon-linkedin"></i></a></li>
+        <li><a href="https://keybase.io/mbussonn/" title="Keybase"><i class="icon-key"></i></a></li>
+        <li><a href="https://stackoverflow.com/users/137794/matt" title="StackOverflow"><i class="icon-stackexchange"></i></a></li>
+        <li><a href="../../archive.html" title="Archives"><i class="icon-archive"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Pip Create</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2014-12-09T19:40:00+00:00">2014-12-09 19:40</time>
+            
+                      |  
+        <a href="index.ipynb" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-long-time-without-news">A long time without news<a class="anchor-link" href="#A-long-time-without-news">¶</a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since Last post lots of things happend, I had 2 <a href="https://github.com/Carreau/posts/pull/5">pull</a> <a href="https://github.com/Carreau/posts/pull/4">requests</a> on github to fix some typos on previous posts (now updated). We had yet another Jupyter/IPython developper meeting in Berkeley. 
+By the way, part of IPython will be renamed Jupyter. See <a href="https://speakerdeck.com/fperez/project-jupyter">Fernando Perez Slides and Talk</a>. I got my PhD on my spare time when not workin on IPython. Went to EuroSciPy, hacked in London In Bloomberg Headquarters for a week-end organized by BloomberLab, got a Post Doc at Berkeley BIDS under the direction of above cited IPython BDFL and is about to move almost 9000 km from my current location to spen a year working on improving your everyday scientific workflow from the West of United-States, I think that's not too bad.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since I got a little more time than usual to do some python everyday since this 
+is officially my day job I was confronted to a few pyton problems, and also sa some amazing stuff.</p>
+<p>Eg, James Powel  Ast Expression hack of CPyhton: 
+<a href="https://twitter.com/dontusethiscode/status/538690194825039872">(original tweet)</a></p>
+
+<pre><code>&gt;&gt;&gt; e = $(x+y) * w * x
+&gt;&gt;&gt; e(x = $z+10, w = 20)(30, 40)
+(×, [(×, [(+, [(+, [40, 10]), 30]), 20]), (+, [40, 10])])
+&gt;&gt;&gt; _()
+80000</code></pre>
+<p>Give you unbound python expression that you can manipulate as you like. 
+Pretty awesome, and would allow some neat meta programming. Woudl be nice 
+if he could release his patch so that we could play with it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A discussion with Olivier Grisel (sikit-learn) raised the point that a good package to deal with deprecation would be nice. Not just deprecation warning, but a decorator/context manager that takes as parameter the version of the software at which point a feature is removed and warn you that you have soem code you can clean.</p>
+<p>Using grep to find deprecation warning don't always work, and sometime you would like a flag to just raise instead of printing a deprecation warning, or even do nothing when you are developpin aginst dev library.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="And-on-the-code-side-?">And on the code side ?<a class="anchor-link" href="#And-on-the-code-side-?">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Jupyter/IPython 3.0 is on its way. Slowly, we are late as usual.Recap will come at the right time.</p>
+<p>I am working on integratin with <a href="https://github.com/jupyter/jupyter-drive">Google Drive</a>, and will try to add real-time synchronisation to Jupyter 1.0/IPython 4.0. IWe plan on addin other Operational Transform library backend, but workin on Google drive first got me my post doc. (Yes Google signed a Check to UC Berkeley)</p>
+<p>Of course new project mean more packagin, and as you all know Python packaging is painfull. 
+Especially when starting a new project you need to get all the basic files...etc.</p>
+<p>Of course you can use project like  <a href="https://github.com/audreyr/cookiecutter">audrayr/cookiecutter</a>, but the you stil have the hassle to :</p>
+<ul>
+<li>set up the GitHub repository, </li>
+<li>Find a name</li>
+<li>Hook Travis-CI find the annoyin setting that let you trigger build.</li>
+<li>Hook up Readthedoc, </li>
+<li>... [1]</li>
+<li>And so on and so forth</li>
+</ul>
+<p>[1] add everything that every project should do.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I stronly believe that intelligence shoudl be in the package-manager, not the packager, and my few experiences with <a href="https://github.com/JuliaLang">julia</a> <code>Pgk</code>, and a small adventure with nodejs <code>npm</code> convinced me that there is really something wrong with Python packagin.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'm not for a complete rewrite of it, and I completly understand the need for really custom setup script, but the complexity just to create a python package is too high. SO as a week-end hack introducing...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pip-Create">Pip Create<a class="anchor-link" href="#Pip-Create">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So yes I know that cookiecutter as pre- and post- hooks that might allow you to do that, but that's not the point. 
+I just want a (few) simple command I can remember and which can do most of the heavy liftin for me.</p>
+<p>I shamelessly call it <code>PipCreate</code>, because I hope that at some point in the future you will be able to just do a <code>$pip create</code> to enerate a new package.</p>
+<p>So to work beyond dependencies, it just need a GitHub Private token (and maybe that you once loin to TravisCI, but haven't tested). The best thin is, if you don't have github token availlble, it will even open the browser for you at the right page. Here are teh step:</p>
+<div class="highlight"><pre><span></span>$ python3 -m pipcreate <span class="c1"># need to create a real executable in future</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now either it grabs the github token from your keychain, or ask you for it and then does all the rest for you:</p>
+<div class="highlight"><pre><span></span>$ python3 -m pipcreate
+will use target dir /Users/bussonniermatthias/eraseme
+Comparing <span class="s2">"SoftLilly"</span> to other existing package name...
+SoftLilly seem to have a sufficiently specific name
+Logged in on GitHub as  Matthias Bussonnier
+Workin with repository Carreau/SoftLilly
+Clonning github repository locally
+Cloning into <span class="s1">'SoftLilly'</span>...
+warning: You appear to have cloned an empty repository.
+Checking connectivity... <span class="k">done</span>.
+I am now in  /Users/bussonniermatthias/eraseme/SoftLilly
+Travis user: Matthias Bussonnier
+syncing Travis with Github, this can take a <span class="k">while</span>...
+.....
+syncing <span class="k">done</span>
+Enabling travis hooks <span class="k">for</span> this repository
+Travis hook <span class="k">for</span> this repository are now enabled.
+Continuous interation <span class="nb">test</span> shoudl be triggerd everytime you push code to github
+/Users/bussonniermatthias/eraseme/SoftLilly
+<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> f4a9a5d<span class="o">]</span> <span class="s1">'initial commit of SoftLilly'</span>
+ <span class="m">28</span> files changed, <span class="m">1167</span> insertions<span class="o">(</span>+<span class="o">)</span>
+ create mode <span class="m">100644</span> .editorconfig
+ create mode <span class="m">100644</span> .gitignore
+ create mode <span class="m">100644</span> .travis.yml
+ create mode <span class="m">100644</span> AUTHORS.rst
+ create mode <span class="m">100644</span> CONTRIBUTING.rst
+ create mode <span class="m">100644</span> HISTORY.rst
+ create mode <span class="m">100644</span> LICENSE
+ create mode <span class="m">100644</span> MANIFEST.in
+ create mode <span class="m">100644</span> Makefile
+ create mode <span class="m">100644</span> README.rst
+ create mode <span class="m">100644</span> docs/Makefile
+ create mode <span class="m">100644</span> docs/authors.rst
+ create mode <span class="m">100755</span> docs/conf.py
+ create mode <span class="m">100644</span> docs/contributing.rst
+ create mode <span class="m">100644</span> docs/history.rst
+ create mode <span class="m">100644</span> docs/index.rst
+ create mode <span class="m">100644</span> docs/installation.rst
+ create mode <span class="m">100644</span> docs/make.bat
+ create mode <span class="m">100644</span> docs/readme.rst
+ create mode <span class="m">100644</span> docs/usage.rst
+ create mode <span class="m">100644</span> requirements.txt
+ create mode <span class="m">100644</span> setup.cfg
+ create mode <span class="m">100755</span> setup.py
+ create mode <span class="m">100755</span> softlilly/__init__.py
+ create mode <span class="m">100755</span> softlilly/softlilly.py
+ create mode <span class="m">100755</span> tests/__init__.py
+ create mode <span class="m">100755</span> tests/test_softlilly.py
+ create mode <span class="m">100644</span> tox.ini
+Counting objects: <span class="m">32</span>, <span class="k">done</span>.
+Delta compression using up to <span class="m">4</span> threads.
+Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">25</span>/25<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">32</span>/32<span class="o">)</span>, <span class="m">13</span>.41 KiB <span class="p">|</span> <span class="m">0</span> bytes/s, <span class="k">done</span>.
+Total <span class="m">32</span> <span class="o">(</span>delta <span class="m">0</span><span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta <span class="m">0</span><span class="o">)</span>
+To git@github.com:Carreau/SoftLilly.git
+ * <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It finishes up by openin travis on the test page after a push so that you can see the first test passin after a few seconds.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hope that will give you soem ideas and patch welcomes.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Anyway, late now, Have fun, PR <a href="https://github.com/Carreau/posts">if you see typos</a> are welcommed too.</p>
+
+</div>
+</div>
+</div>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="../13-PyCon2014/" rel="prev" title="PyCon 2014">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../15-Jupyter/" rel="next" title="Jupyter">Next post</a>
+            </li>
+        </ul>
+</div>
+                    <footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
+</p>
+            
+        </footer>
+</div>
+    </section><script src="../../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110089201-1"></script><script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-110089201-1');
+        </script>
+</body>
+</html>

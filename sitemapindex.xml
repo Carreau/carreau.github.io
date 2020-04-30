@@ -1,70 +1,74 @@
 <ns0:sitemapindex xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/anger.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/best-practices.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/binder.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/chrome.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/figshare.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/firefox.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/git.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/github.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/javascript.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/open-source.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/pgp.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/privacy.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/python.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
+ </ns0:sitemap>
+ <ns0:sitemap>
+  <ns0:loc>https://carreau.github.io/categories/quansightt.xml</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/security.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/categories/swearwords.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/rss.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
  <ns0:sitemap>
   <ns0:loc>https://carreau.github.io/sitemap.xml</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:sitemap>
 </ns0:sitemapindex>
