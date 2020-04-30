@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Changing ByteStr REPR | Random Thoughts</title>
+<link href="../../assets/css/bitter.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://carreau.github.io/posts/25-Changing-ByteString-REPR/">
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+    },
+    displayAlign: 'left', // Change this to 'center' to center equations.
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}}
+    }
+});
+</script><!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Matthias Bussonnier">
+<meta property="og:site_name" content="Random Thoughts">
+<meta property="og:title" content="Changing ByteStr REPR">
+<meta property="og:url" content="https://carreau.github.io/posts/25-Changing-ByteString-REPR/">
+<meta property="og:description" content="A recent rebutal against Python 3 was recently written by the (in)famous Zed Shaw, with many responses to various arguments and counter arguments.
+One particular topic which caught my eye was the byte">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-01-16T10:00:00Z">
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../../pages/me.html" title="Me"><img src="https://avatars2.githubusercontent.com/u/335567?v=3&amp;s=400"></a></li>
+        <li><a href="../../index.html" title="Home"><i class="icon-home"></i></a></li>
+        <li><a href="../../pages/me.html" title="Me"><i class="icon-user"></i></a></li>
+        <li><a href="../../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+        <li><a href="https://twitter.com/mbussonn" title="My Twitter"><i class="icon-twitter"></i></a></li>
+        <li><a href="https://github.com/Carreau" title="Me on Github"><i class="icon-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/matthias-bussonnier-2512256a" title="Linked In"><i class="icon-linkedin"></i></a></li>
+        <li><a href="https://keybase.io/mbussonn/" title="Keybase"><i class="icon-key"></i></a></li>
+        <li><a href="https://stackoverflow.com/users/137794/matt" title="StackOverflow"><i class="icon-stackexchange"></i></a></li>
+        <li><a href="../../archive.html" title="Archives"><i class="icon-archive"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+    <div class="post">
+        <h1 class="p-name entry-title" itemprop="headline name">Changing ByteStr REPR</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2017-01-16T10:00:00+00:00">2017-01-16 10:00</time>
+            
+                      |  
+        <a href="index.ipynb" id="sourcelink">Source</a>
+
+            </div>
+            
+        </div>
+        <div class="body">
+            <div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A recent <a href="https://learnpythonthehardway.org/book/nopython3.html">rebutal</a> against Python 3 was recently written by the (in)famous Zed Shaw, with <a href="https://eev.ee/blog/2016/11/23/a-rebuttal-for-python-3/">many</a> responses to various arguments and counter arguments.</p>
+<p>One particular topic which caught my eye was the <code>bytearray</code> vs <code>unicodearray</code> debate. I'll try explicitely avoid the term <code>str</code>/<code>string</code>/<code>bytes</code>/<code>unicode</code> naming as it is (IMHO) confusing, but that's a debate for another time. If one pay attention to above debates, you might see that there are about two camps:</p>
+<ul>
+<li>
+<code>bytearray</code> and <code>unicodearray</code> are two different things, and we should <em>never</em> convert from one to the other. (that's rought the Pro-Python-3 camp)</li>
+<li>
+<code>bytearray</code> and <code>unicodearray</code> are similar enough in most cases that we should do the magic for users. </li>
+</ul>
+<p>I'm greatly exagerating here and the following is neither for one side or another, I have my personal preference of what I think is good, but that's irrelevant for now. Note that both sides argue that <em>their</em> preference is better for beginners.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can often find posts trying to explain the misconception string/str/bytes, like <a href="https://sircmpwn.github.io/2017/01/13/The-problem-with-Python-3.html">this one</a> which keep insisting on the fact that <code>str</code> in python 3 is far different from bytes.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-mistake-in-the-REPR">The mistake in the REPR<a class="anchor-link" href="#The-mistake-in-the-REPR">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I have one theory that the <code>bytes</code>/<code>str</code> issue is not in their behavior, but in their REPR. The REPR is in the end the main informatin communication channel between the object and the brain of the programmer, user. Also, Python "ducktyped", and you have to admit that <code>bytes</code> and <code>str</code> kinda <em>look</em> similar when printed, so assuming they should behave in similar way is not far fetched. I'm not saying that user will <em>conciously</em> assume bytes/str are the same. I'm saying that human brain inherently may do such association.</p>
+<p>From the top of your head, what does <code>requests.get(url).content</code> returns ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests_cache</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">requests_cache</span><span class="o">.</span><span class="n">install_cache</span><span class="p">(</span><span class="s1">'cachedb.tmp'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/1'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b'{"name":"Luke Skywalker","height":"172","mass":"77","hair_color":"blond","skin_color":"fair","eye_color":"blue","birth_year":"19BBY","gender":"male","homeworld":"http://swapi.co/api/planets/1/","films":["http://swapi.co/api/films/6/","http://swapi.co/api/films/3/","http://swapi.co/api/films/2/","http://swapi.co/api/films/1/","http://swapi.co/api/films/7/"],"species":["http://swapi.co/api/species/1/"],"vehicles":["http://swapi.co/api/vehicles/14/","http://swapi.co/api/vehicles/30/"],"starships":["http://swapi.co/api/starships/12/","http://swapi.co/api/starships/22/"],"created":"2014-12-09T13:50:51.644000Z","edited":"2014-12-20T21:17:56.891000Z","url":"http://swapi.co/api/people/1/"}'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>... bytes...</p>
+<p>I'm pretty sure you glanced ahead in this post and probaly thought it was "Text", even probably in this case Json. It might be invalid Json, I'm pretty sure you cannot tell.</p>
+<p>Why does it returns bytes ? Because it could fetch an image:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://avatars0.githubusercontent.com/u/335567'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x01\xcc\x00\x00\x01\xcc\x08\x06\x00\x00\x00X\xdb\x98\x86\x00\x00 \x00IDATx\xda\xac\xbdy\x93\x1b\xb9\xb2\xf6\xf7K\x00\xb5\x90\xbdH\xa3\x99\xb9s7\xbf\xf1:\x1c\x0e/\xdf\xff\xdb8\xec\xb0}\xd79g4Rw\xb3IV\x15\x80\xf4\x1f@\xedUl\xea\\w\x84\xa65-6Y\x85\x02ry\xf2\xc9'\xa5\xfe\x9f\xfeGE\x04#\x821\x061\x16c\x0c\xc6XD\x0c\x02\xa0\x8a\x8a\x801\xa4\x1f\x08\x880\xfdRUD\x04\xd5\xfe\xff#6z\x8c*\xaa\x82\x88\xe0C \x84@\xf7~\xa6yy\xc5=&gt;Q&gt;~\xe6\xe1\xf3g~\xfd\xa7\x7f\xc28\x07\xb6\x00\x84h-\x88A1(\xe0U\xd2\xfb\xb8t\r1("</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And if you decode the first request ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/2'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'{"name":"C-3PO","height":"167","mass":"75","hair_color":"n/a","skin_color":"gold","eye_color":"yellow","birth_year":"112BBY","gender":"n/a","homeworld":"http://swapi.co/api/planets/1/","films":["http://swapi.co/api/films/5/","http://swapi.co/api/films/4/","http://swapi.co/api/films/6/","http://swapi.co/api/films/3/","http://swapi.co/api/films/2/","http://swapi.co/api/films/1/"],"species":["http://swapi.co/api/species/2/"],"vehicles":[],"starships":[],"created":"2014-12-10T15:10:51.357000Z","edited":"2014-12-20T21:17:50.309000Z","url":"http://swapi.co/api/people/2/"}'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Well that looks the same (except leading <code>b</code>...). Go explain a beginner that the 2 above are totally different things, while they already struggle with 0 base indexing, iterators, and the syntax of the language.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Changing-the-repr">Changing the repr<a class="anchor-link" href="#Changing-the-repr">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lets revert the <code>repr</code> of <code>bytesarray</code> to better represent what they are.  IPython allows to change object repr easily:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text_formatter</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">display_formatter</span><span class="o">.</span><span class="n">formatters</span><span class="p">[</span><span class="s1">'text/plain'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_print_bytestr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cycle</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">'&lt;BytesBytesBytesBytesBytes&gt;'</span><span class="p">)</span>        
+<span class="n">text_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">_print_bytestr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function IPython.lib.pretty._repr_pprint&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/4'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;BytesBytesBytesBytesBytes&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Make-a-usefull-repr">Make a usefull repr<a class="anchor-link" href="#Make-a-usefull-repr">¶</a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>&lt;bytesbytesbytes&gt;</code> may not an  usefull repr, so let's try to make a repr, that:</p>
+<ul>
+<li>Convey bytes are, in genral <strong>not</strong> text.</li>
+<li>Let us <em>peak</em> into the content to guess what it is</li>
+<li>Push the user to <code>.decode()</code> if necessary.</li>
+</ul>
+<p>Generally in Python objects have a repr which start with <code>&lt;</code>, then have the <em>class name</em>, a <em>quoted representation</em> of the object, and memory location of the object, a closing <code>&gt;</code>.</p>
+<p>As the _quoted representation of the object may be really long, we can ellide it.</p>
+<p>A common representation of bytes could be binary, but it's not really compact. Hex, compact but more difficult to read, and make <em>peaking</em> at the content hart when it could be ASCII. So let's go with ASCII reprentation where we escape non ASCII caracterd.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ellide</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">75</span><span class="p">)</span> <span class="k">else</span>  <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">+</span><span class="s1">'...'</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_print_bytestr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cycle</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">'&lt;bytes '</span><span class="o">+</span><span class="n">ellide</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span><span class="o">+</span><span class="s1">' at </span><span class="si">{}</span><span class="s1">&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">arg</span><span class="p">))))</span>       
+<span class="n">text_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">_print_bytestr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__._print_bytestr&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/12'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;bytes b'{"name":"Wilhuff Tarkin","height":"180","mass":"...pi/people/12/"}' at 0x107299228&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'http://swapi.co/api/people/12'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'{"name":"Wilhuff Tarkin","height":"180","mass":"unknown","hair_color":"auburn, grey","skin_color":"fair","eye_color":"blue","birth_year":"64BBY","gender":"male","homeworld":"http://swapi.co/api/planets/21/","films":["http://swapi.co/api/films/1/","http://swapi.co/api/films/6/"],"species":["http://swapi.co/api/species/1/"],"vehicles":[],"starships":[],"created":"2014-12-10T16:26:56.138000Z","edited":"2014-12-20T21:17:50.330000Z","url":"http://swapi.co/api/people/12/"}'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Advantage: It is not gobbledygook anymore when getting binary resources !</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://avatars0.githubusercontent.com/u/335567'</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;bytes b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x01\...0IEND\xaeB`\x82' at 0x107e0c000&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+        </div>
+                <ul class="pager hidden-print">
+<li class="previous">
+                <a href="../25-remaping-notebook-shortcuts.md/" rel="prev" title="Remapping notebook shortcuts">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../27-Writing-an-async-REPL---Part-1.ipynb/" rel="next" title="Writing an async REPL - Part 1">Next post</a>
+            </li>
+        </ul>
+</div>
+                    <footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
+</p>
+            
+        </footer>
+</div>
+    </section><script src="../../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-110089201-1"></script><script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-110089201-1');
+        </script>
+</body>
+</html>

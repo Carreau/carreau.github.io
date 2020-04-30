@@ -1,222 +1,230 @@
 <ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <ns0:url>
+  <ns0:loc>https://carreau.github.io/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
+ </ns0:url>
+ <ns0:url>
   <ns0:loc>https://carreau.github.io/archive.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/anger.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/best-practices.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/anger/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/binder.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/best-practices/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/chrome.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/binder/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/figshare.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/chrome/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/firefox.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/figshare/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/git.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/firefox/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/github.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/git/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/index.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/github/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/javascript.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/javascript/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/open-source.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/open-source/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/pgp.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:48:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/pgp/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/privacy.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/privacy/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/python.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/python/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/security.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/quansightt/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/categories/swearwords.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/categories/security/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
+ </ns0:url>
+ <ns0:url>
+  <ns0:loc>https://carreau.github.io/categories/swearwords/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
   <ns0:loc>https://carreau.github.io/index-1.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
   <ns0:loc>https://carreau.github.io/index-2.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
   <ns0:loc>https://carreau.github.io/index-3.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/index.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/pages/me/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/pages/me.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/02-css-selector/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/02-css-selector.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/03-on-notebook-format/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/03-on-notebook-format.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/04-initialisation-cell/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/04-initialisation-cell.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/05-YAML%20Notebook/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/05-YAML%20Notebook.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/06-NBconvert-Doc-Draft/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/06-NBconvert-Doc-Draft.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/07-the-sound-of-hydrogen/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/07-the-sound-of-hydrogen.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/08-Dear-DiffLib/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/08-Dear-DiffLib.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/09-Matplotlib-And-IPython-Config/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/09-Matplotlib-And-IPython-Config.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/10-No-PyLab-Thanks/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/10-No-PyLab-Thanks.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/11-IPython-Dev-Meeting-Winter-2014.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/13-PyCon2014/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/13-PyCon2014.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/14-Pip-Create/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/14-Pip-Create.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/15-Jupyter/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/15-Jupyter.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/16-Autodeploy-with-travis/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/16-Autodeploy-with-travis.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/17-jupyter-logo/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/17-jupyter-logo.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/19-about-security/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/19-about-security.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/20-about-legacy-python-retirement/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/20-about-legacy-python-retirement.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/21-one-less-pull-request.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/21-one-less-pull-request.md.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/22-one-less-pull-request-followup.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/22-one-less-pull-request-followup.md.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/23-Cross-Language-Integration/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/23-Cross-Language-Integration.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/24-Viridisify/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/24-Viridisify.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/25-Changing-ByteString-REPR/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/25-Changing-ByteString-REPR.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/25-remaping-notebook-shortcuts.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/25-remaping-notebook-shortcuts.md.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/27-Writing-an-async-REPL---Part-1.ipynb.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/28-migration-to-python-3-only.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/28-migration-to-python-3-only.md.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/29-JupyterCon-DisplayProtocol.ipynb/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/29-JupyterCon-DisplayProtocol.ipynb.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/31-open-in-binder-browser-extension/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/31-open-in-binder-browser-extension.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/32-open-with-binder-chrome/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/32-open-with-binder-chrome.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/33-sign-commits-on-github.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/33-sign-commits-on-github.md.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/35-Array-slices-and-indexing.meta/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/35-Array-slices-and-indexing.meta.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/37-joining-quansight.md/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/Blog1.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/Blog1/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
  <ns0:url>
-  <ns0:loc>https://carreau.github.io/posts/planning-an-early-death-for-python-2.html</ns0:loc>
-  <ns0:lastmod>2019-07-25T23:49:00Z</ns0:lastmod>
+  <ns0:loc>https://carreau.github.io/posts/planning-an-early-death-for-python-2/</ns0:loc>
+  <ns0:lastmod>2020-04-30T03:30:00Z</ns0:lastmod>
  </ns0:url>
 </ns0:urlset>

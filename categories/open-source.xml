@@ -1,4 +1,104 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (open-source)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/open-source.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Thu, 25 Jul 2019 23:49:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Pleasure of deleting code</title><link>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2 id="good-code-is-deleted-code"&gt;Good Code is Deleted Code&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about open-source)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/open-source.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Thu, 30 Apr 2020 03:30:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Joining QuanSight.</title><link>https://carreau.github.io/posts/37-joining-quansight.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;April 30th 2020 will be my Last Day at the University of California Merced, I
+will be joining QuanSight and more particularly QuanSight Labs starting May
+1st, and start hopefully to do more Python and Community work again. &lt;/p&gt;
+&lt;h2&gt;A non typical background&lt;/h2&gt;
+&lt;p&gt;While mostly being known for writing Python software my actual background is
+actually as a (Bio)-Physicist. I've been (mostly) self-tough in everything
+related to programming and Python related, which I mostly learned during my PhD
+under the guidance of open-source mentors from the other end of the world when
+I first stated to contribute to IPython in late 2011. &lt;/p&gt;
+&lt;p&gt;Directly after my PhD I joined UC Berkeley as a Post Doc working full time on
+Jupyter and IPython as part of the Berkeley Institute for Data Science. My
+experience as an academic, programmer and open-source contributor and member of
+the Scientific (Python) community gave me critically needed knowledge  about
+which tools were needed to push Science Forward. &lt;/p&gt;
+&lt;p&gt;After 2 years I had the opportunity to join University Of California Merced as
+a Research Facilitator ;&#160;as most of my time I was anyway spending a large
+amount of my time helping users of Python tools online and improving features
+it was a good idea to officialism this role and engage in this new adventure.
+Moreover it was helping with the famous 2 body problem.&lt;/p&gt;
+&lt;h2&gt;UC Merced&lt;/h2&gt;
+&lt;p&gt;The University of California Merced is the latest of the University of
+California campus and is Situated in the Middle of the California Central
+Valley. It is currently shy of having 10 000 students and is a quickly growing
+campus which carry the mission of the University of California with a focus on
+promoting and focusing on Diversity. &lt;/p&gt;
+&lt;p&gt;As both a new and growing University, UC Merced come with a number of challenges
+and opportunities.&lt;/p&gt;
+&lt;p&gt;The size of the campus (which close to doubled during my time here) means that
+the person-to-person interaction are way easier and frequent than on larger
+campus. The Research IT team is also embedded in the research buildings (I was
+next doors to the Math, Physics and Chemistry department) Making it easy to get
+to know Faculty, Staff and Students a like.&lt;/p&gt;
+&lt;p&gt;Many of the procedures, and process are still in motion at UC Merced leading to
+usually way less overhead to getting things done, and also leaving the
+opportunity to do tings the right way and still shape a lot of things. The
+challenging counterpart being that with the growth, what is setup one day
+likely need revisions every 6 month. &lt;/p&gt;
+&lt;p&gt;With a brand new campus also come state of the art installations. I had the
+chance to teach Software Carpentry on brand new media room which provided at
+least one presenter screen for every 5 attendees allowing way more screen real
+estate, and normal size fonts.&lt;/p&gt;
+&lt;p&gt;Speaking about real-estate, I also had the chance to help planning our 2000+
+core cluster  move to a brand new data center room, with about 20 rack reserved
+for current and future Research Usage. This room will also allows the available
+storage available for Research to increase dramatically. One storage node on
+its way to the new research facility (that we nicknamed the Borg Cube)
+currently hold more storage capacity than the whole cluster had when I joined
+UC Merced. We are on our way to have more than 1PB of effective storage on
+site. &lt;/p&gt;
+&lt;p&gt;On top of that we had now have brand new os on those storage nodes (CentOS 8),
+with ZFS, snapshots, deduplication, RDMA etc, and we're thinking about growing
+to a distributed filesystem (BeeGFS ?). And researchers have been quite
+supportive of us pushing the cluster forward and understating when things might
+failed. We of course have our HPC system running JupyterHub (with Dask) which
+could use better Slurm integration and JupyterLab plugins :-). There are still
+many things to be done (Unified user id on compute resource, and central Auth,
+better monitoring, automation...etc), and in the current context, researchers
+and students are looking even more for powerful infrastructure to run code, or
+teach. I'm thus looking forward to see the Research IT team keep growing.&lt;/p&gt;
+&lt;h2&gt;The layers below&lt;/h2&gt;
+&lt;p&gt;Even more now days with most researchers working from home on their computer,
+and using cloud or on premise compute, one must not underestimate all the
+work that goes on infrastructure.&lt;/p&gt;
+&lt;p&gt;During the last 18 month at UC Merced I went in practice way further down the
+stack than I did before. I learned a lot on how to properly manage a system, the
+trade-of of which file system to use how to configure them and what impact this
+can have on overall performance, and how users can inadvertently create issues.&lt;/p&gt;
+&lt;p&gt;But at some point you hit the hardware limit, you don't want to go reboot
+hundreds of machines by hand, so need proper out-of band control, and HPC tend
+to consume a lot of power, so you need a proper redundant power distribution
+and power load balancing. You may not think about it with your classical home
+power outlet, but when you start to need to order devices that uses NEMA L5-30
+and have to worry about balancing power across all the phases of your data
+center there is no answer you can copy past from stack overflow.&lt;/p&gt;
+&lt;p&gt;I learn about many of those aspects during my time at UC Merced and still have
+much more to learn. The team managing all of this is doing a fantastic job and
+is critical to every software running on top. I'm looking forward to stay
+involved but feel my skill are more on the development and higher level view of
+things ; I also do miss a lot of the broader Scientific Python ecosystem,
+nonetheless and despite trying my best to keep up and maintain IPython it is a
+tough task when using those things less on a day-to-day basis.&lt;/p&gt;
+&lt;h2&gt;Joining QuanSight (Time to unwind the stack)&lt;/h2&gt;
+&lt;p&gt;Starting May 1st (Friday) I'll be joining the fantastic team at QuanSight Labs,
+to add my expertise to the growing team who works &#8211; among many other things &#8211;
+on sustainability in open-source. QuanSight employs a number of open source
+maintainers and experts, and if you need this expertise or guaranties about the
+open-source projects you use, come &lt;a href="https://www.quansight.com/"&gt;talk to us&lt;/a&gt;,
+and have a look at &lt;a href="https://www.quansight.com/training"&gt;QuanSight Training&lt;/a&gt; and
+&lt;a href="https://www.quansight.com/residency"&gt;Residency programs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I have a much better understanding of how HPC works now, and I'll be unwinding
+the stack relatively fast, back to application layer. Up until now I've been
+keeping myself up-to-date with the regular &lt;a href="https://www.quansight.com/open-source-directions"&gt;open-source directions podcast and
+webinar&lt;/a&gt;, and followed latest
+project on &lt;a href="https://labs.quansight.org/"&gt;QuanSight Labs Blog&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I'm quite excited to join all the fantastic people there (Ralf Gommers, Carol
+Willing, Anthony Scopatz, Melissa Mendon&#231;a, Aaron Meurer... and many other) and
+spend more time back interacting with the Python community. Sustainability in
+Open source, mentoring and taking proper care of the Community are things that
+I deeply care about, and QuanSight values all of these as well.&lt;/p&gt;
+&lt;p&gt;I'm guessing you will also see me more around GitHub and on various mailing
+list, I'm thus looking forward to your pull-requests and issues.&lt;/p&gt;&lt;/div&gt;</description><category>open-source</category><category>python</category><category>quansightt</category><guid>https://carreau.github.io/posts/37-joining-quansight.md/</guid><pubDate>Wed, 29 Apr 2020 11:59:00 GMT</pubDate></item><item><title>The Pleasure of deleting code</title><link>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2&gt;Good Code is Deleted Code&lt;/h2&gt;
 &lt;p&gt;The only code without bugs is &lt;a href="https://github.com/kelseyhightower/nocode"&gt;no
 code&lt;/a&gt;. And the less code you have,
 the less mental load as well. This is why it is often a pleasure to delete a lot
@@ -8,67 +108,77 @@ Python 3.3&lt;/a&gt;. This was the
 occasion to clean, and remove a lots of code that insure compatibility with
 multiple minor Python version, and while it may seem easy it required a lot of
 thinking ahead of time to make the process simple. &lt;/p&gt;
-&lt;h3 id="finding-what-can-and-should-be-deleted"&gt;Finding what can (and should be deleted)&lt;/h3&gt;
+&lt;h3&gt;Finding what can (and should be deleted)&lt;/h3&gt;
 &lt;p&gt;The hardest part is not deleting the code itself, but finding what can be
 deleted. In many compiled languages, the compiler may help you, but with Python
 it can be quite tougher, and some of Python usual practices make it harder.&lt;/p&gt;
 &lt;p&gt;Here are a few tips on how to prepare your code (when you write it) for
 deletion. &lt;/p&gt;
-&lt;h4 id="eafp-vs-lbyl"&gt;EAFP vs LBYL&lt;/h4&gt;
+&lt;h4&gt;EAFP vs LBYL&lt;/h4&gt;
 &lt;p&gt;Python tend to be more on the Easier to ask Forgiveness than Permission, than
 Look Before You Leap. It is thus common to see &lt;a href="https://github.com/ipython/ipython/issues/11068"&gt;code like&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;try: 
-     from importlib import reload 
-except ImportError : 
-     from imp import reload
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;importlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt; 
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ImportError&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; 
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+
+
 &lt;p&gt;In this particular case though, why do we use the try/except ? Unless there is
 a comment attached, it is hard guess that &lt;code&gt;from imp import reload&lt;/code&gt; was
 deprecated since python 3.4, the comment can easily get out of sync with the
 actual code. &lt;/p&gt;
 &lt;p&gt;A better way would be to explicitly check &lt;code&gt;sys.version_info&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;if sys.version_info &amp;lt; (3, 4):
-     from imp import reload 
-else:
-     from importlib import reload
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version_info&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt; 
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;importlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+
+
 &lt;p&gt;(Note, tuple from unequal length can be compared in python). &lt;/p&gt;
 &lt;p&gt;It is now obvious which code should be removed and when. You can see that as
 "Explicit is better than implicit" rule. &lt;/p&gt;
-&lt;h3 id="deprecated-code"&gt;Deprecated code&lt;/h3&gt;
+&lt;h3&gt;Deprecated code&lt;/h3&gt;
 &lt;p&gt;Removing legacy deprecated code is also always a challenge, as you may be
 worried of other library might be still relying deprecation. To help with that
 let's see how we can improve typical deprecation, here is a typical deprecated
 method from IPython::&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def unicode_std_stream(stream='stdout'):
-    """DEPRECATED"""
-    warn("IPython.utils.io.unicode_std_stream is deprecated", DeprecationWarning)
-    ...
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def unicode_std_stream(stream='stdout'):&lt;/span&gt;
+&lt;span class="err"&gt;    """DEPRECATED"""&lt;/span&gt;
+&lt;span class="err"&gt;    warn("IPython.utils.io.unicode_std_stream is deprecated", DeprecationWarning)&lt;/span&gt;
+&lt;span class="err"&gt;    ...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+
+
 &lt;p&gt;How much are you confident you can remove this ? A few question should pop into
 your head:
   - Since when has this function been deprecated ? &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def unicode_std_stream(stream='stdout'):
-    """DEPRECATED"""
-    warn("IPython.utils.io.unicode_std_stream is deprecated since IPython 4.0", DeprecationWarning)
-    ...
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def unicode_std_stream(stream='stdout'):&lt;/span&gt;
+&lt;span class="err"&gt;    """DEPRECATED"""&lt;/span&gt;
+&lt;span class="err"&gt;    warn("IPython.utils.io.unicode_std_stream is deprecated since IPython 4.0", DeprecationWarning)&lt;/span&gt;
+&lt;span class="err"&gt;    ...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+
+
 &lt;p&gt;With this new snippet I'm confident it's been 3 versions and I am more willing
 to delete. This also helps downstream libraries to know whether they need
 conditional code or now. I'm still unsure downstream maintainer have updated
 their code. Let's add a stacklevel (to help them find where the deprecated
 function is used, and add more informations about how they can replace code uses
 this function:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def unicode_std_stream(stream='stdout'):
-    """DEPRECATED, moved to nbconvert.utils.io"""
-    warn("IPython.utils.io.unicode_std_stream has moved to nbconvert.utils.io since IPython 4.0", DeprecationWarning, stacklevel=2)
-    ...
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def unicode_std_stream(stream='stdout'):&lt;/span&gt;
+&lt;span class="err"&gt;    """DEPRECATED, moved to nbconvert.utils.io"""&lt;/span&gt;
+&lt;span class="err"&gt;    warn("IPython.utils.io.unicode_std_stream has moved to nbconvert.utils.io since IPython 4.0", DeprecationWarning, stacklevel=2)&lt;/span&gt;
+&lt;span class="err"&gt;    ...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+
+
 &lt;p&gt;Well with this information I'm even more confident downstream maintainer have
 updated their code. They have an actionable item: replace one import for
 another, and are more likely to do that, than dig for 1h in history to figure
 out what to do. &lt;/p&gt;
-&lt;h2 id="tldr"&gt;TLDR&lt;/h2&gt;
+&lt;h2&gt;TLDR&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Be explicit in your conditional import that depends on version of underlying
@@ -82,7 +192,7 @@ python or library. &lt;/p&gt;
 &lt;li&gt;What should replace deprecated call for consumers. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The time you put in these will greatly help your downstream consumers, and
-benefit you later to simplify getting rid of lots of code easily.&lt;/p&gt;&lt;/div&gt;</description><category>best-practices</category><category>open-source</category><category>python</category><guid>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md.html</guid><pubDate>Tue, 03 Apr 2018 13:30:00 GMT</pubDate></item><item><title>One less Pull Request</title><link>https://carreau.github.io/posts/21-one-less-pull-request.md.html</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
+benefit you later to simplify getting rid of lots of code easily.&lt;/p&gt;&lt;/div&gt;</description><category>best-practices</category><category>open-source</category><category>python</category><guid>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md/</guid><pubDate>Tue, 03 Apr 2018 13:30:00 GMT</pubDate></item><item><title>One less Pull Request</title><link>https://carreau.github.io/posts/21-one-less-pull-request.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This time of the year again, it's soon going to be the period where many
 websites and organisation will push you to make contribution to Open-Source,
 for example via &lt;a href="https://hacktoberfest.digitalocean.com/"&gt;hacktoberfest&lt;/a&gt; I got
 a nice T-shirt last year, and &lt;a href="http://24pullrequests.com/"&gt;24pullrequests&lt;/a&gt; seem
@@ -91,7 +201,7 @@ users of open-source to start contributing and already seasons developers to
 try touch new project. &lt;/p&gt;
 &lt;p&gt;Here is a request I got for you whether you participate or not to these events:
 Please close a Pull Request. &lt;/p&gt;
-&lt;h2 id="less-is-more"&gt;Less is More&lt;/h2&gt;
+&lt;h2&gt;Less is More&lt;/h2&gt;
 &lt;p&gt;While I really appreciate having new contributions, there is a point were too
 many opened pull-requests can &#8211;&#160;I think &#8211; be harmful. I'm going to expose the
 various case, why I think these are harmful and what can be done.&lt;/p&gt;
@@ -103,7 +213,7 @@ are absolutely extraordinary and reactive. The current count of opened PR is
 at &lt;a href="https://twitter.com/tacaswell/status/780508160490692609"&gt;207&lt;/a&gt;. You can see
 in the discussion linked here that maintainers feel differently about high
 number of PRs.&lt;/p&gt;
-&lt;h3 id="i-open-to-many-pull-requests"&gt;I open to many pull requests&lt;/h3&gt;
+&lt;h3&gt;I open to many pull requests&lt;/h3&gt;
 &lt;p&gt;I currently have 12 opened pull requests, see how many &lt;a href="https://github.com/pulls"&gt;you
 have&lt;/a&gt;. This mean that I (at least) have to follow-up
 with around 12 projects every days. This is an extremely hight cognitive cost
@@ -121,7 +231,7 @@ merged, I would prefer you don't give me false hope, and close it. Explain why.
 Even if it's just that's you are busy on something else and would appreciate if
 this was resubmitted later. I'm more likely to get over it and try a few other
 time than if my first contribution got no responses.&lt;/p&gt;
-&lt;h3 id="i-receive-too-many-pull-requests"&gt;I receive too many pull-requests&lt;/h3&gt;
+&lt;h3&gt;I receive too many pull-requests&lt;/h3&gt;
 &lt;p&gt;I strongly encourage you to try
 &lt;a href="https://minrk.github.io/all-my-pulls/"&gt;minrk.github.io/all-my-pulls&lt;/a&gt; it allows
 you to view all the pull-requests you have the ability to merge. And filter by
@@ -148,7 +258,7 @@ maintainer to do everything.&lt;/p&gt;
 pull-requests. I can keep track of each of them, judge whether or not the work
 will conflict and give proper care to each of these. I fail to do so when there
 are many pages. &lt;/p&gt;
-&lt;h3 id="i-dont-contribute-to-repository-that-have-too-many-prs"&gt;I don't contribute to repository that have too many PRs.&lt;/h3&gt;
+&lt;h3&gt;I don't contribute to repository that have too many PRs.&lt;/h3&gt;
 &lt;p&gt;When I come across a repository with more than 20-ish pull-requests, I tend to
 think that the authors are not responding so why bother to contribute. I know
 that often these are only &lt;em&gt;impressions&lt;/em&gt; and I can get over it because &lt;em&gt;I have
@@ -167,7 +277,7 @@ number of open non active Pull requests. I've
 &lt;a href="https://twitter.com/Mbussonn/status/780474037977751552"&gt;asked&lt;/a&gt; on twitter and
 it looks like roughly every other respondent are discouraged to contribute if
 too many PR are opened.&lt;/p&gt;
-&lt;h2 id="what-do-you-think"&gt;What do you think ?&lt;/h2&gt;
+&lt;h2&gt;What do you think ?&lt;/h2&gt;
 &lt;p&gt;The above paragraphs are my though on too many opened pull-requests ? How are
 you feeling about that ? As you might have read in the twitter conversation
 linked to above, different people have different opinions.&lt;/p&gt;
@@ -175,9 +285,9 @@ linked to above, different people have different opinions.&lt;/p&gt;
 GitHub&lt;/a&gt;, and if you have the courage
 to help improve my English feel free to send me a PR (sic) to make this more
 readable.&lt;/p&gt;
-&lt;h2 id="close-a-pr"&gt;Close a PR !&lt;/h2&gt;
+&lt;h2&gt;Close a PR !&lt;/h2&gt;
 &lt;p&gt;Thanks you for reading up until here ! If you want to restore part of the
 sanity of some maintainers, or want to appeal a bit more to some users, please
 go close a PRs ! Or help finish a Pr that have stalled ! I can't give you a
 free T-shirt like for HactoberFest but feel free to tweet with hashtag
-&lt;code&gt;#IClosedAPR&lt;/code&gt; !&lt;/p&gt;&lt;/div&gt;</description><category>open-source</category><category>python</category><guid>https://carreau.github.io/posts/21-one-less-pull-request.md.html</guid><pubDate>Mon, 26 Sep 2016 20:00:00 GMT</pubDate></item></channel></rss>
+&lt;code&gt;#IClosedAPR&lt;/code&gt; !&lt;/p&gt;&lt;/div&gt;</description><category>open-source</category><category>python</category><guid>https://carreau.github.io/posts/21-one-less-pull-request.md/</guid><pubDate>Mon, 26 Sep 2016 20:00:00 GMT</pubDate></item></channel></rss>
