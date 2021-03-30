@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about best-practices)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/best-practices.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Sun, 24 May 2020 17:19:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Pleasure of deleting code</title><link>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2&gt;Good Code is Deleted Code&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about best-practices)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/best-practices.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Tue, 30 Mar 2021 03:51:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Pleasure of deleting code</title><link>https://carreau.github.io/posts/34-the-pleasure-of-deleting-code.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2&gt;Good Code is Deleted Code&lt;/h2&gt;
 &lt;p&gt;The only code without bugs is &lt;a href="https://github.com/kelseyhightower/nocode"&gt;no
 code&lt;/a&gt;. And the less code you have,
 the less mental load as well. This is why it is often a pleasure to delete a lot
@@ -18,11 +18,10 @@ deletion. &lt;/p&gt;
 &lt;p&gt;Python tend to be more on the Easier to ask Forgiveness than Permission, than
 Look Before You Leap. It is thus common to see &lt;a href="https://github.com/ipython/ipython/issues/11068"&gt;code like&lt;/a&gt;:&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
-     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;importlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt; 
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;importlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reload&lt;/span&gt; 
 &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ImportError&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; 
-     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt;
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reload&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;In this particular case though, why do we use the try/except ? Unless there is
 a comment attached, it is hard guess that &lt;code&gt;from imp import reload&lt;/code&gt; was
@@ -30,11 +29,10 @@ deprecated since python 3.4, the comment can easily get out of sync with the
 actual code. &lt;/p&gt;
 &lt;p&gt;A better way would be to explicitly check &lt;code&gt;sys.version_info&lt;/code&gt;&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version_info&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt; 
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;imp&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reload&lt;/span&gt; 
 &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;importlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nb"&gt;reload&lt;/span&gt;
+     &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;importlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reload&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;(Note, tuple from unequal length can be compared in python). &lt;/p&gt;
 &lt;p&gt;It is now obvious which code should be removed and when. You can see that as
@@ -44,22 +42,20 @@ actual code. &lt;/p&gt;
 worried of other library might be still relying deprecation. To help with that
 let's see how we can improve typical deprecation, here is a typical deprecated
 method from IPython::&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def unicode_std_stream(stream='stdout'):&lt;/span&gt;
-&lt;span class="err"&gt;    """DEPRECATED"""&lt;/span&gt;
-&lt;span class="err"&gt;    warn("IPython.utils.io.unicode_std_stream is deprecated", DeprecationWarning)&lt;/span&gt;
-&lt;span class="err"&gt;    ...&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def unicode_std_stream(stream='stdout'):
+    """DEPRECATED"""
+    warn("IPython.utils.io.unicode_std_stream is deprecated", DeprecationWarning)
+    ...
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;How much are you confident you can remove this ? A few question should pop into
 your head:
   - Since when has this function been deprecated ? &lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def unicode_std_stream(stream='stdout'):&lt;/span&gt;
-&lt;span class="err"&gt;    """DEPRECATED"""&lt;/span&gt;
-&lt;span class="err"&gt;    warn("IPython.utils.io.unicode_std_stream is deprecated since IPython 4.0", DeprecationWarning)&lt;/span&gt;
-&lt;span class="err"&gt;    ...&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def unicode_std_stream(stream='stdout'):
+    """DEPRECATED"""
+    warn("IPython.utils.io.unicode_std_stream is deprecated since IPython 4.0", DeprecationWarning)
+    ...
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;With this new snippet I'm confident it's been 3 versions and I am more willing
 to delete. This also helps downstream libraries to know whether they need
@@ -67,12 +63,11 @@ conditional code or now. I'm still unsure downstream maintainer have updated
 their code. Let's add a stacklevel (to help them find where the deprecated
 function is used, and add more informations about how they can replace code uses
 this function:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def unicode_std_stream(stream='stdout'):&lt;/span&gt;
-&lt;span class="err"&gt;    """DEPRECATED, moved to nbconvert.utils.io"""&lt;/span&gt;
-&lt;span class="err"&gt;    warn("IPython.utils.io.unicode_std_stream has moved to nbconvert.utils.io since IPython 4.0", DeprecationWarning, stacklevel=2)&lt;/span&gt;
-&lt;span class="err"&gt;    ...&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def unicode_std_stream(stream='stdout'):
+    """DEPRECATED, moved to nbconvert.utils.io"""
+    warn("IPython.utils.io.unicode_std_stream has moved to nbconvert.utils.io since IPython 4.0", DeprecationWarning, stacklevel=2)
+    ...
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;Well with this information I'm even more confident downstream maintainer have
 updated their code. They have an actionable item: replace one import for

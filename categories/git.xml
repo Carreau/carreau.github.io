@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about git)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/git.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Sun, 24 May 2020 17:19:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Sign commits on GitHub</title><link>https://carreau.github.io/posts/33-sign-commits-on-github.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2&gt;Signing Commit on Tags on GitHub&lt;/h2&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about git)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/git.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Tue, 30 Mar 2021 03:51:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Sign commits on GitHub</title><link>https://carreau.github.io/posts/33-sign-commits-on-github.md/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;h2&gt;Signing Commit on Tags on GitHub&lt;/h2&gt;
 &lt;p&gt;I've recently set-up &lt;a href="https://keybase.io/"&gt;keybase&lt;/a&gt; and integrated my public key
 with git to be able to sign commits.&lt;/p&gt;
 &lt;p&gt;I decided to not automatically sign, as auto-signing would allow any attacker
@@ -41,7 +41,6 @@ on their platform with &lt;strong&gt;their key&lt;/strong&gt;. &lt;/p&gt;
 &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="n"&gt;Backport&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;#325&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Parenthesize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;conditional&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;requirement&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;So in the previous block, you can see that &lt;code&gt;5ced6c6...&lt;/code&gt; have been done &lt;strong&gt;and
 signed&lt;/strong&gt; by me, while &lt;code&gt;5a28fb0...&lt;/code&gt; has be allegedly done by Min, &lt;em&gt;but&lt;/em&gt; signed by
 GitHub.&lt;/p&gt;
@@ -51,12 +50,11 @@ commits can appear as unverified. &lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 4AEE18F83AFDEB23
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;p&gt;Where &lt;code&gt;4AEE18F83AFDEB23&lt;/code&gt; is the key you do not have locally. 
 And remember Valid Signature, does not mean trusted.&lt;/p&gt;
 &lt;h3&gt;verifying Tags&lt;/h3&gt;
 &lt;p&gt;Tags can be signed, and need to be checked &lt;strong&gt;independently of commits&lt;/strong&gt; :&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--verify 5.2.1&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;verify&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;5.2.1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="k"&gt;object&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="n"&gt;ced6c6936563fea7ba7efccecbc4248d84cfabb&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;commit&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="n"&gt;tag&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;5.2.1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -67,7 +65,6 @@ And remember Valid Signature, does not mean trusted.&lt;/p&gt;
 &lt;span class="nl"&gt;gpg&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;RSA&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;key&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;99&lt;/span&gt;&lt;span class="n"&gt;B17F64FD5C94692E9EF8064968B2CC0208DCC8&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="nl"&gt;gpg&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Good&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;"Matthias Bussonnier &amp;lt;bussonniermatthias@gmail.com&amp;gt;"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ultimate&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
 
 &lt;p&gt;So you can check that &lt;em&gt;I&lt;/em&gt; tagged this commit.&lt;/p&gt;
 &lt;h3&gt;learn more&lt;/h3&gt;

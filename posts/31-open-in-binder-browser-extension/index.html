@@ -106,35 +106,34 @@ I though I would have a look at the new
 <a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a>.</p>
 <p>And 7 days later, after a couple of 30 minutes break, I present to you a
 staggering 27 lines (including 7 line business logic) extension that does that:</p>
-<pre class="code literal-block"><span></span><code><span class="o">(</span><span class="nt">function</span><span class="o">()</span> <span class="p">{</span>
-  <span class="err">function</span> <span class="err">handleClick(){</span>
-    <span class="err">browser.tabs.query({</span><span class="n">active</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">currentWindow</span><span class="o">:</span> <span class="n">true</span><span class="p">}</span><span class="o">)</span>
-    <span class="p">.</span><span class="nc">then</span><span class="o">((</span><span class="nt">tabs</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="err">return</span> <span class="err">tabs</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="p">}</span><span class="o">)</span>
-    <span class="p">.</span><span class="nc">then</span><span class="o">((</span><span class="nt">tab</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="err">let</span> <span class="err">url</span> <span class="err">=</span> <span class="err">new</span> <span class="err">URL(tab.url)</span><span class="p">;</span>
-      <span class="err">if</span> <span class="err">(url.hostname</span> <span class="err">!=</span> <span class="err">'github.com'){</span>
-      <span class="err">console.warn('Open</span> <span class="err">in</span> <span class="err">binder</span> <span class="err">only</span> <span class="err">works</span> <span class="err">on</span> <span class="err">GitHub</span> <span class="err">repositories</span> <span class="err">for</span> <span class="err">now.')</span><span class="p">;</span>
-      <span class="err">return</span><span class="p">;</span>
-      <span class="p">}</span><span class="o">;</span>
-      <span class="nt">let</span> <span class="nt">parts</span> <span class="o">=</span> <span class="nt">url</span><span class="p">.</span><span class="nc">pathname</span><span class="p">.</span><span class="nc">split</span><span class="o">(</span><span class="s1">'/'</span><span class="o">);</span>
-      <span class="nt">if</span> <span class="o">(</span><span class="nt">parts</span><span class="p">.</span><span class="nc">length</span> <span class="o">&lt;</span> <span class="nt">3</span><span class="o">)</span><span class="p">{</span>
-        <span class="err">console.warn('While</span> <span class="err">you</span> <span class="err">are</span> <span class="err">on</span> <span class="err">GitHub,</span> <span class="err">You</span> <span class="err">do</span> <span class="err">not</span> <span class="err">appear</span> <span class="err">to</span> <span class="err">be</span> <span class="err">in</span> <span class="err">a</span> <span class="err">github</span> <span class="err">repository.</span> <span class="err">Aborting.')</span><span class="p">;</span>
-        <span class="err">return</span><span class="p">;</span>
+<pre class="code literal-block"><span></span><code><span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">function</span> <span class="n">handleClick</span><span class="p">(){</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">tabs</span><span class="o">.</span><span class="n">query</span><span class="p">({</span><span class="n">active</span><span class="p">:</span> <span class="bp">true</span><span class="p">,</span> <span class="n">currentWindow</span><span class="p">:</span> <span class="bp">true</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">then</span><span class="p">((</span><span class="n">tabs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="n">tabs</span><span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
+    <span class="o">.</span><span class="n">then</span><span class="p">((</span><span class="n">tab</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="n">let</span> <span class="n">url</span> <span class="o">=</span> <span class="n">new</span> <span class="n">URL</span><span class="p">(</span><span class="n">tab</span><span class="o">.</span><span class="n">url</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">hostname</span> <span class="o">!=</span> <span class="s1">'github.com'</span><span class="p">){</span>
+      <span class="n">console</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'Open in binder only works on GitHub repositories for now.'</span><span class="p">);</span>
+      <span class="k">return</span><span class="p">;</span>
+      <span class="p">};</span>
+      <span class="n">let</span> <span class="n">parts</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">pathname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">parts</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">){</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'While you are on GitHub, You do not appear to be in a github repository. Aborting.'</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
       <span class="p">}</span>
-      <span class="nt">let</span> <span class="nt">my_binder_url</span> <span class="o">=</span> <span class="s1">'https://mybinder.org/v2/gh/'</span><span class="o">+</span><span class="nt">parts</span><span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> <span class="o">+</span><span class="s1">'/'</span><span class="o">+</span><span class="nt">parts</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span> <span class="o">+</span><span class="s1">'/master'</span><span class="o">;</span>
-      <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'Opening '</span> <span class="o">+</span> <span class="nt">url</span> <span class="o">+</span> <span class="s1">'using mybinder.org... enjoy !'</span><span class="o">)</span>
-      <span class="nt">browser</span><span class="p">.</span><span class="nc">tabs</span><span class="p">.</span><span class="nc">create</span><span class="o">(</span><span class="p">{</span><span class="err">'url':my_binder_url</span><span class="p">}</span><span class="o">);</span>
-    <span class="err">}</span><span class="o">)</span>
+      <span class="n">let</span> <span class="n">my_binder_url</span> <span class="o">=</span> <span class="s1">'https://mybinder.org/v2/gh/'</span><span class="o">+</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="s1">'/'</span><span class="o">+</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span><span class="s1">'/master'</span><span class="p">;</span>
+      <span class="n">console</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Opening '</span> <span class="o">+</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">'using mybinder.org... enjoy !'</span><span class="p">)</span>
+      <span class="n">browser</span><span class="o">.</span><span class="n">tabs</span><span class="o">.</span><span class="n">create</span><span class="p">({</span><span class="s1">'url'</span><span class="p">:</span><span class="n">my_binder_url</span><span class="p">});</span>
+    <span class="p">})</span>
 
-  <span class="err">}</span>
-  <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'(Re) loading open-in-binder extension.'</span><span class="o">);</span>
-  <span class="nt">browser</span><span class="p">.</span><span class="nc">browserAction</span><span class="p">.</span><span class="nc">onClicked</span><span class="p">.</span><span class="nc">addListener</span><span class="o">(</span><span class="nt">handleClick</span><span class="o">);</span>
+  <span class="p">}</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'(Re) loading open-in-binder extension.'</span><span class="p">);</span>
+  <span class="n">browser</span><span class="o">.</span><span class="n">browserAction</span><span class="o">.</span><span class="n">onClicked</span><span class="o">.</span><span class="n">addListener</span><span class="p">(</span><span class="n">handleClick</span><span class="p">);</span>
 
-  <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'❤️ If you are reading this then you know about binder and javascript. ❤️'</span><span class="o">);</span>
-  <span class="nt">console</span><span class="p">.</span><span class="nc">info</span><span class="o">(</span><span class="s1">'❤️ So you\'re skilled enough to contribute ! We\'re waiting for you on https://github.com/jupyterhub/ ❤️'</span><span class="o">);</span>
-<span class="err">}</span><span class="o">)()</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'❤️ If you are reading this then you know about binder and javascript. ❤️'</span><span class="p">);</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'❤️ So you</span><span class="se">\'</span><span class="s1">re skilled enough to contribute ! We</span><span class="se">\'</span><span class="s1">re waiting for you on https://github.com/jupyterhub/ ❤️'</span><span class="p">);</span>
+<span class="p">})()</span>
 </code></pre>
-
 
 <p>You can find the <a href="https://github.com/Carreau/open-with-binder-firefox-extension/blob/a46c59199e6e5883ab4985064f6bddba5c6827d2/content_scripts/binderify.js">original source here</a></p>
 <p><img alt="Firefox Dev Logo" src="img/firefox-dev-logo.png"></p>
@@ -194,7 +193,7 @@ process of figuring things out, so that you can contribute easily:</p>
             </li>
         </ul>
 </div>
-                    <footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+                    <footer id="footer"><p>Contents © 2021         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             

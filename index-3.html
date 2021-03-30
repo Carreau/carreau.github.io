@@ -66,30 +66,28 @@ with an empty cache. So let see how we can remap the Jupyter notebook
 shortcut. </p>
 <h3>TL; DR;</h3>
 <p>Use the following in your <code>~/.jupyter/custom/custom.js</code> :</p>
-<pre class="code literal-block"><span></span><code><span class="err">require(['base/js/namespace'], function(Jupyter){</span>
-<span class="err">  // we might want to but that in a callback on wait for </span>
-<span class="err">  // en even telling us the ntebook is ready.</span>
-<span class="err">  console.log('== remaping command palette shortcut ==')</span>
-<span class="err">  // note that meta is the command key on mac.</span>
-<span class="err">  var source_sht = 'meta-shift-p'</span>
-<span class="err">  var target_sht = 'meta-/'</span>
-<span class="err">  var cmd_shortcuts = Jupyter.keyboard_manager.command_shortcuts;</span>
-<span class="err">  var action_name = cmd_shortcuts.get_shortcut(source_sht)</span>
-<span class="err">  cmd_shortcuts.add_shortcut(target_sht, action_name)</span>
-<span class="err">  cmd_shortcuts.remove_shortcut(source_sht)</span>
-<span class="err">  console.log('== ', action_name, 'remaped from', source_sht, 'to', target_sht )</span>
-<span class="err">})</span>
+<pre class="code literal-block"><span></span><code><span class="n">require</span><span class="p">([</span><span class="s1">'base/js/namespace'</span><span class="p">],</span> <span class="n">function</span><span class="p">(</span><span class="n">Jupyter</span><span class="p">){</span>
+  <span class="o">//</span> <span class="n">we</span> <span class="n">might</span> <span class="n">want</span> <span class="n">to</span> <span class="n">but</span> <span class="n">that</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">callback</span> <span class="n">on</span> <span class="n">wait</span> <span class="k">for</span> 
+  <span class="o">//</span> <span class="n">en</span> <span class="n">even</span> <span class="n">telling</span> <span class="n">us</span> <span class="n">the</span> <span class="n">ntebook</span> <span class="k">is</span> <span class="n">ready</span><span class="o">.</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'== remaping command palette shortcut =='</span><span class="p">)</span>
+  <span class="o">//</span> <span class="n">note</span> <span class="n">that</span> <span class="n">meta</span> <span class="k">is</span> <span class="n">the</span> <span class="n">command</span> <span class="n">key</span> <span class="n">on</span> <span class="n">mac</span><span class="o">.</span>
+  <span class="k">var</span> <span class="n">source_sht</span> <span class="o">=</span> <span class="s1">'meta-shift-p'</span>
+  <span class="k">var</span> <span class="n">target_sht</span> <span class="o">=</span> <span class="s1">'meta-/'</span>
+  <span class="k">var</span> <span class="n">cmd_shortcuts</span> <span class="o">=</span> <span class="n">Jupyter</span><span class="o">.</span><span class="n">keyboard_manager</span><span class="o">.</span><span class="n">command_shortcuts</span><span class="p">;</span>
+  <span class="k">var</span> <span class="n">action_name</span> <span class="o">=</span> <span class="n">cmd_shortcuts</span><span class="o">.</span><span class="n">get_shortcut</span><span class="p">(</span><span class="n">source_sht</span><span class="p">)</span>
+  <span class="n">cmd_shortcuts</span><span class="o">.</span><span class="n">add_shortcut</span><span class="p">(</span><span class="n">target_sht</span><span class="p">,</span> <span class="n">action_name</span><span class="p">)</span>
+  <span class="n">cmd_shortcuts</span><span class="o">.</span><span class="n">remove_shortcut</span><span class="p">(</span><span class="n">source_sht</span><span class="p">)</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'== '</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="s1">'remaped from'</span><span class="p">,</span> <span class="n">source_sht</span><span class="p">,</span> <span class="s1">'to'</span><span class="p">,</span> <span class="n">target_sht</span> <span class="p">)</span>
+<span class="p">})</span>
 </code></pre>
-
 
 <h3>details</h3>
 <p>We need to use <code>require</code> and register a callback once the notebook is
 loaded:</p>
-<pre class="code literal-block"><span></span><code><span class="err">require(['base/js/namespace'], function(Jupyter){</span>
-<span class="err">  ...</span>
-<span class="err">})</span>
+<pre class="code literal-block"><span></span><code>require(['base/js/namespace'], function(Jupyter){
+  ...
+})
 </code></pre>
-
 
 <p>Here we grab the main namespace and name it Jupyter.</p>
 <p>Then get the object that hold the various shortcuts: <code>var
@@ -106,14 +104,12 @@ that <code>meta-</code> is the command key on mac.</p>
 name of the command but it may change a bit depending on notebook
 version (this is not yet public API). Here it is <code>jupyter-notebook:show-command-palette</code>. </p>
 <p>You now bind it to your new shortcut:</p>
-<pre class="code literal-block"><span></span><code><span class="err">cmd_shortcuts.add_shortcut('meta-/', action_name)</span>
+<pre class="code literal-block"><span></span><code>cmd_shortcuts.add_shortcut('meta-/', action_name)
 </code></pre>
-
 
 <p>And finally unbind the original one</p>
-<pre class="code literal-block"><span></span><code><span class="err">cmd_shortcuts.remove_shortcut('meta-shift-p')</span>
+<pre class="code literal-block"><span></span><code>cmd_shortcuts.remove_shortcut('meta-shift-p')
 </code></pre>
-
 
 <h3>UI reflect your changes !</h3>
 <p>If you open the command palette, you should see that the <code>Show command
@@ -2590,10 +2586,9 @@ pub extern fn rfib(n: i32) -&gt; i32 {
 
 
 
-<div id="103a8608-c216-429f-93a0-17e00ef56e33"></div>
-<div class="output_subarea output_javascript ">
+<div id="8a1ec344-b1f4-4c9c-83aa-ec4b2c024a5d" class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#103a8608-c216-429f-93a0-17e00ef56e33');
+var element = $('#8a1ec344-b1f4-4c9c-83aa-ec4b2c024a5d');
 $.getScript("https://raw.github.com/marijnh/CodeMirror/master/mode/fortran/fortran.js", function () {
 IPython.config.cell_magic_highlight['magic_fortran'] = {'reg':[/^%%fortran/]};});
 
@@ -3674,7 +3669,7 @@ structures of networks across project different ?</p>
             <li class="next">
                 <a href="index-2.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+        </ul></nav><footer id="footer"><p>Contents © 2021         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             
