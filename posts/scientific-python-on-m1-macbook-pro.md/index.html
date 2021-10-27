@@ -71,22 +71,22 @@ I've been pondering getting a new machine as it was starting to get difficult to
         <div class="body">
             <div>
 <p>For the past five years I've been working on a 2015 intel macbook pro which is starting to show its age. 
-I've been pondering getting a new machine as it was starting to get difficult to be on video call and do anything else at the same time. I tried macs with touchbars, but no functions keys was a bealbreaker for me. I was considring the framework laptop, but ended up getting a new 2021 macpro (base model). </p>
+I've been pondering getting a new machine as it was starting to get difficult to be on video call and do anything else at the same time. I tried macs with touch bars, but no functions keys was a deal-breaker for me. I was considering the <a href="https://frame.work/">framework laptop</a>, but ended up getting a new 2021 macpro (base model). </p>
 <p>Though it is apple silicon, I know it was going to be likely problematic, so here is my experience getting most of my python stack working on it.</p>
 <!-- TEASER_END -->
 
 <h2>The machine itself</h2>
-<p>Well this is not the main point of the article, but after having it for less than 24h, i'm already used to it, I tried to force myself to use previous models for weeks to no avail. If you want to read more see <a href="https://twitter.com/Mbussonn/status/1453208684360704000">this twitter thread</a>.</p>
+<p>Well this is not the main point of the article, but after having it for less than 24h, I'm already used to it, I tried to force myself to use previous models for weeks to no avail. If you want to read more see <a href="https://twitter.com/Mbussonn/status/1453208684360704000">this twitter thread</a>. This also has links to a couple of issues where I'm asked to do some benchmark. Feel free to add to it and I'll do my best. </p>
 <h2>Conda for M1 Chips.</h2>
-<p>As the CPU is of a different architecture you either need to run conda under intel emulation mode (aka rosetta), or install a M1 compatible version. </p>
+<p>As the CPU is of a different architecture you either need to run conda under intel emulation mode (aka Rosetta), or install a M1 compatible version. </p>
 <p>You <em>can</em> install both conda for M1 and conda for intel and switch between both. There are few instruction to do so. </p>
 <h3>Miniforge for apple silicon</h3>
 <p>Miniforge on M1 is still experimental and available <a href="https://github.com/conda-forge/miniforge">here</a>.
-This woudl be the closest experience to the classic conda install you are used to on intel macs, thoug be aware that many packages will not be available. For example don't think of installing pyqt/qt 5., so far only pyqt/qt 6.2 and above will work. This is true both via conda and pip. </p>
+This would be the closest experience to the classic conda install you are used to on intel macs, though be aware that many packages will not be available. For example don't think of installing pyqt/qt 5., so far only pyqt/qt 6.2 and above will work. This is true both via conda and pip. </p>
 <h3>miniconda/conda via rosetta</h3>
 <p>This methods means that you will run all of conda under an emulation layer. You will take a performance hit, and might need to understand when/how to turn on/off the emulation layer. </p>
-<p>Even if it may looks straitforward once setup, the error messages you get might not always be the best when trying to get rosetta to work for the first time. </p>
-<p>In particular if rosetta is not properly or completely installed nothing will indicate you that.</p>
+<p>Even if it may looks straightforward once setup, the error messages you get might not always be the best when trying to get Rosetta to work for the first time. </p>
+<p>In particular if Rosetta is not properly or completely installed nothing will indicate you that.</p>
 <p>For me the advice or running silently failed</p>
 <pre class="code literal-block"><span></span><code>/usr/sbin/softwareupdate --install-rosetta # failed without error code or error message
 </code></pre>
@@ -96,32 +96,32 @@ This woudl be the closest experience to the classic conda install you are used t
 </code></pre>
 
 <p>Silently ignored the <code>-x86_64</code> flag.</p>
-<p><a href="https://www.wisdomgeek.com/development/installing-intel-based-packages-using-homebrew-on-the-m1-mac/">Base on this</a>, I was able to get rosetta to get it to work.</p>
-<p>For me I <em>had to</em> left click and "Duplicate", the "terminal.app", Copy Pasting, or alt-dragging will <em>not</em> have the same effect. Then use "Get info" on the menu and checking "Run under rosetta", triggered the full installation of Rosetta.</p>
+<p><a href="https://www.wisdomgeek.com/development/installing-intel-based-packages-using-homebrew-on-the-m1-mac/">Base on this</a>, I was able to get Rosetta to get it to work.</p>
+<p>For me I <em>had to</em> left click and "Duplicate", the "terminal.app", Copy Pasting, or alt-dragging will <em>not</em> have the same effect. Then use "Get info" on the menu and checking "Run under Rosetta", triggered the full installation of Rosetta.</p>
 <p>You can check it worked with <code>arch</code> without args. </p>
 <pre class="code literal-block"><span></span><code>~ % arch
 i386
 </code></pre>
 
-<p>Once that is done you can just start a subshell under emulation with </p>
-<pre class="code literal-block"><span></span><code><span class="c">% arch </span><span class="w"></span>
-<span class="n">arm64</span><span class="w"></span>
-<span class="s">%</span><span class="w"> </span><span class="s">arch</span><span class="w"> </span><span class="o">-</span><span class="n">x86_64</span><span class="w"> </span><span class="n">zsh</span><span class="w"></span>
-<span class="c">% arch</span><span class="w"></span>
-<span class="n">i386</span><span class="w"></span>
-<span class="s">%</span><span class="w"> </span><span class="s">exit</span><span class="w"></span>
-<span class="c">% arch</span><span class="w"></span>
-<span class="n">arm64</span><span class="w"></span>
+<p>Once that is done you can just start a sub shell under emulation with </p>
+<pre class="code literal-block"><span></span><code>~ % arch 
+arm64
+~ % arch -x86_64 zsh
+~ % arch
+i386
+~ % <span class="nb">exit</span>
+~ % arch
+arm64
 </code></pre>
 
 <p>Warning it is a subprocess it's not like conda activate/deactivate.</p>
 <p>From within and i386 shell you install and then use conda in the same way you did before, you'll have access to most of the python ecosystem you are used to w/o a hitch. Make sure you activate the i386 shell before.</p>
 <h3>GPUs</h3>
-<p>I don't use GPU much, but if you want to use the macbook pro GPU, you'll have to go with miniforge on apple silicon, Ii don't belive you can use it when using emulation. </p>
-<p>Following instructions on <a href="https://forum.image.sc/t/napari-tensorflow-aicsimageio-stardist-care-n2v-pyclesperanto-running-native-on-apple-silicon-m1/55051">image-sc</a> I was able to get my GPU recognise, but still have issue with opencl, and cupy is not yet avaialable.</p>
+<p>I don't use GPU much, but if you want to use the mac book pro GPU, you'll have to go with miniforge on apple silicon, Ii don't believe you can use it when using emulation. </p>
+<p>Following instructions on <a href="https://forum.image.sc/t/napari-tensorflow-aicsimageio-stardist-care-n2v-pyclesperanto-running-native-on-apple-silicon-m1/55051">image-sc</a> I was able to get my GPU recognise, but still have issue with OpenCl, and CuPy is not yet available.</p>
 <h3>Switching between both</h3>
 <p>For the projects I'm currently working on I'll probably need to get both a native (Apple silicon), and intel version of conda. </p>
-<p>Fortunately both miniforge and miniconda can be installed under different path, which I did. I know have tweaked my <code>.zshrc</code> to activate either one or the other conda depending on the curent value of <code>arch</code></p>
+<p>Fortunately both Miniforge and Miniconda can be installed under different path, which I did. I know have tweaked my <code>.zshrc</code> to activate either one or the other conda depending on the current value of <code>arch</code></p>
 <pre class="code literal-block"><span></span><code><span class="k">if</span> [ $<span class="ss">(</span><span class="nv">arch</span><span class="ss">)</span> <span class="o">=</span> <span class="s1">'</span><span class="s">i386</span><span class="s1">'</span> ]<span class="c1">; then</span>
     ...
 <span class="nv">fi</span>
@@ -136,7 +136,10 @@ i386
 </code></pre>
 
 <h2>What's Next</h2>
-<p>So far I had this computer for less than 24h, and as far as I can tell the available instructions and list of compatible packages are moving fast, so by the time you read this  </p>
+<p>So far I had this computer for less than 24h, and as far as I can tell the available instructions and list of compatible packages are moving fast, so by the time you read this. I think I also need to find how to add the current arch in $PS1 in a not too intrusive manner. </p>
+<p>If switching envs is natural to you, then having two conda install should be fine as well, and I hope that in the end it will be possible to have conda envs that are either arm64 or intel instead of having to switch conda install. </p>
+<p>I have a couple of things that are running under homebrew. It was straitforward to setup, but binary don't seem to be universal, that is to say <code>arch -x86_84 /opt/brew/bin/bash/</code> does not seem to work, and as I'll get more`cli tool installed, I might have to separate my i386 and arm64 $PATH.</p>
+<p>I'll also try to update this as I've written it in a single pass and i'll discover things later.</p>
 </div>
 </div>
 </div>
