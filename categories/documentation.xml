@@ -1,0 +1,121 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about documentation)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/documentation.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Wed, 27 Oct 2021 20:18:01 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Rethinking Jupyter Interactive Documentation</title><link>https://carreau.github.io/posts/38-rethinking-jupyter-documentation/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;Jupyter Notebook first release was 8 years ago &#8211;  under the IPython Notebook
+name at the time. Even if notebooks were not invented by Jupyter; they were
+definitely democratized by it. Being Web powered allowed development of many
+changes in Datascience world. Objects now often expose rich representation; from
+Pandas dataframe with as html tables, to more recent &lt;a href="https://github.com/scikit-learn/scikit-learn/pull/14180"&gt;Scikit-learn model&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Today I want to look into a topic that has not evolved much since, and I believe
+could use an upgrade. Accessing interactive Documentation when in a Jupyter
+session.&lt;/p&gt;
+&lt;h2&gt;The current limitation for users&lt;/h2&gt;
+&lt;p&gt;The current documentation of IPython and Jupyter come in a few forms, but mostly
+have the same limitation. 
+The typical way to reach for help is to use the &lt;code&gt;?&lt;/code&gt; operator. Depending on
+the frontend you are using it will bring a pager, or a panel that will display
+some information about the current object. Here is the documentation for
+&lt;code&gt;numpy.linspace&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="numpy.linspace help in IPython" src="https://carreau.github.io/posts/img/numpy-linspace-current.png"&gt;&lt;/p&gt;
+&lt;p&gt;It can show some information about the current object (signature, file,
+sub/super classes) and the raw DocString of the object. &lt;/p&gt;
+&lt;p&gt;You can scroll around but that's about it wether in terminal or Notebooks.&lt;/p&gt;
+&lt;p&gt;Compare it to the same documentation on the numpy website:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="numpy.linspace on numpy.org" src="https://carreau.github.io/posts/img/numpy-linspace-website.png"&gt;&lt;/p&gt;
+&lt;p&gt;Compared to online documentation viewed from within jupyter, the documentation is:
+ - Hard to read, 
+ - Has no navigation
+ - RST Directives have not been interpreted.
+ - No inline graph , rendered rendered math.&lt;/p&gt;
+&lt;p&gt;There is also no access to non-docstring based documentation, like narrative,
+tutorials, image gallery or examples, no search, no syntax highlighting, no way to
+interact or modify documentation to test effects of parameters.&lt;/p&gt;
+&lt;h2&gt;Limitation for authors&lt;/h2&gt;
+&lt;p&gt;Due to Jupyter and IPython limitations to display documentation I believe
+authors are often contained to document functions.&lt;/p&gt;
+&lt;p&gt;Syntax in docstrings is often kept simple for readability, this first version is
+often preferred:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;You can use &lt;span class="s"&gt;``np.einsum('i-&amp;gt;', a)``&lt;/span&gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While the longer form that would provide an helpful link in Sphinx rendered
+docs, it is shun as difficult to read.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;You can use &lt;span class="na"&gt;:py:func:&lt;/span&gt;&lt;span class="nv"&gt;`np.einsum('i-&amp;gt;', a) &amp;lt;numpy.einsum&amp;gt;`&lt;/span&gt; ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This also lead to long discussion about which syntax to use in advance area,
+like formulas in &lt;a href="https://github.com/sympy/sympy/issues/14964"&gt;Sympy's docstrings&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Many project have to implement dynamic docstrings; for example to include all
+the parameter a function or class, would pass down using &lt;code&gt;**kwargs&lt;/code&gt;, (search
+matplotlib source for &lt;code&gt;_kwdoc&lt;/code&gt; , or pandas DataFrame for example.&lt;/p&gt;
+&lt;p&gt;This can make it relatively difficult for authors and contributors to properly
+maintain and provide comprehensive docs.&lt;/p&gt;
+&lt;p&gt;I'm not sure I can completely predict all effects this has on how library
+maintainers write docs; but I believe there is also a strong opportunity for a
+tools to help there. See for example &lt;a href="https://github.com/Carreau/velin"&gt;v&#233;lin&lt;/a&gt;
+which attempts to auto reformat and fix common NumyDoc's format mistakes and
+typos.&lt;/p&gt;
+&lt;h2&gt;Stuck between a Rock and a Hard place&lt;/h2&gt;
+&lt;p&gt;While Sphinx and related project are great at offering hosted HTML
+documentation; extensive usage of those make interactive documentation harder to
+consume;&lt;/p&gt;
+&lt;p&gt;While It is possible to &lt;a href="https://github.com/spyder-ide/docrepr"&gt;run Sphinx on the fly when rendering
+docstrings&lt;/a&gt;, most Sphinx features
+only work when building a full project; with the proper configuration and
+extension and can be computationally intensive. This make running Sphinx locally
+impractical.&lt;/p&gt;
+&lt;p&gt;Hosted website often may not reflect locally installed version of the
+libraries and requires careful linking, deprecation and narrative around
+platform or version specific features.&lt;/p&gt;
+&lt;h2&gt;This is fixable&lt;/h2&gt;
+&lt;p&gt;For the past few month I've been working on rewriting how IPython (and hence
+Jupyter) can display documentation. It works both in terminal and html context
+with proper rendering, and currently understand most directives; and could be
+customized to understand any new ones:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="papyri1" src="https://carreau.github.io/posts/img/papyri-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Above is the (terminal) documentation of &lt;code&gt;scipy.polynomial.lagfit&lt;/code&gt;, see how the
+single backticks are properly understood and refer to known parameters, it
+detected that  &lt;code&gt;`n`&lt;/code&gt; is incorrect as it should have double backticks; notice
+the rendering of the math even in terminal.&lt;/p&gt;
+&lt;p&gt;For that matter technically this does not care as to whether the DocString is
+written in RST or Markdown; though I need to implement the later part. I belive
+though that some maintainers would be quite&lt;/p&gt;
+&lt;p&gt;&lt;img alt="papyri navigation" src="https://carreau.github.io/posts/img/papyri-nav.gif"&gt;&lt;/p&gt;
+&lt;p&gt;It support navigation &#8211; here in terminal &#8211; where clicking or pressing enter on a
+link would bring you to the target page. In above gif you can see that many
+token of code example are also automatically type-inferred (thanks Jedi), and
+can also be clicked to navigate to their corresponding page.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="papyri terminal-fig" src="https://carreau.github.io/posts/img/papyri-terminal-fig.png"&gt;&lt;/p&gt;
+&lt;p&gt;Images are included, even in terminal when they are not inline but replaced by
+a button to open them in your preferred viewer.&lt;/p&gt;
+&lt;p&gt;I'm working on a number of other features, in particular :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rendering of narrative docs &#8211; for which I have a prototype,&lt;/li&gt;
+&lt;li&gt;automatic indexing of all the figures and plots &#8211;&#160; working but slow.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;proper cross library reference and indexing without the need for intersphinx&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It is possible from the &lt;code&gt;numpy.linspace&lt;/code&gt; page to see all page that
+  reference it, or use it in an example (see previous image).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And many others, like showing a graph of the local references between functions,
+search, and preference configure ability. I think this could also support many
+other desirable features, like user preferences (hide/show type annotation,
+deprecated directives,and custom coloration/syntax), though haven't started
+working on these, and I have some ideas on how this could be uses to provide
+translations as well.&lt;/p&gt;
+&lt;p&gt;Right now is it now as fast as efficient as I would like to&#160;&#8211; though it's faster
+than running sphinx on the fly &#8211; but required some ahead of time processing. And
+crash in many places, so I'm not going to link to it here yet;&lt;/p&gt;
+&lt;p&gt;I though encourage you to think about what features you are missing when using
+documentation from withing Jupyter and let me know.&lt;/p&gt;
+&lt;p&gt;For now I've submitted a &lt;a href="https://docs.google.com/document/d/1hk-Ww7pUwnoHINNhDeP9UOPvNEemAFe-pohK5dCtZPs/edit?usp=sharing"&gt;Letter of intent to CZI EOSS
+4&lt;/a&gt;
+in an attempt to get some of that work funded to land in IPython, and if you
+have any interest in contributing or want something like that for your library,
+feel free to reach out. &lt;/p&gt;
+&lt;p&gt;I'll make the repository public in I hope a near future; right now it is too
+unstable and with too many hard coded path to be useful, but once it is in a
+more stable, and better documented [sic] for public feedback.&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+</description><category>documentation</category><category>open-source</category><category>python</category><guid>https://carreau.github.io/posts/38-rethinking-jupyter-documentation/</guid><pubDate>Wed, 27 Oct 2021 00:01:00 GMT</pubDate></item></channel></rss>

@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about figshare)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/figshare.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Sun, 24 May 2020 17:19:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>About security</title><link>https://carreau.github.io/posts/19-about-security/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This is a bit of an anger post, I won't explicitly give name, but if you know
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Random Thoughts (Posts about figshare)</title><link>https://carreau.github.io/</link><description /><ns0:link href="https://carreau.github.io/categories/figshare.xml" rel="self" type="application/rss+xml" /><language>en</language><lastBuildDate>Wed, 27 Oct 2021 20:18:01 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>About security</title><link>https://carreau.github.io/posts/19-about-security/</link><dc:creator>Matthias Bussonnier</dc:creator><description>&lt;div&gt;&lt;p&gt;This is a bit of an anger post, I won't explicitly give name, but if you know
 me you should be able to put the pieces together.&lt;/p&gt;
 &lt;p&gt;I'm angry for the reason that almost a year ago, I warn a known Londonian
 startup, that they had a large security flaw in their software. They responded
@@ -43,4 +43,7 @@ Please respect them instead of raising some funds by venture capitals.&lt;/p&gt;
 apparently you don't.&lt;/p&gt;
 &lt;h3&gt;Thanks&lt;/h3&gt;
 &lt;p&gt;As usual, I'm not a good at writing English so I appreciate any Pull Request
-that fix grammar, spelling and english expression.&lt;/p&gt;&lt;/div&gt;</description><category>anger</category><category>figshare</category><category>privacy</category><category>security</category><category>swearwords</category><guid>https://carreau.github.io/posts/19-about-security/</guid><pubDate>Thu, 24 Sep 2015 21:33:24 GMT</pubDate></item></channel></rss>
+that fix grammar, spelling and english expression.&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+</description><category>anger</category><category>figshare</category><category>privacy</category><category>security</category><category>swearwords</category><guid>https://carreau.github.io/posts/19-about-security/</guid><pubDate>Thu, 24 Sep 2015 21:33:24 GMT</pubDate></item></channel></rss>

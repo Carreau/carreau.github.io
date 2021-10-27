@@ -96,11 +96,10 @@ deletion. </p>
 <p>Python tend to be more on the Easier to ask Forgiveness than Permission, than
 Look Before You Leap. It is thus common to see <a href="https://github.com/ipython/ipython/issues/11068">code like</a>:</p>
 <pre class="code literal-block"><span></span><code><span class="k">try</span><span class="p">:</span> 
-     <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="nb">reload</span> 
+     <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">reload</span> 
 <span class="k">except</span> <span class="ne">ImportError</span> <span class="p">:</span> 
-     <span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="nb">reload</span>
+     <span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="n">reload</span>
 </code></pre>
-
 
 <p>In this particular case though, why do we use the try/except ? Unless there is
 a comment attached, it is hard guess that <code>from imp import reload</code> was
@@ -108,11 +107,10 @@ deprecated since python 3.4, the comment can easily get out of sync with the
 actual code. </p>
 <p>A better way would be to explicitly check <code>sys.version_info</code></p>
 <pre class="code literal-block"><span></span><code><span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-     <span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="nb">reload</span> 
+     <span class="kn">from</span> <span class="nn">imp</span> <span class="kn">import</span> <span class="n">reload</span> 
 <span class="k">else</span><span class="p">:</span>
-     <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="nb">reload</span>
+     <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">reload</span>
 </code></pre>
-
 
 <p>(Note, tuple from unequal length can be compared in python). </p>
 <p>It is now obvious which code should be removed and when. You can see that as
@@ -122,22 +120,20 @@ actual code. </p>
 worried of other library might be still relying deprecation. To help with that
 let's see how we can improve typical deprecation, here is a typical deprecated
 method from IPython::</p>
-<pre class="code literal-block"><span></span><code><span class="err">def unicode_std_stream(stream='stdout'):</span>
-<span class="err">    """DEPRECATED"""</span>
-<span class="err">    warn("IPython.utils.io.unicode_std_stream is deprecated", DeprecationWarning)</span>
-<span class="err">    ...</span>
+<pre class="code literal-block"><span></span><code>def unicode_std_stream(stream='stdout'):
+    """DEPRECATED"""
+    warn("IPython.utils.io.unicode_std_stream is deprecated", DeprecationWarning)
+    ...
 </code></pre>
-
 
 <p>How much are you confident you can remove this ? A few question should pop into
 your head:
   - Since when has this function been deprecated ? </p>
-<pre class="code literal-block"><span></span><code><span class="err">def unicode_std_stream(stream='stdout'):</span>
-<span class="err">    """DEPRECATED"""</span>
-<span class="err">    warn("IPython.utils.io.unicode_std_stream is deprecated since IPython 4.0", DeprecationWarning)</span>
-<span class="err">    ...</span>
+<pre class="code literal-block"><span></span><code>def unicode_std_stream(stream='stdout'):
+    """DEPRECATED"""
+    warn("IPython.utils.io.unicode_std_stream is deprecated since IPython 4.0", DeprecationWarning)
+    ...
 </code></pre>
-
 
 <p>With this new snippet I'm confident it's been 3 versions and I am more willing
 to delete. This also helps downstream libraries to know whether they need
@@ -145,12 +141,11 @@ conditional code or now. I'm still unsure downstream maintainer have updated
 their code. Let's add a stacklevel (to help them find where the deprecated
 function is used, and add more informations about how they can replace code uses
 this function:</p>
-<pre class="code literal-block"><span></span><code><span class="err">def unicode_std_stream(stream='stdout'):</span>
-<span class="err">    """DEPRECATED, moved to nbconvert.utils.io"""</span>
-<span class="err">    warn("IPython.utils.io.unicode_std_stream has moved to nbconvert.utils.io since IPython 4.0", DeprecationWarning, stacklevel=2)</span>
-<span class="err">    ...</span>
+<pre class="code literal-block"><span></span><code>def unicode_std_stream(stream='stdout'):
+    """DEPRECATED, moved to nbconvert.utils.io"""
+    warn("IPython.utils.io.unicode_std_stream has moved to nbconvert.utils.io since IPython 4.0", DeprecationWarning, stacklevel=2)
+    ...
 </code></pre>
-
 
 <p>Well with this information I'm even more confident downstream maintainer have
 updated their code. They have an actionable item: replace one import for
@@ -172,23 +167,24 @@ python or library. </p>
 <p>The time you put in these will greatly help your downstream consumers, and
 benefit you later to simplify getting rid of lots of code easily.</p>
 </div>
-        </div>
-                <ul class="pager hidden-print">
+</div>
+</div>
+</div></section>
+</body>
+</html><html>
+<ul class="pager hidden-print">
 <li class="previous">
-                <a href="../33-sign-commits-on-github.md/" rel="prev" title="Sign commits on GitHub">Previous post</a>
+                <a href="/posts/33-sign-commits-on-github.md/" rel="prev" title="Sign commits on GitHub">Previous post</a>
             </li>
             <li class="next">
-                <a href="../35-Array-slices-and-indexing.meta/" rel="next" title="Array, slices and indexing">Next post</a>
+                <a href="/posts/35-Array-slices-and-indexing.meta/" rel="next" title="Array, slices and indexing">Next post</a>
             </li>
         </ul>
-</div>
-                    <footer id="footer"><p>Contents © 2020         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+<footer id="footer"><p>Contents © 2021         <a href="mailto:bussonniermatthias+blog@gmail.com">Matthias Bussonnier</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png"></a><br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (Contact me to waive NC).
 </p>
             
-        </footer>
-</div>
-    </section><script src="../../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../../assets/js/jquery.timeago.js" type="text/javascript"></script><script src="../../assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
+        </footer><script src="/assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="/assets/js/jquery.timeago.js" type="text/javascript"></script><script src="/assets/js/mathjax.js" type="text/javascript"></script><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
@@ -199,5 +195,5 @@ benefit you later to simplify getting rid of lots of code easily.</p>
 
           gtag('config', 'UA-110089201-1');
         </script>
-</body>
 </html>
+
