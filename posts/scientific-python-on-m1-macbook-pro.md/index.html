@@ -30,7 +30,7 @@ MathJax.Hub.Config({
 <meta property="og:description" content="For the past five years I've been working on a 2015 intel macbook pro which is starting to show its age. 
 I've been pondering getting a new machine as it was starting to get difficult to be on video c">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2021-10-11T02:51:58-05:00">
+<meta property="article:published_time" content="2021-10-27T02:51:58-05:00">
 <meta property="article:tag" content="Apple Silicon">
 <meta property="article:tag" content="Conda">
 </head>
@@ -53,7 +53,7 @@ I've been pondering getting a new machine as it was starting to get difficult to
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2021-10-11T02:51:58-05:00">2021-10-11 02:51</time>
+                <time class="timeago" datetime="2021-10-27T02:51:58-05:00">2021-10-27 02:51</time>
             
                       |  
         <a href="index.md" id="sourcelink">Source</a>
@@ -96,7 +96,7 @@ This would be the closest experience to the classic conda install you are used t
 </code></pre>
 
 <p>Silently ignored the <code>-x86_64</code> flag.</p>
-<p><a href="https://www.wisdomgeek.com/development/installing-intel-based-packages-using-homebrew-on-the-m1-mac/">Base on this</a>, I was able to get Rosetta to get it to work.</p>
+<p><a href="https://www.wisdomgeek.com/development/installing-intel-based-packages-using-homebrew-on-the-m1-mac/">Based on this</a>, I was able to get Rosetta to get it to work.</p>
 <p>For me I <em>had to</em> left click and "Duplicate", the "terminal.app", Copy Pasting, or alt-dragging will <em>not</em> have the same effect. Then use "Get info" on the menu and checking "Run under Rosetta", triggered the full installation of Rosetta.</p>
 <p>You can check it worked with <code>arch</code> without args. </p>
 <pre class="code literal-block"><span></span><code>~ % arch
@@ -117,22 +117,23 @@ arm64
 <p>Warning it is a subprocess it's not like conda activate/deactivate.</p>
 <p>From within and i386 shell you install and then use conda in the same way you did before, you'll have access to most of the python ecosystem you are used to w/o a hitch. Make sure you activate the i386 shell before.</p>
 <h3>GPUs</h3>
-<p>I don't use GPU much, but if you want to use the mac book pro GPU, you'll have to go with miniforge on apple silicon, Ii don't believe you can use it when using emulation. </p>
+<p>I don't use GPU much, but if you want to use the mac book pro GPU, you'll have to go with miniforge on apple silicon, I don't believe you can use it when using emulation. </p>
 <p>Following instructions on <a href="https://forum.image.sc/t/napari-tensorflow-aicsimageio-stardist-care-n2v-pyclesperanto-running-native-on-apple-silicon-m1/55051">image-sc</a> I was able to get my GPU recognise, but still have issue with OpenCl, and CuPy is not yet available.</p>
 <h3>Switching between both</h3>
 <p>For the projects I'm currently working on I'll probably need to get both a native (Apple silicon), and intel version of conda. </p>
-<p>Fortunately both Miniforge and Miniconda can be installed under different path, which I did. I know have tweaked my <code>.zshrc</code> to activate either one or the other conda depending on the current value of <code>arch</code></p>
-<pre class="code literal-block"><span></span><code><span class="k">if</span> [ $<span class="ss">(</span><span class="nv">arch</span><span class="ss">)</span> <span class="o">=</span> <span class="s1">'</span><span class="s">i386</span><span class="s1">'</span> ]<span class="c1">; then</span>
-    ...
-<span class="nv">fi</span>
+<p>Fortunately both Miniforge and Miniconda can be installed under different path, which I did. I know have tweaked my <code>.zshrc</code> to activate either one or the other conda depending on the current value of `arch.</p>
+<pre class="code literal-block"><span></span><code><span class="err">#</span> <span class="nt">in</span> <span class="p">.</span><span class="nc">zshrc</span> <span class="nt">wrap</span> <span class="nt">the</span> <span class="nt">lines</span> <span class="nt">added</span> <span class="nt">by</span> <span class="nt">miniconda</span><span class="o">/</span><span class="nt">miniforge</span> <span class="nt">with</span><span class="o">:</span>
+<span class="nt">if</span> <span class="cp">[</span> <span class="err">$</span><span class="p">(</span><span class="nx">arch</span><span class="p">)</span> <span class="o">=</span> <span class="s1">'i386'</span> <span class="cp">]</span><span class="o">;</span> <span class="nt">then</span>
+    <span class="o">...</span>
+<span class="nt">fi</span>
 
 
-<span class="k">if</span> [ $<span class="ss">(</span><span class="nv">arch</span><span class="ss">)</span> <span class="o">=</span> <span class="s1">'</span><span class="s">arm64</span><span class="s1">'</span> ]<span class="c1">; then</span>
-    ...
-<span class="nv">fi</span>
+<span class="nt">if</span> <span class="cp">[</span> <span class="err">$</span><span class="p">(</span><span class="nx">arch</span><span class="p">)</span> <span class="o">=</span> <span class="s1">'arm64'</span> <span class="cp">]</span><span class="o">;</span> <span class="nt">then</span>
+    <span class="o">...</span>
+<span class="nt">fi</span>
 
-# <span class="nv">also</span> <span class="nv">define</span> <span class="nv">a</span> <span class="nv">quick</span> <span class="nv">alias</span> <span class="nv">to</span> <span class="nv">run</span> <span class="nv">a</span> <span class="nv">single</span> <span class="nv">command</span> <span class="nv">under</span> <span class="nv">i386</span>
-<span class="nv">alias</span> <span class="nv">intel</span><span class="o">=</span><span class="s2">"</span><span class="s">arch -x86_64</span><span class="s2">"</span>
+<span class="err">#</span> <span class="nt">also</span> <span class="nt">define</span> <span class="nt">a</span> <span class="nt">quick</span> <span class="nt">alias</span> <span class="nt">to</span> <span class="nt">run</span> <span class="nt">a</span> <span class="nt">single</span> <span class="nt">command</span> <span class="nt">under</span> <span class="nt">i386</span>
+<span class="nt">alias</span> <span class="nt">intel</span><span class="o">=</span><span class="s2">"arch -x86_64"</span>
 </code></pre>
 
 <h2>What's Next</h2>

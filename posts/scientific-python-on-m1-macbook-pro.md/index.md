@@ -1,7 +1,7 @@
 <!--
 .. title: Scientific Python on M1 Macbook pro
 .. slug: scientific-python-on-m1-macbook-pro.md
-.. date: 2021-10-11 02:51:58 UTC-05:00
+.. date: 2021-10-27 02:51:58 UTC-05:00
 .. author: Matthias Bussonnier
 .. tags: Conda, Apple Silicon, 
 .. category:
@@ -57,7 +57,7 @@ arch -x86_64 ...
 Silently ignored the `-x86_64` flag.
 
 
-[Base on this](https://www.wisdomgeek.com/development/installing-intel-based-packages-using-homebrew-on-the-m1-mac/), I was able to get Rosetta to get it to work.
+[Based on this](https://www.wisdomgeek.com/development/installing-intel-based-packages-using-homebrew-on-the-m1-mac/), I was able to get Rosetta to get it to work.
 
 For me I _had to_ left click and "Duplicate", the "terminal.app", Copy Pasting, or alt-dragging will _not_ have the same effect. Then use "Get info" on the menu and checking "Run under Rosetta", triggered the full installation of Rosetta.
 
@@ -89,7 +89,7 @@ From within and i386 shell you install and then use conda in the same way you di
 
 ## GPUs
 
-I don't use GPU much, but if you want to use the mac book pro GPU, you'll have to go with miniforge on apple silicon, Ii don't believe you can use it when using emulation. 
+I don't use GPU much, but if you want to use the mac book pro GPU, you'll have to go with miniforge on apple silicon, I don't believe you can use it when using emulation. 
 
 Following instructions on [image-sc](https://forum.image.sc/t/napari-tensorflow-aicsimageio-stardist-care-n2v-pyclesperanto-running-native-on-apple-silicon-m1/55051) I was able to get my GPU recognise, but still have issue with OpenCl, and CuPy is not yet available.
 
@@ -98,10 +98,11 @@ Following instructions on [image-sc](https://forum.image.sc/t/napari-tensorflow-
 
 For the projects I'm currently working on I'll probably need to get both a native (Apple silicon), and intel version of conda. 
 
-Fortunately both Miniforge and Miniconda can be installed under different path, which I did. I know have tweaked my `.zshrc` to activate either one or the other conda depending on the current value of `arch`
+Fortunately both Miniforge and Miniconda can be installed under different path, which I did. I know have tweaked my `.zshrc` to activate either one or the other conda depending on the current value of `arch.
 
 
 ```
+# in .zshrc wrap the lines added by miniconda/miniforge with:
 if [ $(arch) = 'i386' ]; then
 	...
 fi
